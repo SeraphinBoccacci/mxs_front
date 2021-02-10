@@ -6,9 +6,8 @@ import {
   useState,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { AuthContext } from "../..";
-import { authenticate, createAccount } from "../../../../services/auth";
-import { Button } from "../../../Button";
+import { authenticate, createAccount } from "../../../services/auth";
+import { Button } from "../../Button";
 import { FormTitle } from "../style";
 import {
   ChangeModePhrase,
@@ -18,9 +17,12 @@ import {
   Inputs,
   Password,
 } from "./style";
-import ErrorHandler from "../../../ErrorHandler";
+import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import { AuthContext } from "../../AuthContext";
+import { setItem } from "../../../utils/localStorage";
 interface ConnectionScreenProps {
   handleClose: () => void;
+  setIsOnPendingVerificationScreen: (s: boolean) => void;
 }
 
 interface ReducerState {
@@ -29,16 +31,14 @@ interface ReducerState {
   confirm?: string;
 }
 
-export const ConnectionScreen = ({ handleClose }: ConnectionScreenProps) => {
+export const ConnectionScreen = ({
+  handleClose,
+  setIsOnPendingVerificationScreen,
+}: ConnectionScreenProps) => {
   const [isAccountCreation, setIsAccountCreation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorType, setErrorType] = useState(null);
-  const {
-    setToken,
-    setHerotag,
-    setTokenExpirationTimestamp,
-    setIsOnPendingVerificationScreen,
-  } = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
+  const { handleError } = useContext(ErrorHandlingContext);
 
   const history = useHistory();
 
@@ -60,6 +60,8 @@ export const ConnectionScreen = ({ handleClose }: ConnectionScreenProps) => {
 
       setIsSubmitting(true);
 
+      if (formData.herotag) setItem("herotag", formData.herotag);
+
       try {
         if (isAccountCreation) {
           if (!formData.herotag || !formData.password || !formData.confirm)
@@ -73,8 +75,7 @@ export const ConnectionScreen = ({ handleClose }: ConnectionScreenProps) => {
 
           setIsSubmitting(false);
 
-          if (resData.herotag && setIsOnPendingVerificationScreen) {
-            setHerotag(resData.herotag);
+          if (resData.herotag) {
             setIsOnPendingVerificationScreen(true);
           } else throw new Error("Account creation failed !");
         } else {
@@ -89,10 +90,11 @@ export const ConnectionScreen = ({ handleClose }: ConnectionScreenProps) => {
           setIsSubmitting(false);
 
           if (resData.token) {
+            setItem(
+              "tokenExpirationTimestamp",
+              Date.now() + resData.expiresIn * 1000
+            );
             setToken(resData.token);
-            setHerotag(resData.user.herotag);
-
-            setTokenExpirationTimestamp(Date.now() + resData.expiresIn * 1000);
 
             handleClose();
 
@@ -101,15 +103,10 @@ export const ConnectionScreen = ({ handleClose }: ConnectionScreenProps) => {
         }
       } catch (e) {
         setIsSubmitting(false);
-        if (e.response.data.data === "ACCOUNT_WITH_VERIFICATION_PENDING") {
-          setHerotag(formData.herotag);
-        } else {
-          setHerotag(null);
-          setToken(null);
-        }
 
-        setErrorType(e.response.data.data);
-      } finally {
+        handleError(e?.response?.data?.data, () =>
+          setIsOnPendingVerificationScreen(true)
+        );
       }
     },
     [
@@ -119,10 +116,9 @@ export const ConnectionScreen = ({ handleClose }: ConnectionScreenProps) => {
       handleClose,
       history,
       isAccountCreation,
-      setHerotag,
       setIsOnPendingVerificationScreen,
       setToken,
-      setTokenExpirationTimestamp,
+      handleError,
     ]
   );
 
@@ -179,10 +175,6 @@ export const ConnectionScreen = ({ handleClose }: ConnectionScreenProps) => {
           </ChangeModeSpan>
         </ChangeModePhrase>
       )}
-      <ErrorHandler
-        errorType={errorType}
-        resetErrorType={() => setErrorType(null)}
-      ></ErrorHandler>
     </>
   );
 };

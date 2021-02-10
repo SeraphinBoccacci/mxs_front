@@ -2,27 +2,27 @@ import { Grid, Switch } from "@material-ui/core";
 import { GridContainer } from "./style";
 
 const Switcher = ({
-  isSubscriberOptionChecked,
-  setIsSubscriberOptionChecked,
+  isViewerOptionChecked,
+  setIsViewerOptionChecked,
 }: {
-  isSubscriberOptionChecked: boolean;
-  setIsSubscriberOptionChecked: (b: boolean) => void;
+  isViewerOptionChecked: boolean;
+  setIsViewerOptionChecked: (b: boolean) => void;
 }) => {
   const handleChange = () => {
-    setIsSubscriberOptionChecked(!isSubscriberOptionChecked);
+    setIsViewerOptionChecked(!isViewerOptionChecked);
   };
 
   return (
     <GridContainer container alignItems="center" spacing={1}>
-      <Grid item>Streamer</Grid>
+      <Grid item>Creator</Grid>
       <Grid item>
         <Switch
-          checked={isSubscriberOptionChecked}
+          checked={isViewerOptionChecked}
           onChange={handleChange}
-          name="checkedC"
+          name="checked"
         />
       </Grid>
-      <Grid item>Subscriber</Grid>
+      <Grid item>Viewer</Grid>
     </GridContainer>
   );
 };

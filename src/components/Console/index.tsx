@@ -9,12 +9,11 @@ import { Account } from "../TabPanel/Account";
 import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRounded";
 import { AuthContext } from "../AuthContext";
 import { useHistory } from "react-router-dom";
+import { setItem } from "../../utils/localStorage";
 
 const Console = () => {
   const [value, setValue] = useState(0);
-  const { setToken, setTokenExpirationTimestamp, setHerotag } = useContext(
-    AuthContext
-  );
+  const { setToken } = useContext(AuthContext);
   const history = useHistory();
 
   const handleChange = (event: React.ChangeEvent<{}>, value: any) => {
@@ -30,15 +29,15 @@ const Console = () => {
 
   const handleClick = () => {
     setToken(null);
-    setTokenExpirationTimestamp(null);
-    setHerotag(null);
+    setItem("tokenExpirationTimestamp", null);
+    setItem("herotag", "");
 
     history.push("/");
   };
 
   return (
     <div>
-      <AppBar position="static" color="transparent">
+      <AppBar position="static" color="primary">
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Account" {...a11yProps(0)} />
           <Tab label="IFTTT Integration" {...a11yProps(1)} />

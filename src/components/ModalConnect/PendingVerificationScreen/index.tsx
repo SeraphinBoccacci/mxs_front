@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../..";
+import { AuthContext } from "../../AuthContext";
 import { FormTitle } from "../style";
 import {
   FirstDot,
@@ -9,19 +9,18 @@ import {
   TransactionReferenceP,
   Alert,
 } from "./style";
-import { getIsVerified, getReference } from "../../../../services/auth";
-import { Button } from "../../../Button";
-
-// import {} from "./style";
+import { getIsVerified, getReference } from "../../../services/auth";
+import { Button } from "../../Button";
 
 interface ConnectionScreenProps {
-  handleClose: () => void;
+  setIsOnPendingVerificationScreen: (s: boolean) => void;
 }
 
 export const PendingVerificationScreen = ({
-  handleClose,
+  setIsOnPendingVerificationScreen,
 }: ConnectionScreenProps) => {
-  const { setIsOnPendingVerificationScreen, herotag } = useContext(AuthContext);
+  const { herotag } = useContext(AuthContext);
+
   const [isUserVerified, setIsUserVerified] = useState(false);
   const [reference, setReference] = useState("");
 
@@ -77,12 +76,7 @@ export const PendingVerificationScreen = ({
         </>
       )}
 
-      <Button
-        onClick={() => {
-          setIsOnPendingVerificationScreen &&
-            setIsOnPendingVerificationScreen(false);
-        }}
-      >
+      <Button onClick={() => setIsOnPendingVerificationScreen(false)}>
         Get back to connection screen
       </Button>
     </>

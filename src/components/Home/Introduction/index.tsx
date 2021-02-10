@@ -13,7 +13,9 @@ import {
   ReferencesContent,
   Reference,
 } from "./style";
-import logo from "../../../assets/twitch_logo.png";
+import logoTwitch from "../../../assets/twitch_logo.png";
+import logoYoutube from "../../../assets/youtube.png";
+import logoFacebook from "../../../assets/facebook.png";
 
 const Introduction = () => {
   return (
@@ -27,25 +29,26 @@ const Introduction = () => {
           ></ShortCatchPhraseChip>
           <InnerContainer>
             <MainCatchPhrase>
-              The simplest way to support<br></br>your favorite streamers
+              The simplest way to support<br></br>your favorite creators
             </MainCatchPhrase>
             <SubMainCatchPhrase>
-              Use Maiar, we alert the streamers
+              Use Maiar, we notify the xxx
             </SubMainCatchPhrase>
             <CallToActions></CallToActions>
           </InnerContainer>
 
           <LittleDisclaimer>
-            MaiarXstreaM, is a free & open-source project. Feel free to donate
-            via erd
+            StreamParticles, is a free & open-source project. Feel free to
+            donate via erd
           </LittleDisclaimer>
         </CatchPhraseContainer>
-        {/* <Image src="maquette.png"></Image> TO-DO */}
       </CatchPhraseAndImage>
       <ReferencesContainer>
         <ReferencesTitle>Active on those great platforms</ReferencesTitle>
         <ReferencesContent>
-          <Reference logoPath={logo}>Twitch</Reference>
+          <Reference logoPath={logoTwitch}>Twitch</Reference>
+          <Reference logoPath={logoYoutube}>Youtube</Reference>
+          <Reference logoPath={logoFacebook}>Facebook</Reference>
         </ReferencesContent>
       </ReferencesContainer>
     </Section>

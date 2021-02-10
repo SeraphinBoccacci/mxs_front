@@ -1,6 +1,6 @@
 import { Paper, Switch } from "@material-ui/core";
 import styled from "styled-components";
-import { colors, fonts } from "../../../constants";
+import { colors, colorsV2, fonts } from "../../../constants";
 
 export const FeaturesContainer = styled.div`
   width: 100vw;
@@ -34,9 +34,10 @@ export const FeaturesSubTitle = styled.h4`
 
 export const FeaturesSwitch = styled(Switch)``;
 
-export const FeaturesContent = styled.div`
+export const FeaturesContent = styled.div<{ isRowReverse: boolean }>`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${({ isRowReverse }) =>
+    isRowReverse ? "row-reverse" : "row"};
   justify-content: space-between;
   align-items: center;
 
@@ -74,7 +75,7 @@ export const Feature = styled.div`
 
   & p {
     font-family: ${fonts.Roboto};
-    color: ${colors.spanishGray};
+    color: ${colorsV2.secondary};
     font-size: 0.8rem;
     text-align: left;
 
@@ -83,7 +84,10 @@ export const Feature = styled.div`
 `;
 
 export const FeatureScreen = styled.div<{ background: string }>`
-  background: ${({ background }) => background};
+  background-image: ${({ background }) => background};
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
   width: 40rem;
   height: 30rem;
 `;

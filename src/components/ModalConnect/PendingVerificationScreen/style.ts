@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { colors, fonts } from "../../../../constants";
+import { colors, fonts } from "../../../constants";
 import MaterialAlert from "@material-ui/lab/Alert";
 
 const appearFirstDot = keyframes`

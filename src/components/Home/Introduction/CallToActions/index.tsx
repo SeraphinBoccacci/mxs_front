@@ -5,9 +5,9 @@ const CallToActions = () => {
   return (
     <CallsToActionsContainer>
       <Button type="reversed" onClick={() => {}}>
-        I'm a streamer
+        I'm a creator
       </Button>
-      <Button onClick={() => {}}>I'm a subscriber</Button>
+      <Button onClick={() => {}}>I'm a viewer</Button>
     </CallsToActionsContainer>
   );
 };

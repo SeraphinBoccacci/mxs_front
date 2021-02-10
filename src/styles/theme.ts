@@ -1,16 +1,14 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { colors, fonts } from "../constants";
+import { colors, fonts, colorsV2 } from "../constants";
 
 export const theme = createMuiTheme({
   palette: {
+    type: "dark",
     primary: {
-      main: colors.denimBlue,
+      main: colorsV2.primary,
     },
     secondary: {
-      main: colors.spanishGray,
-    },
-    info: {
-      main: colors.lightPeriwinkle,
+      main: colorsV2.quad,
     },
     error: {
       main: colors.danger,
@@ -26,3 +24,5 @@ export const theme = createMuiTheme({
     fontFamily: [fonts.Roboto, fonts.Ubuntu].join(", "),
   },
 });
+
+export default theme;

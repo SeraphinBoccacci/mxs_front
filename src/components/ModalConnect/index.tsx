@@ -1,29 +1,41 @@
-import { useState, useContext } from "react";
-import { AuthContext } from "..";
+import { useState } from "react";
 import { ModalContainer, ModalContent } from "./style";
 import { Snackbar } from "./Snackbar";
 import { PendingVerificationScreen } from "./PendingVerificationScreen";
 import { ConnectionScreen } from "./ConnectionScreen";
 
 interface ModalConnectProps {
-  open: boolean;
   handleClose: () => void;
+  isConnectModalOpenned: boolean;
+  isOnPendingVerificationScreen: boolean;
+  setIsOnPendingVerificationScreen: (s: boolean) => void;
 }
 
-const ModalConnect = ({ open, handleClose }: ModalConnectProps) => {
+const ModalConnect = ({
+  handleClose,
+  isConnectModalOpenned,
+  isOnPendingVerificationScreen,
+  setIsOnPendingVerificationScreen,
+}: ModalConnectProps) => {
   const [snackbarData, setSnackBarData] = useState<{} | null>(null);
-  const { isOnPendingVerificationScreen } = useContext(AuthContext);
 
   return (
     <>
-      <ModalContainer open={open} onClose={handleClose}>
+      <ModalContainer open={!!isConnectModalOpenned} onClose={handleClose}>
         <ModalContent>
           {isOnPendingVerificationScreen ? (
             <PendingVerificationScreen
-              handleClose={handleClose}
+              setIsOnPendingVerificationScreen={
+                setIsOnPendingVerificationScreen
+              }
             ></PendingVerificationScreen>
           ) : (
-            <ConnectionScreen handleClose={handleClose}></ConnectionScreen>
+            <ConnectionScreen
+              setIsOnPendingVerificationScreen={
+                setIsOnPendingVerificationScreen
+              }
+              handleClose={handleClose}
+            ></ConnectionScreen>
           )}
         </ModalContent>
       </ModalContainer>

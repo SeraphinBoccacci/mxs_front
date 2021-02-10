@@ -1,17 +1,42 @@
 import { Switch } from "@material-ui/core";
 import styled from "styled-components";
-import { colors, fonts } from "../../../constants/index";
+import { colors, colorsV2, fonts } from "../../../constants/index";
+import Button from "@material-ui/core/Button";
 
 export const IftttIntegrationContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
 `;
 
 export const IftttIntegrationForm = styled.form`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
+  height: 10rem;
+`;
+
+export const Paragraph = styled.p`
+  color: ${colorsV2.secondary};
+  font-family: ${fonts.Ubuntu};
+  font-size: 1.1rem;
+`;
+
+export const HideButton = styled(Button)`
+  position: absolute !important;
+
+  top: 3rem;
+  right: 3rem;
+`;
+
+export const TutorialButtonContainer = styled.div`
+  position: relative;
+  width: 50rem;
+  height: max-content;
+
+  margin: 0 auto;
 `;
 
 export const FormInputAndLabel = styled.div`
@@ -22,7 +47,7 @@ export const FormInputAndLabel = styled.div`
 `;
 export const FormLabel = styled.label`
   color: ${colors.cultured};
-  margin: 0 1.3rem;
+  margin: 0 1rem;
 `;
 export const FormInput = styled.input`
   display: inline-block;
@@ -30,12 +55,15 @@ export const FormInput = styled.input`
   line-height: 2rem;
   width: max-content;
 
-  margin: 1rem 0;
+  margin: 1rem 2rem 1rem 0;
   font-family: ${fonts.Ubuntu};
   font-size: 0.9rem;
 
   transition: 0.4s;
   text-align: center;
+
+  border-radius: 5px;
+  border: none;
 
   &:focus::placeholder {
     font-size: 0;

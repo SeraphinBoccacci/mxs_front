@@ -1,6 +1,5 @@
+import config from "../config/config";
 import { postWithAuth } from "../utils/axios";
-
-const URL = "http://localhost:4000/api";
 
 export const modifyIftttIntegration = async (
   herotag: string,
@@ -8,12 +7,15 @@ export const modifyIftttIntegration = async (
   triggerKey: string
 ) => {
   try {
-    const data = await postWithAuth(`${URL}/user/ifttt/${herotag}`, {
-      ifttt: {
-        eventName,
-        triggerKey,
-      },
-    });
+    const data = await postWithAuth(
+      `${config.development.apiUrl}/user/ifttt/${herotag}`,
+      {
+        ifttt: {
+          eventName,
+          triggerKey,
+        },
+      }
+    );
 
     return data;
   } catch (err) {}
@@ -24,9 +26,12 @@ export const toggleIftttIntegration = async (
   isActive: boolean
 ) => {
   try {
-    const res = await postWithAuth(`${URL}/user/ifttt/is-active/${herotag}`, {
-      isActive,
-    });
+    const res = await postWithAuth(
+      `${config.development.apiUrl}/user/ifttt/is-active/${herotag}`,
+      {
+        isActive,
+      }
+    );
 
     return res.data;
   } catch (err) {}

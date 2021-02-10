@@ -19,8 +19,8 @@ export const ActivateIntegration = styled.div`
 
   border-radius: 6px;
 
-  color: ${colors.denimBlue};
-  background-color: ${colors.cultured};
+  color: ${colors.cultured};
+  /* background-color: ${colors.cultured}; */
 `;
 
 export const ActivateSwitch = styled(Switch)`

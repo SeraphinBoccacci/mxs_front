@@ -1,9 +1,13 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { getUserData } from "../../services/user";
-import ModalConnect from "./ModalConnect";
-import queryString from "query-string";
+import { getItem } from "../../utils/localStorage";
 
 export enum UserAccountStatus {
   PENDING,
@@ -32,111 +36,48 @@ export interface UserType {
 }
 
 export const AuthContext = createContext<{
-  isUserConnected: boolean;
+  isAuthenticated: boolean;
   herotag?: string;
   setToken: (s: any) => void;
-  setHerotag: (s: any) => void;
-  setIsModalOpenned: (s: boolean) => void;
-  setTokenExpirationTimestamp: (s: number | null) => void;
   user?: UserType;
-  tokenExpirationTimestamp?: number;
-  isConnectModalOpenned?: boolean;
-  isOnPendingVerificationScreen?: boolean;
-  setIsOnPendingVerificationScreen?: (s: boolean) => void;
 }>({
-  isUserConnected: false,
+  isAuthenticated: false,
   setToken: (s: any) => {},
-  setHerotag: (s: any) => {},
-  setTokenExpirationTimestamp: (s: number | null) => {},
-  setIsModalOpenned: (s) => s,
-  setIsOnPendingVerificationScreen: (s: boolean) => {},
 });
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const history = useHistory();
-  const parsedSearch = queryString.parse(history.location.search);
-
   const [token, setToken] = useLocalStorage("token", null);
-  const [herotag, setHerotag] = useLocalStorage("herotag", null);
-  const [
-    tokenExpirationTimestamp,
-    setTokenExpirationTimestamp,
-  ] = useLocalStorage("tokenExpirationTimestamp", null);
-  const [isConnectModalOpenned, setIsModalOpenned] = useState(
-    !!parsedSearch?.isConnectModalOpenned || false
-  );
-  const setCurrentIsModalOpenned = (currentIsModalOpenned: boolean) => {
-    history.push({
-      search: queryString.stringify({
-        ...(isOnPendingVerificationScreen && {
-          isOnPendingVerificationScreen,
-        }),
-        ...(currentIsModalOpenned && {
-          isConnectModalOpenned: currentIsModalOpenned,
-        }),
-      }),
-    });
+  const tokenExpirationTimestamp = getItem("tokenExpirationTimestamp");
+  const herotag = getItem("herotag") as string;
 
-    setIsModalOpenned(currentIsModalOpenned);
-  };
-  const [
-    isOnPendingVerificationScreen,
-    setIsOnPendingVerificationScreen,
-  ] = useState(!!parsedSearch?.isOnPendingVerificationScreen || false);
-  const setCurrentIsOnPendingVerificationScreen = (
-    currentIsOnPendingVerificationScreen: boolean
-  ) => {
-    history.push({
-      search: queryString.stringify({
-        ...(currentIsOnPendingVerificationScreen && {
-          isOnPendingVerificationScreen: currentIsOnPendingVerificationScreen,
-        }),
-        ...(isConnectModalOpenned && {
-          isConnectModalOpenned: isConnectModalOpenned,
-        }),
-      }),
-    });
-
-    setIsOnPendingVerificationScreen(currentIsOnPendingVerificationScreen);
-  };
-
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<UserType | undefined>();
 
   useEffect(() => {
     if (!token || (token && Date.now() > tokenExpirationTimestamp)) {
       setToken(null);
+    }
+  }, [token, setToken, tokenExpirationTimestamp]);
 
-      history.push("/");
-    } else if (herotag && token) {
+  useEffect(() => {
+    if (token && herotag)
       getUserData(herotag).then((data) => {
         setUser(data);
       });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token, herotag, history, tokenExpirationTimestamp, setUser]);
+  }, [token, herotag, setUser]);
 
   return (
     <AuthContext.Provider
       value={{
-        isUserConnected: !!token,
+        isAuthenticated: !!token,
         setToken,
         herotag,
-        setHerotag,
-        setTokenExpirationTimestamp,
-        tokenExpirationTimestamp,
         user,
-        isOnPendingVerificationScreen,
-        setIsModalOpenned: setCurrentIsModalOpenned,
-        setIsOnPendingVerificationScreen: setCurrentIsOnPendingVerificationScreen,
       }}
     >
       {children}
-      <ModalConnect
-        open={isConnectModalOpenned}
-        handleClose={() => setCurrentIsModalOpenned(false)}
-      ></ModalConnect>
     </AuthContext.Provider>
   );
 };
 
+export const useAuth = () => useContext(AuthContext);
 export default AuthProvider;

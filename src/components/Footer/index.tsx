@@ -1,5 +1,5 @@
-import { colors } from "../../constants";
-import LogoAndName from "../LogoAndName";
+// import { colors } from "../../constants";
+// import LogoAndName from "../LogoAndName";
 import {
   Columns,
   DoubleColumn,
@@ -13,7 +13,7 @@ import {
 const Footer = () => {
   return (
     <FooterContainer>
-      <LogoAndName color={colors.eerieBlack}></LogoAndName>
+      {/* <LogoAndName color={colors.eerieBlack}></LogoAndName> */}
       <Columns>
         <DoubleColumn>
           <ColumnParagraph>
@@ -22,8 +22,8 @@ const Footer = () => {
           </ColumnParagraph>
 
           <ColumnParagraph>
-            MaiarXstreaM uses maiar to let you interact freely, without
-            intermediary between you and the streamers you support intermedia
+            StreamParticles uses Maiar technology to let you interact freely,
+            without intermediary between you and the creators you support.
           </ColumnParagraph>
         </DoubleColumn>
         <Column>

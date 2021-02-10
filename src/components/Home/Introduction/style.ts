@@ -1,16 +1,22 @@
 import { Chip } from "@material-ui/core";
 import styled from "styled-components";
-import { colors, fonts } from "../../../constants";
+import { colors, colorsV2, fonts } from "../../../constants";
 
 export const Section = styled.section`
   height: 100vh;
   width: 100vw;
-  background-color: ${colors.eerieBlack}ed;
+  background-color: #060606;
+  padding: 6rem 0 2rem;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
+  background-image: url("/planet_2.jpeg");
+  background-position: bottom right;
+  background-size: contain;
+  background-repeat: no-repeat;
 `;
 
 export const CatchPhraseAndImage = styled.div`
@@ -21,6 +27,7 @@ export const CatchPhraseAndImage = styled.div`
 
   width: 80rem;
   height: 25rem;
+  flex: 1;
 `;
 
 export const CatchPhraseContainer = styled.div`
@@ -73,8 +80,8 @@ export const SubMainCatchPhrase = styled.h3`
 
 export const LittleDisclaimer = styled.h6`
   font-family: ${fonts.Ubuntu};
-  font-size: 0.7rem;
-  color: ${colors.cultured};
+  font-size: 0.8rem;
+  color: ${colorsV2.quad};
   margin: 0;
 `;
 
@@ -84,16 +91,16 @@ export const ReferencesContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  margin-top: 7rem;
-
   height: 8rem;
+  width: 100%;
 `;
 
 export const ReferencesTitle = styled.h2`
   position: relative;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  letter-spacing: 1.2px;
   font-family: ${fonts.Roboto};
-  color: ${colors.spanishGray};
+  color: ${colorsV2.quad};
   width: max-content;
   margin: 0 4rem;
 
@@ -108,7 +115,7 @@ export const ReferencesTitle = styled.h2`
     width: 22rem;
     height: 1px;
     border-radius: 999px;
-    background-color: ${colors.spanishGray};
+    background-color: ${colorsV2.quad};
   }
 
   &::after {
@@ -119,11 +126,16 @@ export const ReferencesTitle = styled.h2`
     width: 22rem;
     height: 1px;
     border-radius: 999px;
-    background-color: ${colors.spanishGray};
+    background-color: ${colorsV2.quad};
   }
 `;
 
-export const ReferencesContent = styled.div``;
+export const ReferencesContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Reference = styled.div<{ logoPath?: string }>`
   position: relative;
@@ -134,16 +146,19 @@ export const Reference = styled.div<{ logoPath?: string }>`
 
   font-size: 1.6rem;
   font-family: ${fonts.Roboto};
-  color: ${colors.spanishGray};
+  color: ${colorsV2.secondary};
+
+  margin: 0 2rem 0 4rem;
 
   &::before {
     content: "";
     position: absolute;
     top: 0;
-    left: -50px;
+    left: -40px;
     width: 50px;
     height: 50px;
     background-image: ${({ logoPath }) => `url(${logoPath})`};
     background-size: cover;
+    background-position: center right;
   }
 `;

@@ -3,10 +3,20 @@ import { Button } from "../../Button";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthContext";
 import { useHistory } from "react-router-dom";
+import ModalConnect from "../../ModalConnect";
+import { useQueryString } from "../../../hooks/useQueryString";
 
 export const HeaderCTAs = () => {
-  const { isUserConnected, setIsModalOpenned } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const history = useHistory();
+
+  const [isConnectModalOpenned, setIsModalOpenned] = useQueryString(
+    "isConnectModalOpenned"
+  );
+  const [
+    isOnPendingVerificationScreen,
+    setIsOnPendingVerificationScreen,
+  ] = useQueryString("isOnPendingVerificationScreen");
 
   return (
     <>
@@ -14,7 +24,7 @@ export const HeaderCTAs = () => {
         <Button onClick={() => {}} type="outlined">
           Docs
         </Button>
-        {isUserConnected ? (
+        {isAuthenticated ? (
           <Button
             onClick={() => {
               history.push("/console");
@@ -23,16 +33,23 @@ export const HeaderCTAs = () => {
             Console
           </Button>
         ) : (
-          <Button
-            onClick={() => {
-              setIsModalOpenned(true);
-              history.push({
-                search: "?isConnectModalOpenned=true",
-              });
-            }}
-          >
-            Connect
-          </Button>
+          <>
+            <Button
+              onClick={() => {
+                setIsModalOpenned(true);
+              }}
+            >
+              Connect
+            </Button>
+            <ModalConnect
+              isConnectModalOpenned={isConnectModalOpenned}
+              handleClose={() => setIsModalOpenned(false)}
+              isOnPendingVerificationScreen={isOnPendingVerificationScreen}
+              setIsOnPendingVerificationScreen={
+                setIsOnPendingVerificationScreen
+              }
+            ></ModalConnect>
+          </>
         )}
       </ButtonsContainer>
     </>

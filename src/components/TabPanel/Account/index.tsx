@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { toggleStreamingActivation } from "../../../services/user";
 import { AuthContext } from "../../AuthContext";
+import { ContentContainer, Paragraph } from "../style";
 
 import { ActivateIntegration, AccountContainer, ActivateSwitch } from "./style";
 
@@ -26,15 +27,23 @@ export const Account = () => {
 
   return (
     <AccountContainer>
-      <ActivateIntegration>
-        Start Streaming
-        <ActivateSwitch
-          disabled={isSubmitting}
-          checked={isStreamActive}
-          onChange={handleSwitchChange}
-          color="primary"
-        ></ActivateSwitch>
-      </ActivateIntegration>
+      <ContentContainer>
+        <Paragraph>
+          Activate interactions in your streaming content by switching on the
+          toggle below.
+        </Paragraph>
+      </ContentContainer>
+      <ContentContainer>
+        <ActivateIntegration>
+          Start Streaming
+          <ActivateSwitch
+            disabled={isSubmitting}
+            checked={isStreamActive}
+            onChange={handleSwitchChange}
+            color="secondary"
+          ></ActivateSwitch>
+        </ActivateIntegration>
+      </ContentContainer>
     </AccountContainer>
   );
 };

@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { colors, fonts } from "../../constants";
+import { colors, colorsV2, fonts } from "../../constants";
 
 export const FooterContainer = styled.footer`
-  background-color: ${colors.spanishGray};
+  /* background-color: ${`linear-gradient(to top, ${colorsV2.quad}, white)`}; */
+  background: ${`linear-gradient(to top, ${colorsV2.quad} 75%, ${colorsV2.secondary})`};
 
   width: 100vw;
   height: 50vh;

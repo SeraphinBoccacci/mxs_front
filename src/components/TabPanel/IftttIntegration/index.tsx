@@ -15,12 +15,19 @@ import {
   EventNameInput,
   FormInputAndLabel,
   FormLabel,
+  Paragraph,
+  HideButton,
 } from "./style";
+
+import { ContentContainer } from "../style";
+
 import {
   modifyIftttIntegration,
   toggleIftttIntegration,
 } from "../../../services/ifttt";
 import { AuthContext } from "../../AuthContext";
+import { FlexRow } from "../../../styles/global";
+import { Tutorial } from "./Tutorial";
 
 interface IftttIntegrationState {
   triggerKey?: string;
@@ -30,6 +37,7 @@ interface IftttIntegrationState {
 export const IftttIntegration = () => {
   const { user } = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isTutorialVisible, setIsTutorialVisible] = useState(true);
   const [isIntegrationActive, setIsIntegrationActive] = useState(
     user?.integrations?.ifttt?.isActive || false
   );
@@ -86,32 +94,50 @@ export const IftttIntegration = () => {
 
   return (
     <IftttIntegrationContainer>
-      <IftttIntegrationForm onSubmit={handleSubmit}>
-        <FormInputAndLabel>
-          <FormLabel>Event Name</FormLabel>
-          <EventNameInput
-            disabled={isSubmitting}
-            name="eventName"
-            defaultValue={user?.integrations?.ifttt?.eventName}
-            onChange={setFormData}
-            placeholder="MaiarTest2x"
-          ></EventNameInput>
-        </FormInputAndLabel>
-        <FormInputAndLabel>
-          <FormLabel>Trigger Key</FormLabel>
-          <TriggerKeyInput
-            disabled={isSubmitting}
-            name="triggerKey"
-            defaultValue={user?.integrations?.ifttt?.triggerKey}
-            onChange={setFormData}
-            placeholder="e1eFH71X84ljX-0AFjNdjYJ2B4TfY8whL5j3fkLAc6F"
-          ></TriggerKeyInput>
-        </FormInputAndLabel>
+      <ContentContainer elevation={3} variant="elevation">
+        <Paragraph>
+          IFTTT is a free platform that helps all your products and services
+          work better together.
+        </Paragraph>
+      </ContentContainer>
+      <HideButton
+        onClick={() => setIsTutorialVisible((prevState) => !prevState)}
+        variant="contained"
+        color="secondary"
+      >
+        {isTutorialVisible ? "Hide" : "Show"} tutorial
+      </HideButton>
+      {isTutorialVisible ? <Tutorial></Tutorial> : null}
 
-        <Button isFormButton type="outlined">
-          Submit
-        </Button>
-      </IftttIntegrationForm>
+      <ContentContainer elevation={3} variant="elevation">
+        <IftttIntegrationForm onSubmit={handleSubmit}>
+          <FlexRow>
+            <FormInputAndLabel>
+              <FormLabel>Event Name</FormLabel>
+              <EventNameInput
+                disabled={isSubmitting}
+                name="eventName"
+                defaultValue={user?.integrations?.ifttt?.eventName}
+                onChange={setFormData}
+                placeholder="StreamParticlesEvent"
+              ></EventNameInput>
+            </FormInputAndLabel>
+            <FormInputAndLabel>
+              <FormLabel>Trigger Key</FormLabel>
+              <TriggerKeyInput
+                disabled={isSubmitting}
+                name="triggerKey"
+                defaultValue={user?.integrations?.ifttt?.triggerKey}
+                onChange={setFormData}
+                placeholder="e1eFH71X84ljX-0AFjNdjYJ2B4TfY8whL5j3fkLAc6F"
+              ></TriggerKeyInput>
+            </FormInputAndLabel>
+          </FlexRow>
+
+          <Button isFormButton>Submit</Button>
+        </IftttIntegrationForm>
+      </ContentContainer>
+
       <ActivateIntegration>
         Activate Integration
         <ActivateSwitch

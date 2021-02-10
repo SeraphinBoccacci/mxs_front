@@ -1,10 +1,9 @@
 import axios from "axios";
-
-const URL = "http://localhost:4000/api";
+import config from "../config/config";
 
 export const authenticate = async (herotag: string, password: string) => {
   try {
-    const res = await axios.post(`${URL}/authenticate`, {
+    const res = await axios.post(`${config.development.apiUrl}/authenticate`, {
       herotag,
       password,
     });
@@ -21,11 +20,14 @@ export const createAccount = async (
   confirm: string
 ) => {
   try {
-    const res = await axios.post(`${URL}/create-account`, {
-      herotag,
-      password,
-      confirm,
-    });
+    const res = await axios.post(
+      `${config.development.apiUrl}/create-account`,
+      {
+        herotag,
+        password,
+        confirm,
+      }
+    );
 
     return res.data;
   } catch (err) {}
@@ -33,7 +35,9 @@ export const createAccount = async (
 
 export const getIsVerified = async (herotag: string) => {
   try {
-    const res = await axios.get(`${URL}//verification-status/${herotag}`);
+    const res = await axios.get(
+      `${config.development.apiUrl}//verification-status/${herotag}`
+    );
 
     return res?.data || false;
   } catch (error) {}
@@ -41,7 +45,9 @@ export const getIsVerified = async (herotag: string) => {
 
 export const getReference = async (herotag: string) => {
   try {
-    const res = await axios.get(`${URL}/verification-reference/${herotag}`);
+    const res = await axios.get(
+      `${config.development.apiUrl}/verification-reference/${herotag}`
+    );
 
     return res?.data || "";
   } catch (error) {}

@@ -1,6 +1,6 @@
 import { Modal, Paper } from "@material-ui/core";
 import styled from "styled-components";
-import { fonts } from "../../../constants";
+import { colorsV2, fonts } from "../../constants";
 
 export const ModalContainer = styled(Modal)`
   width: 500px;
@@ -21,9 +21,11 @@ export const ModalContent = styled(Paper)`
 `;
 
 export const FormTitle = styled.h3`
-  margin: 1.3rem auto;
+  margin: 1.5rem auto;
+  letter-spacing: 2px;
   width: max-content;
 
   font-size: 2rem;
   font-family: ${fonts.Roboto};
+  color: ${colorsV2.quad};
 `;

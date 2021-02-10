@@ -1,7 +1,15 @@
 import StyledConsole from "../components/Console";
+import { Helmet } from "react-helmet";
 
 const Console = () => {
-  return <StyledConsole></StyledConsole>;
+  return (
+    <>
+      <Helmet>
+        <title>Console</title>
+      </Helmet>
+      <StyledConsole></StyledConsole>
+    </>
+  );
 };
 
 export default Console;
