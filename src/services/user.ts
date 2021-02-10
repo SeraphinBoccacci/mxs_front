@@ -7,7 +7,7 @@ export const toggleStreamingActivation = async (
 ) => {
   try {
     const data = await postWithAuth(
-      `${config.development.apiUrl}/user/poll-maiar/${herotag}`,
+      `${config.apiUrl}/user/poll-maiar/${herotag}`,
       {
         isStreaming,
       }
@@ -18,9 +18,7 @@ export const toggleStreamingActivation = async (
 };
 
 export const getUserData = async (herotag: string) => {
-  const data = await getWithAuth(
-    `${config.development.apiUrl}/user/${herotag}`
-  );
+  const data = await getWithAuth(`${config.apiUrl}/user/${herotag}`);
 
   return data;
 };

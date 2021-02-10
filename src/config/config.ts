@@ -1,4 +1,10 @@
-const config = {
+interface Config {
+  apiUrl: string;
+}
+
+type EnvConfig = { [key: string]: Config };
+
+const config: EnvConfig = {
   development: {
     apiUrl: "http://localhost:4000/api",
   },
@@ -7,4 +13,4 @@ const config = {
   },
 };
 
-export default config;
+export default config[process.env.NODE_ENV] || config["development"];

@@ -3,7 +3,7 @@ import config from "../config/config";
 
 export const authenticate = async (herotag: string, password: string) => {
   try {
-    const res = await axios.post(`${config.development.apiUrl}/authenticate`, {
+    const res = await axios.post(`${config.apiUrl}/authenticate`, {
       herotag,
       password,
     });
@@ -20,14 +20,11 @@ export const createAccount = async (
   confirm: string
 ) => {
   try {
-    const res = await axios.post(
-      `${config.development.apiUrl}/create-account`,
-      {
-        herotag,
-        password,
-        confirm,
-      }
-    );
+    const res = await axios.post(`${config.apiUrl}/create-account`, {
+      herotag,
+      password,
+      confirm,
+    });
 
     return res.data;
   } catch (err) {}
@@ -36,7 +33,7 @@ export const createAccount = async (
 export const getIsVerified = async (herotag: string) => {
   try {
     const res = await axios.get(
-      `${config.development.apiUrl}//verification-status/${herotag}`
+      `${config.apiUrl}//verification-status/${herotag}`
     );
 
     return res?.data || false;
@@ -46,7 +43,7 @@ export const getIsVerified = async (herotag: string) => {
 export const getReference = async (herotag: string) => {
   try {
     const res = await axios.get(
-      `${config.development.apiUrl}/verification-reference/${herotag}`
+      `${config.apiUrl}/verification-reference/${herotag}`
     );
 
     return res?.data || "";

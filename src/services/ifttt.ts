@@ -7,15 +7,12 @@ export const modifyIftttIntegration = async (
   triggerKey: string
 ) => {
   try {
-    const data = await postWithAuth(
-      `${config.development.apiUrl}/user/ifttt/${herotag}`,
-      {
-        ifttt: {
-          eventName,
-          triggerKey,
-        },
-      }
-    );
+    const data = await postWithAuth(`${config.apiUrl}/user/ifttt/${herotag}`, {
+      ifttt: {
+        eventName,
+        triggerKey,
+      },
+    });
 
     return data;
   } catch (err) {}
@@ -27,7 +24,7 @@ export const toggleIftttIntegration = async (
 ) => {
   try {
     const res = await postWithAuth(
-      `${config.development.apiUrl}/user/ifttt/is-active/${herotag}`,
+      `${config.apiUrl}/user/ifttt/is-active/${herotag}`,
       {
         isActive,
       }
