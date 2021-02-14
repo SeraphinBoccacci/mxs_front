@@ -15,7 +15,6 @@ import {
   FormInputAndLabel,
   FormLabel,
   Paragraph,
-  HideButton,
   FormInputs,
 } from "./style";
 
@@ -39,7 +38,6 @@ interface IftttIntegrationState {
 export const IftttIntegration = () => {
   const { user } = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isTutorialVisible, setIsTutorialVisible] = useState(true);
   const [isIntegrationActive, setIsIntegrationActive] = useState(
     user?.integrations?.ifttt?.isActive || false
   );
@@ -89,12 +87,6 @@ export const IftttIntegration = () => {
     user?.integrations?.ifttt?.triggerKey,
   ]);
 
-  console.log({
-    formData,
-    initialState,
-    user: user?.integrations?.ifttt?.eventName,
-  });
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -133,17 +125,7 @@ export const IftttIntegration = () => {
           work better together.
         </Paragraph>
       </ContentContainer>
-      <HideButton
-        onClick={() => setIsTutorialVisible((prevState) => !prevState)}
-        variant="contained"
-        color="secondary"
-      >
-        {isTutorialVisible ? "Hide" : "Show"} tutorial
-      </HideButton>
-      {isTutorialVisible ? (
-        <Tutorial tutorial={iftttTutorial}></Tutorial>
-      ) : null}
-
+      <Tutorial tutorial={iftttTutorial}></Tutorial>
       <ContentContainer elevation={3} variant="elevation">
         <IftttIntegrationForm onSubmit={handleSubmit}>
           <FormInputs>

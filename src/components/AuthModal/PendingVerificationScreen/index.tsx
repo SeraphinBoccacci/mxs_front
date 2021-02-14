@@ -25,10 +25,8 @@ export const PendingVerificationScreen = ({
   const [reference, setReference] = useState("");
 
   useEffect(() => {
-    console.log("herotag", herotag);
     if (herotag) {
       getReference(herotag).then((data) => {
-        console.log("data", data);
         setReference(data);
       });
 

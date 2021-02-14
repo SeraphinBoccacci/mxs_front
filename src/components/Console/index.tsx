@@ -1,7 +1,7 @@
 import { AppBar, Tabs } from "./style";
 import Tab from "@material-ui/core/Tab";
 import { TabPanel } from "../TabPanel";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { NotDevelopped } from "../TabPanel/NotDevelopped";
 import { IftttIntegration } from "../TabPanel/IftttIntegration";
 import { Account } from "../TabPanel/Account";

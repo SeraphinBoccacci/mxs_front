@@ -2,6 +2,7 @@ import {
   Paper,
   Stepper as MaterialStepper,
   Step as MaterialStep,
+  Button,
 } from "@material-ui/core";
 import styled from "styled-components";
 import { colors } from "../../constants";
@@ -69,4 +70,12 @@ export const Image = styled.img`
   border-radius: 7px;
 
   margin: 0 auto;
+`;
+
+export const HideButton = styled(Button)`
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: max-content !important;
+  margin: 1.3rem auto !important;
 `;

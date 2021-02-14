@@ -63,13 +63,6 @@ export const Paragraph = styled.p`
   }
 `;
 
-export const HideButton = styled(Button)`
-  position: absolute !important;
-
-  top: 3rem;
-  right: 3rem;
-`;
-
 export const TutorialButtonContainer = styled.div`
   position: relative;
   width: 50rem;
