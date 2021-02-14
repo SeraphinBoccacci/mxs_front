@@ -2,16 +2,12 @@ import axios from "axios";
 import config from "../config/config";
 
 export const authenticate = async (herotag: string, password: string) => {
-  try {
-    const res = await axios.post(`${config.apiUrl}/authenticate`, {
-      herotag,
-      password,
-    });
+  const res = await axios.post(`${config.apiUrl}/authenticate`, {
+    herotag,
+    password,
+  });
 
-    return res.data;
-  } catch (err) {
-    throw err;
-  }
+  return res.data;
 };
 
 export const createAccount = async (
@@ -19,15 +15,13 @@ export const createAccount = async (
   password: string,
   confirm: string
 ) => {
-  try {
-    const res = await axios.post(`${config.apiUrl}/create-account`, {
-      herotag,
-      password,
-      confirm,
-    });
+  const res = await axios.post(`${config.apiUrl}/create-account`, {
+    herotag,
+    password,
+    confirm,
+  });
 
-    return res.data;
-  } catch (err) {}
+  return res.data;
 };
 
 export const getIsVerified = async (herotag: string) => {
@@ -41,11 +35,9 @@ export const getIsVerified = async (herotag: string) => {
 };
 
 export const getReference = async (herotag: string) => {
-  try {
-    const res = await axios.get(
-      `${config.apiUrl}/verification-reference/${herotag}`
-    );
+  const res = await axios.get(
+    `${config.apiUrl}/verification-reference/${herotag}`
+  );
 
-    return res?.data || "";
-  } catch (error) {}
+  return res?.data || "";
 };

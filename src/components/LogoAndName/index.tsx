@@ -6,7 +6,7 @@ import {
 } from "./style";
 // import logo from "../../assets/mxs_logo.png";
 
-const LogoAndName = ({ color = colors.cultured }: { color?: string }) => {
+const LogoAndName = ({ color = colors.secondary }: { color?: string }) => {
   return (
     <LogoAndNameContainer>
       {/* <Logo src={logo}></Logo> */}

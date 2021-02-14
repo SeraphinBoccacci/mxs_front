@@ -1,14 +1,14 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { colors, fonts, colorsV2 } from "../constants";
+import { colors, fonts } from "../constants";
 
 export const theme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: colorsV2.primary,
+      main: colors.primary,
     },
     secondary: {
-      main: colorsV2.quad,
+      main: colors.quad,
     },
     error: {
       main: colors.danger,

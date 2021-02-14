@@ -1,16 +1,22 @@
-import Anchors from "./Anchors";
-import { HeaderCTAs } from "./HeaderCTAs";
-import LogoAndName from "../LogoAndName";
-import { HeaderContainer } from "./style";
+import StandartHeader from "./Header";
+import MobileHeader from "./MobileHeader";
+//@ts-ignore
+import { withBreakpoints } from "react-breakpoints";
 
-const Header = () => {
-  return (
-    <HeaderContainer>
-      <LogoAndName></LogoAndName>
-      <Anchors></Anchors>
-      <HeaderCTAs></HeaderCTAs>
-    </HeaderContainer>
+type breakpoints = { [key: string]: number };
+
+const Header = ({
+  breakpoints,
+  currentBreakpoint,
+}: {
+  breakpoints: breakpoints;
+  currentBreakpoint: string;
+}) => {
+  return breakpoints[currentBreakpoint] > breakpoints.mobileLandscape ? (
+    <StandartHeader></StandartHeader>
+  ) : (
+    <MobileHeader></MobileHeader>
   );
 };
 
-export default Header;
+export default withBreakpoints(Header);

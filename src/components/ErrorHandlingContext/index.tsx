@@ -62,6 +62,10 @@ const ErrorHandlingContextProvider = ({
       severity: "error",
       message: "The password is not correct",
     },
+    COULD_NOT_FIND_HETOTAG_ON_DNS: {
+      severity: "error",
+      message: "Could not find the herotag you provided on elrond dns",
+    },
   };
 
   const handleError: HandleError = (errorType, action) => {

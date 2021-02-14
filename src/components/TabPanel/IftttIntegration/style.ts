@@ -1,6 +1,6 @@
 import { Switch } from "@material-ui/core";
 import styled from "styled-components";
-import { colors, colorsV2, fonts } from "../../../constants/index";
+import { colors, fonts } from "../../../constants/index";
 import Button from "@material-ui/core/Button";
 
 export const IftttIntegrationContainer = styled.div`
@@ -15,13 +15,52 @@ export const IftttIntegrationForm = styled.form`
   justify-content: space-evenly;
   align-items: center;
 
-  height: 10rem;
+  height: max-content;
+  width: 80vw;
+
+  @media (min-width: 500px) {
+    width: 25rem;
+  }
+
+  @media (min-width: 600px) {
+    width: 30rem;
+  }
+
+  @media (min-width: 800px) {
+    width: 40rem;
+  }
+
+  @media (min-width: 1000px) {
+    width: 50rem;
+  }
 `;
 
 export const Paragraph = styled.p`
-  color: ${colorsV2.secondary};
+  color: ${colors.secondary};
   font-family: ${fonts.Ubuntu};
-  font-size: 1.1rem;
+  font-size: 0.85rem;
+  width: 80vw;
+  text-align: center;
+
+  @media (min-width: 500px) {
+    width: 20rem;
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 900px) {
+    width: 25rem;
+    font-size: 1rem;
+  }
+
+  @media (min-width: 1000px) {
+    width: 30rem;
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 1250px) {
+    line-height: 2rem;
+    width: 35rem;
+  }
 `;
 
 export const HideButton = styled(Button)`
@@ -39,15 +78,42 @@ export const TutorialButtonContainer = styled.div`
   margin: 0 auto;
 `;
 
-export const FormInputAndLabel = styled.div`
+export const FormInputs = styled.div`
   display: flex;
   flex-direction: row;
-  width: max-content;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  margin: 1rem 0 2.5rem;
+`;
+
+export const FormInputAndLabel = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
+
+  max-width: 100%;
+
+  margin: 1rem 0;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+    margin: 0.2rem 0;
+  }
 `;
 export const FormLabel = styled.label`
-  color: ${colors.cultured};
+  color: ${colors.secondary};
   margin: 0 1rem;
+  font-size: 0.8rem;
+
+  @media (min-width: 800px) {
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 1rem;
+  }
 `;
 export const FormInput = styled.input`
   display: inline-block;
@@ -64,6 +130,22 @@ export const FormInput = styled.input`
 
   border-radius: 5px;
   border: none;
+
+  &::placeholder {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 800px) {
+    &::placeholder {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    &::placeholder {
+      font-size: 1rem;
+    }
+  }
 
   &:focus::placeholder {
     font-size: 0;
@@ -106,8 +188,8 @@ export const ActivateIntegration = styled.div`
 
   border-radius: 6px;
 
-  color: ${colors.denimBlue};
-  background-color: ${colors.cultured};
+  color: ${colors.primary};
+  background-color: ${colors.secondary};
 `;
 
 export const ActivateSwitch = styled(Switch)`

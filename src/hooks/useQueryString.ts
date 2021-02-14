@@ -9,6 +9,9 @@ export const useQueryString = (key: string): [any, (value: any) => void] => {
       const parsedSearch = queryString.parse(history.location.search);
       const item = parsedSearch[key];
 
+      if (item === "true") return true;
+      if (item === "false") return false;
+
       return item || null;
     } catch (error) {
       return null;
@@ -18,10 +21,11 @@ export const useQueryString = (key: string): [any, (value: any) => void] => {
   const setValue = (value: any) => {
     try {
       const parsedSearch = queryString.parse(history.location.search);
+      const { [key]: lastValue, ...restParsedSearch } = parsedSearch;
       history.push({
         search: queryString.stringify({
-          ...parsedSearch,
-          [key]: value,
+          ...restParsedSearch,
+          ...(!!value && { [key]: value }),
         }),
       });
 

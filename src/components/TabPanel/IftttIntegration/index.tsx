@@ -5,7 +5,6 @@ import {
   useReducer,
   useState,
 } from "react";
-import { Button } from "../../Button";
 import {
   ActivateIntegration,
   IftttIntegrationContainer,
@@ -17,6 +16,7 @@ import {
   FormLabel,
   Paragraph,
   HideButton,
+  FormInputs,
 } from "./style";
 
 import { ContentContainer } from "../style";
@@ -26,8 +26,10 @@ import {
   toggleIftttIntegration,
 } from "../../../services/ifttt";
 import { AuthContext } from "../../AuthContext";
-import { FlexRow } from "../../../styles/global";
-import { Tutorial } from "./Tutorial";
+import { Tutorial } from "../../Tutorial";
+import { Button } from "@material-ui/core";
+import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import { iftttTutorial } from "../../../constants/tutorials";
 
 interface IftttIntegrationState {
   triggerKey?: string;
@@ -41,6 +43,7 @@ export const IftttIntegration = () => {
   const [isIntegrationActive, setIsIntegrationActive] = useState(
     user?.integrations?.ifttt?.isActive || false
   );
+  const { handleError } = useContext(ErrorHandlingContext);
 
   useEffect(() => {
     setIsIntegrationActive(user?.integrations?.ifttt?.isActive || false);
@@ -56,29 +59,59 @@ export const IftttIntegration = () => {
     };
   };
 
-  const [formData, setFormData] = useReducer(formReducer, {
-    ...(user &&
-      user?.integrations?.ifttt?.triggerKey && {
-        triggerKey: user?.integrations?.ifttt.triggerKey,
-      }),
-    ...(user &&
-      user?.integrations?.ifttt?.eventName && {
-        eventName: user?.integrations?.ifttt.eventName,
-      }),
+  const initialState = {
+    ...(user?.integrations?.ifttt?.triggerKey && {
+      triggerKey: user?.integrations?.ifttt.triggerKey,
+    }),
+    ...(user?.integrations?.ifttt?.eventName && {
+      eventName: user?.integrations?.ifttt.eventName,
+    }),
+  };
+
+  const [formData, setFormData] = useReducer(formReducer, initialState);
+
+  useEffect(() => {
+    setFormData({
+      target: {
+        name: "eventName",
+        value: user?.integrations?.ifttt?.eventName || "",
+      },
+    } as ChangeEvent<HTMLInputElement>);
+    setFormData({
+      target: {
+        name: "triggerKey",
+        value: user?.integrations?.ifttt?.triggerKey || "",
+      },
+    } as ChangeEvent<HTMLInputElement>);
+  }, [
+    setFormData,
+    user?.integrations?.ifttt?.eventName,
+    user?.integrations?.ifttt?.triggerKey,
+  ]);
+
+  console.log({
+    formData,
+    initialState,
+    user: user?.integrations?.ifttt?.eventName,
   });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsSubmitting(true);
-    if (formData.eventName && formData.triggerKey && user && user.herotag)
-      await modifyIftttIntegration(
-        user.herotag,
-        formData.eventName,
-        formData.triggerKey
-      );
 
-    setIsSubmitting(false);
-    return;
+    try {
+      setIsSubmitting(true);
+      if (formData.eventName && formData.triggerKey && user && user.herotag)
+        await modifyIftttIntegration(
+          user.herotag,
+          formData.eventName,
+          formData.triggerKey
+        );
+
+      setIsSubmitting(false);
+      return;
+    } catch (error) {
+      handleError("Erreur inconnue");
+    }
   };
 
   const handleSwitchChange = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -107,11 +140,13 @@ export const IftttIntegration = () => {
       >
         {isTutorialVisible ? "Hide" : "Show"} tutorial
       </HideButton>
-      {isTutorialVisible ? <Tutorial></Tutorial> : null}
+      {isTutorialVisible ? (
+        <Tutorial tutorial={iftttTutorial}></Tutorial>
+      ) : null}
 
       <ContentContainer elevation={3} variant="elevation">
         <IftttIntegrationForm onSubmit={handleSubmit}>
-          <FlexRow>
+          <FormInputs>
             <FormInputAndLabel>
               <FormLabel>Event Name</FormLabel>
               <EventNameInput
@@ -132,9 +167,11 @@ export const IftttIntegration = () => {
                 placeholder="e1eFH71X84ljX-0AFjNdjYJ2B4TfY8whL5j3fkLAc6F"
               ></TriggerKeyInput>
             </FormInputAndLabel>
-          </FlexRow>
+          </FormInputs>
 
-          <Button isFormButton>Submit</Button>
+          <Button variant="outlined" color="secondary" type="submit">
+            Submit
+          </Button>
         </IftttIntegrationForm>
       </ContentContainer>
 

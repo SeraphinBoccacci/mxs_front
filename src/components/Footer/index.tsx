@@ -1,5 +1,7 @@
 // import { colors } from "../../constants";
 // import LogoAndName from "../LogoAndName";
+import Logo from "../../assets/icons/StreamParticlesLogo";
+import { LogoContainer } from "../../styles/global";
 import {
   Columns,
   DoubleColumn,
@@ -13,7 +15,9 @@ import {
 const Footer = () => {
   return (
     <FooterContainer>
-      {/* <LogoAndName color={colors.eerieBlack}></LogoAndName> */}
+      <LogoContainer style={{ background: "white" }}>
+        <Logo></Logo>
+      </LogoContainer>
       <Columns>
         <DoubleColumn>
           <ColumnParagraph>

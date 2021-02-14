@@ -17,9 +17,13 @@ import logoTwitch from "../../../assets/twitch_logo.png";
 import logoYoutube from "../../../assets/youtube.png";
 import logoFacebook from "../../../assets/facebook.png";
 
-const Introduction = () => {
+const Introduction = ({
+  setIsViewer,
+}: {
+  setIsViewer: (b: boolean) => void;
+}) => {
   return (
-    <Section>
+    <Section id="home">
       <CatchPhraseAndImage>
         <CatchPhraseContainer>
           <ShortCatchPhraseChip
@@ -34,7 +38,7 @@ const Introduction = () => {
             <SubMainCatchPhrase>
               Use Maiar, we notify the xxx
             </SubMainCatchPhrase>
-            <CallToActions></CallToActions>
+            <CallToActions setIsViewer={setIsViewer}></CallToActions>
           </InnerContainer>
 
           <LittleDisclaimer>

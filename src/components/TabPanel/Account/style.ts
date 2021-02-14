@@ -8,19 +8,25 @@ export const AccountContainer = styled.div`
 `;
 
 export const ActivateIntegration = styled.div`
-  height: 3rem;
-  line-height: 3rem;
+  height: 2rem;
+  line-height: 2rem;
   width: 17rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
 
-  margin: 3rem auto;
+  margin: 1rem auto;
 
   border-radius: 6px;
 
-  color: ${colors.cultured};
-  /* background-color: ${colors.cultured}; */
+  color: ${colors.secondary};
+
+  @media (min-width: 800px) {
+    height: 3rem;
+    line-height: 3rem;
+
+    margin: 3rem auto;
+  }
 `;
 
 export const ActivateSwitch = styled(Switch)`

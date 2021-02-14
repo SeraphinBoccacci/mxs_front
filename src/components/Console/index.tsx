@@ -1,5 +1,4 @@
-import { AppBar } from "./style";
-import Tabs from "@material-ui/core/Tabs";
+import { AppBar, Tabs } from "./style";
 import Tab from "@material-ui/core/Tab";
 import { TabPanel } from "../TabPanel";
 import { useContext, useState } from "react";
@@ -10,6 +9,7 @@ import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRoun
 import { AuthContext } from "../AuthContext";
 import { useHistory } from "react-router-dom";
 import { setItem } from "../../utils/localStorage";
+import StreamElementsIntegration from "../TabPanel/StreamElementsIntegration";
 
 const Console = () => {
   const [value, setValue] = useState(0);
@@ -57,7 +57,7 @@ const Console = () => {
         <IftttIntegration></IftttIntegration>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <NotDevelopped></NotDevelopped>
+        <StreamElementsIntegration></StreamElementsIntegration>
       </TabPanel>
       <TabPanel value={value} index={3}>
         <NotDevelopped></NotDevelopped>

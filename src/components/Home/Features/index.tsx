@@ -17,10 +17,11 @@ import AccountBalanceWalletRoundedIcon from "@material-ui/icons/AccountBalanceWa
 import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 import DonutSmallRoundedIcon from "@material-ui/icons/DonutSmallRounded";
 
-import { useState } from "react";
-import Switcher from "./Switche";
+import { useEffect, useState } from "react";
+
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";
+import Switch from "../../Switch";
 
 const features = {
   creator: [
@@ -86,30 +87,39 @@ const iconsMapper: Icon = {
   features_06: DonutSmallRoundedIcon,
 };
 
-const Features = () => {
-  const [isViewerOptionChecked, setIsViewerOptionChecked] = useState<boolean>(
-    true
-  );
+const Features = ({
+  isViewer,
+  setIsViewer,
+}: {
+  isViewer: boolean;
+  setIsViewer: (b: boolean) => void;
+}) => {
   const [focusedFeatureKey, setFocusedFeatureKey] = useState<string>(
-    isViewerOptionChecked ? "features_04" : "features_01"
+    isViewer ? "features_04" : "features_01"
   );
 
+  useEffect(() => {
+    setFocusedFeatureKey(isViewer ? "features_04" : "features_01");
+  }, [isViewer, setFocusedFeatureKey]);
+
   return (
-    <FeaturesContainer>
+    <FeaturesContainer id="features">
       <FeaturesHeader>
         <FeaturesTitle>How does it works ?</FeaturesTitle>
         <FeaturesSubTitle>Nothing simpler.</FeaturesSubTitle>
-        <Switcher
-          isViewerOptionChecked={isViewerOptionChecked}
-          setIsViewerOptionChecked={(isChecked) => {
-            setIsViewerOptionChecked(isChecked);
+        <Switch
+          isActive={isViewer}
+          setIsActive={(isChecked) => {
+            setIsViewer(isChecked);
             setFocusedFeatureKey(isChecked ? "features_04" : "features_01");
           }}
-        ></Switcher>
+          offLabel="Creator"
+          onLabel="Viewer"
+        ></Switch>
       </FeaturesHeader>
-      <FeaturesContent isRowReverse={!isViewerOptionChecked}>
+      <FeaturesContent isRowReverse={!isViewer}>
         <FeaturesSubContent>
-          {features[isViewerOptionChecked ? "viewer" : "creator"].map(
+          {features[isViewer ? "viewer" : "creator"].map(
             ({ title, content, key }) => {
               const Icon = iconsMapper[key];
 
@@ -118,7 +128,7 @@ const Features = () => {
                   key={key}
                   onMouseEnter={() => setFocusedFeatureKey(key)}
                 >
-                  <Icon fontSize="large"></Icon>
+                  <Icon fontSize={false ? "large" : "small"}></Icon>
                   <Feature>
                     <h3>{title}</h3>
                     <p>{content}</p>
@@ -129,6 +139,7 @@ const Features = () => {
           )}
         </FeaturesSubContent>
         <FeatureScreen
+          key={`backgrounds-${focusedFeatureKey}`}
           background={backgrounds[focusedFeatureKey] as string}
         ></FeatureScreen>
       </FeaturesContent>

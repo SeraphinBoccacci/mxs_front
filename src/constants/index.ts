@@ -1,16 +1,3 @@
-export const colors = {
-  spanishGray: "#969696",
-  eerieBlack: "#141414",
-  denimBlue: "#1A46C2",
-  umber: "#62504C",
-  lightPeriwinkle: "#D8DEEF",
-  cultured: "#F5F5F5",
-
-  warning: "#E6C229",
-  success: "#157F1F",
-  danger: "#7F2425",
-};
-
 export const fonts = {
   Roboto: "'Roboto', sans-serif",
   Ubuntu: "'Ubuntu', sans-serif",
@@ -29,8 +16,8 @@ export const weights = {
   },
 };
 
-export const colorsV2 = {
-  primary: "#1A46C2",
+export const colors = {
+  primary: "#0B2B53",
   secondary: "#f5f5f5",
   third: "#0f276c",
   quad: "#ceff1a",
@@ -39,5 +26,5 @@ export const colorsV2 = {
 
   warning: "#E6C229",
   success: "#157F1F",
-  danger: "#7F2425",
+  danger: "#F55926",
 };
