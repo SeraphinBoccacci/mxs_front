@@ -10,14 +10,15 @@ import { AuthContext } from "../AuthContext";
 import { useHistory } from "react-router-dom";
 import { setItem } from "../../utils/localStorage";
 import StreamElementsIntegration from "../TabPanel/StreamElementsIntegration";
+import { useQueryString } from "../../hooks/useQueryString";
 
 const Console = () => {
-  const [value, setValue] = useState(0);
+  const [activeTab, setActiveTab] = useQueryString("activeTab");
   const { setToken } = useContext(AuthContext);
   const history = useHistory();
 
   const handleChange = (event: React.ChangeEvent<{}>, value: any) => {
-    setValue(value);
+    setActiveTab(value);
   };
 
   const a11yProps = (index: number) => {
@@ -34,6 +35,8 @@ const Console = () => {
 
     history.push("/");
   };
+
+  const value = Number(activeTab);
 
   return (
     <div>

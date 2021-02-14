@@ -12,7 +12,11 @@ import { dark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { Button } from "@material-ui/core";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { NotDevelopped } from "../NotDevelopped";
-import { js, html, css } from "../../../assets/codeSnippets/streamElements";
+import {
+  jsSnippet,
+  htmlSnippet,
+  cssSnippet,
+} from "../../../assets/codeSnippets/streamElements";
 import { Tutorial } from "../../Tutorial";
 import { streamElementsTutorial } from "../../../constants/tutorials/streamElements";
 
@@ -21,9 +25,9 @@ const StreamElementsIntegration = () => {
   const [lang, setLang] = useState<"javascript" | "html" | "css">("javascript");
 
   const codeString = {
-    javascript: js,
-    html: html,
-    css: css,
+    javascript: jsSnippet,
+    html: htmlSnippet,
+    css: cssSnippet,
   };
 
   return (

@@ -1,49 +1,47 @@
-import { removeFirstAndLastLines } from "../../utils/string";
+/* eslint-disable no-template-curly-in-string */
 
-/* eslint-disable no-undef */
-const code = () => {
-  const appendAnimation = (herotag, amount, message) => {
-    $(`
-        <div id="widget-container" class="container">
-          <img
-            class="logo"
-            src="https://miro.medium.com/max/2480/1*6JcegZHxgP87e8Ny-RBSBg.png"
-          />
-          <h3>${herotag} sent ${amount} ¤eGLD¤</h3>
-          <div class="p-container">
-            <p>${message}</p>
-          </div>
-        </div>
-    `).appendTo(document.body);
-    setTimeout(() => {
-      $("#widget-container").addClass("slide-out");
-      setTimeout(() => {
-        $("#widget-container").remove();
-      }, 1000);
-    }, 10000);
-  };
+const jsLines = [
+  "const appendAnimation = (herotag, amount, message) => {",
+  "  $(`",
+  '      <div id="widget-container" class="container">',
+  "        <img",
+  '          class="logo"',
+  '          src="https://miro.medium.com/max/2480/1*6JcegZHxgP87e8Ny-RBSBg.png"',
+  "        />",
+  "        <h3>${herotag} sent ${amount} ¤eGLD¤</h3>",
+  '        <div class="p-container">',
+  "          <p>${message}</p>",
+  "        </div>",
+  "      </div>",
+  "  `).appendTo(document.body);",
+  "  setTimeout(() => {",
+  '    $("#widget-container").addClass("slide-out");',
+  "    setTimeout(() => {",
+  '      $("#widget-container").remove();',
+  "    }, 1000);",
+  "  }, 10000);",
+  "};",
+  "",
+  'const socket = io("https://streamparticles:4000", {',
+  "  query: {",
+  '    streamerHerotag: "serabocca06",',
+  "  },",
+  "});",
+  "",
+  'socket.on("newDonation", (data) => {',
+  "  appendAnimation(data.herotag, data.amount, data.message);",
+  "});",
+];
 
-  const socket = io("https://streamparticles:4000", {
-    query: {
-      streamerHerotag: "serabocca06",
-    },
-  });
+export const jsSnippet = jsLines.join("\n");
 
-  socket.on("newDonation", (data) => {
-    appendAnimation(data.herotag, data.amount, data.message);
-  });
-};
-
-export const js = removeFirstAndLastLines(`${code}`);
-
-export const html = `
+export const htmlSnippet = `
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"></script>
 `;
 
-export const css = `
-
+export const cssSnippet = `
 #widget-container {
   position: absolute;
   bottom: 3rem;
