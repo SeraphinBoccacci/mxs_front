@@ -80,7 +80,9 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         text: (
           <Text>
             Copy and paste the <Emphasize>code</Emphasize> below this tutorial
-            on the three others Tabs (other screens just below).
+            on the three others Tabs (other screens just below). Make sure to
+            fill the sockets configuration with your own{" "}
+            <Emphasize>herotag</Emphasize>.
           </Text>
         ),
       },
