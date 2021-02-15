@@ -22,3 +22,15 @@ export const getUserData = async (herotag: string) => {
 
   return data;
 };
+
+export const triggerIftttEvent = (herotag: string) => {
+  return postWithAuth(`${config.apiUrl}/user/trigger/ifttt`, {
+    herotag,
+  });
+};
+
+export const triggerStreamElementsEvent = (herotag: string) => {
+  return postWithAuth(`${config.apiUrl}/user/trigger/streamElements`, {
+    herotag,
+  });
+};

@@ -49,3 +49,32 @@ export const Emphasize = styled.span`
 
   border-radius: 99px;
 `;
+
+export const Link = styled.a`
+  position: relative;
+  font-size: 0.8rem;
+  padding: 0 0.2rem;
+
+  cursor: pointer;
+
+  &::before {
+    display: block;
+    position: absolute;
+    content: "";
+
+    bottom: 1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+
+    transition: 0.2s;
+
+    background-color: ${colors.quad}55;
+  }
+
+  &:hover::before {
+    height: 3px;
+
+    background-color: ${colors.quad};
+  }
+`;

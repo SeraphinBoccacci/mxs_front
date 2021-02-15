@@ -1,5 +1,6 @@
 import {
   ChangeEvent,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
@@ -29,6 +30,7 @@ import { Tutorial } from "../../Tutorial";
 import { Button } from "@material-ui/core";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
 import { iftttTutorial } from "../../../constants/tutorials";
+import { triggerIftttEvent } from "../../../services/user";
 
 interface IftttIntegrationState {
   triggerKey?: string;
@@ -117,6 +119,14 @@ export const IftttIntegration = () => {
     }
   };
 
+  const triggerEvent = useCallback(async () => {
+    try {
+      if (user?.herotag) await triggerIftttEvent(user.herotag);
+    } catch (error) {
+      handleError(error?.response?.data?.data);
+    }
+  }, [user?.herotag, handleError]);
+
   return (
     <IftttIntegrationContainer>
       <ContentContainer elevation={3} variant="elevation">
@@ -166,6 +176,11 @@ export const IftttIntegration = () => {
           color="primary"
         ></ActivateSwitch>
       </ActivateIntegration>
+      <ContentContainer>
+        <Button variant="contained" onClick={triggerEvent}>
+          Trigger Ifttt event
+        </Button>
+      </ContentContainer>
     </IftttIntegrationContainer>
   );
 };

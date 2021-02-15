@@ -1,6 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 
-const jsLines = [
+const jsLines = (herotag: string) => [
   "const appendAnimation = (herotag, amount, message) => {",
   "  $(`",
   '      <div id="widget-container" class="container">',
@@ -24,7 +24,7 @@ const jsLines = [
   "",
   'const socket = io("https://streamparticles.io", {',
   "  query: {",
-  "    streamerHerotag: {{your-herotag}},",
+  `    streamerHerotag: '${herotag}',`,
   "  },",
   "});",
   "",
@@ -33,7 +33,7 @@ const jsLines = [
   "});",
 ];
 
-export const jsSnippet = jsLines.join("\n");
+export const jsSnippet = (herotag: string) => jsLines(herotag).join("\n");
 
 export const htmlSnippet = `
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet"/>

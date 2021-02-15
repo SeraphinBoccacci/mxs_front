@@ -8,6 +8,8 @@ import {
   FeaturesSubTitle,
   FeaturePaper,
   FeatureScreen,
+  FeatureParagraph,
+  ContentContainer,
 } from "./style";
 
 import MovieCreationRoundedIcon from "@material-ui/icons/MovieCreationRounded";
@@ -22,44 +24,78 @@ import { useEffect, useState } from "react";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";
 import Switch from "../../Switch";
+import { Link } from "../../../styles/global";
+import { AnimatePresence } from "framer-motion";
 
 const features = {
   creator: [
     {
       title: "1. Create your account",
-      content:
-        "It's totally free. A herotag, a password and your integration settings are the only informations we store.",
+      content: (
+        <FeatureParagraph>
+          It's totally free. A herotag, a password and your integration settings
+          are the only informations we store.
+        </FeatureParagraph>
+      ),
       key: "features_01",
     },
     {
       title: "2. Use our integration console",
-      content:
-        "Our powerfull webhook connected to Maiar, combined with our console, let you customize the interaction with Maiar donators",
+      content: (
+        <FeatureParagraph>
+          Our powerfull webhook connected to Maiar, combined with our console,
+          let you customize the interaction with Maiar donators
+        </FeatureParagraph>
+      ),
       key: "features_02",
     },
     {
       title: "3. Start Streaming !",
-      content: "That's it ! Three steps then cut the commissions !",
+      content: (
+        <FeatureParagraph>
+          That's it ! Three steps then cut the commissions !
+        </FeatureParagraph>
+      ),
       key: "features_03",
     },
   ],
   viewer: [
     {
       title: "1. Create a Maiar wallet, it's free",
-      content:
-        "Maiar requires only your phone number and let you own some crypto-currencies on your phone. More documentations here.",
+      content: (
+        <FeatureParagraph>
+          Maiar requires only your phone number and let you own some
+          crypto-currencies on your phone. More documentations{" "}
+          <Link target="_blank" href="https://maiar.com/">
+            here
+          </Link>
+          .
+        </FeatureParagraph>
+      ),
       key: "features_04",
     },
     {
       title: "2. Deposit a bunch of eGLD",
-      content:
-        "To be able to send them via Maiar. A list of ¤eGLD brokers is available here.",
+      content: (
+        <FeatureParagraph>
+          To be able to send them via Maiar. A list of ¤eGLD brokers is
+          available{" "}
+          <Link target="_blank" href="https://buy.elrond.com/fr">
+            here
+          </Link>
+          .
+        </FeatureParagraph>
+      ),
       key: "features_05",
     },
     {
       title: "3. Support your favorite creators",
-      content:
-        "And enjoy full interaction on their live streams. They get 100% of what you send them.",
+      content: (
+        <FeatureParagraph>
+          And enjoy full interaction on their live streams. They get 100% of
+          what you send them.
+        </FeatureParagraph>
+      ),
       key: "features_06",
     },
   ],
@@ -117,32 +153,77 @@ const Features = ({
           onLabel="Viewer"
         ></Switch>
       </FeaturesHeader>
-      <FeaturesContent isRowReverse={!isViewer}>
-        <FeaturesSubContent>
-          {features[isViewer ? "viewer" : "creator"].map(
-            ({ title, content, key }) => {
-              const Icon = iconsMapper[key];
+      <AnimatePresence>
+        {isViewer ? (
+          <FeaturesContent
+            key="viewer"
+            isRowReverse={!isViewer}
+            transition={{ duration: 0.5 }}
+            initial={{ width: 0 }}
+            animate={{ width: "100vw" }}
+            exit={{ width: 0 }}
+          >
+            <ContentContainer>
+              <FeaturesSubContent>
+                {features.viewer.map(({ title, content, key }) => {
+                  const Icon = iconsMapper[key];
 
-              return (
-                <FeaturePaper
-                  key={key}
-                  onMouseEnter={() => setFocusedFeatureKey(key)}
-                >
-                  <Icon fontSize={false ? "large" : "small"}></Icon>
-                  <Feature>
-                    <h3>{title}</h3>
-                    <p>{content}</p>
-                  </Feature>
-                </FeaturePaper>
-              );
-            }
-          )}
-        </FeaturesSubContent>
-        <FeatureScreen
-          key={`backgrounds-${focusedFeatureKey}`}
-          background={backgrounds[focusedFeatureKey] as string}
-        ></FeatureScreen>
-      </FeaturesContent>
+                  return (
+                    <FeaturePaper
+                      key={key}
+                      onMouseEnter={() => setFocusedFeatureKey(key)}
+                    >
+                      <Icon fontSize={false ? "large" : "small"}></Icon>
+                      <Feature>
+                        <h3>{title}</h3>
+                        {content}
+                      </Feature>
+                    </FeaturePaper>
+                  );
+                })}
+              </FeaturesSubContent>
+              <FeatureScreen
+                key={`backgrounds-${focusedFeatureKey}`}
+                background={backgrounds[focusedFeatureKey] as string}
+              ></FeatureScreen>
+            </ContentContainer>
+          </FeaturesContent>
+        ) : (
+          <FeaturesContent
+            key="creator"
+            isRowReverse={!isViewer}
+            transition={{ duration: 0.5 }}
+            initial={{ width: 0 }}
+            animate={{ width: "100vw" }}
+            exit={{ width: 0 }}
+          >
+            <ContentContainer>
+              <FeatureScreen
+                key={`backgrounds-${focusedFeatureKey}`}
+                background={backgrounds[focusedFeatureKey] as string}
+              ></FeatureScreen>
+              <FeaturesSubContent>
+                {features.creator.map(({ title, content, key }) => {
+                  const Icon = iconsMapper[key];
+
+                  return (
+                    <FeaturePaper
+                      key={key}
+                      onMouseEnter={() => setFocusedFeatureKey(key)}
+                    >
+                      <Icon fontSize={false ? "large" : "small"}></Icon>
+                      <Feature>
+                        <h3>{title}</h3>
+                        {content}
+                      </Feature>
+                    </FeaturePaper>
+                  );
+                })}
+              </FeaturesSubContent>
+            </ContentContainer>
+          </FeaturesContent>
+        )}
+      </AnimatePresence>
     </FeaturesContainer>
   );
 };

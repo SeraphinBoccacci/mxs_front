@@ -2,6 +2,7 @@ import { Paper } from "@material-ui/core";
 import styled from "styled-components";
 import { colors, fonts } from "../../../constants";
 import { FlexColumn } from "../../../styles/global";
+import { motion } from "framer-motion";
 
 export const FeaturesContainer = styled.section`
   width: 100vw;
@@ -36,15 +37,19 @@ export const FeaturesSubTitle = styled.h4`
   margin-top: -1.1rem;
 `;
 
-export const FeaturesContent = styled.div<{ isRowReverse: boolean }>`
+export const FeaturesContent = styled(motion.div)<{ isRowReverse: boolean }>`
+  position: absolute;
+
   display: flex;
+  overflow: hidden;
 
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
 
-  width: 100vw;
   flex-direction: column;
+
+  left: 50%;
+  transform: translateX(-50%);
 
   @media (min-width: 800px) {
     width: max-content;
@@ -53,7 +58,16 @@ export const FeaturesContent = styled.div<{ isRowReverse: boolean }>`
   }
 `;
 
-export const FeaturesSubContent = styled(FlexColumn)`
+export const ContentContainer = styled.div`
+  position: relative;
+  width: max-content;
+
+  display: flex;
+`;
+
+export const FeaturesSubContent = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   height: max-content;
 
@@ -70,6 +84,8 @@ export const FeaturesSubContent = styled(FlexColumn)`
 `;
 
 export const FeaturePaper = styled(Paper)`
+  position: relative;
+  left: 0;
   height: max-content;
   display: flex;
   flex-direction: row;
@@ -78,6 +94,15 @@ export const FeaturePaper = styled(Paper)`
 
   padding: 0.7rem;
   margin: 0.7rem;
+
+  transition: 0.4s !important;
+
+  cursor: help;
+
+  &:hover {
+    border-radius: 20px;
+    left: 1rem;
+  }
 
   @media (min-width: 1100px) {
     padding: 1rem;
@@ -96,26 +121,27 @@ export const Feature = styled.div`
     font-size: 1rem;
   }
 
-  & p {
-    font-family: ${fonts.Roboto};
-    color: ${colors.secondary};
-    font-size: 0.65rem;
-    text-align: left;
-
-    width: 100%;
-  }
-
   @media (min-width: 1100px) {
     margin-left: 1.5rem;
 
     & h3 {
       font-size: 1.2rem;
     }
+  }
+`;
 
-    & p {
-      font-size: 0.8rem;
-      text-align: left;
-    }
+export const FeatureParagraph = styled.p`
+  font-family: ${fonts.Roboto};
+  color: #c5c5c5;
+  font-size: 0.65rem;
+  line-height: 1.4rem;
+  text-align: left;
+
+  width: 100%;
+
+  @media (min-width: 1100px) {
+    font-size: 0.8rem;
+    text-align: left;
   }
 `;
 

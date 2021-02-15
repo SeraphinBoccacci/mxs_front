@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import Switch from "../../Switch";
 import { ContentContainer, Paragraph } from "../style";
 import {
@@ -19,16 +19,29 @@ import {
 } from "../../../assets/codeSnippets/streamElements";
 import { Tutorial } from "../../Tutorial";
 import { streamElementsTutorial } from "../../../constants/tutorials/streamElements";
+import { AuthContext } from "../../AuthContext";
+import { triggerStreamElementsEvent } from "../../../services/user";
+import { ErrorHandlingContext } from "../../ErrorHandlingContext";
 
 const StreamElementsIntegration = () => {
   const [isOnCustomTemplate, setIsOnCustomTemplate] = useState(false);
+  const { user } = useContext(AuthContext);
+  const { handleError } = useContext(ErrorHandlingContext);
   const [lang, setLang] = useState<"javascript" | "html" | "css">("javascript");
 
   const codeString = {
-    javascript: jsSnippet,
+    javascript: jsSnippet(user?.herotag || "{{your-herotag}}"),
     html: htmlSnippet,
     css: cssSnippet,
   };
+
+  const triggerEvent = useCallback(() => {
+    try {
+      if (user?.herotag) triggerStreamElementsEvent(user?.herotag);
+    } catch (error) {
+      handleError(error?.response?.data?.data);
+    }
+  }, [user?.herotag, handleError]);
 
   return (
     <StreamElementsIntegrationContainer>
@@ -82,6 +95,11 @@ const StreamElementsIntegration = () => {
           </CodeSnippets>
         </>
       )}
+      <ContentContainer>
+        <Button variant="contained" onClick={triggerEvent}>
+          Trigger StreamElements event
+        </Button>
+      </ContentContainer>
     </StreamElementsIntegrationContainer>
   );
 };
