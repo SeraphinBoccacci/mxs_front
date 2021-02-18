@@ -4,12 +4,14 @@ const appendAnimation = (herotag, amount, message) => {
   containerIndex++;
   
   const currentIndex = containerIndex
+  
+  const now = new Date().getTime();
 
   $(`
       <div class="widget-container" id=${`widget-container-${currentIndex}`} class="container">
         <h3>${herotag} sent ${amount} ¤eGLD¤</h3>
         <div class="p-container">
-          <p>${message} ${currentIndex}</p>
+          <p>${message}</p>
         </div>
       </div>
   `).appendTo(document.body);
@@ -18,7 +20,7 @@ const appendAnimation = (herotag, amount, message) => {
     $(`#widget-container-${currentIndex}`).prepend(`
       <audio autoplay src="https://streamparticles.io/audios/audio_2.mp3"></audio>
             <img class="logo"
-              src="https://streamparticles.io/images/image_4.gif"
+              src="https://streamparticles.io/images/image_4.gif?t=${now}"
             />
     `);
   }, 700);
