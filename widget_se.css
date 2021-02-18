@@ -1,4 +1,5 @@
-#widget-container {
+
+.widget-container {
   position: absolute;
   bottom: 3rem;
   right: 2rem;
@@ -82,3 +83,4 @@ h3 {
     transform: translateX(-100%);
   }
 }
+
