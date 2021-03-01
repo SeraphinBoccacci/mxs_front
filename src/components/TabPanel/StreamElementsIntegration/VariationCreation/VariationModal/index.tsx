@@ -105,12 +105,6 @@ export const VariationModal = ({
   const text_animation_exit_durationRef = createRef<HTMLInputElement>();
   const text_animation_exit_offsetRef = createRef<HTMLInputElement>();
 
-  const getFieldValue = (pathString: VariationLenses) => {
-    const path = pathString.split("_");
-
-    return get(variationData, path, "");
-  };
-
   const formDataToPayload = () => {
     const formData = {
       nameRef: nameRef.current?.value,
@@ -289,7 +283,6 @@ export const VariationModal = ({
                 inputName={VariationLenses.sound_soundPath}
                 inputRef={sound_soundPathRef}
                 isAudio
-                getFieldValue={getFieldValue}
               ></Upload>
             </SectionRow>
             <SectionRow>
@@ -326,7 +319,6 @@ export const VariationModal = ({
                 inputRef={image_imagePathRef}
                 inputLabel="Upload Image"
                 inputName={VariationLenses.image_imagePath}
-                getFieldValue={getFieldValue}
               ></Upload>
             </SectionRow>
             <SectionRow>

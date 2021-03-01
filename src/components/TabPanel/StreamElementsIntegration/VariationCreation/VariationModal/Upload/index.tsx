@@ -16,20 +16,11 @@ interface UploadProps {
   inputLabel: string;
   inputRef: RefObject<{ path: string }>;
   isAudio?: boolean;
-  getFieldValue: (pathString: VariationLenses) => string;
 }
 
-const Upload = ({
-  inputName,
-  inputLabel,
-  inputRef,
-  isAudio,
-  getFieldValue,
-}: UploadProps) => {
-  const getFileSrc = () => {
+const Upload = ({ inputName, inputLabel, inputRef, isAudio }: UploadProps) => {
+  const getFileSrc = (filename: string) => {
     const media = isAudio ? "audios" : "images";
-
-    const filename = getFieldValue(inputName);
 
     const now = new Date().getTime();
 
@@ -38,7 +29,9 @@ const Upload = ({
     return `${config.url}/${media}/${filename}?t=${now}`;
   };
 
-  const [file, setFile] = useState<string>(getFileSrc());
+  const [file, setFile] = useState<string>(
+    inputRef?.current?.path ? getFileSrc(inputRef?.current?.path) : ""
+  );
 
   const uploadMedia = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,9 +39,9 @@ const Upload = ({
 
       if (!file) return;
 
-      setFile(URL.createObjectURL(file));
-
       const filePath = await uploadFile(isAudio ? "audios" : "images", file);
+
+      setFile(getFileSrc(filePath));
 
       if (inputRef.current) inputRef.current.path = filePath;
     },
