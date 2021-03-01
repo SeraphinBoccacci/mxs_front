@@ -1,10 +1,12 @@
+import { useState } from "react";
+import React from "react";
+import { Helmet } from "react-helmet";
+
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Features from "../components/Home/Features";
-import Introduction from "../components/Home/Introduction";
-import { Helmet } from "react-helmet";
 import FrequentlyAskedQuestions from "../components/Home/FrequentlyAskedQuestions";
-import { useState } from "react";
+import Introduction from "../components/Home/Introduction";
 
 export default function Home() {
   const [isViewer, setIsViewer] = useState<boolean>(true);

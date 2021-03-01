@@ -1,6 +1,6 @@
 import MaterialAppBar from "@material-ui/core/AppBar";
-import styled from "styled-components";
 import MaterialTabs from "@material-ui/core/Tabs";
+import styled from "styled-components";
 
 export const AppBar = styled(MaterialAppBar)`
   display: flex !important;

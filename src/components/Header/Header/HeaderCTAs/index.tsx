@@ -1,10 +1,12 @@
-import { ButtonsContainer } from "./style";
-import { useContext } from "react";
-import { AuthContext } from "../../../AuthContext";
-import { useHistory } from "react-router-dom";
-import ModalConnect from "../../../AuthModal";
-import { useQueryString } from "../../../../hooks/useQueryString";
 import { Button } from "@material-ui/core";
+import { useContext } from "react";
+import React from "react";
+import { useHistory } from "react-router-dom";
+
+import { useQueryString } from "../../../../hooks/useQueryString";
+import { AuthContext } from "../../../AuthContext";
+import ModalConnect from "../../../AuthModal";
+import { ButtonsContainer } from "./style";
 
 export const HeaderCTAs = () => {
   const { isAuthenticated } = useContext(AuthContext);

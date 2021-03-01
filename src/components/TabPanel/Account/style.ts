@@ -1,5 +1,6 @@
 import { Switch } from "@material-ui/core";
 import styled from "styled-components";
+
 import { colors } from "../../../constants/index";
 
 export const AccountContainer = styled.div`

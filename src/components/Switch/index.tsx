@@ -1,4 +1,6 @@
-import { OffValue, CheckBackground, OnValue, SwitchContainer } from "./style";
+import React from "react";
+
+import { CheckBackground, OffValue, OnValue, SwitchContainer } from "./style";
 
 interface SwitchProps {
   onLabel: string;

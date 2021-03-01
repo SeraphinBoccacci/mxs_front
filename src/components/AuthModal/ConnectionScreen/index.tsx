@@ -1,4 +1,4 @@
-import {
+import React, {
   ChangeEvent,
   useCallback,
   useContext,
@@ -6,20 +6,21 @@ import {
   useState,
 } from "react";
 import { useHistory } from "react-router-dom";
+
 import { authenticate, createAccount } from "../../../services/auth";
+import { setItem } from "../../../utils/localStorage";
+import { AuthContext } from "../../AuthContext";
+import { ErrorHandlingContext } from "../../ErrorHandlingContext";
 import { FormTitle } from "../style";
 import {
+  Button,
   ChangeModePhrase,
   ChangeModeSpan,
   ConnectionForm,
   Herotag,
   Inputs,
   Password,
-  Button,
 } from "./style";
-import { ErrorHandlingContext } from "../../ErrorHandlingContext";
-import { AuthContext } from "../../AuthContext";
-import { setItem } from "../../../utils/localStorage";
 interface ConnectionScreenProps {
   handleClose: () => void;
   setIsOnPendingVerificationScreen: (s: boolean) => void;
@@ -172,7 +173,7 @@ export const ConnectionScreen = ({
         </ChangeModePhrase>
       ) : (
         <ChangeModePhrase>
-          You don't have an account ?
+          You don&rsquo;t have an account ?
           <ChangeModeSpan onClick={() => setIsAccountCreation(true)}>
             {" "}
             Create One !

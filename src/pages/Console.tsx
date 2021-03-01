@@ -1,5 +1,7 @@
-import StyledConsole from "../components/Console";
+import React from "react";
 import { Helmet } from "react-helmet";
+
+import StyledConsole from "../components/Console";
 
 const Console = () => {
   return (

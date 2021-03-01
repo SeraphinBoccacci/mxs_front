@@ -1,12 +1,14 @@
 import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
+import React from "react";
+
 import {
+  Accordion,
+  AccordionDetails,
+  Accordions,
+  AccordionSummary,
   FaqContainer,
   FaqHeader,
   FaqTitle,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Accordions,
 } from "./style";
 
 const questionsAndAnswers = [
@@ -27,10 +29,11 @@ const questionsAndAnswers = [
       "How will the creator I send my eGLD to be notified of the transaction ?",
     answer: (
       <div>
-        We have developped a webhook "watching" Elrond's blockchain, that
-        detects every new transaction sent to a creator. The creator only needs
-        to signup on StreamParticles and create his very own particles to
-        connect with the blockchain. Customized experiences garantied !
+        We have developped a webhook &quot;watching&quot; Elrond&rsquo;s
+        blockchain, that detects every new transaction sent to a creator. The
+        creator only needs to signup on StreamParticles and create his very own
+        particles to connect with the blockchain. Customized experiences
+        garantied !
       </div>
     ),
   },

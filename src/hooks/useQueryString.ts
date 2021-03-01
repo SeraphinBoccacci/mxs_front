@@ -1,5 +1,5 @@
-import { useState } from "react";
 import queryString from "query-string";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export const useQueryString = (key: string): [any, (value: any) => void] => {

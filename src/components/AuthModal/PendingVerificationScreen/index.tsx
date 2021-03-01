@@ -1,16 +1,18 @@
 import { useContext, useEffect, useState } from "react";
+import React from "react";
+
+import { getIsVerified, getReference } from "../../../services/auth";
 import { AuthContext } from "../../AuthContext";
 import { FormTitle } from "../style";
 import {
+  Alert,
+  Button,
   FirstDot,
   SecondDot,
   ThirdDot,
   TransactionReferenceHighlighted,
   TransactionReferenceP,
-  Alert,
-  Button,
 } from "./style";
-import { getIsVerified, getReference } from "../../../services/auth";
 
 interface ConnectionScreenProps {
   setIsOnPendingVerificationScreen: (s: boolean) => void;

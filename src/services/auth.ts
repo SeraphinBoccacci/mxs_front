@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import config from "../config/config";
 
 export const authenticate = async (herotag: string, password: string) => {

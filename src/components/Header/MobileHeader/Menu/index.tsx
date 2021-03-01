@@ -1,12 +1,13 @@
-import { Anchor } from "../../Header/Anchors/style";
-import { MenuBackground, MenuContainer } from "./style";
-
 import { Button } from "@material-ui/core";
 import { useContext } from "react";
-import { AuthContext } from "../../../AuthContext";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import ModalConnect from "../../../AuthModal";
+
 import { useQueryString } from "../../../../hooks/useQueryString";
+import { AuthContext } from "../../../AuthContext";
+import ModalConnect from "../../../AuthModal";
+import { Anchor } from "../../Header/Anchors/style";
+import { MenuBackground, MenuContainer } from "./style";
 
 const Menu = ({
   isMenuOpenned,

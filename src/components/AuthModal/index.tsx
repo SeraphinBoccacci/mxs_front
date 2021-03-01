@@ -1,7 +1,9 @@
-import { ModalContainer, ModalContent } from "./style";
-import { PendingVerificationScreen } from "./PendingVerificationScreen";
-import { ConnectionScreen } from "./ConnectionScreen";
 import { Fade } from "@material-ui/core";
+import React from "react";
+
+import { ConnectionScreen } from "./ConnectionScreen";
+import { PendingVerificationScreen } from "./PendingVerificationScreen";
+import { ModalContainer, ModalContent } from "./style";
 
 interface ModalConnectProps {
   handleClose: () => void;

@@ -1,21 +1,23 @@
+import React from "react";
+
+import logoFacebook from "../../../assets/facebook.png";
+import logoTwitch from "../../../assets/twitch_logo.png";
+import logoYoutube from "../../../assets/youtube.png";
 import CallToActions from "./CallToActions";
 import {
   CatchPhraseAndImage,
   CatchPhraseContainer,
+  InnerContainer,
+  LittleDisclaimer,
   MainCatchPhrase,
+  Reference,
+  ReferencesContainer,
+  ReferencesContent,
+  ReferencesTitle,
   Section,
   ShortCatchPhraseChip,
   SubMainCatchPhrase,
-  LittleDisclaimer,
-  InnerContainer,
-  ReferencesContainer,
-  ReferencesTitle,
-  ReferencesContent,
-  Reference,
 } from "./style";
-import logoTwitch from "../../../assets/twitch_logo.png";
-import logoYoutube from "../../../assets/youtube.png";
-import logoFacebook from "../../../assets/facebook.png";
 
 const Introduction = ({
   setIsViewer,
@@ -36,7 +38,14 @@ const Introduction = ({
               The simplest way to support<br></br>your favorite creators
             </MainCatchPhrase>
             <SubMainCatchPhrase>
-              Use Maiar, we notify the xxx
+              Built on{" "}
+              <a target="_blank" rel="noreferrer" href="https://maiar.com/">
+                Maiar
+              </a>{" "}
+              and{" "}
+              <a target="_blank" rel="noreferrer" href="https://elrond.com/">
+                Elrond
+              </a>
             </SubMainCatchPhrase>
             <CallToActions setIsViewer={setIsViewer}></CallToActions>
           </InnerContainer>

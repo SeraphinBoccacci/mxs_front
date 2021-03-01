@@ -1,5 +1,8 @@
-import { TutorialStepElement } from ".";
+/* eslint-disable react/no-unescaped-entities */
+import React from "react";
+
 import { Emphasize, Text } from "../../styles/global";
+import { TutorialStepElement } from ".";
 
 export const iftttTutorial: TutorialStepElement[] = [
   {
@@ -10,7 +13,9 @@ export const iftttTutorial: TutorialStepElement[] = [
         text: (
           <Text>
             Create an account or login to IFTTT. <br></br>
-            On your home page, you'll find a <Emphasize>Create</Emphasize>{" "}
+            On your home page, you&rsquo;ll find a <Emphasize>
+              Create
+            </Emphasize>{" "}
             button in the top right corner, click on it to create an{" "}
             <Emphasize>Applet</Emphasize>.
           </Text>
@@ -42,9 +47,10 @@ export const iftttTutorial: TutorialStepElement[] = [
         text: (
           <Text>
             Then click on the only available option,{" "}
-            <Emphasize>Receive a web request</Emphasize>.<br></br>You'll be
-            prompted to fill an <Emphasize>EventName</Emphasize>, choose yours
-            and fill it in Stream Particles console, just below this tutorial.
+            <Emphasize>Receive a web request</Emphasize>.<br></br>You&rsquo;ll
+            be prompted to fill an <Emphasize>EventName</Emphasize>, choose
+            yours and fill it in Stream Particles console, just below this
+            tutorial.
           </Text>
         ),
       },

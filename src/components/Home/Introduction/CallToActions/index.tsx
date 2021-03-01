@@ -1,4 +1,6 @@
 import { Button } from "@material-ui/core";
+import React from "react";
+
 import { CallsToActionsContainer } from "./style";
 
 const CallToActions = ({
@@ -28,7 +30,7 @@ const CallToActions = ({
           scrollToFeatures();
         }}
       >
-        I'm a creator
+        I&rsquo;m a creator
       </Button>
       <Button
         variant="outlined"
@@ -38,7 +40,7 @@ const CallToActions = ({
           scrollToFeatures();
         }}
       >
-        I'm a viewer
+        I&rsquo;m a viewer
       </Button>
     </CallsToActionsContainer>
   );

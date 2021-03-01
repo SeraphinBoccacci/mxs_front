@@ -1,6 +1,6 @@
 import { Paper } from "@material-ui/core";
-import styled from "styled-components";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import styled from "styled-components";
 
 export const StreamElementsIntegrationContainer = styled.div`
   position: relative;

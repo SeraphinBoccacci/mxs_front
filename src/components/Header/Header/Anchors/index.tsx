@@ -1,4 +1,6 @@
-import { AnchorsContainer, Anchor } from "./style";
+import React from "react";
+
+import { Anchor, AnchorsContainer } from "./style";
 
 const scrollTo = (id: string) => {
   const element = document.getElementById(id);

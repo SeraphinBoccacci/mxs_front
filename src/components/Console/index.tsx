@@ -1,16 +1,18 @@
-import { AppBar, Tabs } from "./style";
 import Tab from "@material-ui/core/Tab";
-import { TabPanel } from "../TabPanel";
-import { useContext } from "react";
-import { NotDevelopped } from "../TabPanel/NotDevelopped";
-import { IftttIntegration } from "../TabPanel/IftttIntegration";
-import { Account } from "../TabPanel/Account";
 import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRounded";
-import { AuthContext } from "../AuthContext";
+import { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { setItem } from "../../utils/localStorage";
-import StreamElementsIntegration from "../TabPanel/StreamElementsIntegration";
+
 import { useQueryString } from "../../hooks/useQueryString";
+import { setItem } from "../../utils/localStorage";
+import { AuthContext } from "../AuthContext";
+import { TabPanel } from "../TabPanel";
+import { Account } from "../TabPanel/Account";
+import { IftttIntegration } from "../TabPanel/IftttIntegration";
+import { NotDevelopped } from "../TabPanel/NotDevelopped";
+import StreamElementsIntegration from "../TabPanel/StreamElementsIntegration";
+import { AppBar, Tabs } from "./style";
 
 const Console = () => {
   const [activeTab, setActiveTab] = useQueryString("activeTab");

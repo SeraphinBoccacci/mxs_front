@@ -1,39 +1,23 @@
-import { useCallback, useContext, useState } from "react";
-import Switch from "../../Switch";
-import { ContentContainer, Paragraph } from "../style";
-import {
-  CodeSnippets,
-  CodeSnippetsButtons,
-  StreamElementsIntegrationContainer,
-  CodeSnippet,
-} from "./style";
-
-import { dark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { Button } from "@material-ui/core";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import { NotDevelopped } from "../NotDevelopped";
-import {
-  jsSnippet,
-  htmlSnippet,
-  cssSnippet,
-} from "../../../assets/codeSnippets/streamElements";
-import { Tutorial } from "../../Tutorial";
+import { useCallback, useContext, useState } from "react";
+import React from "react";
+
 import { streamElementsTutorial } from "../../../constants/tutorials/streamElements";
-import { AuthContext } from "../../AuthContext";
 import { triggerStreamElementsEvent } from "../../../services/user";
+import { AuthContext } from "../../AuthContext";
+import CodeSnippets from "../../CodeSnippets";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import Switch from "../../Switch";
+import { Tutorial } from "../../Tutorial";
+import { ContentContainer, Paragraph } from "../style";
+import { cssSnippet, htmlSnippet, jsSnippet } from "./codeSnippets/template";
+import { StreamElementsIntegrationContainer } from "./style";
+import VariationCreation from "./VariationCreation";
 
 const StreamElementsIntegration = () => {
   const [isOnCustomTemplate, setIsOnCustomTemplate] = useState(false);
   const { user } = useContext(AuthContext);
   const { handleError } = useContext(ErrorHandlingContext);
-  const [lang, setLang] = useState<"javascript" | "html" | "css">("javascript");
-
-  const codeString = {
-    javascript: jsSnippet(user?.herotag || "{{your-herotag}}"),
-    html: htmlSnippet,
-    css: cssSnippet,
-  };
 
   const triggerEvent = useCallback(() => {
     try {
@@ -49,8 +33,8 @@ const StreamElementsIntegration = () => {
         <Paragraph>
           Stream Elements is an all-in-one platform that helps creator along all
           their content management. For instance, it lets them create customized
-          overlays to react to viewers' support. That's what we'll be working on
-          in this particle.
+          overlays to react to viewers&rsquo; support. That&rsquo;s what
+          we&rsquo;ll be working on in this particle.
         </Paragraph>
       </ContentContainer>
       <Switch
@@ -60,39 +44,15 @@ const StreamElementsIntegration = () => {
         onLabel="Custom template"
       ></Switch>
       {isOnCustomTemplate ? (
-        <NotDevelopped></NotDevelopped>
+        <VariationCreation></VariationCreation>
       ) : (
         <>
           <Tutorial tutorial={streamElementsTutorial}></Tutorial>
-          <CodeSnippets>
-            <CodeSnippetsButtons>
-              <Button
-                onClick={() => setLang("javascript")}
-                variant="outlined"
-                color="secondary"
-              >
-                Javascript
-              </Button>
-              <Button onClick={() => setLang("html")} color="secondary">
-                Html
-              </Button>
-              <Button
-                onClick={() => setLang("css")}
-                variant="contained"
-                color="secondary"
-              >
-                Css
-              </Button>
-              <Button
-                onClick={() => navigator.clipboard.writeText(codeString[lang])}
-              >
-                <FileCopyIcon></FileCopyIcon>
-              </Button>
-            </CodeSnippetsButtons>
-            <CodeSnippet language="javascript" style={dark}>
-              {codeString[lang]}
-            </CodeSnippet>
-          </CodeSnippets>
+          <CodeSnippets
+            jsSnippet={jsSnippet(user?.herotag || "{{your-herotag}}")}
+            htmlSnippet={htmlSnippet}
+            cssSnippet={cssSnippet}
+          ></CodeSnippets>
         </>
       )}
       <ContentContainer>

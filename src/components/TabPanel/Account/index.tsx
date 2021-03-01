@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
+import React from "react";
+
 import { toggleStreamingActivation } from "../../../services/user";
 import { AuthContext } from "../../AuthContext";
 import { ContentContainer, Paragraph } from "../style";
-
-import { ActivateIntegration, AccountContainer, ActivateSwitch } from "./style";
+import { AccountContainer, ActivateIntegration, ActivateSwitch } from "./style";
 
 export const Account = () => {
   const { user } = useContext(AuthContext);

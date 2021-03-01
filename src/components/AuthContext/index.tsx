@@ -5,9 +5,12 @@ import {
   useEffect,
   useState,
 } from "react";
+import React from "react";
+
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { getUserData } from "../../services/user";
 import { getItem } from "../../utils/localStorage";
+import { Variation } from "../TabPanel/StreamElementsIntegration/interface";
 
 export enum UserAccountStatus {
   PENDING,
@@ -30,6 +33,9 @@ export interface UserType {
   verificationReference?: string;
   integrations?: {
     ifttt?: IftttIntegrationData;
+    streamElements?: {
+      variations: Variation[];
+    };
   };
   isStreaming: boolean;
   streamingStartDate: Date;

@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import {
   ChangeEvent,
   useCallback,
@@ -6,31 +7,30 @@ import {
   useReducer,
   useState,
 } from "react";
-import {
-  ActivateIntegration,
-  IftttIntegrationContainer,
-  IftttIntegrationForm,
-  ActivateSwitch,
-  TriggerKeyInput,
-  EventNameInput,
-  FormInputAndLabel,
-  FormLabel,
-  Paragraph,
-  FormInputs,
-} from "./style";
+import React from "react";
 
-import { ContentContainer } from "../style";
-
+import { iftttTutorial } from "../../../constants/tutorials";
 import {
   modifyIftttIntegration,
   toggleIftttIntegration,
 } from "../../../services/ifttt";
-import { AuthContext } from "../../AuthContext";
-import { Tutorial } from "../../Tutorial";
-import { Button } from "@material-ui/core";
-import { ErrorHandlingContext } from "../../ErrorHandlingContext";
-import { iftttTutorial } from "../../../constants/tutorials";
 import { triggerIftttEvent } from "../../../services/user";
+import { AuthContext } from "../../AuthContext";
+import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import { Tutorial } from "../../Tutorial";
+import { ContentContainer } from "../style";
+import {
+  ActivateIntegration,
+  ActivateSwitch,
+  EventNameInput,
+  FormInputAndLabel,
+  FormInputs,
+  FormLabel,
+  IftttIntegrationContainer,
+  IftttIntegrationForm,
+  Paragraph,
+  TriggerKeyInput,
+} from "./style";
 
 interface IftttIntegrationState {
   triggerKey?: string;
@@ -108,7 +108,7 @@ export const IftttIntegration = () => {
     }
   };
 
-  const handleSwitchChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSwitchChange = async () => {
     setIsSubmitting(true);
 
     if (user && user.herotag) {
@@ -144,7 +144,7 @@ export const IftttIntegration = () => {
               <EventNameInput
                 disabled={isSubmitting}
                 name="eventName"
-                defaultValue={user?.integrations?.ifttt?.eventName}
+                value={user?.integrations?.ifttt?.eventName}
                 onChange={setFormData}
                 placeholder="StreamParticlesEvent"
               ></EventNameInput>
@@ -154,7 +154,7 @@ export const IftttIntegration = () => {
               <TriggerKeyInput
                 disabled={isSubmitting}
                 name="triggerKey"
-                defaultValue={user?.integrations?.ifttt?.triggerKey}
+                value={user?.integrations?.ifttt?.triggerKey}
                 onChange={setFormData}
                 placeholder="e1eFH71X84ljX-0AFjNdjYJ2B4TfY8whL5j3fkLAc6F"
               ></TriggerKeyInput>

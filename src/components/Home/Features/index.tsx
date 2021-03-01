@@ -1,31 +1,30 @@
-import {
-  Feature,
-  FeaturesContainer,
-  FeaturesContent,
-  FeaturesHeader,
-  FeaturesSubContent,
-  FeaturesTitle,
-  FeaturesSubTitle,
-  FeaturePaper,
-  FeatureScreen,
-  FeatureParagraph,
-  ContentContainer,
-} from "./style";
-
-import MovieCreationRoundedIcon from "@material-ui/icons/MovieCreationRounded";
-import HighlightRoundedIcon from "@material-ui/icons/HighlightRounded";
-import VideoCallRoundedIcon from "@material-ui/icons/VideoCallRounded";
+import { SvgIconTypeMap } from "@material-ui/core";
+import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import AccountBalanceWalletRoundedIcon from "@material-ui/icons/AccountBalanceWalletRounded";
 import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 import DonutSmallRoundedIcon from "@material-ui/icons/DonutSmallRounded";
-
-import { useEffect, useState } from "react";
-
-import { OverridableComponent } from "@material-ui/core/OverridableComponent";
-import { SvgIconTypeMap } from "@material-ui/core";
-import Switch from "../../Switch";
-import { Link } from "../../../styles/global";
+import HighlightRoundedIcon from "@material-ui/icons/HighlightRounded";
+import MovieCreationRoundedIcon from "@material-ui/icons/MovieCreationRounded";
+import VideoCallRoundedIcon from "@material-ui/icons/VideoCallRounded";
 import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import React from "react";
+
+import { Link } from "../../../styles/global";
+import Switch from "../../Switch";
+import {
+  ContentContainer,
+  Feature,
+  FeaturePaper,
+  FeatureParagraph,
+  FeaturesContainer,
+  FeaturesContent,
+  FeatureScreen,
+  FeaturesHeader,
+  FeaturesSubContent,
+  FeaturesSubTitle,
+  FeaturesTitle,
+} from "./style";
 
 const features = {
   creator: [
@@ -33,8 +32,8 @@ const features = {
       title: "1. Create your account",
       content: (
         <FeatureParagraph>
-          It's totally free. A herotag, a password and your integration settings
-          are the only informations we store.
+          It&rsquo;s totally free. A herotag, a password and your integration
+          settings are the only informations we store.
         </FeatureParagraph>
       ),
       key: "features_01",
@@ -53,7 +52,7 @@ const features = {
       title: "3. Start Streaming !",
       content: (
         <FeatureParagraph>
-          That's it ! Three steps then cut the commissions !
+          That&rsquo;s it ! Three steps then cut the commissions !
         </FeatureParagraph>
       ),
       key: "features_03",
@@ -66,7 +65,7 @@ const features = {
         <FeatureParagraph>
           Maiar requires only your phone number and let you own some
           crypto-currencies on your phone. More documentations{" "}
-          <Link target="_blank" href="https://maiar.com/">
+          <Link target="_blank" rel="noreferrer" href="https://maiar.com/">
             here
           </Link>
           .
@@ -80,7 +79,11 @@ const features = {
         <FeatureParagraph>
           To be able to send them via Maiar. A list of ¤eGLD brokers is
           available{" "}
-          <Link target="_blank" href="https://buy.elrond.com/fr">
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href="https://buy.elrond.com/fr"
+          >
             here
           </Link>
           .
@@ -153,77 +156,34 @@ const Features = ({
           onLabel="Viewer"
         ></Switch>
       </FeaturesHeader>
-      <AnimatePresence>
-        {isViewer ? (
-          <FeaturesContent
-            key="viewer"
-            isRowReverse={!isViewer}
-            transition={{ duration: 0.5 }}
-            initial={{ width: 0 }}
-            animate={{ width: "100vw" }}
-            exit={{ width: 0 }}
-          >
-            <ContentContainer>
-              <FeaturesSubContent>
-                {features.viewer.map(({ title, content, key }) => {
-                  const Icon = iconsMapper[key];
+      <FeaturesContent isRowReverse={!isViewer}>
+        <ContentContainer>
+          <FeaturesSubContent>
+            {features[isViewer ? "viewer" : "creator"].map(
+              ({ title, content, key }) => {
+                const Icon = iconsMapper[key];
 
-                  return (
-                    <FeaturePaper
-                      key={key}
-                      onMouseEnter={() => setFocusedFeatureKey(key)}
-                    >
-                      <Icon fontSize={false ? "large" : "small"}></Icon>
-                      <Feature>
-                        <h3>{title}</h3>
-                        {content}
-                      </Feature>
-                    </FeaturePaper>
-                  );
-                })}
-              </FeaturesSubContent>
-              <FeatureScreen
-                key={`backgrounds-${focusedFeatureKey}`}
-                background={backgrounds[focusedFeatureKey] as string}
-              ></FeatureScreen>
-            </ContentContainer>
-          </FeaturesContent>
-        ) : (
-          <FeaturesContent
-            key="creator"
-            isRowReverse={!isViewer}
-            transition={{ duration: 0.5 }}
-            initial={{ width: 0 }}
-            animate={{ width: "100vw" }}
-            exit={{ width: 0 }}
-          >
-            <ContentContainer>
-              <FeatureScreen
-                key={`backgrounds-${focusedFeatureKey}`}
-                background={backgrounds[focusedFeatureKey] as string}
-              ></FeatureScreen>
-              <FeaturesSubContent>
-                {features.creator.map(({ title, content, key }) => {
-                  const Icon = iconsMapper[key];
-
-                  return (
-                    <FeaturePaper
-                      key={key}
-                      onMouseEnter={() => setFocusedFeatureKey(key)}
-                    >
-                      <Icon fontSize={false ? "large" : "small"}></Icon>
-                      <Feature>
-                        <h3>{title}</h3>
-                        {content}
-                      </Feature>
-                    </FeaturePaper>
-                  );
-                })}
-              </FeaturesSubContent>
-            </ContentContainer>
-          </FeaturesContent>
-        )}
-      </AnimatePresence>
+                return (
+                  <FeaturePaper
+                    key={key}
+                    onMouseEnter={() => setFocusedFeatureKey(key)}
+                  >
+                    <Icon fontSize={false ? "large" : "small"}></Icon>
+                    <Feature>
+                      <h3>{title}</h3>
+                      {content}
+                    </Feature>
+                  </FeaturePaper>
+                );
+              }
+            )}
+          </FeaturesSubContent>
+          <FeatureScreen
+            key={`backgrounds-${focusedFeatureKey}`}
+            background={backgrounds[focusedFeatureKey] as string}
+          ></FeatureScreen>
+        </ContentContainer>
+      </FeaturesContent>
     </FeaturesContainer>
   );
 };

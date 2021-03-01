@@ -1,7 +1,7 @@
 import { Switch } from "@material-ui/core";
 import styled from "styled-components";
+
 import { colors, fonts } from "../../../constants/index";
-import Button from "@material-ui/core/Button";
 
 export const IftttIntegrationContainer = styled.div`
   position: relative;

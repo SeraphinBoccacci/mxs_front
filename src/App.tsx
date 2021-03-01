@@ -1,12 +1,15 @@
-import Console from "./pages/Console";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { ThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
+
+import { ThemeProvider } from "@material-ui/core/styles";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import AuthProvider from "./components/AuthContext";
+import ErrorHandler from "./components/ErrorHandlingContext";
+import PrivateRoute from "./components/PrivateRoute";
+import Console from "./pages/Console";
 import Home from "./pages/Home";
 import { theme } from "./styles/theme";
-import PrivateRoute from "./components/PrivateRoute";
-import ErrorHandler from "./components/ErrorHandlingContext";
 
 function App() {
   return (
