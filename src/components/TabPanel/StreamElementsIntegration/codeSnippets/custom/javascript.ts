@@ -1,4 +1,5 @@
 /* eslint-disable quotes */
+import config from "../../../../../config/config";
 import { Image, Sound, Text, Variation } from "../../interface";
 
 export const formatVariationName = (variationName: string) =>
@@ -110,9 +111,7 @@ const appendImageLines = (
     formatVariationName(name) +
     '" id="image_${currentIndex}">',
   '        <img class="logo"',
-  `        src="https://streamparticles.io/images/${`${
-    image.imagePath
-  }${"?ts=${now}"}`}"/>`,
+  `        src="${config.url}/images/${`${image.imagePath}${"?ts=${now}"}`}"/>`,
   "      </div>`,",
   "    `widget-container-${currentIndex}`,",
   `    ${secondsToMilliseconds(duration)},`,
@@ -129,9 +128,7 @@ const appendAudioLines = (sound: Sound, duration: number = 10) => [
   "  appendElementAndRemove(",
   "    `audio_${currentIndex}`,",
   '    ` <audio id="audio_${currentIndex}" autoplay ',
-  `        src="https://streamparticles.io/audios/${`${
-    sound.soundPath
-  }${"?ts=${now}"}`}">`,
+  `        src="${config.url}/audios/${`${sound.soundPath}${"?ts=${now}"}`}">`,
   "      </audio>`,",
   "    `widget-container-${currentIndex}`,",
   `    ${secondsToMilliseconds(duration)},`,
@@ -228,7 +225,7 @@ const findVariationLines = () => [
 ];
 
 const socketLines = (herotag: string) => [
-  'const socket = io("https://streamparticles.io", {',
+  `const socket = io("${config.url}", {`,
   "  query: {",
   `    streamerHerotag: "${herotag}",`,
   "  },",

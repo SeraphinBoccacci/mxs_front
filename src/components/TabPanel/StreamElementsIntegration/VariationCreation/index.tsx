@@ -35,7 +35,11 @@ const WidgetCreation = () => {
     <>
       <ContentContainer>
         <Content>
-          <IframeContainer srcDoc={html}></IframeContainer>
+          <IframeContainer
+            src="about:blank"
+            sandbox="allow-scripts"
+            srcDoc={html}
+          ></IframeContainer>
         </Content>
         <VariationsList
           variations={variations}
