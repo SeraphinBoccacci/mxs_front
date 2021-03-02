@@ -35,19 +35,19 @@ const WidgetCreation = () => {
     <>
       <ContentContainer>
         <Content>
-          <IframeContainer
+          {/* <IframeContainer
             src="about:blank"
             sandbox="allow-scripts"
             srcDoc={html}
-          ></IframeContainer>
+          ></IframeContainer> */}
+          <VariationsList
+            variations={variations}
+            setVariations={setVariations}
+            html={html}
+            setHtml={setHtml}
+            setFocusedVariationIndex={setFocusedVariationIndex}
+          ></VariationsList>
         </Content>
-        <VariationsList
-          variations={variations}
-          setVariations={setVariations}
-          html={html}
-          setHtml={setHtml}
-          setFocusedVariationIndex={setFocusedVariationIndex}
-        ></VariationsList>
       </ContentContainer>
       <VariationModal
         setVariationModalData={() => setFocusedVariationIndex(undefined)}
