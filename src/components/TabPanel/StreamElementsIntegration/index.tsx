@@ -38,6 +38,7 @@ const StreamElementsIntegration = () => {
         </Paragraph>
       </ContentContainer>
       <Switch
+        variant="inverted"
         isActive={isOnCustomTemplate}
         setIsActive={setIsOnCustomTemplate}
         offLabel="Base template"
