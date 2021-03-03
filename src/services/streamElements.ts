@@ -34,7 +34,10 @@ const endpoint = `${config.apiUrl}/user/stream-elements/variation`;
 export const createVariation = async (
   herotag: string,
   variation: Variation
-): Promise<Variation> => {
+): Promise<{
+  variations: Variation[];
+  files: { html: string; css: string; javascript: string };
+}> => {
   const res = await postWithAuth(endpoint, { herotag, variation });
 
   return res;
@@ -46,15 +49,38 @@ export const getVariation = async (variationId: string): Promise<Variation> => {
   return res;
 };
 
+export const getUserVariations = async (
+  herotag: string
+): Promise<{
+  variations: Variation[];
+  files: { html: string; css: string; javascript: string };
+}> => {
+  const res = await getWithAuth(
+    `${config.apiUrl}/user/stream-elements/variations/${herotag}`
+  );
+
+  return res;
+};
+
 export const updateVariation = async (
   variationId: string,
   variation: Variation
-): Promise<void> => {
-  await putWithAuth(endpoint, { variationId, variation });
+): Promise<{
+  variation: Variation;
+  files: { html: string; css: string; javascript: string };
+}> => {
+  const res = await putWithAuth(endpoint, { variationId, variation });
+
+  return res;
 };
 
-export const deleteVariation = async (variationId: string): Promise<any> => {
+export const deleteVariation = async (
+  variationId: string
+): Promise<{
+  variations: Variation[];
+  files: { html: string; css: string; javascript: string };
+}> => {
   const res = await deleteWithAuth(`${endpoint}/${variationId}`);
 
-  return res.data;
+  return res;
 };

@@ -144,7 +144,7 @@ export const IftttIntegration = () => {
               <EventNameInput
                 disabled={isSubmitting}
                 name="eventName"
-                value={user?.integrations?.ifttt?.eventName}
+                value={user?.integrations?.ifttt?.eventName || ""}
                 onChange={setFormData}
                 placeholder="StreamParticlesEvent"
               ></EventNameInput>
@@ -154,7 +154,7 @@ export const IftttIntegration = () => {
               <TriggerKeyInput
                 disabled={isSubmitting}
                 name="triggerKey"
-                value={user?.integrations?.ifttt?.triggerKey}
+                value={user?.integrations?.ifttt?.triggerKey || ""}
                 onChange={setFormData}
                 placeholder="e1eFH71X84ljX-0AFjNdjYJ2B4TfY8whL5j3fkLAc6F"
               ></TriggerKeyInput>

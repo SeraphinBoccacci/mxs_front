@@ -1,28 +1,37 @@
 /* eslint-disable quotes */
 import React, { useContext, useEffect, useState } from "react";
 
+import { getUserVariations } from "../../../../services/streamElements";
 import { AuthContext } from "../../../AuthContext";
 import CodeSnippets from "../../../CodeSnippets";
 import { ContentContainer } from "../../style";
-import { generateCss } from "../codeSnippets/custom/css";
-import { mainLines } from "../codeSnippets/custom/javascript";
 import { Variation } from "../interface";
 import { Content, IframeContainer } from "./style";
 import { VariationModal } from "./VariationModal";
 import { VariationsList } from "./VariationsList";
 
+export interface VariationsFiles {
+  html: string;
+  css: string;
+  javascript: string;
+}
+
 const WidgetCreation = () => {
+  const [variations, setVariations] = useState<Variation[]>([]);
+  const [files, setFiles] = useState<VariationsFiles>();
+  const [focusedVariationIndex, setFocusedVariationIndex] = useState<number>();
+  const [htmlSrc, setHtmlSrc] = useState<string>();
+
   const { user, herotag } = useContext(AuthContext);
 
-  const [variations, setVariations] = useState<Variation[]>([]);
-
-  const [html, setHtml] = useState<string>();
-
   useEffect(() => {
-    setVariations(user?.integrations?.streamElements?.variations || []);
+    if (herotag) {
+      getUserVariations(herotag).then(({ variations, files }) => {
+        setVariations(variations || []);
+        setFiles(files);
+      });
+    }
   }, [user]);
-
-  const [focusedVariationIndex, setFocusedVariationIndex] = useState<number>();
 
   const updateVariation = (index: number) => (updatedVariation: Variation) => {
     const before = variations.slice(0, index);
@@ -35,21 +44,22 @@ const WidgetCreation = () => {
     <>
       <ContentContainer>
         <Content>
-          {/* <IframeContainer
-            src="about:blank"
-            sandbox="allow-scripts"
-            srcDoc={html}
-          ></IframeContainer> */}
+          <IframeContainer
+            sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+            src={htmlSrc}
+          ></IframeContainer>
           <VariationsList
             variations={variations}
             setVariations={setVariations}
-            html={html}
-            setHtml={setHtml}
+            setFiles={setFiles}
+            htmlSrc={htmlSrc}
+            setHtmlSrc={setHtmlSrc}
             setFocusedVariationIndex={setFocusedVariationIndex}
           ></VariationsList>
         </Content>
       </ContentContainer>
       <VariationModal
+        setFiles={setFiles}
         setVariationModalData={() => setFocusedVariationIndex(undefined)}
         updateVariation={
           !!focusedVariationIndex || focusedVariationIndex === 0
@@ -62,10 +72,13 @@ const WidgetCreation = () => {
             : undefined
         }
       ></VariationModal>
-      <CodeSnippets
-        jsSnippet={herotag ? mainLines(herotag, variations) : ""}
-        cssSnippet={generateCss(variations)}
-      ></CodeSnippets>
+      {files ? (
+        <CodeSnippets
+          htmlSnippet={files.html}
+          cssSnippet={files.css}
+          jsSnippet={files.javascript}
+        ></CodeSnippets>
+      ) : null}
     </>
   );
 };

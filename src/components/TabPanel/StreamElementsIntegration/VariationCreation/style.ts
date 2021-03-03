@@ -14,13 +14,14 @@ export const IframeContainer = styled.iframe`
   width: 100%;
   height: 40rem;
 
-  background-color: ${colors.secondary};
+  background-color: ${colors.secondary}ee;
 
   border: none;
 
   border-radius: 10px;
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
-    0 3px 5px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
 `;
 
 export const VariationsContainer = styled.div`

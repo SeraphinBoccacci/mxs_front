@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import { get, set } from "lodash";
+import { set } from "lodash";
 import React, { createRef, useCallback, useRef } from "react";
 
 import { updateVariation as putUpdateVariation } from "../../../../../services/streamElements";
@@ -12,6 +12,7 @@ import {
   VariationLenses,
   VariationPositions,
 } from "../../interface";
+import { VariationsFiles } from "..";
 import { AnimationSettings } from "./AnimationSettings";
 import { textPositionsOptions } from "./constants";
 import Input from "./Input";
@@ -31,14 +32,16 @@ import Upload from "./Upload";
 
 interface VariationModalProps {
   variationData?: Variation;
+  setFiles: React.Dispatch<React.SetStateAction<VariationsFiles | undefined>>;
   updateVariation?: (updatedVariation: Variation) => void;
   setVariationModalData: (variation?: Variation) => void;
 }
 
 export const VariationModal = ({
   variationData,
-  setVariationModalData,
+  setFiles,
   updateVariation,
+  setVariationModalData,
 }: VariationModalProps) => {
   if (!variationData || !updateVariation) return null;
 
@@ -158,9 +161,9 @@ export const VariationModal = ({
     return Object.entries(formData).reduce((variationData, [key, value]) => {
       const path = key.replaceAll("Ref", "").split("_");
 
-      const newV = set(variationData, path, value || "");
+      const newVariation = set(variationData, path, value || "");
 
-      return newV;
+      return newVariation;
     }, {}) as Variation;
   };
 
@@ -170,11 +173,15 @@ export const VariationModal = ({
     if (variationData?._id) {
       const updates = { ...variationData, ...newSnapshot };
 
-      await putUpdateVariation(variationData._id as string, updates);
+      const {
+        variation: savedUpdatedVariation,
+        files,
+      } = await putUpdateVariation(variationData._id as string, updates);
 
       setVariationModalData(undefined);
 
-      updateVariation(updates);
+      updateVariation(savedUpdatedVariation);
+      setFiles(files);
     }
   }, [setVariationModalData, updateVariation, variationData]);
 

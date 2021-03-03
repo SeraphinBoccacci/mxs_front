@@ -1,8 +1,9 @@
 import { Button } from "@material-ui/core";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import React from "react";
 
 import { streamElementsTutorial } from "../../../constants/tutorials/streamElements";
+import { useQueryString } from "../../../hooks/useQueryString";
 import { triggerStreamElementsEvent } from "../../../services/user";
 import { AuthContext } from "../../AuthContext";
 import CodeSnippets from "../../CodeSnippets";
@@ -15,7 +16,9 @@ import { StreamElementsIntegrationContainer } from "./style";
 import VariationCreation from "./VariationCreation";
 
 const StreamElementsIntegration = () => {
-  const [isOnCustomTemplate, setIsOnCustomTemplate] = useState(false);
+  const [isOnCustomTemplate, setIsOnCustomTemplate] = useQueryString(
+    "isOnCustom"
+  );
   const { user } = useContext(AuthContext);
   const { handleError } = useContext(ErrorHandlingContext);
 

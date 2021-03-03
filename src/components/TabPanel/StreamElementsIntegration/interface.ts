@@ -23,6 +23,7 @@ export interface Variation {
   sound?: Sound;
   image?: Image;
   text?: Text;
+  filepath?: string;
 }
 
 export interface Sound {

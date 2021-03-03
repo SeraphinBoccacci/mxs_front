@@ -3,7 +3,7 @@ import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext, useState } from "react";
 
 import { colors } from "../../../../../constants/colors";
 import {
@@ -12,9 +12,8 @@ import {
 } from "../../../../../services/streamElements";
 import { invertColor } from "../../../../../utils/color";
 import { AuthContext } from "../../../../AuthContext";
-import { generateCss } from "../../codeSnippets/custom/css";
-import { mainLines } from "../../codeSnippets/custom/javascript";
 import { Variation } from "../../interface";
+import { VariationsFiles } from "..";
 import {
   NewVariationButton,
   VariationHeader,
@@ -26,24 +25,6 @@ import {
   VariationsContainer,
   VariationSmallContent,
 } from "./style";
-
-const HTML = (variation: Variation) => `
-  <html>
-    <style>
-      ${generateCss([variation])}
-    </style>
-    <body></body>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"></script>
-    <script type="text/javascript">
-    ${mainLines("test_herotag", [variation], {
-      triggerMode: "manual",
-      targetVariation: variation.name,
-    })}
-    </script>
-  </html>
-`;
 
 const generateRandomVariationName = (variations: Variation[]): Variation => {
   const leftColors = colors.filter(
@@ -63,61 +44,66 @@ const generateRandomVariationName = (variations: Variation[]): Variation => {
 };
 
 interface VariationsListProps {
+  htmlSrc?: string;
   variations: Variation[];
+  setFiles: React.Dispatch<React.SetStateAction<VariationsFiles | undefined>>;
+  setHtmlSrc: React.Dispatch<React.SetStateAction<string | undefined>>;
   setVariations: React.Dispatch<React.SetStateAction<Variation[]>>;
   setFocusedVariationIndex: (index: number) => void;
-  setHtml: React.Dispatch<React.SetStateAction<string | undefined>>;
-  html?: string;
 }
 
 export const VariationsList = ({
+  htmlSrc,
   variations,
+  setFiles,
+  setHtmlSrc,
   setVariations,
   setFocusedVariationIndex,
-  setHtml,
-  html,
 }: VariationsListProps) => {
-  const { user, herotag } = useContext(AuthContext);
-
-  useEffect(() => {
-    setVariations(user?.integrations?.streamElements?.variations || []);
-  }, [user]);
+  const { herotag } = useContext(AuthContext);
+  const [
+    displayedVariationIndex,
+    setDisplayedVariationIndex,
+  ] = useState<number>();
 
   const addNewVariation = useCallback(async () => {
     const newVariation = generateRandomVariationName(variations);
 
-    const variation = await createVariation(herotag as string, newVariation);
+    const { variations: updatedVariations, files } = await createVariation(
+      herotag as string,
+      newVariation
+    );
 
-    if (variation)
-      setVariations((prevVariations: Variation[]) => [
-        ...prevVariations,
-        variation,
-      ]);
+    setVariations(updatedVariations);
+    setFiles(files);
   }, [variations]);
 
   const removeVariation = useCallback(
     async (index: number) => {
-      const before = variations.slice(0, index);
-      const after = variations.slice(index + 1, variations.length);
+      const { variations: updatedVariations, files } = await deleteVariation(
+        variations[index]._id as string
+      );
 
-      if (variations?.[index]?._id) {
-        await deleteVariation(variations[index]._id as string);
-
-        setVariations([...before, ...after]);
-      }
+      setVariations(updatedVariations);
+      setFiles(files);
     },
     [variations]
   );
 
-  const displayPreview = (variation: Variation) => {
-    setHtml(HTML(variation));
+  const displayPreview = (variation: Variation, variationIndex: number) => {
+    setHtmlSrc(
+      `http://localhost:4000/files/html/file-name/${variation.filepath}`
+    );
+    setDisplayedVariationIndex(variationIndex);
     setTimeout(() => {
-      setHtml("");
+      setHtmlSrc("");
+      setDisplayedVariationIndex(undefined);
     }, (variation.duration || 0) * 1000);
   };
 
   const stopPreview = () => {
-    setHtml("");
+    setHtmlSrc("");
+    setDisplayedVariationIndex(undefined);
   };
 
   return (
@@ -145,7 +131,7 @@ export const VariationsList = ({
                 {variation.chances || "-"}
               </VariationMediumContent>
               <VariationSmallContent>
-                {!!html ? (
+                {displayedVariationIndex === index ? (
                   <Button size="small" onClick={() => stopPreview()}>
                     <StopRoundedIcon
                       style={{
@@ -155,9 +141,10 @@ export const VariationsList = ({
                   </Button>
                 ) : (
                   <Button
+                    disabled={!!htmlSrc || !variation.filepath}
                     size="small"
                     onClick={() => {
-                      displayPreview(variation);
+                      displayPreview(variation, index);
                     }}
                   >
                     <PlayArrowRoundedIcon
