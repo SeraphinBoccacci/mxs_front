@@ -5,6 +5,7 @@ import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
 import React, { useCallback, useContext, useState } from "react";
 
+import config from "../../../../../config/config";
 import { colors } from "../../../../../constants/colors";
 import {
   createVariation,
@@ -91,9 +92,7 @@ export const VariationsList = ({
   );
 
   const displayPreview = (variation: Variation, variationIndex: number) => {
-    setHtmlSrc(
-      `http://localhost:4000/files/html/file-name/${variation.filepath}`
-    );
+    setHtmlSrc(`${config.url}/files/html/file-name/${variation.filepath}`);
     setDisplayedVariationIndex(variationIndex);
     setTimeout(() => {
       setHtmlSrc("");
