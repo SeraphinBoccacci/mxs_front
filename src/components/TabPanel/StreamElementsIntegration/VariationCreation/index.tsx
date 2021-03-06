@@ -1,5 +1,7 @@
 /* eslint-disable quotes */
 import React, { useContext, useEffect, useState } from "react";
+//@ts-ignore
+import { withBreakpoints } from "react-breakpoints";
 
 import { getUserVariations } from "../../../../services/streamElements";
 import { AuthContext } from "../../../AuthContext";
@@ -16,7 +18,17 @@ export interface VariationsFiles {
   javascript: string;
 }
 
-const WidgetCreation = () => {
+type breakpoints = { [key: string]: number };
+
+interface VariationCreationProps {
+  breakpoints: breakpoints;
+  currentBreakpoint: string;
+}
+
+const VariationCreation = ({
+  breakpoints,
+  currentBreakpoint,
+}: VariationCreationProps) => {
   const [variations, setVariations] = useState<Variation[]>([]);
   const [files, setFiles] = useState<VariationsFiles>();
   const [focusedVariationIndex, setFocusedVariationIndex] = useState<number>();
@@ -39,6 +51,8 @@ const WidgetCreation = () => {
 
     setVariations([...before, updatedVariation, ...after]);
   };
+
+  if (breakpoints[currentBreakpoint] < breakpoints.tabletLandscape) return null;
 
   return (
     <>
@@ -83,4 +97,4 @@ const WidgetCreation = () => {
   );
 };
 
-export default WidgetCreation;
+export default withBreakpoints(VariationCreation);

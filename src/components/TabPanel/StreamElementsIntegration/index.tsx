@@ -1,6 +1,8 @@
 import { Button } from "@material-ui/core";
 import { useCallback, useContext } from "react";
 import React from "react";
+//@ts-ignore
+import { withBreakpoints } from "react-breakpoints";
 
 import { streamElementsTutorial } from "../../../constants/tutorials/streamElements";
 import { useQueryString } from "../../../hooks/useQueryString";
@@ -15,7 +17,17 @@ import { cssSnippet, htmlSnippet, jsSnippet } from "./codeSnippets/template";
 import { StreamElementsIntegrationContainer } from "./style";
 import VariationCreation from "./VariationCreation";
 
-const StreamElementsIntegration = () => {
+type breakpoints = { [key: string]: number };
+
+interface StreamElementsIntegrationProps {
+  breakpoints: breakpoints;
+  currentBreakpoint: string;
+}
+
+const StreamElementsIntegration = ({
+  breakpoints,
+  currentBreakpoint,
+}: StreamElementsIntegrationProps) => {
   const [isOnCustomTemplate, setIsOnCustomTemplate] = useQueryString(
     "isOnCustom"
   );
@@ -52,11 +64,13 @@ const StreamElementsIntegration = () => {
       ) : (
         <>
           <Tutorial tutorial={streamElementsTutorial}></Tutorial>
-          <CodeSnippets
-            jsSnippet={jsSnippet(user?.herotag || "{{your-herotag}}")}
-            htmlSnippet={htmlSnippet}
-            cssSnippet={cssSnippet}
-          ></CodeSnippets>
+          {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape ? (
+            <CodeSnippets
+              jsSnippet={jsSnippet(user?.herotag || "{{your-herotag}}")}
+              htmlSnippet={htmlSnippet}
+              cssSnippet={cssSnippet}
+            ></CodeSnippets>
+          ) : null}
         </>
       )}
       <ContentContainer>
@@ -68,4 +82,4 @@ const StreamElementsIntegration = () => {
   );
 };
 
-export default StreamElementsIntegration;
+export default withBreakpoints(StreamElementsIntegration);

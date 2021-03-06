@@ -1,5 +1,5 @@
 import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Accordion,
@@ -13,6 +13,7 @@ import {
 
 const questionsAndAnswers = [
   {
+    id: "panel_1",
     question: "Why would I need to send my donations via Maiar ?",
     answer: (
       <div>
@@ -25,6 +26,7 @@ const questionsAndAnswers = [
     ),
   },
   {
+    id: "panel_2",
     question:
       "How will the creator I send my eGLD to be notified of the transaction ?",
     answer: (
@@ -38,6 +40,7 @@ const questionsAndAnswers = [
     ),
   },
   {
+    id: "panel_3",
     question: "It is safe ?",
     answer: (
       <div>
@@ -49,6 +52,7 @@ const questionsAndAnswers = [
     ),
   },
   {
+    id: "panel_4",
     question: "Do I have to create an account on StreamParticles ?",
     answer: (
       <div>
@@ -59,6 +63,7 @@ const questionsAndAnswers = [
     ),
   },
   {
+    id: "panel_5",
     question: "Can I send a personnalized message to the creator ?",
     answer: (
       <div>
@@ -70,16 +75,27 @@ const questionsAndAnswers = [
 ];
 
 const FrequentlyAskedQuestions = () => {
+  const [expandedPanel, setExpandedPanel] = useState<string>("");
+
+  const handleChange = (panel: string) => (
+    event: React.ChangeEvent<{}>,
+    isExpanded: boolean
+  ) => {
+    setExpandedPanel(isExpanded ? panel : "");
+  };
+
   return (
     <FaqContainer id="community">
       <FaqHeader>
         <FaqTitle>Frequently Asked Questions</FaqTitle>
       </FaqHeader>
       <Accordions>
-        {questionsAndAnswers.map(({ question, answer }, index) => (
+        {questionsAndAnswers.map(({ question, answer, id }, index) => (
           <Accordion
             color="primary"
             key={`frequently-asked-questions-${index}`}
+            expanded={expandedPanel === id}
+            onChange={handleChange(id)}
           >
             <AccordionSummary expandIcon={<AddOutlinedIcon />}>
               {question}

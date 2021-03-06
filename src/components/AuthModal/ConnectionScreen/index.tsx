@@ -1,3 +1,4 @@
+import { Tooltip } from "@material-ui/core";
 import React, {
   ChangeEvent,
   useCallback,
@@ -129,12 +130,17 @@ export const ConnectionScreen = ({
       </FormTitle>
       <ConnectionForm onSubmit={handleSubmit}>
         <Inputs>
-          <Herotag
-            placeholder="Herotag"
-            name="herotag"
-            onChange={setFormData}
-            disabled={isSubmitting}
-          ></Herotag>
+          <Tooltip
+            placement="top"
+            title="Your herotag is the username you set when you registered on Maiar."
+          >
+            <Herotag
+              placeholder="Herotag"
+              name="herotag"
+              onChange={setFormData}
+              disabled={isSubmitting}
+            ></Herotag>
+          </Tooltip>
           <Password
             type="password"
             name="password"

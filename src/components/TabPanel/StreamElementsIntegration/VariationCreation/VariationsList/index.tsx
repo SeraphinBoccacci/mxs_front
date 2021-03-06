@@ -2,29 +2,30 @@ import { Button } from "@material-ui/core";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
-import StopRoundedIcon from "@material-ui/icons/StopRounded";
-import React, { useCallback, useContext, useState } from "react";
+import { debounce } from "lodash";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import config from "../../../../../config/config";
 import { colors } from "../../../../../constants/colors";
 import {
   createVariation,
   deleteVariation,
+  getRowsStructure,
+  updateRowsStructure,
 } from "../../../../../services/streamElements";
 import { invertColor } from "../../../../../utils/color";
 import { AuthContext } from "../../../../AuthContext";
+import Table from "../../../../Table";
+import { isRowNest, Row, RowNest } from "../../../../Table/TableRow";
 import { Variation } from "../../interface";
 import { VariationsFiles } from "..";
+import { columns } from "./columns";
+import { resolveUpdatedRowsGroups } from "./row-structures";
 import {
   NewVariationButton,
-  VariationHeader,
-  VariationLargeContent,
-  VariationList,
-  VariationListContainer,
-  VariationListItem,
-  VariationMediumContent,
+  TopButton,
+  TopButtonContainer,
   VariationsContainer,
-  VariationSmallContent,
 } from "./style";
 
 const generateRandomVariationName = (variations: Variation[]): Variation => {
@@ -62,10 +63,9 @@ export const VariationsList = ({
   setFocusedVariationIndex,
 }: VariationsListProps) => {
   const { herotag } = useContext(AuthContext);
-  const [
-    displayedVariationIndex,
-    setDisplayedVariationIndex,
-  ] = useState<number>();
+  const [selectedRows, setSelectedRows] = useState<Row[]>([]);
+  const [isOnGatheringMode, setIsOnGatheringMode] = useState<boolean>(false);
+  const [formattedRows, setFormatedRows] = useState<(Row | RowNest)[]>([]);
 
   const addNewVariation = useCallback(async () => {
     const newVariation = generateRandomVariationName(variations);
@@ -91,96 +91,280 @@ export const VariationsList = ({
     [variations]
   );
 
-  const displayPreview = (variation: Variation, variationIndex: number) => {
+  const updateHeaderText = (
+    targetIndex: number,
+    rowsStructure: {
+      rows: string[];
+      rowsGroupName?: string | undefined;
+    }[],
+    herotag: string
+  ) =>
+    debounce(async (updatedHeaderText: string) => {
+      const before = rowsStructure.slice(0, targetIndex);
+      const after = rowsStructure.slice(targetIndex + 1, rowsStructure.length);
+
+      const update = [
+        ...before,
+        {
+          ...rowsStructure[targetIndex],
+          rowsGroupName: updatedHeaderText,
+        },
+        ...after,
+      ];
+
+      await updateRowsStructure(herotag, update);
+    }, 1000);
+
+  const displayPreview = (variation: Variation) => {
     setHtmlSrc(`${config.url}/files/html/file-name/${variation.filepath}`);
-    setDisplayedVariationIndex(variationIndex);
     setTimeout(() => {
       setHtmlSrc("");
-      setDisplayedVariationIndex(undefined);
     }, (variation.duration || 0) * 1000);
   };
 
-  const stopPreview = () => {
-    setHtmlSrc("");
-    setDisplayedVariationIndex(undefined);
+  const rows = useCallback(
+    (variations: Variation[]) =>
+      variations
+        .map((variation, variationIndex) => ({
+          id: variation._id as string,
+          style: {
+            backgroundColor: variation.backgroundColor,
+            color: invertColor(variation.backgroundColor),
+          },
+          variationName: variation.name,
+          requiredAmount: variation.requiredAmount,
+          chances: variation.chances,
+          preview: (
+            <Button
+              disabled={!!htmlSrc || !variation.filepath}
+              size="small"
+              onClick={() => {
+                displayPreview(variation);
+              }}
+            >
+              <PlayArrowRoundedIcon
+                style={{
+                  color: invertColor(variation.backgroundColor),
+                }}
+              ></PlayArrowRoundedIcon>
+            </Button>
+          ),
+          edit: (
+            <Button
+              size="small"
+              onClick={() => {
+                setFocusedVariationIndex(variationIndex);
+              }}
+            >
+              <EditRoundedIcon
+                style={{
+                  color: invertColor(variation.backgroundColor),
+                }}
+              ></EditRoundedIcon>
+            </Button>
+          ),
+          delete: (
+            <Button
+              size="small"
+              onClick={() => {
+                removeVariation(variationIndex);
+              }}
+            >
+              <DeleteRoundedIcon
+                style={{
+                  color: invertColor(variation.backgroundColor),
+                }}
+              ></DeleteRoundedIcon>
+            </Button>
+          ),
+        }))
+        .filter((id) => Boolean(id)),
+    [removeVariation, setFocusedVariationIndex, displayPreview, htmlSrc]
+  );
+
+  useEffect(() => {
+    if (!herotag) return;
+
+    getRowsStructure(herotag).then((rowsStructure) => {
+      const rowsFromVariations = rows(variations);
+
+      if (!rowsStructure) {
+        setFormatedRows(rowsFromVariations);
+
+        return;
+      }
+
+      const structuredRows = rowsStructure.map(
+        ({ rows, rowsGroupName }, rowIndex) => ({
+          headerText: rowsGroupName,
+          onHeaderTextChange: updateHeaderText(
+            rowIndex,
+            rowsStructure,
+            herotag
+          ),
+          rows: rows
+            .map((nestedRowId) =>
+              rowsFromVariations.find(({ id }) => id === nestedRowId)
+            )
+            .filter(Boolean),
+        })
+      );
+
+      const structuredRowsWithNotRegisteredOnes = [
+        // Structure from server
+        ...structuredRows,
+        // Rows below are not part of any group
+        ...rowsFromVariations.filter(
+          (row) =>
+            !structuredRows.some((structuredRow) =>
+              structuredRow.rows.some(
+                (nestedStructuredRow) =>
+                  nestedStructuredRow?.variationName === row.variationName
+              )
+            )
+        ),
+      ] as (Row | RowNest)[];
+
+      setFormatedRows(structuredRowsWithNotRegisteredOnes);
+    });
+  }, [variations, herotag]);
+
+  const rowsGroups: RowNest[] = formattedRows.filter(isRowNest);
+  const selectedRowsIds = selectedRows.map(({ id }) => id);
+
+  const isAlreadyInRowGroup = (rowId: string) =>
+    rowsGroups.some(({ rows }) => rows.map(({ id }) => id).includes(rowId));
+
+  const getHasRowsFromDifferentGroupsToGather = (): boolean => {
+    if (hasNoRowAlreadyGathered) return false;
+
+    const firstRowsGroupIndex = rowsGroups.findIndex(({ rows }) =>
+      rows.some(({ id }) => selectedRowsIds.includes(id))
+    );
+
+    const secondRowsGroupIndex = rowsGroups.findIndex(
+      ({ rows }, rowsGroupIndex) =>
+        rows.some(({ id }) => selectedRowsIds.includes(id)) &&
+        rowsGroupIndex !== firstRowsGroupIndex
+    );
+
+    return firstRowsGroupIndex > -1 && secondRowsGroupIndex > -1;
+  };
+
+  const hasSomeRowsAlreadyGathered = selectedRowsIds.some(isAlreadyInRowGroup);
+  const hasAllRowsAlreadyGathered = selectedRowsIds.every(isAlreadyInRowGroup);
+  const hasNoRowAlreadyGathered = !hasSomeRowsAlreadyGathered;
+  const hasRowsFromDifferentGroupsToGather = getHasRowsFromDifferentGroupsToGather();
+
+  const gatherRows = useCallback(
+    async (rowsSelection: Row[]) => {
+      const rowsFromVariations = rows(variations);
+      const updatedRowsGroups = resolveUpdatedRowsGroups(
+        formattedRows,
+        rowsSelection,
+        rowsGroups,
+        herotag as string,
+        {
+          hasSomeRowsAlreadyGathered,
+          hasAllRowsAlreadyGathered,
+          hasNoRowAlreadyGathered,
+          hasRowsFromDifferentGroupsToGather,
+        }
+      );
+
+      const formattedUpdates = updatedRowsGroups.map(
+        ({ headerText, rows }) => ({
+          rowsGroupName: headerText as string,
+          rows: rows.map(({ id }) => id),
+        })
+      );
+
+      const updatedRows = [
+        ...(updatedRowsGroups.map((rowNest, rowIndex) => ({
+          ...rowNest,
+          onHeaderTextChange: updateHeaderText(
+            rowIndex,
+            formattedUpdates,
+            herotag as string
+          ),
+        })) as RowNest[]),
+        ...rowsFromVariations.filter(
+          (row) =>
+            !updatedRowsGroups.some((updatedRowsGroup) =>
+              updatedRowsGroup?.rows?.some(
+                (nestedRow) => nestedRow?.variationName === row.variationName
+              )
+            )
+        ),
+      ];
+
+      setFormatedRows(updatedRows);
+      await updateRowsStructure(herotag as string, formattedUpdates);
+    },
+    [
+      herotag,
+      variations,
+      setFormatedRows,
+      formattedRows,
+      rowsGroups,
+      hasSomeRowsAlreadyGathered,
+      hasAllRowsAlreadyGathered,
+      hasNoRowAlreadyGathered,
+      hasRowsFromDifferentGroupsToGather,
+    ]
+  );
+
+  const buttonText = () => {
+    if (hasSomeRowsAlreadyGathered && !hasAllRowsAlreadyGathered)
+      return "Merge selection in group";
+
+    if (hasAllRowsAlreadyGathered && !hasRowsFromDifferentGroupsToGather)
+      return "Remove selection from group";
+
+    if (hasNoRowAlreadyGathered) return "Gather selection";
+
+    if (hasRowsFromDifferentGroupsToGather)
+      return "Can't gather rows from two groups";
+
+    return "Gather";
   };
 
   return (
     <VariationsContainer>
-      <VariationListContainer>
-        <VariationHeader>
-          <VariationLargeContent>Variation Name</VariationLargeContent>
-          <VariationMediumContent>Required Amount</VariationMediumContent>
-          <VariationMediumContent>Chances</VariationMediumContent>
-          <VariationSmallContent></VariationSmallContent>
-          <VariationSmallContent></VariationSmallContent>
-          <VariationSmallContent></VariationSmallContent>
-        </VariationHeader>
-        <VariationList>
-          {variations.map((variation, index) => (
-            <VariationListItem
-              background={variation.backgroundColor}
-              key={`variation-${index}`}
-            >
-              <VariationLargeContent>{variation.name}</VariationLargeContent>
-              <VariationMediumContent>
-                {variation.requiredAmount || "-"}
-              </VariationMediumContent>
-              <VariationMediumContent>
-                {variation.chances || "-"}
-              </VariationMediumContent>
-              <VariationSmallContent>
-                {displayedVariationIndex === index ? (
-                  <Button size="small" onClick={() => stopPreview()}>
-                    <StopRoundedIcon
-                      style={{
-                        color: invertColor(variation.backgroundColor),
-                      }}
-                    ></StopRoundedIcon>
-                  </Button>
-                ) : (
-                  <Button
-                    disabled={!!htmlSrc || !variation.filepath}
-                    size="small"
-                    onClick={() => {
-                      displayPreview(variation, index);
-                    }}
-                  >
-                    <PlayArrowRoundedIcon
-                      style={{
-                        color: invertColor(variation.backgroundColor),
-                      }}
-                    ></PlayArrowRoundedIcon>
-                  </Button>
-                )}
-              </VariationSmallContent>
-              <VariationSmallContent>
-                <Button
-                  size="small"
-                  onClick={() => {
-                    setFocusedVariationIndex(index);
-                  }}
-                >
-                  <EditRoundedIcon
-                    style={{
-                      color: invertColor(variation.backgroundColor),
-                    }}
-                  ></EditRoundedIcon>
-                </Button>
-              </VariationSmallContent>
-              <VariationSmallContent>
-                <Button size="small" onClick={() => removeVariation(index)}>
-                  <DeleteRoundedIcon
-                    style={{
-                      color: invertColor(variation.backgroundColor),
-                    }}
-                  ></DeleteRoundedIcon>
-                </Button>
-              </VariationSmallContent>
-            </VariationListItem>
-          ))}
-        </VariationList>
-      </VariationListContainer>
+      <TopButtonContainer>
+        {isOnGatheringMode && selectedRows.length ? (
+          <TopButton
+            disabled={hasRowsFromDifferentGroupsToGather}
+            variant="contained"
+            onClick={() => {
+              gatherRows(selectedRows);
+              setSelectedRows([]);
+            }}
+          >
+            {<span>{buttonText()}</span>}
+          </TopButton>
+        ) : null}
+        <TopButton
+          variant="outlined"
+          onClick={() => setIsOnGatheringMode((prev) => !prev)}
+        >
+          {isOnGatheringMode ? (
+            <span>Cancel</span>
+          ) : (
+            <span>Gathering Mode</span>
+          )}
+        </TopButton>
+      </TopButtonContainer>
+
+      <Table
+        selectedRows={selectedRows}
+        isSelectable={isOnGatheringMode}
+        onSelect={(rows: Row[]) =>
+          setSelectedRows(rows.flatMap((nestedRows) => nestedRows))
+        }
+        columns={columns}
+        rows={formattedRows}
+      ></Table>
       <NewVariationButton
         onClick={addNewVariation}
         color="secondary"

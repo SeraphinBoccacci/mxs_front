@@ -84,3 +84,28 @@ export const deleteVariation = async (
 
   return res;
 };
+
+export const getRowsStructure = async (
+  herotag: string
+): Promise<{ rows: string[]; rowsGroupName?: string }[]> => {
+  const res = await getWithAuth(
+    `${config.apiUrl}/user/stream-elements/rows-structure/${herotag}`
+  );
+
+  return res;
+};
+
+export const updateRowsStructure = async (
+  herotag: string,
+  rowsStructure: { rows: string[]; rowsGroupName?: string }[]
+) => {
+  const res = await postWithAuth(
+    `${config.apiUrl}/user/stream-elements/rows-structure`,
+    {
+      herotag,
+      rowsStructure,
+    }
+  );
+
+  return res;
+};

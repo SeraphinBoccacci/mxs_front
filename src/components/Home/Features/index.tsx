@@ -6,7 +6,6 @@ import DonutSmallRoundedIcon from "@material-ui/icons/DonutSmallRounded";
 import HighlightRoundedIcon from "@material-ui/icons/HighlightRounded";
 import MovieCreationRoundedIcon from "@material-ui/icons/MovieCreationRounded";
 import VideoCallRoundedIcon from "@material-ui/icons/VideoCallRounded";
-import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import React from "react";
 
@@ -29,21 +28,21 @@ import {
 const features = {
   creator: [
     {
-      title: "1. Create your account",
+      title: "1. Create your accounts",
       content: (
         <FeatureParagraph>
-          It&rsquo;s totally free. A herotag, a password and your integration
-          settings are the only informations we store.
+          You just need to create your Maiar wallet and your account on
+          StreamParticles. It&rsquo;s totally free.
         </FeatureParagraph>
       ),
       key: "features_01",
     },
     {
-      title: "2. Use our integration console",
+      title: "2. Set your alerts",
       content: (
         <FeatureParagraph>
-          Our powerfull webhook connected to Maiar, combined with our console,
-          let you customize the interaction with Maiar donators
+          Upload your own GIFs, your own Audios. Configure all the variations
+          you need. Create a fully customized interaction with your donators.
         </FeatureParagraph>
       ),
       key: "features_02",
@@ -52,7 +51,8 @@ const features = {
       title: "3. Start Streaming !",
       content: (
         <FeatureParagraph>
-          That&rsquo;s it ! Three steps then cut the commissions !
+          Share your herotag to your community and let them support your
+          content.
         </FeatureParagraph>
       ),
       key: "features_03",
@@ -74,11 +74,11 @@ const features = {
       key: "features_04",
     },
     {
-      title: "2. Deposit a bunch of eGLD",
+      title: "2. Buy or deposit eGLDs",
       content: (
         <FeatureParagraph>
-          To be able to send them via Maiar. A list of ¤eGLD brokers is
-          available{" "}
+          It is as easier as buying Bits on Twitch !<br></br>A list of ¤eGLD
+          brokers is available{" "}
           <Link
             target="_blank"
             rel="noreferrer"
@@ -144,7 +144,7 @@ const Features = ({
   return (
     <FeaturesContainer id="features">
       <FeaturesHeader>
-        <FeaturesTitle>How does it works ?</FeaturesTitle>
+        <FeaturesTitle>How does it work?</FeaturesTitle>
         <FeaturesSubTitle>Nothing simpler.</FeaturesSubTitle>
         <Switch
           isActive={isViewer}
@@ -157,32 +157,30 @@ const Features = ({
         ></Switch>
       </FeaturesHeader>
       <FeaturesContent isRowReverse={!isViewer}>
-        <ContentContainer>
-          <FeaturesSubContent>
-            {features[isViewer ? "viewer" : "creator"].map(
-              ({ title, content, key }) => {
-                const Icon = iconsMapper[key];
+        <FeaturesSubContent>
+          {features[isViewer ? "viewer" : "creator"].map(
+            ({ title, content, key }) => {
+              const Icon = iconsMapper[key];
 
-                return (
-                  <FeaturePaper
-                    key={key}
-                    onMouseEnter={() => setFocusedFeatureKey(key)}
-                  >
-                    <Icon fontSize={false ? "large" : "small"}></Icon>
-                    <Feature>
-                      <h3>{title}</h3>
-                      {content}
-                    </Feature>
-                  </FeaturePaper>
-                );
-              }
-            )}
-          </FeaturesSubContent>
-          <FeatureScreen
-            key={`backgrounds-${focusedFeatureKey}`}
-            background={backgrounds[focusedFeatureKey] as string}
-          ></FeatureScreen>
-        </ContentContainer>
+              return (
+                <FeaturePaper
+                  key={key}
+                  onMouseEnter={() => setFocusedFeatureKey(key)}
+                >
+                  <Icon fontSize={false ? "large" : "small"}></Icon>
+                  <Feature>
+                    <h3>{title}</h3>
+                    {content}
+                  </Feature>
+                </FeaturePaper>
+              );
+            }
+          )}
+        </FeaturesSubContent>
+        <FeatureScreen
+          key={`backgrounds-${focusedFeatureKey}`}
+          background={backgrounds[focusedFeatureKey] as string}
+        ></FeatureScreen>
       </FeaturesContent>
     </FeaturesContainer>
   );

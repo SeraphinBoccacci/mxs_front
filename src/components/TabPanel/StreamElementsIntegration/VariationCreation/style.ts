@@ -5,20 +5,29 @@ import { colors, fonts } from "../../../../constants";
 import { invertColor } from "../../../../utils/color";
 
 export const Content = styled.div`
+  position: relative;
   width: 50rem;
   display: flex;
   flex-direction: column;
+
+  padding-top: 432px;
 `;
 
 export const IframeContainer = styled.iframe`
-  width: 100%;
-  height: 40rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1920px;
+  height: 1080px;
 
   background-color: ${colors.secondary}ee;
 
   border: none;
 
   border-radius: 10px;
+
+  transform: translateX(-50%) scale(0.4);
+  transform-origin: top center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
     0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
     0 16px 16px rgba(0, 0, 0, 0.12);
