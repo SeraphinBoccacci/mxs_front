@@ -258,13 +258,13 @@ export const StyledUl = styled.ol`
   }
 
   @media (min-width: 45rem) {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.6rem;
   }
 `;
 
-export const StyledLi = styled.li`
-  & > span {
-    font-size: 0.65rem;
-  }
+export const StyledLi = styled.li``;
+
+export const StyledComment = styled.span`
+  font-size: 0.65rem;
 `;

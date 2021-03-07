@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import Logo from "../../assets/icons/StreamParticlesLogo";
+import config from "../../config/config";
 import { Emphasize, LogoContainer } from "../../styles/global";
 import {
   Column,
@@ -18,6 +19,7 @@ import {
   FooterModalContent,
   FooterModalParagraph,
   FooterModalTitle,
+  StyledComment,
   StyledLi,
   StyledModal,
   StyledUl,
@@ -44,15 +46,11 @@ const Footer = () => {
   );
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/simple/price?ids=elrond-erd-2&vs_currencies=usd"
-      )
-      .then((response) => {
-        if (!response) return;
+    axios.get(`${config.apiUrl}/egld-price`).then((response) => {
+      if (!response) return;
 
-        setCurrentPrice(response.data["elrond-erd-2"].usd);
-      });
+      setCurrentPrice(response.data.price);
+    });
   }, []);
   return (
     <FooterContainer>
@@ -169,10 +167,10 @@ const Footer = () => {
               <StyledLi>
                 The transaction fee will be{" "}
                 <Emphasize>${feesInDollars}</Emphasize> (0.00005 EGLD) <br></br>
-                <span>
+                <StyledComment>
                   (low additionnal fees may be charged based on transaction data
                   length)
-                </span>
+                </StyledComment>
               </StyledLi>
               <StyledLi>
                 They will receive <Emphasize>${receivedDollars}</Emphasize> (
