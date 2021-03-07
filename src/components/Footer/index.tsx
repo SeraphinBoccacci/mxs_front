@@ -35,6 +35,14 @@ const Footer = () => {
   const receivedDollars = (30 - Number(feesInDollars)).toFixed(4);
   const receivedEGLD = (Number(EGLDPer30Dollars) - 0.00005).toFixed(5);
 
+  const maiar = (
+    <Emphasize>
+      <a target="about:blank" href="https://maiar.com/">
+        Maiar
+      </a>
+    </Emphasize>
+  );
+
   useEffect(() => {
     axios
       .get(
@@ -54,12 +62,13 @@ const Footer = () => {
       <Columns>
         <DoubleColumn>
           <ColumnParagraph>
-            Maiar is powered by the amazing technology of the Elrond blockchain,
-            and is going to radically change the way we interact with money.
+            {maiar} is powered by the amazing technology of the Elrond
+            blockchain, and is going to radically change the way we interact
+            with money.
           </ColumnParagraph>
 
           <ColumnParagraph>
-            StreamParticles uses Maiar technology to let you interact freely,
+            StreamParticles uses {maiar} technology to let you interact freely,
             without intermediary between you and the creators you support.
           </ColumnParagraph>
         </DoubleColumn>
@@ -133,14 +142,16 @@ const Footer = () => {
               cost on the blockchain.
             </FooterModalParagraph>
             <FooterModalParagraph>
-              Whereas many blochains have a prohibitive transaction fee, the
-              elrond blockchain which is used by the Maiar app has a cost of{" "}
+              Whereas many blockchains have a prohibitive transaction fee, the
+              elrond blockchain which is used by the {maiar} app has a cost of{" "}
               <Emphasize>0.00005 EGLD per transcation</Emphasize> (low
               additionnal fees may be charged based on transaction data length).
               Those fees are used to pay people around the world who are{" "}
               <Emphasize>staking</Emphasize> and{" "}
               <Emphasize>delegating</Emphasize> their ELGD in order to{" "}
               <Emphasize>secure</Emphasize> the elrond blockchain.
+            </FooterModalParagraph>
+            <FooterModalParagraph>
               Streamparticles will not receive anything from those fees.
             </FooterModalParagraph>
             <StyledUlParagraph>
@@ -157,7 +168,11 @@ const Footer = () => {
               </StyledLi>
               <StyledLi>
                 The transaction fee will be{" "}
-                <Emphasize>${feesInDollars}</Emphasize> (0.00005 EGLD)
+                <Emphasize>${feesInDollars}</Emphasize> (0.00005 EGLD) <br></br>
+                <span>
+                  (low additionnal fees may be charged based on transaction data
+                  length)
+                </span>
               </StyledLi>
               <StyledLi>
                 They will receive <Emphasize>${receivedDollars}</Emphasize> (

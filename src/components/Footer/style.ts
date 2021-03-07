@@ -131,7 +131,7 @@ export const ColumnItem = styled.div`
   flex-direction: row;
   align-items: center;
 
-  margin: 0.3rem 0;
+  margin: 0;
   margin-left: 0.2rem;
 
   font-size: 1rem;
@@ -263,4 +263,8 @@ export const StyledUl = styled.ol`
   }
 `;
 
-export const StyledLi = styled.li``;
+export const StyledLi = styled.li`
+  & > span {
+    font-size: 0.65rem;
+  }
+`;

@@ -43,12 +43,29 @@ export const Text = styled.p`
 `;
 
 export const Emphasize = styled.span`
+  position: relative;
   background-color: ${colors.quad};
   color: ${colors.primary};
   margin: 0 0.1rem;
   padding: 0.1rem 0.4rem;
 
   border-radius: 99px;
+
+  & > a::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    height: 0;
+    background-color: ${colors.primary};
+    width: 100%;
+
+    transition: 0.1s;
+  }
+
+  & > a:hover::before {
+    height: 3px;
+  }
 `;
 
 export const Link = styled.a`

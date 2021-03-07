@@ -12,7 +12,6 @@ import React from "react";
 import { Link } from "../../../styles/global";
 import Switch from "../../Switch";
 import {
-  ContentContainer,
   Feature,
   FeaturePaper,
   FeatureParagraph,

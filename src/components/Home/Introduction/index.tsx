@@ -79,7 +79,7 @@ const Introduction = ({
             href="https://www.xsplit.com/"
             logoPath={logoXPlit}
           >
-            Xsplit
+            XSplit
           </Reference>
           <Reference
             target="about:blank"
