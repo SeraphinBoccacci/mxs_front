@@ -66,6 +66,14 @@ const Footer = () => {
         <Column>
           <ColumnTitle>Ressources</ColumnTitle>
           <ColumnItem>Documentation</ColumnItem>
+          <ColumnItem>
+            <span>
+              <a target="about:blank" href="https://t.me/streamparticles">
+                Telegram
+              </a>
+            </span>
+            <TelegramIcon></TelegramIcon>
+          </ColumnItem>
           <ColumnItem onClick={() => setIsPricingModalOpenned(true)}>
             Pricing ?
           </ColumnItem>
@@ -92,6 +100,17 @@ const Footer = () => {
             <span>
               <a target="about:blank" href="https://twitter.com/ElrondNetwork">
                 Elrond Network
+              </a>
+            </span>
+            <TwitterIcon></TwitterIcon>
+          </ColumnItem>
+          <ColumnItem>
+            <span>
+              <a
+                target="about:blank"
+                href="https://twitter.com/streamparticles"
+              >
+                Stream Particles
               </a>
             </span>
             <TwitterIcon></TwitterIcon>
