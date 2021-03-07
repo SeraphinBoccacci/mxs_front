@@ -60,10 +60,34 @@ const Introduction = ({
       <ReferencesContainer>
         <ReferencesTitle>Works great with</ReferencesTitle>
         <ReferencesContent>
-          <Reference logoPath={logoObs}>Obs</Reference>
-          <Reference logoPath={logoStreamLabsObs}>StreamLabs Obs</Reference>
-          <Reference logoPath={logoXPlit}>XPlit</Reference>
-          <Reference logoPath={logoTwitchStudio}>TwitchStudios</Reference>
+          <Reference
+            target="about:blank"
+            href="https://obsproject.com/fr"
+            logoPath={logoObs}
+          >
+            OBS
+          </Reference>
+          <Reference
+            target="about:blank"
+            href="https://streamlabs.com/streamlabs-obs?l=fr-FR"
+            logoPath={logoStreamLabsObs}
+          >
+            StreamLabs OBS
+          </Reference>
+          <Reference
+            target="about:blank"
+            href="https://www.xsplit.com/"
+            logoPath={logoXPlit}
+          >
+            Xsplit
+          </Reference>
+          <Reference
+            target="about:blank"
+            href="https://www.twitch.tv/broadcast/studio"
+            logoPath={logoTwitchStudio}
+          >
+            Twitch Studio
+          </Reference>
         </ReferencesContent>
       </ReferencesContainer>
     </Section>

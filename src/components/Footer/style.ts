@@ -31,8 +31,11 @@ export const FooterContainer = styled.footer`
 `;
 
 export const Columns = styled.div`
-  width: 100%;
   height: max-content;
+
+  width: 100%;
+
+  margin: auto;
 
   display: flex;
   flex-direction: column;
@@ -40,6 +43,18 @@ export const Columns = styled.div`
 
   @media (min-width: 800px) {
     flex-direction: row;
+  }
+
+  @media (min-width: 35rem) {
+    width: 30rem;
+  }
+
+  @media (min-width: 45rem) {
+    width: 40rem;
+  }
+
+  @media (min-width: 55rem) {
+    width: 50rem;
   }
 `;
 
@@ -208,7 +223,8 @@ export const FooterModalTitle = styled.h3`
 `;
 
 export const FooterModalParagraph = styled.p`
-  text-align: center;
+  text-align: justify;
+  text-align-last: center;
   font-family: ${fonts.Ubuntu};
   font-size: 0.8rem;
   line-height: 1rem;
@@ -223,3 +239,28 @@ export const FooterModalParagraph = styled.p`
     line-height: 1.6rem;
   }
 `;
+
+export const StyledUlParagraph = styled(FooterModalParagraph)`
+  margin-top: 3rem;
+  text-align-last: left;
+`;
+
+export const StyledUl = styled.ol`
+  font-family: ${fonts.Ubuntu};
+  font-size: 0.8rem;
+  line-height: 1rem;
+
+  margin-left: 1rem;
+
+  @media (min-width: 35rem) {
+    font-size: 0.85rem;
+    line-height: 1.3rem;
+  }
+
+  @media (min-width: 45rem) {
+    font-size: 0.9rem;
+    line-height: 1.6rem;
+  }
+`;
+
+export const StyledLi = styled.li``;

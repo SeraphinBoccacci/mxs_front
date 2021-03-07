@@ -1,10 +1,11 @@
 import { Fade } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import TwitterIcon from "@material-ui/icons/Twitter";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 import Logo from "../../assets/icons/StreamParticlesLogo";
-import { LogoContainer } from "../../styles/global";
+import { Emphasize, LogoContainer } from "../../styles/global";
 import {
   Column,
   ColumnItem,
@@ -17,11 +18,34 @@ import {
   FooterModalContent,
   FooterModalParagraph,
   FooterModalTitle,
+  StyledLi,
   StyledModal,
+  StyledUl,
+  StyledUlParagraph,
 } from "./style";
 
 const Footer = () => {
   const [isPricingModalOpenned, setIsPricingModalOpenned] = useState(false);
+
+  const [currentPrice, setCurrentPrice] = useState(150);
+
+  const EGLDPer30Dollars = (30 / currentPrice).toFixed(2);
+  const feesInDollars = (0.00005 * currentPrice).toFixed(4);
+
+  const receivedDollars = (30 - Number(feesInDollars)).toFixed(4);
+  const receivedEGLD = (Number(EGLDPer30Dollars) - 0.00005).toFixed(5);
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.coingecko.com/api/v3/simple/price?ids=elrond-erd-2&vs_currencies=usd"
+      )
+      .then((response) => {
+        if (!response) return;
+
+        setCurrentPrice(response.data["elrond-erd-2"].usd);
+      });
+  }, []);
   return (
     <FooterContainer>
       <LogoContainer style={{ background: "white" }}>
@@ -58,16 +82,16 @@ const Footer = () => {
           </ColumnItem>
           <ColumnItem>
             <span>
-              <a target="about:blank" href="https://t.me/ElrondNetwork_fr">
-                ElrondFr
+              <a target="about:blank" href="https://linktr.ee/elrond">
+                Elrond Community
               </a>
             </span>
             <TelegramIcon></TelegramIcon>
           </ColumnItem>
           <ColumnItem>
             <span>
-              <a target="about:blank" href="https://twitter.com/beniaminmincu">
-                Beniamin Mincu
+              <a target="about:blank" href="https://twitter.com/ElrondNetwork">
+                Elrond Network
               </a>
             </span>
             <TwitterIcon></TwitterIcon>
@@ -82,7 +106,8 @@ const Footer = () => {
           <FooterModalContent>
             <FooterModalTitle>Stream Particles is 100% Free</FooterModalTitle>
             <FooterModalParagraph>
-              Stream particles is Free and Open source.
+              Stream particles is <Emphasize>Free</Emphasize> and{" "}
+              <Emphasize>Open source</Emphasize>.
             </FooterModalParagraph>
             <FooterModalParagraph>
               In spit of this, you have to know that every transaction has a
@@ -90,21 +115,36 @@ const Footer = () => {
             </FooterModalParagraph>
             <FooterModalParagraph>
               Whereas many blochains have a prohibitive transaction fee, the
-              elrond blockchain which is used by the maiar app has a fixed cost
-              of 0.00005 egld per transacation, whatever the value of the
-              latter. Those fees are used to pay people around the world who are
-              staking and delegating their egld in order to secure the elrond
-              blockchain. Streamparticles will not receive anything from those
-              fees.
+              elrond blockchain which is used by the Maiar app has a cost of{" "}
+              <Emphasize>0.00005 EGLD per transcation</Emphasize> (low
+              additionnal fees may be charged based on transaction data length).
+              Those fees are used to pay people around the world who are{" "}
+              <Emphasize>staking</Emphasize> and{" "}
+              <Emphasize>delegating</Emphasize> their ELGD in order to{" "}
+              <Emphasize>secure</Emphasize> the elrond blockchain.
+              Streamparticles will not receive anything from those fees.
             </FooterModalParagraph>
-            <FooterModalParagraph>
+            <StyledUlParagraph>
               To make it more understandable, let’s take the example below:
-              <br></br>
-              currently, 1 EGLD is worth 150$<br></br>
-              If you send your favorite streamer [30$] (0,2 EGLD)<br></br>
-              The transaction fee will be [0,0075$] (0.00005 EGLD)<br></br>
-              They will receive [29,9925$] (0,1995 EGLD)<br></br>
-            </FooterModalParagraph>
+            </StyledUlParagraph>
+            <StyledUl>
+              <StyledLi>
+                Currently, 1 EGLD is worth{" "}
+                <Emphasize>${currentPrice}</Emphasize>
+              </StyledLi>
+              <StyledLi>
+                If you send your favorite streamer <Emphasize>$30</Emphasize> (
+                {EGLDPer30Dollars} EGLD)
+              </StyledLi>
+              <StyledLi>
+                The transaction fee will be{" "}
+                <Emphasize>${feesInDollars}</Emphasize> (0.00005 EGLD)
+              </StyledLi>
+              <StyledLi>
+                They will receive <Emphasize>${receivedDollars}</Emphasize> (
+                {receivedEGLD} EGLD)
+              </StyledLi>
+            </StyledUl>
           </FooterModalContent>
         </Fade>
       </StyledModal>

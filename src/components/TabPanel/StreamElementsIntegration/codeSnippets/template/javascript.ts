@@ -9,7 +9,7 @@ const jsLines = (herotag: string) => [
   '          class="logo"',
   '          src="https://miro.medium.com/max/2480/1*6JcegZHxgP87e8Ny-RBSBg.png"',
   "        />",
-  "        <h3>${herotag} sent ${amount} ¤eGLD¤</h3>",
+  "        <h3>${herotag} sent ${amount} ¤EGLD¤</h3>",
   '        <div class="p-container">',
   "          <p>${message}</p>",
   "        </div>",

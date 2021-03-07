@@ -230,7 +230,7 @@ export const VariationModal = ({
                 inputRef={requiredAmountRef}
                 value={variationData?.requiredAmount || ""}
                 isTypeNumber
-                endAdornment="¤eGLD¤"
+                endAdornment="¤EGLD¤"
               ></Input>
               <Input
                 key={VariationLenses.chances}

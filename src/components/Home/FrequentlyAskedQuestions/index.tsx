@@ -28,7 +28,7 @@ const questionsAndAnswers = [
   {
     id: "panel_2",
     question:
-      "How will the creator I send my eGLD to be notified of the transaction ?",
+      "How will the creator I send my EGLD to be notified of the transaction ?",
     answer: (
       <div>
         We have developped a webhook &quot;watching&quot; Elrond&rsquo;s
@@ -46,7 +46,7 @@ const questionsAndAnswers = [
       <div>
         It is 100% safe, all you have to do is keeping safe and secret your
         mnemonic phrase that Maiar gives you when you create a wallet. Then your
-        eGLDs are secured by a state of the art blockchain technology developped
+        EGLDs are secured by a state of the art blockchain technology developped
         by Elrond !
       </div>
     ),

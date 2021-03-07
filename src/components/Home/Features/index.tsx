@@ -74,10 +74,10 @@ const features = {
       key: "features_04",
     },
     {
-      title: "2. Buy or deposit eGLDs",
+      title: "2. Buy or deposit EGLDs",
       content: (
         <FeatureParagraph>
-          It is as easier as buying Bits on Twitch !<br></br>A list of ¤eGLD
+          It is as easier as buying Bits on Twitch !<br></br>A list of ¤EGLD
           brokers is available{" "}
           <Link
             target="_blank"

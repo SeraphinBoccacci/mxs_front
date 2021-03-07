@@ -121,7 +121,7 @@ export const streamElementsTutorial: TutorialStepElement[] = [
             Then, click on the <Emphasize>Preview</Emphasize> button (in the top
             right corner), and click on <Emphasize>Open in new tab</Emphasize>{" "}
             in the modal that just openned. <Emphasize>Test</Emphasize> your
-            custom widget by asking a friend to send you some eGLD via{" "}
+            custom widget by asking a friend to send you some EGLD via{" "}
             <Emphasize>Maiar</Emphasize>.
           </Text>
         ),

@@ -272,7 +272,7 @@ export const ReferencesContent = styled.div`
   margin: 1rem 0;
 `;
 
-export const Reference = styled.div<{ logoPath?: string }>`
+export const Reference = styled.a<{ logoPath?: string }>`
   position: relative;
 
   height: 30px;
