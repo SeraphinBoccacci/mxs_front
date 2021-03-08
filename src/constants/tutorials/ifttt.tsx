@@ -49,7 +49,7 @@ export const iftttTutorial: TutorialStepElement[] = [
             Then click on the only available option,{" "}
             <Emphasize>Receive a web request</Emphasize>.<br></br>You&rsquo;ll
             be prompted to fill an <Emphasize>EventName</Emphasize>, choose
-            yours and fill it in Stream Particles console, just below this
+            yours and fill it in StreamParticles console, just below this
             tutorial.
           </Text>
         ),

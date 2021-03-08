@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 import Logo from "../../assets/icons/StreamParticlesLogo";
 import config from "../../config/config";
 import { Emphasize, LogoContainer } from "../../styles/global";
+import Switch from "../Switch";
+import CreatorPart from "./CreatorPart";
 import {
   Column,
   ColumnItem,
@@ -17,33 +19,22 @@ import {
   ElgdSymbol,
   FooterContainer,
   FooterModalContent,
-  FooterModalParagraph,
-  FooterModalTitle,
-  StyledComment,
-  StyledLi,
   StyledModal,
-  StyledUl,
-  StyledUlParagraph,
 } from "./style";
+import ViewerPart from "./ViewerPart";
+
+const maiar = (
+  <Emphasize>
+    <a target="about:blank" href="https://maiar.com/">
+      Maiar
+    </a>
+  </Emphasize>
+);
 
 const Footer = () => {
+  const [isOnViewerPart, setIsOnViewerPart] = useState(false);
   const [isPricingModalOpenned, setIsPricingModalOpenned] = useState(false);
-
   const [currentPrice, setCurrentPrice] = useState(150);
-
-  const EGLDPer30Dollars = (30 / currentPrice).toFixed(2);
-  const feesInDollars = (0.00005 * currentPrice).toFixed(4);
-
-  const receivedDollars = (30 - Number(feesInDollars)).toFixed(4);
-  const receivedEGLD = (Number(EGLDPer30Dollars) - 0.00005).toFixed(5);
-
-  const maiar = (
-    <Emphasize>
-      <a target="about:blank" href="https://maiar.com/">
-        Maiar
-      </a>
-    </Emphasize>
-  );
 
   useEffect(() => {
     axios.get(`${config.apiUrl}/egld-price`).then((response) => {
@@ -52,6 +43,7 @@ const Footer = () => {
       setCurrentPrice(response.data.price);
     });
   }, []);
+
   return (
     <FooterContainer>
       <LogoContainer style={{ background: "white" }}>
@@ -117,7 +109,7 @@ const Footer = () => {
                 target="about:blank"
                 href="https://twitter.com/streamparticles"
               >
-                Stream Particles
+                StreamParticles
               </a>
             </span>
             <TwitterIcon></TwitterIcon>
@@ -130,53 +122,18 @@ const Footer = () => {
       >
         <Fade in={isPricingModalOpenned}>
           <FooterModalContent>
-            <FooterModalTitle>Stream Particles is 100% Free</FooterModalTitle>
-            <FooterModalParagraph>
-              Stream particles is <Emphasize>Free</Emphasize> and{" "}
-              <Emphasize>Open source</Emphasize>.
-            </FooterModalParagraph>
-            <FooterModalParagraph>
-              In spit of this, you have to know that every transaction has a
-              cost on the blockchain.
-            </FooterModalParagraph>
-            <FooterModalParagraph>
-              Whereas many blockchains have a prohibitive transaction fee, the
-              elrond blockchain which is used by the {maiar} app has a cost of{" "}
-              <Emphasize>0.00005 EGLD per transcation</Emphasize> (low
-              additionnal fees may be charged based on transaction data length).
-              Those fees are used to pay people around the world who are{" "}
-              <Emphasize>staking</Emphasize> and{" "}
-              <Emphasize>delegating</Emphasize> their ELGD in order to{" "}
-              <Emphasize>secure</Emphasize> the elrond blockchain.
-            </FooterModalParagraph>
-            <FooterModalParagraph>
-              Streamparticles will not receive anything from those fees.
-            </FooterModalParagraph>
-            <StyledUlParagraph>
-              To make it more understandable, let’s take the example below:
-            </StyledUlParagraph>
-            <StyledUl>
-              <StyledLi>
-                Currently, 1 EGLD is worth{" "}
-                <Emphasize>${currentPrice}</Emphasize>
-              </StyledLi>
-              <StyledLi>
-                If you send your favorite streamer <Emphasize>$30</Emphasize> (
-                {EGLDPer30Dollars} EGLD)
-              </StyledLi>
-              <StyledLi>
-                The transaction fee will be{" "}
-                <Emphasize>${feesInDollars}</Emphasize> (0.00005 EGLD) <br></br>
-                <StyledComment>
-                  (low additionnal fees may be charged based on transaction data
-                  length)
-                </StyledComment>
-              </StyledLi>
-              <StyledLi>
-                They will receive <Emphasize>${receivedDollars}</Emphasize> (
-                {receivedEGLD} EGLD)
-              </StyledLi>
-            </StyledUl>
+            <Switch
+              onLabel="viewer"
+              offLabel="creator"
+              isActive={isOnViewerPart}
+              setIsActive={setIsOnViewerPart}
+              variant="inverted"
+            ></Switch>
+            {isOnViewerPart ? (
+              <ViewerPart currentPrice={currentPrice}></ViewerPart>
+            ) : (
+              <CreatorPart></CreatorPart>
+            )}
           </FooterModalContent>
         </Fade>
       </StyledModal>

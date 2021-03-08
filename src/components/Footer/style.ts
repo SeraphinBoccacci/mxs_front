@@ -193,7 +193,7 @@ export const StyledModal = styled(Modal)`
 
   @media (min-width: 45rem) {
     width: 40rem;
-    height: 35rem;
+    height: max-content;
   }
 `;
 

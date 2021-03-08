@@ -38,7 +38,7 @@ const StreamElementsIntegration = ({
     try {
       if (user?.herotag) triggerStreamElementsEvent(user?.herotag);
     } catch (error) {
-      handleError(error?.response?.data?.data);
+      handleError(error?.response?.data?.message);
     }
   }, [user?.herotag, handleError]);
 

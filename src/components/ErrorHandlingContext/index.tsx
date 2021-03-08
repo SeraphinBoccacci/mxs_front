@@ -64,14 +64,18 @@ const ErrorHandlingContextProvider = ({
     },
     COULD_NOT_FIND_HETOTAG_ON_DNS: {
       severity: "error",
-      message: "Could not find the herotag you provided on elrond dns",
+      message: "Could not find the herotag you provided on Elrond dns",
+    },
+    DEFAULT: {
+      severity: "error",
+      message: "An unknown error occured.",
     },
   };
 
   const handleError: HandleError = (errorType, action) => {
     const snackbarRawData =
       !errorType || !snackBarDataMapper[errorType]
-        ? null
+        ? snackBarDataMapper.DEFAULT
         : snackBarDataMapper[errorType];
 
     if (snackbarRawData)

@@ -105,9 +105,13 @@ export const ConnectionScreen = ({
         }
       } catch (e) {
         setIsSubmitting(false);
-        handleError(e?.response?.data?.data, () => {
-          setIsOnPendingVerificationScreen(true);
-        });
+
+        if (e?.response?.data?.message === "ACCOUNT_WITH_VERIFICATION_PENDING")
+          handleError(e?.response?.data?.message, () => {
+            setIsOnPendingVerificationScreen(true);
+          });
+
+        handleError(e?.response?.data?.message);
       }
     },
     [

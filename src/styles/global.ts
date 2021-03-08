@@ -56,7 +56,7 @@ export const Emphasize = styled.span`
     content: "";
     left: 0;
     bottom: 0;
-    height: 0;
+    height: 1px;
     background-color: ${colors.primary};
     width: 100%;
 

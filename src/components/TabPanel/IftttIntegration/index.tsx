@@ -104,7 +104,7 @@ export const IftttIntegration = () => {
       setIsSubmitting(false);
       return;
     } catch (error) {
-      handleError("Erreur inconnue");
+      handleError("");
     }
   };
 
@@ -123,7 +123,7 @@ export const IftttIntegration = () => {
     try {
       if (user?.herotag) await triggerIftttEvent(user.herotag);
     } catch (error) {
-      handleError(error?.response?.data?.data);
+      handleError(error?.response?.data?.message);
     }
   }, [user?.herotag, handleError]);
 
