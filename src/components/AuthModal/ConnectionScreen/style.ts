@@ -86,3 +86,43 @@ export const ChangeModeSpan = styled.span`
 
   cursor: pointer;
 `;
+
+export const StyledPendingVerificationCTA = styled.div`
+  position: relative;
+  text-align: center;
+  font-size: 0.8rem;
+  font-family: ${fonts.Roboto};
+  color: ${colors.quad};
+  transition: 0.8s;
+
+  width: max-content;
+  margin: auto;
+
+  padding: 0.2rem 0.6rem;
+
+  &:hover {
+    color: ${colors.primary};
+  }
+
+  & > label {
+    position: relative;
+    z-index: 30;
+    cursor: pointer;
+  }
+
+  & > div {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    height: 0%;
+    width: 100%;
+    border-radius: 99px;
+    background-color: ${colors.quad};
+    transition: 0.2s;
+  }
+
+  &:hover > div {
+    height: 100%;
+  }
+`;

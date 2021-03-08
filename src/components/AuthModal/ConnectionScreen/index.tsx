@@ -21,6 +21,7 @@ import {
   Herotag,
   Inputs,
   Password,
+  StyledPendingVerificationCTA,
 } from "./style";
 interface ConnectionScreenProps {
   handleClose: () => void;
@@ -106,10 +107,15 @@ export const ConnectionScreen = ({
       } catch (e) {
         setIsSubmitting(false);
 
-        if (e?.response?.data?.message === "ACCOUNT_WITH_VERIFICATION_PENDING")
+        if (
+          e?.response?.data?.message === "ACCOUNT_WITH_VERIFICATION_PENDING"
+        ) {
           handleError(e?.response?.data?.message, () => {
             setIsOnPendingVerificationScreen(true);
           });
+
+          return;
+        }
 
         handleError(e?.response?.data?.message);
       }
@@ -173,11 +179,17 @@ export const ConnectionScreen = ({
           Submit
         </Button>
       </ConnectionForm>
+      <StyledPendingVerificationCTA
+        onClick={() => setIsOnPendingVerificationScreen(true)}
+      >
+        <div></div>
+        <label>Account with pending verification ?</label>
+      </StyledPendingVerificationCTA>
+
       {isAccountCreation ? (
         <ChangeModePhrase>
           You are already have an account ?
           <ChangeModeSpan onClick={() => setIsAccountCreation(false)}>
-            {" "}
             Connect !
           </ChangeModeSpan>
         </ChangeModePhrase>
