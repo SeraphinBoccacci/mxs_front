@@ -97,3 +97,25 @@ export const Button = styled(MaterialButton)`
   padding: 0.4rem 2rem !important;
   margin-bottom: 1.8rem !important;
 `;
+
+export const Column = styled.div`
+  width: 100%;
+  height: 100%;
+
+  padding: 2rem 1.4rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ReferenceAndAlert = styled.div`
+  width: 100%;
+  height: 10rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;

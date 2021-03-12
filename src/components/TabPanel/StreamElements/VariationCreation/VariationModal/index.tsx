@@ -3,6 +3,9 @@ import { set } from "lodash";
 import React, { createRef, useCallback, useRef } from "react";
 
 import { updateVariation as putUpdateVariation } from "../../../../../services/streamElements";
+import Input from "../../../../Input";
+import Select from "../../../../Select";
+import Upload from "../../../../Upload";
 import {
   EnterAnimationTypes,
   ExitAnimationTypes,
@@ -15,8 +18,6 @@ import {
 import { VariationsFiles } from "..";
 import { AnimationSettings } from "./AnimationSettings";
 import { textPositionsOptions } from "./constants";
-import Input from "./Input";
-import Select from "./Select";
 import {
   Comment,
   Modal,
@@ -28,7 +29,6 @@ import {
 import { ModalContent, ModalHeader } from "./style";
 import { TextAlignRadioGroup } from "./TextAlignRadioGroup";
 import { TextStylesCheckboxes } from "./TextStylesCheckboxes";
-import Upload from "./Upload";
 
 interface VariationModalProps {
   variationData?: Variation;

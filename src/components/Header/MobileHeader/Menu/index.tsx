@@ -22,10 +22,6 @@ const Menu = ({
   const [isConnectModalOpenned, setIsModalOpenned] = useQueryString(
     "isConnectModalOpenned"
   );
-  const [
-    isOnPendingVerificationScreen,
-    setIsOnPendingVerificationScreen,
-  ] = useQueryString("isOnPendingVerificationScreen");
 
   const scrollTo = (id: string) => {
     setIsMenuOpenned(false);
@@ -58,10 +54,10 @@ const Menu = ({
           <Button
             variant="contained"
             onClick={() => {
-              history.push("/console");
+              history.push("/lab");
             }}
           >
-            Console
+            Lab
           </Button>
         ) : (
           <>
@@ -77,10 +73,6 @@ const Menu = ({
             <ModalConnect
               isConnectModalOpenned={isConnectModalOpenned}
               handleClose={() => setIsModalOpenned(false)}
-              isOnPendingVerificationScreen={isOnPendingVerificationScreen}
-              setIsOnPendingVerificationScreen={
-                setIsOnPendingVerificationScreen
-              }
             ></ModalConnect>
           </>
         )}

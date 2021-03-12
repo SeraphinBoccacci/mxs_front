@@ -1,9 +1,9 @@
 import { Button } from "@material-ui/core";
 import React, { RefObject, useCallback, useState } from "react";
 
-import config from "../../../../../../config/config";
-import { uploadFile } from "../../../../../../services/streamElements";
-import { VariationLenses } from "../../../interface";
+import config from "../../config/config";
+import { uploadFile } from "../../services/streamElements";
+import { VariationLenses } from "../TabPanel/StreamElements/interface";
 import {
   Controllers,
   ImagePreview,

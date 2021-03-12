@@ -12,7 +12,7 @@ export interface ErrorHandlingContextProps {
 }
 
 export const ErrorHandlingContext = createContext<ErrorHandlingContextProps>({
-  handleError: (e: string) => {},
+  handleError: () => {},
 });
 
 export interface SnackbarRawData {
@@ -66,6 +66,14 @@ const ErrorHandlingContextProvider = ({
       severity: "error",
       message: "Could not find the herotag you provided on Elrond dns",
     },
+    ACCOUNT_NOT_PENDING_VERIFICATION: {
+      severity: "warning",
+      message: "Your account does not have pending verification",
+    },
+    INVALID_FORM: {
+      severity: "error",
+      message: "Your form is invalid. Please fill all the fields.",
+    },
     DEFAULT: {
       severity: "error",
       message: "An unknown error occured.",
@@ -93,6 +101,7 @@ const ErrorHandlingContextProvider = ({
       <Snackbar
         open={!!snackbarData}
         onClose={handleClose}
+        autoHideDuration={10000}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",

@@ -1,5 +1,7 @@
 import React, { RefObject } from "react";
 
+import Input from "../../../../../Input";
+import Select from "../../../../../Select";
 import {
   EnterAnimationTypes,
   ExitAnimationTypes,
@@ -10,8 +12,6 @@ import {
   enterAnimationTypesOptions,
   exitAnimationTypesOptions,
 } from "../constants";
-import Input from "../Input";
-import Select from "../Select";
 import {
   AnimationSection,
   AnimationTitle,

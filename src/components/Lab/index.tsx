@@ -5,18 +5,17 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQueryString } from "../../hooks/useQueryString";
-import { setItem } from "../../utils/localStorage";
 import { AuthContext } from "../AuthContext";
 import { TabPanel } from "../TabPanel";
 import { Account } from "../TabPanel/Account";
-import { IftttIntegration } from "../TabPanel/IftttIntegration";
+import { IftttIntegration } from "../TabPanel/Ifttt";
 import { NotDevelopped } from "../TabPanel/NotDevelopped";
-import StreamElementsIntegration from "../TabPanel/StreamElementsIntegration";
+import StreamElementsIntegration from "../TabPanel/StreamElements";
 import { AppBar, Tabs } from "./style";
 
-const Console = () => {
+const Lab = () => {
   const [activeTab, setActiveTab] = useQueryString("activeTab");
-  const { setToken } = useContext(AuthContext);
+  const { setTokenData, setHerotag } = useContext(AuthContext);
   const history = useHistory();
 
   const handleChange = (event: React.ChangeEvent<{}>, value: any) => {
@@ -31,9 +30,8 @@ const Console = () => {
   };
 
   const handleClick = () => {
-    setToken(null);
-    setItem("tokenExpirationTimestamp", null);
-    setItem("herotag", "");
+    setTokenData(null);
+    setHerotag("");
 
     history.push("/");
   };
@@ -44,11 +42,11 @@ const Console = () => {
     <div>
       <AppBar position="static" color="primary">
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Account" {...a11yProps(0)} />
-          <Tab label="IFTTT Integration" {...a11yProps(1)} />
-          <Tab label="Stream Elements Integration" {...a11yProps(2)} />
-          <Tab label="StreamLabs Integration" {...a11yProps(3)} />
-          <Tab label="OBS Integration" {...a11yProps(4)} />
+          <Tab label="User Account" {...a11yProps(0)} />
+          <Tab label="IFTTT Particle" {...a11yProps(1)} />
+          <Tab label="Stream Elements Particle" {...a11yProps(2)} />
+          <Tab label="StreamLabs Particle" {...a11yProps(3)} />
+          <Tab label="OBS Particle" {...a11yProps(4)} />
         </Tabs>
         <PowerSettingsNewRoundedIcon
           onClick={handleClick}
@@ -74,4 +72,4 @@ const Console = () => {
   );
 };
 
-export default Console;
+export default Lab;

@@ -1,3 +1,4 @@
+import { Paper } from "@material-ui/core";
 import styled from "styled-components";
 
 import { colors, fonts } from "../constants";
@@ -94,5 +95,22 @@ export const Link = styled.a`
     height: 3px;
 
     background-color: ${colors.quad};
+  }
+`;
+
+export const ContentContainer = styled(Paper)`
+  margin: 1.4rem auto !important;
+  width: max-content !important;
+  height: max-content !important;
+  padding: 1rem 2rem !important;
+
+  @media (min-width: 800px) {
+    margin: 2rem auto !important;
+    padding: 0.8rem 3rem !important;
+  }
+
+  @media (min-width: 1100px) {
+    margin: 3rem auto !important;
+    padding: 1rem 4rem !important;
   }
 `;

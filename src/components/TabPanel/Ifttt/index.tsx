@@ -14,11 +14,11 @@ import {
   modifyIftttIntegration,
   toggleIftttIntegration,
 } from "../../../services/ifttt";
-import { triggerIftttEvent } from "../../../services/user";
+import { ContentContainer } from "../../../styles/global";
 import { AuthContext } from "../../AuthContext";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import EventTriggerer from "../../EventTriggerer";
 import { Tutorial } from "../../Tutorial";
-import { ContentContainer } from "../style";
 import {
   ActivateIntegration,
   ActivateSwitch,
@@ -37,6 +37,16 @@ interface IftttIntegrationState {
   eventName?: string;
 }
 
+const formReducer = (
+  state: IftttIntegrationState,
+  event: ChangeEvent<HTMLInputElement>
+) => {
+  return {
+    ...state,
+    [event.target.name]: event.target.value,
+  };
+};
+
 export const IftttIntegration = () => {
   const { user } = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,16 +59,6 @@ export const IftttIntegration = () => {
     setIsIntegrationActive(user?.integrations?.ifttt?.isActive || false);
   }, [setIsIntegrationActive, user]);
 
-  const formReducer = (
-    state: IftttIntegrationState,
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    return {
-      ...state,
-      [event.target.name]: event.target.value,
-    };
-  };
-
   const initialState = {
     ...(user?.integrations?.ifttt?.triggerKey && {
       triggerKey: user?.integrations?.ifttt.triggerKey,
@@ -68,7 +68,14 @@ export const IftttIntegration = () => {
     }),
   };
 
-  const [formData, setFormData] = useReducer(formReducer, initialState);
+  const [formData, setFormDatax] = useReducer(formReducer, initialState);
+
+  const setFormData = useCallback(
+    (data: any) => {
+      setFormDatax(data);
+    },
+    [setFormDatax]
+  );
 
   useEffect(() => {
     setFormData({
@@ -104,7 +111,7 @@ export const IftttIntegration = () => {
       setIsSubmitting(false);
       return;
     } catch (error) {
-      handleError("");
+      handleError(error.message);
     }
   };
 
@@ -118,14 +125,6 @@ export const IftttIntegration = () => {
       setIsSubmitting(false);
     }
   };
-
-  const triggerEvent = useCallback(async () => {
-    try {
-      if (user?.herotag) await triggerIftttEvent(user.herotag);
-    } catch (error) {
-      handleError(error?.response?.data?.message);
-    }
-  }, [user?.herotag, handleError]);
 
   return (
     <IftttIntegrationContainer>
@@ -144,7 +143,7 @@ export const IftttIntegration = () => {
               <EventNameInput
                 disabled={isSubmitting}
                 name="eventName"
-                value={user?.integrations?.ifttt?.eventName || ""}
+                value={formData.eventName || ""}
                 onChange={setFormData}
                 placeholder="StreamParticlesEvent"
               ></EventNameInput>
@@ -154,7 +153,7 @@ export const IftttIntegration = () => {
               <TriggerKeyInput
                 disabled={isSubmitting}
                 name="triggerKey"
-                value={user?.integrations?.ifttt?.triggerKey || ""}
+                value={formData.triggerKey || ""}
                 onChange={setFormData}
                 placeholder="e1eFH71X84ljX-0AFjNdjYJ2B4TfY8whL5j3fkLAc6F"
               ></TriggerKeyInput>
@@ -167,6 +166,8 @@ export const IftttIntegration = () => {
         </IftttIntegrationForm>
       </ContentContainer>
 
+      <EventTriggerer triggeredEvent="ifttt"></EventTriggerer>
+
       <ActivateIntegration>
         Activate Integration
         <ActivateSwitch
@@ -176,11 +177,6 @@ export const IftttIntegration = () => {
           color="primary"
         ></ActivateSwitch>
       </ActivateIntegration>
-      <ContentContainer>
-        <Button variant="contained" onClick={triggerEvent}>
-          Trigger Ifttt event
-        </Button>
-      </ContentContainer>
     </IftttIntegrationContainer>
   );
 };

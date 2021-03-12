@@ -1,18 +1,17 @@
-import { Button } from "@material-ui/core";
-import { useCallback, useContext } from "react";
+import { useContext } from "react";
 import React from "react";
 //@ts-ignore
 import { withBreakpoints } from "react-breakpoints";
 
 import { streamElementsTutorial } from "../../../constants/tutorials/streamElements";
 import { useQueryString } from "../../../hooks/useQueryString";
-import { triggerStreamElementsEvent } from "../../../services/user";
+import { ContentContainer } from "../../../styles/global";
 import { AuthContext } from "../../AuthContext";
 import CodeSnippets from "../../CodeSnippets";
-import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import EventTriggerer from "../../EventTriggerer";
 import Switch from "../../Switch";
 import { Tutorial } from "../../Tutorial";
-import { ContentContainer, Paragraph } from "../style";
+import { Paragraph } from "../style";
 import { cssSnippet, htmlSnippet, jsSnippet } from "./codeSnippets/template";
 import { StreamElementsIntegrationContainer } from "./style";
 import VariationCreation from "./VariationCreation";
@@ -32,15 +31,6 @@ const StreamElementsIntegration = ({
     "isOnCustom"
   );
   const { user } = useContext(AuthContext);
-  const { handleError } = useContext(ErrorHandlingContext);
-
-  const triggerEvent = useCallback(() => {
-    try {
-      if (user?.herotag) triggerStreamElementsEvent(user?.herotag);
-    } catch (error) {
-      handleError(error?.response?.data?.message);
-    }
-  }, [user?.herotag, handleError]);
 
   return (
     <StreamElementsIntegrationContainer>
@@ -52,6 +42,7 @@ const StreamElementsIntegration = ({
           we&rsquo;ll be working on in this particle.
         </Paragraph>
       </ContentContainer>
+
       <Switch
         variant="inverted"
         isActive={isOnCustomTemplate}
@@ -60,24 +51,27 @@ const StreamElementsIntegration = ({
         onLabel="Custom template"
       ></Switch>
       {isOnCustomTemplate ? (
-        <VariationCreation></VariationCreation>
+        <div>
+          <EventTriggerer triggeredEvent="streamElements"></EventTriggerer>
+          <VariationCreation></VariationCreation>
+        </div>
       ) : (
-        <>
+        <div>
           <Tutorial tutorial={streamElementsTutorial}></Tutorial>
           {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape ? (
-            <CodeSnippets
-              jsSnippet={jsSnippet(user?.herotag || "{{your-herotag}}")}
-              htmlSnippet={htmlSnippet}
-              cssSnippet={cssSnippet}
-            ></CodeSnippets>
-          ) : null}
-        </>
+            <div>
+              <EventTriggerer triggeredEvent="streamElements"></EventTriggerer>
+              <CodeSnippets
+                jsSnippet={jsSnippet(user?.herotag || "{{your-herotag}}")}
+                htmlSnippet={htmlSnippet}
+                cssSnippet={cssSnippet}
+              ></CodeSnippets>
+            </div>
+          ) : (
+            <EventTriggerer triggeredEvent="streamElements"></EventTriggerer>
+          )}
+        </div>
       )}
-      <ContentContainer>
-        <Button variant="contained" onClick={triggerEvent}>
-          Trigger StreamElements event
-        </Button>
-      </ContentContainer>
     </StreamElementsIntegrationContainer>
   );
 };

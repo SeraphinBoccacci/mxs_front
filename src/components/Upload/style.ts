@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FlexColumn } from "../../../../../../styles/global";
+import { FlexColumn } from "../../styles/global";
 
 export const UploadContainer = styled.div`
   min-height: 7rem;

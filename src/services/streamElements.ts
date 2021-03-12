@@ -1,11 +1,6 @@
-import { Variation } from "../components/TabPanel/StreamElementsIntegration/interface";
+import { Variation } from "../components/TabPanel/StreamElements/interface";
 import config from "../config/config";
-import {
-  deleteWithAuth,
-  getWithAuth,
-  postWithAuth,
-  putWithAuth,
-} from "../utils/axios";
+import { axiosDelete, axiosGet, axiosPost, axiosPut } from "../utils/axios";
 
 export const uploadFile = async (
   fileType: "images" | "audios",
@@ -16,9 +11,10 @@ export const uploadFile = async (
   formData.append("media", file, file.name);
 
   try {
-    const filePath = await postWithAuth(
+    const filePath = await axiosPost(
       `${config.uploadsUrl}/${fileType}`,
-      formData
+      formData,
+      { withToken: true }
     );
 
     if (!filePath) throw new Error("NO_FILE_PATH_RETURNED");
@@ -38,15 +34,21 @@ export const createVariation = async (
   variations: Variation[];
   files: { html: string; css: string; javascript: string };
 }> => {
-  const res = await postWithAuth(endpoint, { herotag, variation });
+  const res = await axiosPost(
+    endpoint,
+    { herotag, variation },
+    { withToken: true }
+  );
 
   return res;
 };
 
 export const getVariation = async (variationId: string): Promise<Variation> => {
-  const res = await getWithAuth(`${endpoint}/${variationId}`);
+  const data = await axiosGet(`${endpoint}/${variationId}`, {
+    withToken: true,
+  });
 
-  return res;
+  return data;
 };
 
 export const getUserVariations = async (
@@ -55,11 +57,12 @@ export const getUserVariations = async (
   variations: Variation[];
   files: { html: string; css: string; javascript: string };
 }> => {
-  const res = await getWithAuth(
-    `${config.apiUrl}/user/stream-elements/variations/${herotag}`
+  const data = await axiosGet(
+    `${config.apiUrl}/user/stream-elements/variations/${herotag}`,
+    { withToken: true }
   );
 
-  return res;
+  return data;
 };
 
 export const updateVariation = async (
@@ -69,9 +72,13 @@ export const updateVariation = async (
   variation: Variation;
   files: { html: string; css: string; javascript: string };
 }> => {
-  const res = await putWithAuth(endpoint, { variationId, variation });
+  const data = await axiosPut(
+    endpoint,
+    { variationId, variation },
+    { withToken: true }
+  );
 
-  return res;
+  return data;
 };
 
 export const deleteVariation = async (
@@ -80,32 +87,36 @@ export const deleteVariation = async (
   variations: Variation[];
   files: { html: string; css: string; javascript: string };
 }> => {
-  const res = await deleteWithAuth(`${endpoint}/${variationId}`);
+  const data = await axiosDelete(`${endpoint}/${variationId}`, {
+    withToken: true,
+  });
 
-  return res;
+  return data;
 };
 
 export const getRowsStructure = async (
   herotag: string
 ): Promise<{ rows: string[]; rowsGroupName?: string }[]> => {
-  const res = await getWithAuth(
-    `${config.apiUrl}/user/stream-elements/rows-structure/${herotag}`
+  const data = await axiosGet(
+    `${config.apiUrl}/user/stream-elements/rows-structure/${herotag}`,
+    { withToken: true }
   );
 
-  return res;
+  return data;
 };
 
 export const updateRowsStructure = async (
   herotag: string,
   rowsStructure: { rows: string[]; rowsGroupName?: string }[]
 ) => {
-  const res = await postWithAuth(
+  const data = await axiosPost(
     `${config.apiUrl}/user/stream-elements/rows-structure`,
     {
       herotag,
       rowsStructure,
-    }
+    },
+    { withToken: true }
   );
 
-  return res;
+  return data;
 };

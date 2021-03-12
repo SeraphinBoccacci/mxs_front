@@ -4,9 +4,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { withBreakpoints } from "react-breakpoints";
 
 import { getUserVariations } from "../../../../services/streamElements";
+import { ContentContainer } from "../../../../styles/global";
 import { AuthContext } from "../../../AuthContext";
 import CodeSnippets from "../../../CodeSnippets";
-import { ContentContainer } from "../../style";
 import { Variation } from "../interface";
 import { Content, IframeContainer } from "./style";
 import { VariationModal } from "./VariationModal";

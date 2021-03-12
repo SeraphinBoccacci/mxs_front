@@ -60,6 +60,8 @@ export const ContentContainer = styled.div`
   width: max-content;
 
   display: flex;
+
+  margin: 3rem auto;
 `;
 
 export const FeaturesSubContent = styled.div`

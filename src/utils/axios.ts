@@ -2,58 +2,94 @@ import axios from "axios";
 
 import { getItem } from "./localStorage";
 
-export const postWithAuth = async (endPoint: string, body: object) => {
+const extractToken = () => {
+  const tokenData = getItem("tokenData");
+
+  return tokenData?.token;
+};
+
+export const axiosPost = async (
+  endPoint: string,
+  body: object,
+  { withToken } = { withToken: false }
+) => {
   try {
     const config = {
-      headers: {
-        Authorization: "Bearer " + getItem("token"),
-      },
+      ...(withToken && {
+        headers: {
+          Authorization: `Bearer ${extractToken()}`,
+        },
+      }),
     };
 
     const res = await axios.post(endPoint, body, config);
 
     return res.data;
-  } catch (err) {}
+  } catch (error) {
+    throw new Error(error?.response?.data?.message);
+  }
 };
 
-export const getWithAuth = async (endPoint: string) => {
+export const axiosGet = async (
+  endPoint: string,
+  { withToken } = { withToken: false }
+) => {
   try {
     const config = {
-      headers: {
-        Authorization: "Bearer " + getItem("token"),
-      },
+      ...(withToken && {
+        headers: {
+          Authorization: `Bearer ${extractToken()}`,
+        },
+      }),
     };
 
     const res = await axios.get(endPoint, config);
 
     return res.data;
-  } catch (err) {}
+  } catch (error) {
+    throw new Error(error?.response?.data?.message);
+  }
 };
 
-export const putWithAuth = async (endPoint: string, body: object) => {
+export const axiosPut = async (
+  endPoint: string,
+  body: object,
+  { withToken } = { withToken: false }
+) => {
   try {
     const config = {
-      headers: {
-        Authorization: "Bearer " + getItem("token"),
-      },
+      ...(withToken && {
+        headers: {
+          Authorization: `Bearer ${extractToken()}`,
+        },
+      }),
     };
 
     const res = await axios.put(endPoint, body, config);
 
     return res.data;
-  } catch (err) {}
+  } catch (error) {
+    throw new Error(error?.response?.data?.message);
+  }
 };
 
-export const deleteWithAuth = async (endPoint: string) => {
+export const axiosDelete = async (
+  endPoint: string,
+  { withToken } = { withToken: false }
+) => {
   try {
     const config = {
-      headers: {
-        Authorization: "Bearer " + getItem("token"),
-      },
+      ...(withToken && {
+        headers: {
+          Authorization: `Bearer ${extractToken()}`,
+        },
+      }),
     };
 
     const res = await axios.delete(endPoint, config);
 
     return res.data;
-  } catch (err) {}
+  } catch (error) {
+    throw new Error(error?.response?.data?.message);
+  }
 };

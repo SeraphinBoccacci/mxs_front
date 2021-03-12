@@ -1,42 +1,112 @@
 import { Fade } from "@material-ui/core";
-import React from "react";
+import React, { useCallback } from "react";
 
-import { ConnectionScreen } from "./ConnectionScreen";
-import { PendingVerificationScreen } from "./PendingVerificationScreen";
+import { useQueryString } from "../../hooks/useQueryString";
+import { useAuth } from "../AuthContext";
+import { AccountCreation } from "./AccountCreation";
+import { HerotagInput } from "./HerotagInput";
+import { Login } from "./Login";
+import { PasswordEdit } from "./PasswordEdit";
+import { PendingVerification } from "./PendingVerification";
 import { ModalContainer, ModalContent } from "./style";
+
+export enum ModalKinds {
+  AccountCreation = "AccountCreation",
+  Login = "Login",
+  HerotagInput = "HerotagInput",
+  PasswordEdit = "PasswordEdit",
+  PendingVerification = "PendingVerification",
+}
 
 interface ModalConnectProps {
   handleClose: () => void;
   isConnectModalOpenned: boolean;
-  isOnPendingVerificationScreen: boolean;
-  setIsOnPendingVerificationScreen: (s: boolean) => void;
+  defaultModalKind?: ModalKinds;
+  isOnlyPasswordEdit?: boolean;
 }
 
 const AuthModal = ({
-  handleClose,
+  handleClose: handleOnClose,
   isConnectModalOpenned,
-  isOnPendingVerificationScreen,
-  setIsOnPendingVerificationScreen,
+  defaultModalKind,
+  isOnlyPasswordEdit,
 }: ModalConnectProps) => {
+  const { herotag, setHerotag } = useAuth();
+  const [modalKind, setModalKind] = useQueryString("modalKind");
+
+  const handleClose = useCallback(() => {
+    setModalKind(null);
+    handleOnClose();
+  }, [setModalKind, handleOnClose]);
+
+  const setModalKindWithGuards = useCallback(
+    (kind: ModalKinds) => {
+      if (
+        [
+          ModalKinds.AccountCreation,
+          ModalKinds.Login,
+          ModalKinds.HerotagInput,
+        ].includes(kind)
+      )
+        setHerotag("");
+
+      if (
+        isOnlyPasswordEdit &&
+        [ModalKinds.AccountCreation, ModalKinds.Login].includes(kind)
+      )
+        setModalKind(ModalKinds.PasswordEdit);
+
+      setModalKind(kind);
+    },
+    [herotag, setHerotag, setModalKind, isOnlyPasswordEdit]
+  );
+
+  const modalsMapper = {
+    [ModalKinds.Login]: (
+      <Login
+        handleClose={handleClose}
+        setModalKind={setModalKindWithGuards}
+      ></Login>
+    ),
+    [ModalKinds.AccountCreation]: (
+      <AccountCreation
+        handleClose={handleClose}
+        setModalKind={setModalKindWithGuards}
+      ></AccountCreation>
+    ),
+    [ModalKinds.HerotagInput]: (
+      <HerotagInput
+        setModalKind={setModalKindWithGuards}
+        isOnlyPasswordEdit={isOnlyPasswordEdit}
+      ></HerotagInput>
+    ),
+    [ModalKinds.PasswordEdit]: (
+      <PasswordEdit
+        setModalKind={setModalKindWithGuards}
+        isOnlyPasswordEdit={isOnlyPasswordEdit}
+      ></PasswordEdit>
+    ),
+    [ModalKinds.PendingVerification]: (
+      <PendingVerification
+        setModalKind={setModalKindWithGuards}
+        isOnlyPasswordEdit={isOnlyPasswordEdit}
+      ></PendingVerification>
+    ),
+  };
+
+  const defaultModal =
+    defaultModalKind && !!modalsMapper[defaultModalKind as ModalKinds]
+      ? modalsMapper[defaultModalKind as ModalKinds]
+      : modalsMapper[ModalKinds.Login];
+
   return (
     <>
       <ModalContainer open={!!isConnectModalOpenned} onClose={handleClose}>
         <Fade in={!!isConnectModalOpenned}>
           <ModalContent>
-            {isOnPendingVerificationScreen ? (
-              <PendingVerificationScreen
-                setIsOnPendingVerificationScreen={
-                  setIsOnPendingVerificationScreen
-                }
-              ></PendingVerificationScreen>
-            ) : (
-              <ConnectionScreen
-                setIsOnPendingVerificationScreen={
-                  setIsOnPendingVerificationScreen
-                }
-                handleClose={handleClose}
-              ></ConnectionScreen>
-            )}
+            {modalKind && !!modalsMapper[modalKind as ModalKinds]
+              ? modalsMapper[modalKind as ModalKinds]
+              : defaultModal}
           </ModalContent>
         </Fade>
       </ModalContainer>

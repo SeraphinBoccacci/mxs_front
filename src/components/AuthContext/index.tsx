@@ -1,20 +1,23 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import React from "react";
+import { useHistory } from "react-router";
 
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useQueryString } from "../../hooks/useQueryString";
 import { getUserData } from "../../services/user";
-import { getItem } from "../../utils/localStorage";
-import { Variation } from "../TabPanel/StreamElementsIntegration/interface";
+import { Variation } from "../TabPanel/StreamElements/interface";
 
 export enum UserAccountStatus {
-  PENDING,
+  PENDING_VERIFICATION = 0,
   VERIFIED,
+  PENDING_EDIT_PASSWORD_VERIFICATION,
 }
 
 export interface IftttIntegrationData {
@@ -25,57 +28,82 @@ export interface IftttIntegrationData {
 
 export interface UserType {
   _id?: string;
-  name?: string;
   password?: string;
+  pendingPassword?: string;
   herotag?: string;
   erdAddress?: string;
   status: UserAccountStatus;
   verificationReference?: string;
+  passwordEditionVerificationReference?: string;
+  verificationStartDate?: string;
+  passwordEditionVerificationStartDate?: string;
   integrations?: {
     ifttt?: IftttIntegrationData;
     streamElements?: {
       variations: Variation[];
+      rowsStructure: {
+        rows: string[];
+        rowsGroupName?: string | undefined;
+      }[];
     };
   };
-  isStreaming: boolean;
-  streamingStartDate: Date;
+  isStreaming?: boolean;
+  streamingStartDate?: Date | null;
 }
 
 export const AuthContext = createContext<{
   isAuthenticated: boolean;
   herotag?: string;
-  setToken: (s: any) => void;
+  setTokenData: (
+    s: { token: string; expirationTimestamp: number } | null
+  ) => void;
+  setHerotag: (herotag: string) => void;
   user?: UserType;
 }>({
   isAuthenticated: false,
-  setToken: (s: any) => {},
+  setTokenData: () => {},
+  setHerotag: () => {},
 });
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [token, setToken] = useLocalStorage("token", null);
-  const tokenExpirationTimestamp = getItem("tokenExpirationTimestamp");
-  const herotag = getItem("herotag") as string;
-
   const [user, setUser] = useState<UserType | undefined>();
+  const [tokenData, setTokenData] = useLocalStorage("tokenData", null);
+
+  const [queryStringHerotag, setQueryStringHerotag] = useQueryString("herotag");
+  const [herotag, setStateHerotag] = useState(queryStringHerotag);
+
+  const setHerotag = useCallback(
+    (herotag: string) => {
+      setQueryStringHerotag(herotag);
+      setStateHerotag(herotag);
+    },
+    [setQueryStringHerotag, setStateHerotag]
+  );
+
+  const history = useHistory();
+
+  const isAuthenticated = !!tokenData;
 
   useEffect(() => {
-    if (!token || (token && Date.now() > tokenExpirationTimestamp)) {
-      setToken(null);
+    if (!tokenData?.token || Date.now() > tokenData.expirationTimestamp) {
+      setTokenData(null);
     }
-  }, [token, setToken, tokenExpirationTimestamp]);
+  }, [setTokenData, tokenData, history]);
 
   useEffect(() => {
-    if (token && herotag)
-      getUserData(herotag).then((data) => {
+    if (isAuthenticated)
+      getUserData().then((data) => {
         setUser(data);
+        setHerotag(data.herotag);
       });
-  }, [token, herotag, setUser]);
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated: !!token,
-        setToken,
+        isAuthenticated,
+        setTokenData,
+        setHerotag,
         herotag,
         user,
       }}

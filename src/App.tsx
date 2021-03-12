@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import AuthProvider from "./components/AuthContext";
 import ErrorHandler from "./components/ErrorHandlingContext";
 import PrivateRoute from "./components/PrivateRoute";
-import Console from "./pages/Console";
 import Home from "./pages/Home";
+import Lab from "./pages/Lab";
 import { theme } from "./styles/theme";
 
 function App() {
@@ -20,8 +20,8 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <PrivateRoute exact path="/console">
-              <Console />
+            <PrivateRoute exact path="/lab">
+              <Lab />
             </PrivateRoute>
           </AuthProvider>
         </ErrorHandler>

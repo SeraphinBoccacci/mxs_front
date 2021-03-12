@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import React, { RefObject } from "react";
 
-import { VariationLenses } from "../../../interface";
+import { VariationLenses } from "../TabPanel/StreamElements/interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface InputProps {
-  inputName: VariationLenses;
+  inputName: string | VariationLenses;
   inputLabel: string;
   inputRef: RefObject<HTMLInputElement>;
-  value: string | number;
+  value?: string | number;
   isTypeNumber?: boolean;
   isTextContent?: boolean;
   endAdornment?: string;

@@ -1,12 +1,13 @@
 import { Fade } from "@material-ui/core";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import TwitterIcon from "@material-ui/icons/Twitter";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Logo from "../../assets/icons/StreamParticlesLogo";
 import config from "../../config/config";
 import { Emphasize, LogoContainer } from "../../styles/global";
+import { axiosGet } from "../../utils/axios";
+import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import Switch from "../Switch";
 import CreatorPart from "./CreatorPart";
 import {
@@ -35,13 +36,16 @@ const Footer = () => {
   const [isOnViewerPart, setIsOnViewerPart] = useState(false);
   const [isPricingModalOpenned, setIsPricingModalOpenned] = useState(false);
   const [currentPrice, setCurrentPrice] = useState(150);
+  const { handleError } = useContext(ErrorHandlingContext);
 
   useEffect(() => {
-    axios.get(`${config.apiUrl}/egld-price`).then((response) => {
-      if (!response) return;
+    axiosGet(`${config.apiUrl}/egld-price`)
+      .then((data) => {
+        if (!data) return;
 
-      setCurrentPrice(response.data.price);
-    });
+        setCurrentPrice(data.price);
+      })
+      .catch((error) => handleError(error.message));
   }, []);
 
   return (
