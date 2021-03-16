@@ -1,3 +1,4 @@
+import { omit } from "lodash";
 import queryString from "query-string";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -21,10 +22,10 @@ export const useQueryString = (key: string): [any, (value: any) => void] => {
   const setValue = (value: any) => {
     try {
       const parsedSearch = queryString.parse(history.location.search);
-      const { [key]: lastValue, ...restParsedSearch } = parsedSearch;
+
       history.push({
         search: queryString.stringify({
-          ...restParsedSearch,
+          ...omit(parsedSearch, [key]),
           ...(!!value && { [key]: value }),
         }),
       });

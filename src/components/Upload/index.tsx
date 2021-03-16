@@ -1,5 +1,11 @@
 import { Button } from "@material-ui/core";
-import React, { RefObject, useCallback, useState } from "react";
+import React, {
+  ChangeEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 import config from "../../config/config";
 import { uploadFile } from "../../services/streamElements";
@@ -14,24 +20,38 @@ import {
 interface UploadProps {
   inputName: VariationLenses;
   inputLabel: string;
-  inputRef: RefObject<{ path: string }>;
   isAudio?: boolean;
+  value?: string;
+  onChange: (
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => void;
 }
 
-const Upload = ({ inputName, inputLabel, inputRef, isAudio }: UploadProps) => {
-  const getFileSrc = (filename: string) => {
-    const media = isAudio ? "audios" : "images";
+const Upload = ({
+  inputName,
+  inputLabel,
+  isAudio,
+  onChange,
+  value = "",
+}: UploadProps) => {
+  const getFileSrc = useCallback(
+    (filename: string) => {
+      const media = isAudio ? "audios" : "images";
 
-    const now = new Date().getTime();
+      const now = new Date().getTime();
 
-    if (!filename) return "";
+      if (!filename) return "";
 
-    return `${config.url}/${media}/${filename}?t=${now}`;
-  };
-
-  const [file, setFile] = useState<string>(
-    inputRef?.current?.path ? getFileSrc(inputRef?.current?.path) : ""
+      return `${config.url}/${media}/${filename}?t=${now}`;
+    },
+    [isAudio]
   );
+
+  const [file, setFile] = useState<string>(getFileSrc(value));
+
+  useEffect(() => {
+    setFile(getFileSrc(value));
+  }, [setFile, getFileSrc, value]);
 
   const uploadMedia = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,16 +63,25 @@ const Upload = ({ inputName, inputLabel, inputRef, isAudio }: UploadProps) => {
 
       setFile(getFileSrc(filePath));
 
-      if (inputRef.current) inputRef.current.path = filePath;
+      onChange({
+        target: {
+          name: inputName,
+          value: filePath,
+        },
+      } as ChangeEvent<HTMLInputElement>);
     },
-    []
+    [isAudio, inputName, onChange, setFile, getFileSrc]
   );
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setFile("");
-
-    if (inputRef.current) inputRef.current.path = "";
-  };
+    onChange({
+      target: {
+        name: inputName,
+        value: "",
+      },
+    } as ChangeEvent<HTMLInputElement>);
+  }, [setFile, onChange, inputName]);
 
   return (
     <UploadContainer key={`${inputName}_UploadContainer`}>
@@ -67,10 +96,10 @@ const Upload = ({ inputName, inputLabel, inputRef, isAudio }: UploadProps) => {
         <input
           style={{ display: "none" }}
           accept={isAudio ? "audio/*" : "image/*"}
-          id={`upload_input_${inputName}`}
           name="media"
           type="file"
           onChange={uploadMedia}
+          id={`upload_input_${inputName}`}
         />
         <label htmlFor={`upload_input_${inputName}`}>
           <Button variant="contained" color="primary" component="span">
@@ -83,4 +112,4 @@ const Upload = ({ inputName, inputLabel, inputRef, isAudio }: UploadProps) => {
   );
 };
 
-export default Upload;
+export default memo(Upload);

@@ -2,35 +2,33 @@ import { Checkbox } from "@material-ui/core";
 import FormatBoldRoundedIcon from "@material-ui/icons/FormatBoldRounded";
 import FormatItalicRoundedIcon from "@material-ui/icons/FormatItalicRounded";
 import FormatUnderlinedRoundedIcon from "@material-ui/icons/FormatUnderlinedRounded";
-import React, { RefObject, useCallback, useState } from "react";
+import React, { ChangeEvent, useCallback } from "react";
 
 import { TextStyles, VariationLenses } from "../../../interface";
 import { SectionRow } from "../style";
 
 interface TextStylesProps {
-  inputRef: RefObject<{ textStyles: TextStyles[] }>;
+  value: TextStyles[];
+  onChange: (
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => void;
 }
 
-export const TextStylesCheckboxes = ({ inputRef }: TextStylesProps) => {
-  const [textStyles, setTextStyles] = useState<TextStyles[]>(
-    inputRef.current?.textStyles || []
-  );
+export const TextStylesCheckboxes = ({ onChange, value }: TextStylesProps) => {
   const handleTextStyleChange = useCallback(
     (checkedValue: TextStyles) => (
       event: React.ChangeEvent<HTMLInputElement>,
       checked: boolean
     ) => {
       const updatedField: TextStyles[] = checked
-        ? [...(textStyles || []), checkedValue]
-        : textStyles.filter((field) => field !== checkedValue) || [];
+        ? [...(value || []), checkedValue]
+        : value?.filter((field) => field !== checkedValue) || [];
 
-      setTextStyles(updatedField);
-
-      if (inputRef.current) {
-        inputRef.current.textStyles = updatedField;
-      }
+      onChange(({
+        target: { name: VariationLenses.text_textStyle, value: updatedField },
+      } as unknown) as ChangeEvent<HTMLInputElement>);
     },
-    [textStyles]
+    [value, onChange]
   );
 
   return (
@@ -41,7 +39,7 @@ export const TextStylesCheckboxes = ({ inputRef }: TextStylesProps) => {
         icon={<FormatBoldRoundedIcon color="action" />}
         checkedIcon={<FormatBoldRoundedIcon color="secondary" />}
         name={`${VariationLenses.text_textStyle}_bold`}
-        checked={textStyles.some((field) => field === TextStyles.bold)}
+        checked={value?.some((field) => field === TextStyles.bold)}
         onChange={handleTextStyleChange(TextStyles.bold)}
       />
       <Checkbox
@@ -50,7 +48,7 @@ export const TextStylesCheckboxes = ({ inputRef }: TextStylesProps) => {
         icon={<FormatItalicRoundedIcon color="action" />}
         checkedIcon={<FormatItalicRoundedIcon color="secondary" />}
         name={`${VariationLenses.text_textStyle}_italic`}
-        checked={textStyles.some((field) => field === TextStyles.italic)}
+        checked={value?.some((field) => field === TextStyles.italic)}
         onChange={handleTextStyleChange(TextStyles.italic)}
       />
       <Checkbox
@@ -59,7 +57,7 @@ export const TextStylesCheckboxes = ({ inputRef }: TextStylesProps) => {
         icon={<FormatUnderlinedRoundedIcon color="action" />}
         checkedIcon={<FormatUnderlinedRoundedIcon color="secondary" />}
         name={`${VariationLenses.text_textStyle}_underline`}
-        checked={textStyles.some((field) => field === TextStyles.underline)}
+        checked={value?.some((field) => field === TextStyles.underline)}
         onChange={handleTextStyleChange(TextStyles.underline)}
       />
     </SectionRow>

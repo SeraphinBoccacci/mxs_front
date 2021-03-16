@@ -1,6 +1,6 @@
 import Tab from "@material-ui/core/Tab";
 import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRounded";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
@@ -18,23 +18,26 @@ const Lab = () => {
   const { setTokenData, setHerotag } = useContext(AuthContext);
   const history = useHistory();
 
-  const handleChange = (event: React.ChangeEvent<{}>, value: any) => {
-    setActiveTab(value);
-  };
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<{}>, value: any) => {
+      setActiveTab(value);
+    },
+    [setActiveTab]
+  );
 
-  const a11yProps = (index: number) => {
+  const a11yProps = useCallback((index: number) => {
     return {
       id: `simple-tab-${index}`,
       "aria-controls": `simple-tabpanel-${index}`,
     };
-  };
+  }, []);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setTokenData(null);
     setHerotag("");
 
     history.push("/");
-  };
+  }, [setTokenData, setHerotag, history]);
 
   const value = Number(activeTab);
 

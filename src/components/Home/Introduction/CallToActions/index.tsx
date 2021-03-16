@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import React from "react";
+import React, { useCallback } from "react";
 
 import { CallsToActionsContainer } from "./style";
 
@@ -8,7 +8,7 @@ const CallToActions = ({
 }: {
   setIsViewer: (b: boolean) => void;
 }) => {
-  const scrollToFeatures = () => {
+  const scrollToFeatures = useCallback(() => {
     const element = document.getElementById("features");
 
     if (!element) return;
@@ -19,7 +19,8 @@ const CallToActions = ({
         top: element.offsetTop,
       });
     }, 100);
-  };
+  }, []);
+
   return (
     <CallsToActionsContainer>
       <Button

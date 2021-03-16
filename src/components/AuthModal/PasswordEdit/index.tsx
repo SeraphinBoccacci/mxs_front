@@ -1,15 +1,10 @@
-import React, {
-  ChangeEvent,
-  useCallback,
-  useContext,
-  useReducer,
-  useState,
-} from "react";
-import { useHistory } from "react-router-dom";
+import React, { useCallback, useContext, useState } from "react";
 
+import { useForm } from "../../../hooks/useForm";
 import { editPassword } from "../../../services/auth";
 import { useAuth } from "../../AuthContext";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import Input from "../../Input";
 import { ModalKinds } from "..";
 import { HerotagInput } from "../HerotagInput";
 import {
@@ -18,18 +13,11 @@ import {
   ChangeModeSpan,
   ConnectionForm,
   Inputs,
-  Password,
 } from "../style";
 import { FormTitle } from "../style";
 interface PasswordEditProps {
   setModalKind: (modalKind: ModalKinds) => void;
   isOnlyPasswordEdit?: boolean;
-}
-
-interface ReducerState {
-  herotag?: string;
-  password?: string;
-  confirm?: string;
 }
 
 export const PasswordEdit = ({
@@ -40,19 +28,17 @@ export const PasswordEdit = ({
   const { herotag } = useAuth();
   const { handleError } = useContext(ErrorHandlingContext);
 
-  const history = useHistory();
+  const [formData, setFormData] = useForm<{
+    password?: string;
+    confirm?: string;
+  }>({});
 
-  const formReducer = (
-    state: ReducerState,
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    return {
-      ...state,
-      [event.target.name]: event.target.value,
-    };
-  };
-
-  const [formData, setFormData] = useReducer(formReducer, {});
+  const handleOnChange = useCallback(
+    (data) => {
+      setFormData(data);
+    },
+    [setFormData]
+  );
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -78,7 +64,7 @@ export const PasswordEdit = ({
         setIsSubmitting(false);
       }
     },
-    [formData.confirm, formData.password, history, handleError]
+    [herotag, setModalKind, formData.confirm, formData.password, handleError]
   );
 
   const handleClickAccountConnection = useCallback(() => {
@@ -98,20 +84,22 @@ export const PasswordEdit = ({
       <FormTitle>Password Edit</FormTitle>
       <ConnectionForm onSubmit={handleSubmit}>
         <Inputs>
-          <Password
+          <Input
             type="password"
-            name="password"
-            placeholder="New Password"
-            onChange={setFormData}
-            disabled={isSubmitting}
-          ></Password>
-          <Password
+            inputName="password"
+            inputLabel="Password"
+            value={formData.password}
+            isDisabled={isSubmitting}
+            onChange={handleOnChange}
+          ></Input>
+          <Input
             type="password"
-            name="confirm"
-            placeholder="Confirmation"
-            onChange={setFormData}
-            disabled={isSubmitting}
-          ></Password>
+            inputName="confirm"
+            inputLabel="Confirmation"
+            value={formData.confirm}
+            isDisabled={isSubmitting}
+            onChange={handleOnChange}
+          ></Input>
         </Inputs>
         <Button
           color="secondary"

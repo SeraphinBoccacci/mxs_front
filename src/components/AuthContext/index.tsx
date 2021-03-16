@@ -96,6 +96,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser(data);
         setHerotag(data.herotag);
       });
+    // eslint-disable-next-line
   }, [isAuthenticated]);
 
   return (

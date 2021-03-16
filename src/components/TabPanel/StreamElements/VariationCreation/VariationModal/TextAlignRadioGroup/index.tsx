@@ -2,26 +2,29 @@ import { Radio, RadioGroup } from "@material-ui/core";
 import FormatAlignCenterRoundedIcon from "@material-ui/icons/FormatAlignCenterRounded";
 import FormatAlignLeftRoundedIcon from "@material-ui/icons/FormatAlignLeftRounded";
 import FormatAlignRightRoundedIcon from "@material-ui/icons/FormatAlignRightRounded";
-import React, { RefObject, useCallback, useState } from "react";
+import React, { ChangeEvent, useCallback } from "react";
 
 import { VariationLenses } from "../../../interface";
 import { SectionRow } from "../style";
 
 interface TextAlignRadioGroupProps {
-  inputRef: RefObject<{ textAlign: string }>;
+  value: string;
+  onChange: (
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => void;
 }
 
-export const TextAlignRadioGroup = ({ inputRef }: TextAlignRadioGroupProps) => {
-  const [textAlign, setTextAlign] = useState<string>(
-    inputRef.current?.textAlign || ""
-  );
+export const TextAlignRadioGroup = ({
+  onChange,
+  value,
+}: TextAlignRadioGroupProps) => {
   const handleRadioChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>, value: string) => {
-      setTextAlign(value);
-
-      if (inputRef.current) inputRef.current.textAlign = value;
+      onChange({
+        target: { name: VariationLenses.text_textAlign, value },
+      } as ChangeEvent<HTMLInputElement>);
     },
-    [textAlign, inputRef]
+    [onChange]
   );
 
   return (
@@ -29,11 +32,10 @@ export const TextAlignRadioGroup = ({ inputRef }: TextAlignRadioGroupProps) => {
       <RadioGroup
         key={VariationLenses.text_textAlign}
         style={{ flexDirection: "row" }}
-        value={textAlign || "left"}
+        value={value || ""}
         onChange={handleRadioChange}
       >
         <Radio
-          key={`${VariationLenses.text_textAlign}_left`}
           size="medium"
           icon={<FormatAlignLeftRoundedIcon color="action" />}
           checkedIcon={<FormatAlignLeftRoundedIcon color="secondary" />}
@@ -41,7 +43,6 @@ export const TextAlignRadioGroup = ({ inputRef }: TextAlignRadioGroupProps) => {
           value="left"
         />
         <Radio
-          key={`${VariationLenses.text_textAlign}_center`}
           size="medium"
           icon={<FormatAlignCenterRoundedIcon color="action" />}
           checkedIcon={<FormatAlignCenterRoundedIcon color="secondary" />}
@@ -49,7 +50,6 @@ export const TextAlignRadioGroup = ({ inputRef }: TextAlignRadioGroupProps) => {
           value="center"
         />
         <Radio
-          key={`${VariationLenses.text_textAlign}_right`}
           size="medium"
           icon={<FormatAlignRightRoundedIcon color="action" />}
           checkedIcon={<FormatAlignRightRoundedIcon color="secondary" />}

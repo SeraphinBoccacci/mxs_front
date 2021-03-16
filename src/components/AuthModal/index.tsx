@@ -31,7 +31,7 @@ const AuthModal = ({
   defaultModalKind,
   isOnlyPasswordEdit,
 }: ModalConnectProps) => {
-  const { herotag, setHerotag } = useAuth();
+  const { setHerotag } = useAuth();
   const [modalKind, setModalKind] = useQueryString("modalKind");
 
   const handleClose = useCallback(() => {
@@ -58,7 +58,7 @@ const AuthModal = ({
 
       setModalKind(kind);
     },
-    [herotag, setHerotag, setModalKind, isOnlyPasswordEdit]
+    [setHerotag, setModalKind, isOnlyPasswordEdit]
   );
 
   const modalsMapper = {

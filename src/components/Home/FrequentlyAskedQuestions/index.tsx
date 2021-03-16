@@ -1,5 +1,5 @@
 import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import {
   Accordion,
@@ -77,33 +77,37 @@ const questionsAndAnswers = [
 const FrequentlyAskedQuestions = () => {
   const [expandedPanel, setExpandedPanel] = useState<string>("");
 
-  const handleChange = (panel: string) => (
-    event: React.ChangeEvent<{}>,
-    isExpanded: boolean
-  ) => {
-    setExpandedPanel(isExpanded ? panel : "");
-  };
+  const handleChange = useCallback(
+    (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+      setExpandedPanel(isExpanded ? panel : "");
+    },
+    [setExpandedPanel]
+  );
+
+  const accordions = useMemo(
+    () =>
+      questionsAndAnswers.map(({ question, answer, id }, index) => (
+        <Accordion
+          color="primary"
+          key={`frequently-asked-questions-${index}`}
+          expanded={expandedPanel === id}
+          onChange={handleChange(id)}
+        >
+          <AccordionSummary expandIcon={<AddOutlinedIcon />}>
+            {question}
+          </AccordionSummary>
+          <AccordionDetails>{answer}</AccordionDetails>
+        </Accordion>
+      )),
+    [expandedPanel, handleChange]
+  );
 
   return (
     <FaqContainer id="community">
       <FaqHeader>
         <FaqTitle>Frequently Asked Questions</FaqTitle>
       </FaqHeader>
-      <Accordions>
-        {questionsAndAnswers.map(({ question, answer, id }, index) => (
-          <Accordion
-            color="primary"
-            key={`frequently-asked-questions-${index}`}
-            expanded={expandedPanel === id}
-            onChange={handleChange(id)}
-          >
-            <AccordionSummary expandIcon={<AddOutlinedIcon />}>
-              {question}
-            </AccordionSummary>
-            <AccordionDetails>{answer}</AccordionDetails>
-          </Accordion>
-        ))}
-      </Accordions>
+      <Accordions>{accordions}</Accordions>
     </FaqContainer>
   );
 };

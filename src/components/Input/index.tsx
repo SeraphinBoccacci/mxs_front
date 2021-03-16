@@ -8,7 +8,7 @@ import {
   Theme,
   Tooltip,
 } from "@material-ui/core";
-import React, { RefObject } from "react";
+import React, { ChangeEvent, memo } from "react";
 
 import { VariationLenses } from "../TabPanel/StreamElements/interface";
 
@@ -28,23 +28,28 @@ const useStyles = makeStyles((theme: Theme) =>
 interface InputProps {
   inputName: string | VariationLenses;
   inputLabel: string;
-  inputRef: RefObject<HTMLInputElement>;
   value?: string | number;
+  onChange:
+    | ((event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void)
+    | ((event: ChangeEvent<HTMLInputElement>) => void);
   isTypeNumber?: boolean;
   isTextContent?: boolean;
   endAdornment?: string;
   tooltipText?: string;
+  isDisabled?: boolean;
+  type?: "password";
 }
 
 const Input = ({
   inputName,
   inputLabel,
-  inputRef,
-  value,
-  isTypeNumber,
+  value = "",
+  onChange,
   endAdornment,
   isTextContent,
   tooltipText,
+  isDisabled,
+  type,
 }: InputProps) => {
   const classes = useStyles();
 
@@ -57,16 +62,16 @@ const Input = ({
     >
       <InputLabel htmlFor={inputName}>{inputLabel}</InputLabel>
       <OutlinedInput
+        type={type}
+        disabled={isDisabled}
+        onChange={onChange}
         rows={3}
-        rowsMax={3}
+        rowsMin={3}
         multiline={isTextContent}
-        inputRef={inputRef}
-        id={inputName}
         name={inputName}
-        defaultValue={value}
-        type={isTypeNumber ? "number" : "normal"}
+        value={value || ""}
         endAdornment={
-          endAdornment ? (
+          !!endAdornment ? (
             <InputAdornment position="end">{endAdornment}</InputAdornment>
           ) : (
             ""
@@ -79,4 +84,4 @@ const Input = ({
   return tooltipText ? <Tooltip title={tooltipText}>{input}</Tooltip> : input;
 };
 
-export default Input;
+export default memo(Input);

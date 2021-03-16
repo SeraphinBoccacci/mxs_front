@@ -1,111 +1,93 @@
-import React, { RefObject } from "react";
+import React, { ChangeEvent } from "react";
 
 import Input from "../../../../../Input";
 import Select from "../../../../../Select";
-import {
-  EnterAnimationTypes,
-  ExitAnimationTypes,
-  Variation,
-  VariationLenses,
-} from "../../../interface";
+import { VariationFormData, VariationLenses } from "../../../interface";
 import {
   enterAnimationTypesOptions,
   exitAnimationTypesOptions,
 } from "../constants";
 import {
-  AnimationSection,
-  AnimationTitle,
   AnimationType,
   SectionRow,
+  SubSection,
+  SubSectionTitle,
 } from "../style";
-
-interface inputRefs {
-  enter_animationRef: RefObject<{
-    value: EnterAnimationTypes | ExitAnimationTypes;
-  }>;
-  enter_durationRef: RefObject<HTMLInputElement>;
-  enter_delayRef: RefObject<HTMLInputElement>;
-  exit_animationRef: RefObject<{
-    value: EnterAnimationTypes | ExitAnimationTypes;
-  }>;
-  exit_durationRef: RefObject<HTMLInputElement>;
-  exit_offsetRef: RefObject<HTMLInputElement>;
-}
 
 interface AnimationSettingsProps {
   pathString: "image" | "text";
-  variation: Variation;
-  inputRefs: inputRefs;
+  formData: VariationFormData;
+  onChange: (
+    event: ChangeEvent<
+      | HTMLTextAreaElement
+      | HTMLInputElement
+      | { name?: string | undefined; value: unknown }
+    >
+  ) => void;
 }
 
 export const AnimationSettings = ({
   pathString,
-  variation,
-  inputRefs,
+  formData,
+  onChange,
 }: AnimationSettingsProps) => {
   return (
-    <AnimationSection>
-      <AnimationTitle>Animation</AnimationTitle>
+    <SubSection>
+      <SubSectionTitle>Animation</SubSectionTitle>
       <SectionRow>
         <AnimationType>Enter</AnimationType>
         <Select
-          inputRef={inputRefs.enter_animationRef}
-          key={`${pathString}_animation_enter_type`}
           options={enterAnimationTypesOptions}
           inputName={`${pathString}_animation_enter_type` as VariationLenses}
           inputLabel="Type"
-          value={variation?.[pathString]?.animation?.enter?.type || ""}
+          value={formData?.[`${pathString}_animation_enter_type`]}
+          onChange={onChange}
         ></Select>
         <Input
-          inputRef={inputRefs.enter_durationRef}
-          key={`${pathString}_animation_enter_duration`}
           inputLabel="Duration"
           inputName={
             `${pathString}_animation_enter_duration` as VariationLenses
           }
-          value={variation?.[pathString]?.animation?.enter?.duration || ""}
+          value={formData?.[`${pathString}_animation_enter_duration`]}
           isTypeNumber
           endAdornment="seconds"
+          onChange={onChange}
         ></Input>
         <Input
-          inputRef={inputRefs.enter_delayRef}
-          key={`${pathString}_animation_enter_delay`}
           inputLabel="Delay"
           inputName={`${pathString}_animation_enter_delay` as VariationLenses}
-          value={variation?.[pathString]?.animation?.enter?.delay || ""}
+          value={formData?.[`${pathString}_animation_enter_delay`]}
           isTypeNumber
           endAdornment="seconds"
+          onChange={onChange}
         ></Input>
       </SectionRow>
       <SectionRow>
         <AnimationType>Exit</AnimationType>
         <Select
-          inputRef={inputRefs.exit_animationRef}
-          key={`${pathString}_animation_exit_type`}
           options={exitAnimationTypesOptions}
           inputName={`${pathString}_animation_exit_type` as VariationLenses}
           inputLabel="Type"
-          value={variation?.[pathString]?.animation?.exit?.type || ""}
+          value={formData?.[`${pathString}_animation_exit_type`]}
+          onChange={onChange}
         ></Select>
         <Input
-          inputRef={inputRefs.exit_durationRef}
-          key={`${pathString}_animation_exit_duration`}
           inputLabel="Duration"
           inputName={`${pathString}_animation_exit_duration` as VariationLenses}
-          value={variation?.[pathString]?.animation?.exit?.duration || ""}
+          value={formData?.[`${pathString}_animation_exit_duration`]}
           isTypeNumber
           endAdornment="seconds"
+          onChange={onChange}
         ></Input>
         <Input
-          inputRef={inputRefs.exit_offsetRef}
-          key={`${pathString}_animation_exit_offset`}
           inputLabel="Offset"
           inputName={`${pathString}_animation_exit_offset` as VariationLenses}
-          value={variation?.[pathString]?.animation?.exit?.offset || ""}
+          value={formData?.[`${pathString}_animation_exit_offset`]}
           isTypeNumber
           endAdornment="seconds"
+          onChange={onChange}
         ></Input>
       </SectionRow>
-    </AnimationSection>
+    </SubSection>
   );
 };

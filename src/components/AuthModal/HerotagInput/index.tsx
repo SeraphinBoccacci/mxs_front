@@ -1,16 +1,15 @@
-import { Tooltip } from "@material-ui/core";
 import React, { ChangeEvent, useCallback, useContext, useState } from "react";
 
 import { submitHerotag } from "../../../services/auth";
 import { useAuth } from "../../AuthContext";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import Input from "../../Input";
 import { ModalKinds } from "..";
 import {
   Button,
   ChangeModePhrase,
   ChangeModeSpan,
   ConnectionForm,
-  Herotag,
   Inputs,
 } from "../style";
 import { FormTitle } from "../style";
@@ -58,7 +57,7 @@ export const HerotagInput = ({
         setHerotagInput("");
       }
     },
-    [setIsSubmitting, herotagInput, setModalKind]
+    [setIsSubmitting, herotagInput, handleError, setHerotag]
   );
 
   const handleClickAccountConnection = useCallback(() => {
@@ -70,18 +69,14 @@ export const HerotagInput = ({
       <FormTitle>Your Herotag</FormTitle>
       <ConnectionForm onSubmit={handleSubmit}>
         <Inputs>
-          <Tooltip
-            placement="top"
-            title="Your herotag is the username you set when you registered on Maiar."
-          >
-            <Herotag
-              placeholder="Herotag"
-              name="herotag"
-              value={herotagInput}
-              onChange={handleOnChange}
-              disabled={isSubmitting}
-            ></Herotag>
-          </Tooltip>
+          <Input
+            tooltipText="Your herotag is the username you set when you registered on Maiar."
+            value={herotagInput}
+            inputName="herotag"
+            inputLabel="Herotag"
+            onChange={handleOnChange}
+            isDisabled={isSubmitting}
+          ></Input>
         </Inputs>
         <Button
           color="secondary"

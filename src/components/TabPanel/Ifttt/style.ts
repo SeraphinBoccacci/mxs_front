@@ -80,34 +80,6 @@ export const FormInputs = styled.div`
   margin: 1rem 0 2.5rem;
 `;
 
-export const FormInputAndLabel = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-
-  max-width: 100%;
-
-  margin: 1rem 0;
-
-  @media (min-width: 600px) {
-    flex-direction: row;
-    margin: 0.2rem 0;
-  }
-`;
-export const FormLabel = styled.label`
-  color: ${colors.secondary};
-  margin: 0 1rem;
-  font-size: 0.8rem;
-
-  @media (min-width: 800px) {
-    font-size: 0.9rem;
-  }
-
-  @media (min-width: 1000px) {
-    font-size: 1rem;
-  }
-`;
 export const FormInput = styled.input`
   display: inline-block;
   height: 2rem;
@@ -142,30 +114,6 @@ export const FormInput = styled.input`
 
   &:focus::placeholder {
     font-size: 0;
-  }
-`;
-
-export const EventNameInput = styled(FormInput)`
-  width: 10rem;
-
-  &::placeholder {
-    font-size: 0.9rem;
-
-    transition: 0.4s;
-  }
-
-  &:focus::placeholder {
-    font-size: 0;
-  }
-`;
-
-export const TriggerKeyInput = styled(FormInput)`
-  width: 20rem;
-
-  &::placeholder {
-    font-size: 0.7rem;
-
-    transition: 0.4s;
   }
 `;
 

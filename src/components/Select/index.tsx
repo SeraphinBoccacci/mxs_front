@@ -7,7 +7,7 @@ import {
   Select as MaterialSelect,
   Theme,
 } from "@material-ui/core";
-import React, { RefObject, useCallback } from "react";
+import React, { memo } from "react";
 
 import {
   EnterAnimationTypes,
@@ -43,7 +43,8 @@ export interface Option {
     | VariationPositions
     | TextPositions
     | EnterAnimationTypes
-    | ExitAnimationTypes;
+    | ExitAnimationTypes
+    | string;
 }
 
 interface SelectProps {
@@ -51,14 +52,16 @@ interface SelectProps {
   size?: "large";
   inputName: VariationLenses;
   inputLabel: string;
-  inputRef: RefObject<{
-    value:
-      | VariationPositions
-      | TextPositions
-      | EnterAnimationTypes
-      | ExitAnimationTypes;
-  }>;
-  value: any;
+  onChange:
+    | ((
+        event: React.ChangeEvent<{
+          name?: string | undefined;
+          value: unknown;
+        }>,
+        child: React.ReactNode
+      ) => void)
+    | undefined;
+  value?: any;
 }
 
 const Select = ({
@@ -66,29 +69,10 @@ const Select = ({
   size,
   inputName,
   inputLabel,
-  inputRef,
-  value,
+  onChange,
+  value = "",
 }: SelectProps) => {
   const classes = useStyles();
-
-  const handleChange = useCallback(
-    (
-      e: React.ChangeEvent<{
-        name?: string | undefined;
-        value: unknown;
-      }>
-    ) => {
-      e.preventDefault();
-
-      if (inputRef.current)
-        inputRef.current.value = e.target.value as
-          | VariationPositions
-          | TextPositions
-          | EnterAnimationTypes
-          | ExitAnimationTypes;
-    },
-    [inputRef]
-  );
 
   return (
     <FormControl
@@ -101,11 +85,7 @@ const Select = ({
       color="secondary"
     >
       <InputLabel>{inputLabel}</InputLabel>
-      <MaterialSelect
-        onChange={handleChange}
-        defaultValue={value}
-        name={inputName}
-      >
+      <MaterialSelect onChange={onChange} value={value || ""} name={inputName}>
         {options.map((option, index) => (
           <MenuItem
             key={`select_options_${inputName}_${index}`}
@@ -119,4 +99,4 @@ const Select = ({
   );
 };
 
-export default Select;
+export default memo(Select);

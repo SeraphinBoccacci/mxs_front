@@ -1,25 +1,18 @@
-import { Tooltip } from "@material-ui/core";
-import React, {
-  ChangeEvent,
-  useCallback,
-  useContext,
-  useReducer,
-  useState,
-} from "react";
+import React, { ChangeEvent, useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import { useForm } from "../../../hooks/useForm";
 import { authenticate } from "../../../services/auth";
 import { useAuth } from "../../AuthContext";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import Input from "../../Input";
 import { ModalKinds } from "..";
 import {
   Button,
   ChangeModePhrase,
   ChangeModeSpan,
   ConnectionForm,
-  Herotag,
   Inputs,
-  Password,
   RecoveryActionCTA,
   RecoveryActionsCTAs,
 } from "../style";
@@ -29,12 +22,6 @@ interface LoginProps {
   setModalKind: (e: ModalKinds) => void;
 }
 
-interface ReducerState {
-  herotag?: string;
-  password?: string;
-  confirm?: string;
-}
-
 export const Login = ({ handleClose, setModalKind }: LoginProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setTokenData, setHerotag } = useAuth();
@@ -42,17 +29,10 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
 
   const history = useHistory();
 
-  const formReducer = (
-    state: ReducerState,
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    return {
-      ...state,
-      [event.target.name]: event.target.value,
-    };
-  };
-
-  const [formData, setFormData] = useReducer(formReducer, {});
+  const [formData, setFormData] = useForm<{
+    herotag?: string;
+    password?: string;
+  }>({});
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -73,6 +53,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
             token: data.token,
             expirationTimestamp: Date.now() + data.expiresIn * 1000,
           });
+
           setHerotag(formData.herotag);
 
           handleClose();
@@ -106,6 +87,13 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
     ]
   );
 
+  const handleOnChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setFormData(event);
+    },
+    [setFormData]
+  );
+
   const handleClickPendingVerification = useCallback(() => {
     setModalKind(ModalKinds.PendingVerification);
   }, [setModalKind]);
@@ -123,24 +111,23 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
       <FormTitle>Login</FormTitle>
       <ConnectionForm onSubmit={handleSubmit}>
         <Inputs>
-          <Tooltip
-            placement="top"
-            title="Your herotag is the username you set when you registered on Maiar."
-          >
-            <Herotag
-              placeholder="Herotag"
-              name="herotag"
-              onChange={setFormData}
-              disabled={isSubmitting}
-            ></Herotag>
-          </Tooltip>
-          <Password
+          <Input
+            tooltipText="Your herotag is the username you set when you registered on Maiar."
+            value={formData.herotag}
+            inputName="herotag"
+            inputLabel="Herotag"
+            onChange={handleOnChange}
+            isDisabled={isSubmitting}
+          ></Input>
+          <Input
+            tooltipText="Your herotag is the username you set when you registered on Maiar."
+            value={formData.password}
+            inputName="password"
+            inputLabel="Password"
+            onChange={handleOnChange}
             type="password"
-            name="password"
-            placeholder="Password"
-            onChange={setFormData}
-            disabled={isSubmitting}
-          ></Password>
+            isDisabled={isSubmitting}
+          ></Input>
           <div></div>
         </Inputs>
         <Button

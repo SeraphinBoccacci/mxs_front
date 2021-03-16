@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 //@ts-ignore
 import { withBreakpoints } from "react-breakpoints";
 
@@ -43,19 +43,33 @@ const VariationCreation = ({
         setFiles(files);
       });
     }
-  }, [user]);
+  }, [herotag, user]);
 
-  const updateVariation = (index: number) => (updatedVariation: Variation) => {
-    const before = variations.slice(0, index);
-    const after = variations.slice(index + 1, variations.length);
+  const updateVariation = useCallback(
+    (index: number) => (updatedVariation: Variation) => {
+      const before = variations.slice(0, index);
+      const after = variations.slice(index + 1, variations.length);
 
-    setVariations([...before, updatedVariation, ...after]);
-  };
+      setVariations([...before, updatedVariation, ...after]);
+    },
+    [setVariations, variations]
+  );
+
+  const handleFocusOnVariation = useCallback(
+    (index: number) => {
+      setFocusedVariationIndex(index);
+    },
+    [setFocusedVariationIndex]
+  );
+
+  const handleClose = useCallback(() => {
+    setFocusedVariationIndex(undefined);
+  }, [setFocusedVariationIndex]);
 
   if (breakpoints[currentBreakpoint] < breakpoints.tabletLandscape) return null;
 
   return (
-    <>
+    <div>
       <ContentContainer>
         <Content>
           <IframeContainer
@@ -68,13 +82,13 @@ const VariationCreation = ({
             setFiles={setFiles}
             htmlSrc={htmlSrc}
             setHtmlSrc={setHtmlSrc}
-            setFocusedVariationIndex={setFocusedVariationIndex}
+            setFocusedVariationIndex={handleFocusOnVariation}
           ></VariationsList>
         </Content>
       </ContentContainer>
       <VariationModal
         setFiles={setFiles}
-        setVariationModalData={() => setFocusedVariationIndex(undefined)}
+        onClose={handleClose}
         updateVariation={
           !!focusedVariationIndex || focusedVariationIndex === 0
             ? updateVariation(focusedVariationIndex)
@@ -86,14 +100,14 @@ const VariationCreation = ({
             : undefined
         }
       ></VariationModal>
-      {files ? (
+      {files && (
         <CodeSnippets
           htmlSnippet={files.html}
           cssSnippet={files.css}
           jsSnippet={files.javascript}
         ></CodeSnippets>
-      ) : null}
-    </>
+      )}
+    </div>
   );
 };
 

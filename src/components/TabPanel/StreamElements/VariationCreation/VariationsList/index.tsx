@@ -3,7 +3,13 @@ import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import { debounce } from "lodash";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import config from "../../../../../config/config";
 import { colors } from "../../../../../constants/colors";
@@ -77,7 +83,7 @@ export const VariationsList = ({
 
     setVariations(updatedVariations);
     setFiles(files);
-  }, [variations]);
+  }, [herotag, variations, setFiles, setVariations]);
 
   const removeVariation = useCallback(
     async (index: number) => {
@@ -88,39 +94,48 @@ export const VariationsList = ({
       setVariations(updatedVariations);
       setFiles(files);
     },
-    [variations]
+    [variations, setFiles, setVariations]
   );
 
-  const updateHeaderText = (
-    targetIndex: number,
-    rowsStructure: {
-      rows: string[];
-      rowsGroupName?: string | undefined;
-    }[],
-    herotag: string
-  ) =>
-    debounce(async (updatedHeaderText: string) => {
-      const before = rowsStructure.slice(0, targetIndex);
-      const after = rowsStructure.slice(targetIndex + 1, rowsStructure.length);
+  const updateHeaderText = useCallback(
+    (
+      targetIndex: number,
+      rowsStructure: {
+        rows: string[];
+        rowsGroupName?: string | undefined;
+      }[],
+      herotag: string
+    ) =>
+      debounce(async (updatedHeaderText: string) => {
+        const before = rowsStructure.slice(0, targetIndex);
+        const after = rowsStructure.slice(
+          targetIndex + 1,
+          rowsStructure.length
+        );
 
-      const update = [
-        ...before,
-        {
-          ...rowsStructure[targetIndex],
-          rowsGroupName: updatedHeaderText,
-        },
-        ...after,
-      ];
+        const update = [
+          ...before,
+          {
+            ...rowsStructure[targetIndex],
+            rowsGroupName: updatedHeaderText,
+          },
+          ...after,
+        ];
 
-      await updateRowsStructure(herotag, update);
-    }, 1000);
+        await updateRowsStructure(herotag, update);
+      }, 1000),
+    []
+  );
 
-  const displayPreview = (variation: Variation) => {
-    setHtmlSrc(`${config.url}/files/html/file-name/${variation.filepath}`);
-    setTimeout(() => {
-      setHtmlSrc("");
-    }, (variation.duration || 0) * 1000);
-  };
+  const displayPreview = useCallback(
+    (variation: Variation) => {
+      setHtmlSrc(`${config.url}/files/html/file-name/${variation.filepath}`);
+      setTimeout(() => {
+        setHtmlSrc("");
+      }, (variation.duration || 0) * 1000);
+    },
+    [setHtmlSrc]
+  );
 
   const rows = useCallback(
     (variations: Variation[]) =>
@@ -227,15 +242,33 @@ export const VariationsList = ({
 
       setFormatedRows(structuredRowsWithNotRegisteredOnes);
     });
-  }, [variations, herotag]);
+  }, [variations, herotag, setFormatedRows, updateHeaderText, rows]);
 
-  const rowsGroups: RowNest[] = formattedRows.filter(isRowNest);
-  const selectedRowsIds = selectedRows.map(({ id }) => id);
+  const rowsGroups: RowNest[] = useMemo(() => formattedRows.filter(isRowNest), [
+    formattedRows,
+  ]);
+  const selectedRowsIds = useMemo(() => selectedRows.map(({ id }) => id), [
+    selectedRows,
+  ]);
 
-  const isAlreadyInRowGroup = (rowId: string) =>
-    rowsGroups.some(({ rows }) => rows.map(({ id }) => id).includes(rowId));
+  const isAlreadyInRowGroup = useCallback(
+    (rowId: string) =>
+      rowsGroups.some(({ rows }) => rows.map(({ id }) => id).includes(rowId)),
+    [rowsGroups]
+  );
 
-  const getHasRowsFromDifferentGroupsToGather = (): boolean => {
+  const hasSomeRowsAlreadyGathered = useMemo(
+    () => selectedRowsIds.some(isAlreadyInRowGroup),
+    [selectedRowsIds, isAlreadyInRowGroup]
+  );
+  const hasAllRowsAlreadyGathered = useMemo(
+    () => selectedRowsIds.every(isAlreadyInRowGroup),
+    [selectedRowsIds, isAlreadyInRowGroup]
+  );
+
+  const hasNoRowAlreadyGathered = !hasSomeRowsAlreadyGathered;
+
+  const getHasRowsFromDifferentGroupsToGather = useCallback((): boolean => {
     if (hasNoRowAlreadyGathered) return false;
 
     const firstRowsGroupIndex = rowsGroups.findIndex(({ rows }) =>
@@ -249,12 +282,12 @@ export const VariationsList = ({
     );
 
     return firstRowsGroupIndex > -1 && secondRowsGroupIndex > -1;
-  };
+  }, [hasNoRowAlreadyGathered, rowsGroups, selectedRowsIds]);
 
-  const hasSomeRowsAlreadyGathered = selectedRowsIds.some(isAlreadyInRowGroup);
-  const hasAllRowsAlreadyGathered = selectedRowsIds.every(isAlreadyInRowGroup);
-  const hasNoRowAlreadyGathered = !hasSomeRowsAlreadyGathered;
-  const hasRowsFromDifferentGroupsToGather = getHasRowsFromDifferentGroupsToGather();
+  const hasRowsFromDifferentGroupsToGather = useMemo(
+    () => getHasRowsFromDifferentGroupsToGather(),
+    [getHasRowsFromDifferentGroupsToGather]
+  );
 
   const gatherRows = useCallback(
     async (rowsSelection: Row[]) => {
@@ -311,10 +344,12 @@ export const VariationsList = ({
       hasAllRowsAlreadyGathered,
       hasNoRowAlreadyGathered,
       hasRowsFromDifferentGroupsToGather,
+      updateHeaderText,
+      rows,
     ]
   );
 
-  const buttonText = () => {
+  const buttonText = useMemo(() => {
     if (hasSomeRowsAlreadyGathered && !hasAllRowsAlreadyGathered)
       return "Merge selection in group";
 
@@ -327,7 +362,12 @@ export const VariationsList = ({
       return "Can't gather rows from two groups";
 
     return "Gather";
-  };
+  }, [
+    hasSomeRowsAlreadyGathered,
+    hasAllRowsAlreadyGathered,
+    hasNoRowAlreadyGathered,
+    hasRowsFromDifferentGroupsToGather,
+  ]);
 
   return (
     <VariationsContainer>
@@ -341,7 +381,7 @@ export const VariationsList = ({
               setSelectedRows([]);
             }}
           >
-            {<span>{buttonText()}</span>}
+            {<span>{buttonText}</span>}
           </TopButton>
         ) : null}
         <TopButton

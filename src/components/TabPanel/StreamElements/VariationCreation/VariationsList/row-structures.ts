@@ -1,6 +1,5 @@
-import { debounce, partition } from "lodash";
+import { partition } from "lodash";
 
-import { updateRowsStructure } from "../../../../../services/streamElements";
 import { Row, RowNest } from "../../../../Table/TableRow";
 
 export const resolveUpdatedRowsGroups = (

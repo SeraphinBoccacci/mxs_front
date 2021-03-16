@@ -46,7 +46,7 @@ const Footer = () => {
         setCurrentPrice(data.price);
       })
       .catch((error) => handleError(error.message));
-  }, []);
+  }, [handleError]);
 
   return (
     <FooterContainer>

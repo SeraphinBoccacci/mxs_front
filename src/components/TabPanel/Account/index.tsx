@@ -28,13 +28,7 @@ export const Account = () => {
 
     setIsStreamActive(!isStreamActive);
     setIsSubmitting(false);
-  }, [
-    setIsSubmitting,
-    user,
-    toggleStreamingActivation,
-    isStreamActive,
-    setIsStreamActive,
-  ]);
+  }, [setIsSubmitting, user, isStreamActive, setIsStreamActive]);
 
   const handleModalOpen = useCallback(() => {
     setIsAuthModalOpened(true);
@@ -64,7 +58,6 @@ export const Account = () => {
             ></ActivateSwitch>
           </ActivateIntegration>
         </ContentContainer>
-
         <ContentContainer>
           <Button color="secondary" onClick={handleModalOpen}>
             Modify Password

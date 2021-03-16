@@ -1,25 +1,17 @@
-import { Tooltip } from "@material-ui/core";
-import React, {
-  ChangeEvent,
-  useCallback,
-  useContext,
-  useReducer,
-  useState,
-} from "react";
-import { useHistory } from "react-router-dom";
+import React, { useCallback, useContext, useState } from "react";
 
+import { useForm } from "../../../hooks/useForm";
 import { createAccount } from "../../../services/auth";
 import { useAuth } from "../../AuthContext";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
+import Input from "../../Input";
 import { ModalKinds } from "..";
 import {
   Button,
   ChangeModePhrase,
   ChangeModeSpan,
   ConnectionForm,
-  Herotag,
   Inputs,
-  Password,
 } from "../style";
 import { FormTitle } from "../style";
 interface AccountCreationProps {
@@ -27,33 +19,23 @@ interface AccountCreationProps {
   setModalKind: (modalKind: ModalKinds) => void;
 }
 
-interface ReducerState {
-  herotag?: string;
-  password?: string;
-  confirm?: string;
-}
-
-const formReducer = (
-  state: ReducerState,
-  event: ChangeEvent<HTMLInputElement>
-) => {
-  return {
-    ...state,
-    [event.target.name]: event.target.value,
-  };
-};
-
-export const AccountCreation = ({
-  handleClose,
-  setModalKind,
-}: AccountCreationProps) => {
+export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setHerotag } = useAuth();
   const { handleError } = useContext(ErrorHandlingContext);
 
-  const history = useHistory();
+  const [formData, setFormData] = useForm<{
+    herotag?: string;
+    password?: string;
+    confirm?: string;
+  }>({});
 
-  const [formData, setFormData] = useReducer(formReducer, {});
+  const handleOnChange = useCallback(
+    (data) => {
+      setFormData(data);
+    },
+    [setFormData]
+  );
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -77,6 +59,7 @@ export const AccountCreation = ({
           setModalKind(ModalKinds.PendingVerification);
         } else throw new Error("ACCOUNT_CREATION_FAILED");
       } catch (error) {
+        handleError(error.message);
         setIsSubmitting(false);
       }
     },
@@ -84,10 +67,9 @@ export const AccountCreation = ({
       formData.confirm,
       formData.herotag,
       formData.password,
-      history,
-      handleClose,
       handleError,
       setModalKind,
+      setHerotag,
     ]
   );
 
@@ -100,31 +82,31 @@ export const AccountCreation = ({
       <FormTitle>Account Creation</FormTitle>
       <ConnectionForm onSubmit={handleSubmit}>
         <Inputs>
-          <Tooltip
-            placement="top"
-            title="Your herotag is the username you set when you registered on Maiar."
-          >
-            <Herotag
-              placeholder="Herotag"
-              name="herotag"
-              onChange={setFormData}
-              disabled={isSubmitting}
-            ></Herotag>
-          </Tooltip>
-          <Password
+          <Input
+            tooltipText="Your herotag is the username you set when you registered on Maiar."
+            value={formData.herotag}
+            inputName="herotag"
+            inputLabel="Herotag"
+            onChange={handleOnChange}
+            isDisabled={isSubmitting}
+          ></Input>
+
+          <Input
+            value={formData.password}
+            inputName="password"
+            inputLabel="password"
+            onChange={handleOnChange}
+            isDisabled={isSubmitting}
             type="password"
-            name="password"
-            placeholder="Password"
-            onChange={setFormData}
-            disabled={isSubmitting}
-          ></Password>
-          <Password
+          ></Input>
+          <Input
+            value={formData.confirm}
+            inputName="confirm"
+            inputLabel="Password Confirmation"
+            onChange={handleOnChange}
+            isDisabled={isSubmitting}
             type="password"
-            name="confirm"
-            placeholder="Password Confirmation"
-            onChange={setFormData}
-            disabled={isSubmitting}
-          ></Password>
+          ></Input>
         </Inputs>
         <Button
           color="secondary"

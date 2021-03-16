@@ -1,23 +1,21 @@
 import { Button } from "@material-ui/core";
 import { set } from "lodash";
-import React, { createRef, useCallback, useRef } from "react";
+import React, { useCallback, useEffect } from "react";
 
+import { useForm } from "../../../../../hooks/useForm";
 import { updateVariation as putUpdateVariation } from "../../../../../services/streamElements";
 import Input from "../../../../Input";
 import Select from "../../../../Select";
 import Upload from "../../../../Upload";
 import {
-  EnterAnimationTypes,
-  ExitAnimationTypes,
-  TextPositions,
   TextStyles,
   Variation,
+  VariationFormData,
   VariationLenses,
-  VariationPositions,
 } from "../../interface";
 import { VariationsFiles } from "..";
 import { AnimationSettings } from "./AnimationSettings";
-import { textPositionsOptions } from "./constants";
+import { textPositionsOptions, variationPositionOptions } from "./constants";
 import {
   Comment,
   Modal,
@@ -25,6 +23,8 @@ import {
   SectionContent,
   SectionRow,
   SectionTitle,
+  SubSection,
+  SubSectionTitle,
 } from "./style";
 import { ModalContent, ModalHeader } from "./style";
 import { TextAlignRadioGroup } from "./TextAlignRadioGroup";
@@ -34,141 +34,55 @@ interface VariationModalProps {
   variationData?: Variation;
   setFiles: React.Dispatch<React.SetStateAction<VariationsFiles | undefined>>;
   updateVariation?: (updatedVariation: Variation) => void;
-  setVariationModalData: (variation?: Variation) => void;
+  onClose: () => void;
 }
+
+const formatFormData = (formData: { [x: string]: string | TextStyles[] }) => {
+  return Object.entries(formData).reduce((variationData, [key, value]) => {
+    const path = key.replaceAll("Ref", "").split("_");
+
+    const newVariation = set(variationData, path, value || "");
+
+    return newVariation;
+  }, {}) as Variation;
+};
+
+const isObject = (variable: any) => {
+  return Object.prototype.toString.call(variable) === "[object Object]";
+};
+
+const formatVariation = (variation: Variation | null) => {
+  if (!variation) return {};
+
+  const nestedFields = (nest: object, path: string): [string, any][] => {
+    const fieldEntries = Object.entries(nest);
+
+    return fieldEntries.flatMap(([fieldKey, fieldValue]) => {
+      const fieldPath = !!path ? `${path}_${fieldKey}` : fieldKey;
+
+      return isObject(fieldValue)
+        ? nestedFields(fieldValue, fieldPath)
+        : [[fieldPath, fieldValue]];
+    });
+  };
+
+  return Object.fromEntries(nestedFields(variation, ""));
+};
 
 export const VariationModal = ({
   variationData,
   setFiles,
   updateVariation,
-  setVariationModalData,
+  onClose,
 }: VariationModalProps) => {
-  if (!variationData || !updateVariation) return null;
+  const [formData, setFormData] = useForm<VariationFormData>({});
 
-  const nameRef = createRef<HTMLInputElement>();
-  const durationRef = createRef<HTMLInputElement>();
-  const chancesRef = createRef<HTMLInputElement>();
-  const requiredAmountRef = createRef<HTMLInputElement>();
-  const backgroundColorRef = createRef<HTMLInputElement>();
-  const widthRef = createRef<HTMLInputElement>();
-  const heigthRef = createRef<HTMLInputElement>();
-  const positionRef = useRef<{ value: VariationPositions }>({
-    value: variationData.position || VariationPositions.BottomCenter,
-  });
-  const sound_soundPathRef = useRef<{ path: string }>({
-    path: variationData.sound?.soundPath || "",
-  });
-  const sound_soundDelayRef = createRef<HTMLInputElement>();
-  const sound_soundOffsetRef = createRef<HTMLInputElement>();
-  const image_imagePathRef = useRef<{ path: string }>({
-    path: variationData.image?.imagePath || "",
-  });
-  const image_widthRef = createRef<HTMLInputElement>();
-  const image_heightRef = createRef<HTMLInputElement>();
-  const image_animation_enter_typeRef = useRef<{ value: EnterAnimationTypes }>({
-    value:
-      variationData.image?.animation?.enter?.type ||
-      EnterAnimationTypes.slideUp,
-  });
-  const image_animation_enter_durationRef = createRef<HTMLInputElement>();
-  const image_animation_enter_delayRef = createRef<HTMLInputElement>();
-  const image_animation_exit_typeRef = useRef<{ value: ExitAnimationTypes }>({
-    value:
-      variationData.image?.animation?.exit?.type || ExitAnimationTypes.slideUp,
-  });
-  const image_animation_exit_durationRef = createRef<HTMLInputElement>();
-  const image_animation_exit_offsetRef = createRef<HTMLInputElement>();
-  const text_positionRef = useRef<{ value: TextPositions }>({
-    value: variationData.text?.position || TextPositions.top,
-  });
-  const text_contentRef = createRef<HTMLInputElement>();
-  const text_widthRef = createRef<HTMLInputElement>();
-  const text_heightRef = createRef<HTMLInputElement>();
-  const text_sizeRef = createRef<HTMLInputElement>();
-  const text_colorRef = createRef<HTMLInputElement>();
-  const text_lineHeightRef = createRef<HTMLInputElement>();
-  const text_letterSpacingRef = createRef<HTMLInputElement>();
-  const text_wordSpacingRef = createRef<HTMLInputElement>();
-  const text_textAlignRef = useRef<{ textAlign: string }>({
-    textAlign: variationData.text?.textAlign || "left",
-  });
-  const text_textStyleRef = useRef<{ textStyles: TextStyles[] }>({
-    textStyles: variationData.text?.textStyle || [],
-  });
-  const text_animation_enter_typeRef = useRef<{ value: EnterAnimationTypes }>({
-    value:
-      variationData.text?.animation?.enter?.type || EnterAnimationTypes.slideUp,
-  });
-  const text_animation_enter_durationRef = createRef<HTMLInputElement>();
-  const text_animation_enter_delayRef = createRef<HTMLInputElement>();
-  const text_animation_exit_typeRef = useRef<{ value: ExitAnimationTypes }>({
-    value:
-      variationData.text?.animation?.exit?.type || ExitAnimationTypes.slideUp,
-  });
-  const text_animation_exit_durationRef = createRef<HTMLInputElement>();
-  const text_animation_exit_offsetRef = createRef<HTMLInputElement>();
-
-  const formDataToPayload = () => {
-    const formData = {
-      nameRef: nameRef.current?.value,
-      durationRef: durationRef.current?.value,
-      chancesRef: chancesRef.current?.value,
-      requiredAmountRef: requiredAmountRef.current?.value,
-      backgroundColorRef: backgroundColorRef.current?.value,
-      widthRef: widthRef.current?.value,
-      heigthRef: heigthRef.current?.value,
-      positionRef: positionRef.current?.value,
-      sound_soundPathRef: sound_soundPathRef.current?.path,
-      sound_soundDelayRef: sound_soundDelayRef.current?.value,
-      sound_soundOffsetRef: sound_soundOffsetRef.current?.value,
-      image_imagePathRef: image_imagePathRef.current?.path,
-      image_widthRef: image_widthRef.current?.value,
-      image_heightRef: image_heightRef.current?.value,
-      image_animation_enter_typeRef:
-        image_animation_enter_typeRef.current?.value,
-      image_animation_enter_durationRef:
-        image_animation_enter_durationRef.current?.value,
-      image_animation_enter_delayRef:
-        image_animation_enter_delayRef.current?.value,
-      image_animation_exit_typeRef: image_animation_exit_typeRef.current?.value,
-      image_animation_exit_durationRef:
-        image_animation_exit_durationRef.current?.value,
-      image_animation_exit_offsetRef:
-        image_animation_exit_offsetRef.current?.value,
-      text_positionRef: text_positionRef.current?.value,
-      text_contentRef: text_contentRef.current?.value,
-      text_widthRef: text_widthRef.current?.value,
-      text_heightRef: text_heightRef.current?.value,
-      text_sizeRef: text_sizeRef.current?.value,
-      text_colorRef: text_colorRef.current?.value,
-      text_lineHeightRef: text_lineHeightRef.current?.value,
-      text_letterSpacingRef: text_letterSpacingRef.current?.value,
-      text_wordSpacingRef: text_wordSpacingRef.current?.value,
-      text_textAlignRef: text_textAlignRef.current?.textAlign,
-      text_textStyleRef: text_textStyleRef.current?.textStyles,
-      text_animation_enter_typeRef: text_animation_enter_typeRef.current?.value,
-      text_animation_enter_durationRef:
-        text_animation_enter_durationRef.current?.value,
-      text_animation_enter_delayRef:
-        text_animation_enter_delayRef.current?.value,
-      text_animation_exit_typeRef: text_animation_exit_typeRef.current?.value,
-      text_animation_exit_durationRef:
-        text_animation_exit_durationRef.current?.value,
-      text_animation_exit_offsetRef:
-        text_animation_exit_offsetRef.current?.value,
-    };
-
-    return Object.entries(formData).reduce((variationData, [key, value]) => {
-      const path = key.replaceAll("Ref", "").split("_");
-
-      const newVariation = set(variationData, path, value || "");
-
-      return newVariation;
-    }, {}) as Variation;
-  };
+  useEffect(() => {
+    setFormData({ value: formatVariation(variationData || null) });
+  }, [setFormData, variationData]);
 
   const handleClick = useCallback(async () => {
-    const newSnapshot = formDataToPayload();
+    const newSnapshot = formatFormData(formData);
 
     if (variationData?._id) {
       const updates = { ...variationData, ...newSnapshot };
@@ -178,20 +92,28 @@ export const VariationModal = ({
         files,
       } = await putUpdateVariation(variationData._id as string, updates);
 
-      setVariationModalData(undefined);
+      onClose();
 
-      updateVariation(savedUpdatedVariation);
+      if (updateVariation) updateVariation(savedUpdatedVariation);
       setFiles(files);
     }
-  }, [setVariationModalData, updateVariation, variationData]);
+  }, [onClose, updateVariation, variationData, formData, setFiles]);
 
   const handleClose = useCallback(() => {
-    const newVariationData = formDataToPayload();
+    const newVariationData = formatFormData(formData);
 
-    setVariationModalData(undefined);
+    onClose();
 
-    updateVariation({ ...variationData, ...newVariationData });
-  }, [setVariationModalData, updateVariation, variationData]);
+    if (updateVariation)
+      updateVariation({ ...variationData, ...newVariationData });
+  }, [onClose, updateVariation, variationData, formData]);
+
+  const handleOnChange = useCallback(
+    (event) => {
+      setFormData(event);
+    },
+    [setFormData]
+  );
 
   return (
     <Modal open={!!variationData && !!updateVariation} onClose={handleClose}>
@@ -206,76 +128,68 @@ export const VariationModal = ({
           <SectionContent>
             <SectionRow>
               <Input
-                key={VariationLenses.name}
                 inputLabel="Name"
                 inputName={VariationLenses.name}
-                inputRef={nameRef}
-                value={variationData?.name || ""}
+                onChange={handleOnChange}
+                value={formData?.name}
               ></Input>
               <Input
-                key={VariationLenses.duration}
                 inputLabel="Duration"
                 tooltipText="Variation duration"
                 inputName={VariationLenses.duration}
-                inputRef={durationRef}
-                value={variationData?.duration || ""}
+                onChange={handleOnChange}
+                value={formData?.duration}
                 isTypeNumber
                 endAdornment="seconds"
               ></Input>
               <Input
-                key={VariationLenses.requiredAmount}
                 inputLabel="Required Amount"
                 tooltipText="Required amount to display variation"
                 inputName={VariationLenses.requiredAmount}
-                inputRef={requiredAmountRef}
-                value={variationData?.requiredAmount || ""}
+                onChange={handleOnChange}
+                value={formData?.requiredAmount}
                 isTypeNumber
                 endAdornment="¤EGLD¤"
               ></Input>
               <Input
-                key={VariationLenses.chances}
                 inputLabel="Chances"
                 tooltipText="To randomly use variation if amount sent match required one"
                 inputName={VariationLenses.chances}
-                inputRef={chancesRef}
-                value={variationData?.chances || ""}
+                onChange={handleOnChange}
+                value={formData?.chances}
                 isTypeNumber
               ></Input>
             </SectionRow>
             <SectionRow>
               <Input
-                key={VariationLenses.backgroundColor}
                 inputLabel="Background Color"
                 inputName={VariationLenses.backgroundColor}
-                inputRef={backgroundColorRef}
-                value={variationData?.backgroundColor || "#ffffff"}
+                onChange={handleOnChange}
+                value={formData?.backgroundColor || "#ffffff"}
               ></Input>
-              {/* <Select
-                key={VariationLenses.position}
+              <Select
                 options={variationPositionOptions}
                 inputName={VariationLenses.position}
-                inputRef={positionRef}
+                onChange={handleOnChange}
                 inputLabel="Position"
-                value={variationData?.position || ""}
+                value={formData?.position}
               ></Select>
               <Input
-                key={VariationLenses.width}
                 inputLabel="Width"
                 inputName={VariationLenses.width}
-                inputRef={widthRef}
-                value={variationData?.width || ""}
+                onChange={handleOnChange}
+                value={formData?.width}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
               <Input
-                key={VariationLenses.heigth}
                 inputLabel="Height"
                 inputName={VariationLenses.heigth}
-                inputRef={heigthRef}
-                value={variationData?.heigth || ""}
+                onChange={handleOnChange}
+                value={formData?.heigth}
                 isTypeNumber
                 endAdornment="px"
-              ></Input> */}
+              ></Input>
             </SectionRow>
           </SectionContent>
         </Section>
@@ -285,30 +199,28 @@ export const VariationModal = ({
           <SectionContent>
             <SectionRow>
               <Upload
-                key={VariationLenses.sound_soundPath}
                 inputLabel="Upload Audio"
                 inputName={VariationLenses.sound_soundPath}
-                inputRef={sound_soundPathRef}
+                value={formData?.[VariationLenses.sound_soundPath]}
+                onChange={handleOnChange}
                 isAudio
               ></Upload>
             </SectionRow>
             <SectionRow>
               <Input
-                key={VariationLenses.sound_soundDelay}
                 inputLabel="Sound Delay"
                 inputName={VariationLenses.sound_soundDelay}
-                inputRef={sound_soundDelayRef}
-                value={variationData?.sound?.soundDelay || ""}
+                onChange={handleOnChange}
+                value={formData?.[VariationLenses.sound_soundDelay]}
                 isTypeNumber
                 endAdornment="seconds"
                 tooltipText="Time between alert end and alert start"
               ></Input>
               <Input
-                key={VariationLenses.sound_soundOffset}
                 inputLabel="Sound Offset"
                 inputName={VariationLenses.sound_soundOffset}
-                inputRef={sound_soundOffsetRef}
-                value={variationData?.sound?.soundOffset || ""}
+                onChange={handleOnChange}
+                value={formData?.[VariationLenses.sound_soundOffset]}
                 isTypeNumber
                 endAdornment="seconds"
                 tooltipText="Time between alert end and alert end"
@@ -322,44 +234,35 @@ export const VariationModal = ({
           <SectionContent>
             <SectionRow>
               <Upload
-                key={VariationLenses.image_imagePath}
-                inputRef={image_imagePathRef}
+                onChange={handleOnChange}
                 inputLabel="Upload Image"
+                value={formData?.[VariationLenses.image_imagePath]}
                 inputName={VariationLenses.image_imagePath}
               ></Upload>
             </SectionRow>
             <SectionRow>
               <Input
-                key={VariationLenses.image_width}
-                inputRef={image_widthRef}
+                onChange={handleOnChange}
                 inputLabel="Width"
                 inputName={VariationLenses.image_width}
-                value={variationData?.image?.width || ""}
+                value={formData?.[VariationLenses.image_width]}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
               <Input
-                key={VariationLenses.image_height}
-                inputRef={image_heightRef}
+                onChange={handleOnChange}
                 inputLabel="Height"
                 inputName={VariationLenses.image_height}
-                value={variationData?.image?.height || ""}
+                value={formData?.[VariationLenses.image_height]}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
             </SectionRow>
             <AnimationSettings
               key="animation_setting_image"
-              variation={variationData as Variation}
+              formData={formData}
               pathString="image"
-              inputRefs={{
-                enter_animationRef: image_animation_enter_typeRef,
-                enter_durationRef: image_animation_enter_durationRef,
-                enter_delayRef: image_animation_enter_delayRef,
-                exit_animationRef: image_animation_exit_typeRef,
-                exit_durationRef: image_animation_exit_durationRef,
-                exit_offsetRef: image_animation_exit_offsetRef,
-              }}
+              onChange={handleOnChange}
             ></AnimationSettings>
           </SectionContent>
         </Section>
@@ -369,22 +272,20 @@ export const VariationModal = ({
           <SectionContent>
             <SectionRow>
               <Select
-                key={VariationLenses.text_position}
-                inputRef={text_positionRef}
+                onChange={handleOnChange}
                 options={textPositionsOptions}
                 inputName={VariationLenses.text_position}
                 inputLabel="Text Position"
                 size="large"
-                value={variationData?.text?.position || ""}
+                value={formData?.[VariationLenses.text_position]}
               ></Select>
             </SectionRow>
             <SectionRow>
               <Input
-                key={VariationLenses.text_content}
-                inputRef={text_contentRef}
+                onChange={handleOnChange}
                 inputLabel="Text Content"
                 inputName={VariationLenses.text_content}
-                value={variationData?.text?.content || ""}
+                value={formData?.[VariationLenses.text_content]}
                 isTextContent
               ></Input>
               <Comment>
@@ -394,88 +295,95 @@ export const VariationModal = ({
             </SectionRow>
             <SectionRow>
               <Input
-                key={VariationLenses.text_width}
-                inputRef={text_widthRef}
+                onChange={handleOnChange}
                 inputLabel="Width"
                 inputName={VariationLenses.text_width}
-                value={variationData?.text?.width || ""}
+                value={formData?.[VariationLenses.text_width]}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
               <Input
-                key={VariationLenses.text_height}
-                inputRef={text_heightRef}
+                onChange={handleOnChange}
                 inputLabel="Height"
                 inputName={VariationLenses.text_height}
-                value={variationData?.text?.height || ""}
+                value={formData?.[VariationLenses.text_height]}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
             </SectionRow>
             <SectionRow>
               <Input
-                key={VariationLenses.text_size}
-                inputRef={text_sizeRef}
+                onChange={handleOnChange}
                 inputLabel="Font Size"
                 inputName={VariationLenses.text_size}
-                value={variationData?.text?.size || ""}
+                value={formData?.[VariationLenses.text_size]}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
               <Input
-                key={VariationLenses.text_color}
-                inputRef={text_colorRef}
+                onChange={handleOnChange}
                 inputLabel="Font Color"
                 inputName={VariationLenses.text_color}
-                value={variationData?.text?.color || ""}
+                value={formData?.[VariationLenses.text_color]}
               ></Input>
             </SectionRow>
             <SectionRow>
               <Input
-                key={VariationLenses.text_lineHeight}
-                inputRef={text_lineHeightRef}
+                onChange={handleOnChange}
                 inputLabel="Line Height"
                 inputName={VariationLenses.text_lineHeight}
-                value={variationData?.text?.lineHeight || ""}
+                value={formData?.[VariationLenses.text_lineHeight]}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
               <Input
-                key={VariationLenses.text_letterSpacing}
-                inputRef={text_letterSpacingRef}
+                onChange={handleOnChange}
                 inputLabel="Letter Spacing"
                 inputName={VariationLenses.text_letterSpacing}
-                value={variationData?.text?.letterSpacing || ""}
+                value={formData?.[VariationLenses.text_letterSpacing]}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
               <Input
-                key={VariationLenses.text_wordSpacing}
-                inputRef={text_wordSpacingRef}
+                onChange={handleOnChange}
                 inputLabel="Word Spacing"
                 inputName={VariationLenses.text_wordSpacing}
-                value={variationData?.text?.wordSpacing || ""}
+                value={formData?.[VariationLenses.text_wordSpacing]}
                 isTypeNumber
                 endAdornment="px"
               ></Input>
-            </SectionRow>
+            </SectionRow>{" "}
             <TextAlignRadioGroup
-              inputRef={text_textAlignRef}
+              value={formData?.[VariationLenses.text_textAlign] as string}
+              onChange={handleOnChange}
             ></TextAlignRadioGroup>
             <TextStylesCheckboxes
-              inputRef={text_textStyleRef}
+              value={formData?.[VariationLenses.text_textStyle] as TextStyles[]}
+              onChange={handleOnChange}
             ></TextStylesCheckboxes>
+            <SubSection>
+              <SubSectionTitle>Text Stroke</SubSectionTitle>
+              <SectionRow>
+                <Input
+                  onChange={handleOnChange}
+                  inputLabel="Stroke Width"
+                  inputName={VariationLenses.text_stroke_width}
+                  value={formData?.[VariationLenses.text_stroke_width]}
+                  isTypeNumber
+                  endAdornment="px"
+                ></Input>
+                <Input
+                  onChange={handleOnChange}
+                  inputLabel="Stroke Color"
+                  inputName={VariationLenses.text_stroke_color}
+                  value={formData?.[VariationLenses.text_stroke_color]}
+                ></Input>
+              </SectionRow>
+            </SubSection>
             <AnimationSettings
-              inputRefs={{
-                enter_animationRef: text_animation_enter_typeRef,
-                enter_durationRef: text_animation_enter_durationRef,
-                enter_delayRef: text_animation_enter_delayRef,
-                exit_animationRef: text_animation_exit_typeRef,
-                exit_durationRef: text_animation_exit_durationRef,
-                exit_offsetRef: text_animation_exit_offsetRef,
-              }}
+              onChange={handleOnChange}
               key="animation_setting_text"
-              variation={variationData as Variation}
+              formData={formData}
               pathString="text"
             ></AnimationSettings>
           </SectionContent>

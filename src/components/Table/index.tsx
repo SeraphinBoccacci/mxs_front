@@ -2,7 +2,7 @@ import { Checkbox } from "@material-ui/core";
 import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
 import { flatten } from "lodash";
-import React, { useCallback } from "react";
+import React from "react";
 
 import {
   FirstHeaderTableCell,
@@ -80,13 +80,13 @@ const Table = (props: TableProps | SelectableTableProps) => {
     if (isSelectableTable(props)) {
       const { onSelect, selectedRows } = props;
 
-      const handleOnChangeSelectAll = useCallback(() => {
+      const handleOnChangeSelectAll = () => {
         if (flatten(selectedRows).length !== flatten(rows).length) {
           onSelect(rows as Row[]);
         } else {
           onSelect([]);
         }
-      }, [selectedRows, rows, onSelect]);
+      };
 
       return withHeader ? (
         <TableHead>
@@ -116,16 +116,13 @@ const Table = (props: TableProps | SelectableTableProps) => {
     if (isSelectableTable(props)) {
       const { isSelectable, onSelect, selectedRows } = props;
 
-      const handleOnChangeSelect = useCallback(
-        (row: Row) => {
-          if (selectedRows.some(({ id: rowId }) => rowId === row.id)) {
-            onSelect(selectedRows.filter(({ id: rowId }) => rowId !== row.id));
-          } else {
-            onSelect([...selectedRows, row]);
-          }
-        },
-        [selectedRows, rows, onSelect]
-      );
+      const handleOnChangeSelect = (row: Row) => {
+        if (selectedRows.some(({ id: rowId }) => rowId === row.id)) {
+          onSelect(selectedRows.filter(({ id: rowId }) => rowId !== row.id));
+        } else {
+          onSelect([...selectedRows, row]);
+        }
+      };
 
       return (
         <TableBody>

@@ -57,41 +57,11 @@ export const Inputs = styled.div`
   }
 `;
 
-const BaseInput = styled.input`
-  margin: 1rem auto;
-  width: 15rem;
-  height: 2.1rem;
-  font-family: ${fonts.Ubuntu};
-  border-radius: 10px;
-  border: none;
-  font-size: 0.9rem;
-  transition: 0.4s;
-  text-align: center;
-  box-shadow: 0 8px 6px -6px ${colors.black};
-  &::placeholder {
-    font-size: 0.9rem;
-    transition: 0.4s;
-  }
-  &:focus::placeholder {
-    font-size: 0;
-  }
-  @media (min-width: 700px) {
-    width: 17rem;
-  }
-  @media (min-width: 900px) {
-    width: 20rem;
-  }
-`;
-
 export const Button = styled(MaterialButton)`
   width: max-content !important;
   margin: 0 auto !important;
   padding: 0.4rem 2rem !important;
 `;
-
-export const Herotag = styled(BaseInput)``;
-
-export const Password = styled(BaseInput)``;
 
 export const ChangeModePhrase = styled.div`
   margin: 0.6rem auto;

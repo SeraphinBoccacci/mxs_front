@@ -6,7 +6,7 @@ import DonutSmallRoundedIcon from "@material-ui/icons/DonutSmallRounded";
 import HighlightRoundedIcon from "@material-ui/icons/HighlightRounded";
 import MovieCreationRoundedIcon from "@material-ui/icons/MovieCreationRounded";
 import VideoCallRoundedIcon from "@material-ui/icons/VideoCallRounded";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import React from "react";
 
 import { Link } from "../../../styles/global";
@@ -140,6 +140,37 @@ const Features = ({
     setFocusedFeatureKey(isViewer ? "features_04" : "features_01");
   }, [isViewer, setFocusedFeatureKey]);
 
+  const handleSwitch = useCallback(
+    (isChecked) => {
+      setIsViewer(isChecked);
+      setFocusedFeatureKey(isChecked ? "features_04" : "features_01");
+    },
+    [setIsViewer, setFocusedFeatureKey]
+  );
+
+  const featuresContent = useMemo(
+    () =>
+      features[isViewer ? "viewer" : "creator"].map(
+        ({ title, content, key }) => {
+          const Icon = iconsMapper[key];
+
+          return (
+            <FeaturePaper
+              key={key}
+              onMouseEnter={() => setFocusedFeatureKey(key)}
+            >
+              <Icon fontSize={false ? "large" : "small"}></Icon>
+              <Feature>
+                <h3>{title}</h3>
+                {content}
+              </Feature>
+            </FeaturePaper>
+          );
+        }
+      ),
+    [isViewer]
+  );
+
   return (
     <FeaturesContainer id="features">
       <FeaturesHeader>
@@ -147,35 +178,13 @@ const Features = ({
         <FeaturesSubTitle>Nothing simpler.</FeaturesSubTitle>
         <Switch
           isActive={isViewer}
-          setIsActive={(isChecked) => {
-            setIsViewer(isChecked);
-            setFocusedFeatureKey(isChecked ? "features_04" : "features_01");
-          }}
+          setIsActive={handleSwitch}
           offLabel="Creator"
           onLabel="Viewer"
         ></Switch>
       </FeaturesHeader>
       <FeaturesContent isRowReverse={!isViewer}>
-        <FeaturesSubContent>
-          {features[isViewer ? "viewer" : "creator"].map(
-            ({ title, content, key }) => {
-              const Icon = iconsMapper[key];
-
-              return (
-                <FeaturePaper
-                  key={key}
-                  onMouseEnter={() => setFocusedFeatureKey(key)}
-                >
-                  <Icon fontSize={false ? "large" : "small"}></Icon>
-                  <Feature>
-                    <h3>{title}</h3>
-                    {content}
-                  </Feature>
-                </FeaturePaper>
-              );
-            }
-          )}
-        </FeaturesSubContent>
+        <FeaturesSubContent>{featuresContent}</FeaturesSubContent>
         <FeatureScreen
           key={`backgrounds-${focusedFeatureKey}`}
           background={backgrounds[focusedFeatureKey] as string}

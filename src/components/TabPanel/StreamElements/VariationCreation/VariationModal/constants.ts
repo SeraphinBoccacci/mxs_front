@@ -6,6 +6,7 @@ import {
 } from "../../interface";
 
 export const variationPositionOptions = [
+  { label: "None", value: "" },
   { label: "Top Left", value: VariationPositions.TopLeft },
   { label: "Top Center", value: VariationPositions.TopCenter },
   { label: "Top Right", value: VariationPositions.TopRight },
@@ -18,6 +19,7 @@ export const variationPositionOptions = [
 ];
 
 export const textPositionsOptions = [
+  { label: "None", value: "" },
   { label: "On top", value: TextPositions.top },
   { label: "On bottom", value: TextPositions.bottom },
   { label: "At right", value: TextPositions.right },
@@ -26,6 +28,7 @@ export const textPositionsOptions = [
 ];
 
 export const enterAnimationTypesOptions = [
+  { label: "None", value: "" },
   { label: "Slide up", value: EnterAnimationTypes.slideUp },
   { label: "Slide right", value: EnterAnimationTypes.slideRight },
   { label: "Slide left", value: EnterAnimationTypes.slideLeft },
@@ -35,6 +38,7 @@ export const enterAnimationTypesOptions = [
 ];
 
 export const exitAnimationTypesOptions = [
+  { label: "None", value: "" },
   { label: "Slide up", value: ExitAnimationTypes.slideUp },
   { label: "Slide right", value: ExitAnimationTypes.slideRight },
   { label: "Slide left", value: ExitAnimationTypes.slideLeft },

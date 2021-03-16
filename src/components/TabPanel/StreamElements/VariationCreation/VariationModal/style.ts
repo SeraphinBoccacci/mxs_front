@@ -103,7 +103,7 @@ export const SectionRow = styled.div`
   width: 100%;
 `;
 
-export const AnimationSection = styled(Section)`
+export const SubSection = styled(Section)`
   background-color: ${colors.black};
 
   width: calc(100% - 1.4rem);
@@ -111,7 +111,7 @@ export const AnimationSection = styled(Section)`
   margin: 0.7rem;
 `;
 
-export const AnimationTitle = styled.h4`
+export const SubSectionTitle = styled.h4`
   font-family: ${fonts.Ubuntu};
   text-align: center;
 

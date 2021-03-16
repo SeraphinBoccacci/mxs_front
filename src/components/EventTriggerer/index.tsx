@@ -1,7 +1,9 @@
 import { Button } from "@material-ui/core";
-import React, { createRef, useCallback, useContext } from "react";
+import React, { ChangeEvent, useCallback, useContext } from "react";
 
+import { useForm } from "../../hooks/useForm";
 import {
+  EventData,
   triggerIftttEvent,
   triggerStreamElementsEvent,
 } from "../../services/user";
@@ -16,20 +18,23 @@ interface EventTriggererProps {
 }
 
 const EventTriggerer = ({ triggeredEvent }: EventTriggererProps) => {
-  const triggeredHerotagRef = createRef<HTMLInputElement>();
-  const triggeredAmountRef = createRef<HTMLInputElement>();
-  const triggeredMessageRef = createRef<HTMLInputElement>();
   const { herotag } = useAuth();
   const { handleError } = useContext(ErrorHandlingContext);
+
+  const [formData, setFormData] = useForm({
+    herotag: "test_herotag",
+    amount: "0.01",
+    data: "test_message",
+  });
 
   const triggerEvent = useCallback(
     async (event) => {
       event.preventDefault();
 
-      const data = {
-        herotag: triggeredHerotagRef.current?.value || "test_herotag",
-        amount: triggeredAmountRef.current?.value || "0.01",
-        data: triggeredMessageRef.current?.value || "test_message",
+      const data: EventData = {
+        herotag: formData.herotag,
+        amount: formData.amount,
+        data: formData.data,
       };
 
       try {
@@ -43,14 +48,14 @@ const EventTriggerer = ({ triggeredEvent }: EventTriggererProps) => {
         handleError(error.message);
       }
     },
-    [
-      herotag,
-      triggeredEvent,
-      handleError,
-      triggeredHerotagRef,
-      triggeredAmountRef,
-      triggeredMessageRef,
-    ]
+    [herotag, triggeredEvent, handleError, formData]
+  );
+
+  const handleOnChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData(event);
+    },
+    [setFormData]
   );
 
   return (
@@ -58,23 +63,26 @@ const EventTriggerer = ({ triggeredEvent }: EventTriggererProps) => {
       <Form onSubmit={triggerEvent}>
         <FormRow>
           <Input
-            inputName={`triggeredHerotag_${triggeredEvent}`}
+            inputName="herotag"
             inputLabel="Herotag"
-            inputRef={triggeredHerotagRef}
+            onChange={handleOnChange}
+            value={formData.herotag}
           ></Input>
           <Input
-            inputName={`triggeredAmount_${triggeredEvent}`}
+            inputName="amount"
             inputLabel="Amount"
-            inputRef={triggeredAmountRef}
             endAdornment="EGLD"
+            onChange={handleOnChange}
+            value={formData.amount}
           ></Input>
         </FormRow>
         <FormRow>
           <Input
-            inputName={`triggeredMessage_${triggeredEvent}`}
+            inputName="data"
             inputLabel="Message"
-            inputRef={triggeredMessageRef}
             isTextContent
+            onChange={handleOnChange}
+            value={formData.data}
           ></Input>
         </FormRow>
         <Button variant="outlined" color="secondary" type="submit">

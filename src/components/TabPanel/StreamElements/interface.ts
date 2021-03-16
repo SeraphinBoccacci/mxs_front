@@ -52,6 +52,10 @@ export interface Text {
   textAlign?: string;
   textStyle?: TextStyles[];
   animation?: Animation;
+  stroke?: {
+    color?: string;
+    width?: number;
+  };
 }
 
 export enum TextPositions {
@@ -118,6 +122,8 @@ export enum VariationLenses {
   "text_height" = "text_height",
   "text_size" = "text_size",
   "text_color" = "text_color",
+  "text_stroke_width" = "text_stroke_width",
+  "text_stroke_color" = "text_stroke_color",
   "text_lineHeight" = "text_lineHeight",
   "text_letterSpacing" = "text_letterSpacing",
   "text_wordSpacing" = "text_wordSpacing",
@@ -130,3 +136,46 @@ export enum VariationLenses {
   "text_animation_exit_duration" = "text_animation_exit_duration",
   "text_animation_exit_offset" = "text_animation_exit_offset",
 }
+
+export interface VariationData {
+  name?: string;
+  duration?: string;
+  chances?: string;
+  requiredAmount?: string;
+  backgroundColor?: string;
+  width?: string;
+  heigth?: string;
+  position?: string;
+  sound_soundPath?: string;
+  sound_soundDelay?: string;
+  sound_soundOffset?: string;
+  image_imagePath?: string;
+  image_width?: string;
+  image_height?: string;
+  image_animation_enter_type?: string;
+  image_animation_enter_duration?: string;
+  image_animation_enter_delay?: string;
+  image_animation_exit_type?: string;
+  image_animation_exit_duration?: string;
+  image_animation_exit_offset?: string;
+  text_position?: string;
+  text_content?: string;
+  text_width?: string;
+  text_height?: string;
+  text_size?: string;
+  text_color?: string;
+  text_stroke_width?: number;
+  text_stroke_color?: string;
+  text_lineHeight?: string;
+  text_letterSpacing?: string;
+  text_wordSpacing?: string;
+  text_textAlign?: string;
+  text_textStyle?: TextStyles[];
+  text_animation_enter_type?: string;
+  text_animation_enter_duration?: string;
+  text_animation_enter_delay?: string;
+  text_animation_exit_type?: string;
+  text_animation_exit_duration?: string;
+  text_animation_exit_offset?: string;
+}
+export type VariationFormData = VariationData & { [x: string]: string };
