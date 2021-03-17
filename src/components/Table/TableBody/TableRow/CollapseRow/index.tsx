@@ -11,7 +11,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import React, { useCallback, useEffect, useState } from "react";
 
-import { Column } from "../../";
+import { Column } from "../../..";
 import { Row } from "../index";
 import StandardRow from "../StandardRow";
 import { StyledTableHeader } from "./style";

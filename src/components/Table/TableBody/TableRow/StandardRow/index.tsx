@@ -1,14 +1,14 @@
 import { Checkbox } from "@material-ui/core";
 import React from "react";
 
-import { Column } from "../../";
+import { Column } from "../../..";
+import { Row } from "../index";
 import {
   FirstTableCell,
   LastTableCell,
   TableCell as MaterialTableCell,
   TableRow as MaterialTableRow,
-} from "../../style";
-import { Row } from "../index";
+} from "./style";
 
 interface TableRowProps {
   row: Row;

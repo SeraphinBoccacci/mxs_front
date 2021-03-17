@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { Column } from "..";
+import { Column } from "../..";
 import CollapseRow from "./CollapseRow";
 import StandardRow from "./StandardRow";
 

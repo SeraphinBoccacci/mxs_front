@@ -23,7 +23,7 @@ import {
   Paragraph,
 } from "./style";
 
-export const IftttIntegration = () => {
+const Ifttt = () => {
   const { user } = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -146,3 +146,5 @@ export const IftttIntegration = () => {
     </IftttIntegrationContainer>
   );
 };
+
+export default Ifttt;

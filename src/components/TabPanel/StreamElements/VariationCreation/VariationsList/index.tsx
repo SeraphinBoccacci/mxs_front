@@ -22,7 +22,7 @@ import {
 import { invertColor } from "../../../../../utils/color";
 import { AuthContext } from "../../../../AuthContext";
 import Table from "../../../../Table";
-import { isRowNest, Row, RowNest } from "../../../../Table/TableRow";
+import { isRowNest, Row, RowNest } from "../../../../Table/TableBody/TableRow";
 import { Variation } from "../../interface";
 import { VariationsFiles } from "..";
 import { columns } from "./columns";

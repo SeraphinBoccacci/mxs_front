@@ -1,17 +1,26 @@
 import Tab from "@material-ui/core/Tab";
 import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRounded";
-import { useCallback, useContext } from "react";
+import { lazy, Suspense, useCallback, useContext } from "react";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQueryString } from "../../hooks/useQueryString";
 import { AuthContext } from "../AuthContext";
 import { TabPanel } from "../TabPanel";
-import { Account } from "../TabPanel/Account";
-import { IftttIntegration } from "../TabPanel/Ifttt";
 import { NotDevelopped } from "../TabPanel/NotDevelopped";
-import StreamElementsIntegration from "../TabPanel/StreamElements";
 import { AppBar, Tabs } from "./style";
+
+const Account = lazy(() => {
+  return import("../TabPanel/Account");
+});
+
+const Ifttt = lazy(() => {
+  return import("../TabPanel/Ifttt");
+});
+
+const StreamElements = lazy(() => {
+  return import("../TabPanel/StreamElements");
+});
 
 const Lab = () => {
   const [activeTab, setActiveTab] = useQueryString("activeTab");
@@ -56,21 +65,23 @@ const Lab = () => {
           style={{ cursor: "pointer" }}
         ></PowerSettingsNewRoundedIcon>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <Account></Account>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <IftttIntegration></IftttIntegration>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <StreamElementsIntegration></StreamElementsIntegration>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <NotDevelopped></NotDevelopped>
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <NotDevelopped></NotDevelopped>
-      </TabPanel>
+      <Suspense fallback={<div>Loading...</div>}>
+        <TabPanel value={value} index={0}>
+          <Account></Account>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Ifttt></Ifttt>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <StreamElements></StreamElements>
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <NotDevelopped></NotDevelopped>
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <NotDevelopped></NotDevelopped>
+        </TabPanel>
+      </Suspense>
     </div>
   );
 };

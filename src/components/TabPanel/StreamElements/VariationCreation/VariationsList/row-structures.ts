@@ -1,6 +1,6 @@
 import { partition } from "lodash";
 
-import { Row, RowNest } from "../../../../Table/TableRow";
+import { Row, RowNest } from "../../../../Table/TableBody/TableRow";
 
 export const resolveUpdatedRowsGroups = (
   formattedRows: (Row | RowNest)[],

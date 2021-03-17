@@ -9,7 +9,7 @@ import AuthModal, { ModalKinds } from "../../AuthModal";
 import { Paragraph } from "../style";
 import { AccountContainer, ActivateIntegration, ActivateSwitch } from "./style";
 
-export const Account = () => {
+const Account = () => {
   const { user } = useContext(AuthContext);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -73,3 +73,5 @@ export const Account = () => {
     </>
   );
 };
+
+export default Account;

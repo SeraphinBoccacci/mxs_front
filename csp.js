@@ -8,7 +8,7 @@ module.exports = {
     "style-src": ["'self'", "'unsafe-inline'"],
     "script-src-elem": ["'unsafe-inline'", "*"],
     "style-src-elem": ["'unsafe-inline'", "https:"],
-    "connect-src": ["'self'"],
+    "connect-src": ["*"],
   },
   prod: {
     "default-src": ["'self'", "*", "data:", "https:"],
@@ -19,6 +19,6 @@ module.exports = {
     "style-src": ["'self'", "'unsafe-inline'"],
     "script-src-elem": ["'unsafe-inline'", "*"],
     "style-src-elem": ["'unsafe-inline'", "https:"],
-    "connect-src": ["'self'"],
+    "connect-src": ["*"],
   },
 };
