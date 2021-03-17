@@ -6,7 +6,7 @@ import VariationCreation from "../VariationCreation";
 const CustomTemplateIntegration = () => {
   return (
     <div>
-      <EventTriggerer triggeredEvent="streamElements"></EventTriggerer>
+      <EventTriggerer></EventTriggerer>
       <VariationCreation></VariationCreation>
     </div>
   );

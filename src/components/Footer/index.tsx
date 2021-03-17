@@ -45,7 +45,9 @@ const Footer = () => {
 
         setCurrentPrice(data.price);
       })
-      .catch((error) => handleError(error.message));
+      .catch((error) => {
+        handleError(error.message);
+      });
   }, [handleError]);
 
   return (
@@ -78,7 +80,7 @@ const Footer = () => {
             <TelegramIcon></TelegramIcon>
           </ColumnItem>
           <ColumnItem onClick={() => setIsPricingModalOpenned(true)}>
-            Pricing ?
+            Pricing?
           </ColumnItem>
         </Column>
         <Column>

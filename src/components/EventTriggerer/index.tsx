@@ -1,11 +1,10 @@
 import { Button } from "@material-ui/core";
-import React, { ChangeEvent, useCallback, useContext } from "react";
+import React, { ChangeEvent, useCallback, useContext, useEffect } from "react";
 
 import { useForm } from "../../hooks/useForm";
 import {
   EventData,
-  triggerIftttEvent,
-  triggerStreamElementsEvent,
+  triggerEvent as postTriggerEvent,
 } from "../../services/user";
 import { ContentContainer } from "../../styles/global";
 import { useAuth } from "../AuthContext";
@@ -13,19 +12,25 @@ import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import Input from "../Input";
 import { Form, FormRow } from "./style";
 
-interface EventTriggererProps {
-  triggeredEvent: "ifttt" | "streamElements";
-}
-
-const EventTriggerer = ({ triggeredEvent }: EventTriggererProps) => {
+const EventTriggerer = () => {
   const { herotag } = useAuth();
   const { handleError } = useContext(ErrorHandlingContext);
 
   const [formData, setFormData] = useForm({
     herotag: "test_herotag",
     amount: "0.01",
-    data: "test_message",
+    message: "test_message",
   });
+
+  useEffect(() => {
+    setFormData({
+      value: {
+        herotag: "test_herotag",
+        amount: "0.01",
+        message: "test_message",
+      },
+    });
+  }, [setFormData]);
 
   const triggerEvent = useCallback(
     async (event) => {
@@ -34,21 +39,18 @@ const EventTriggerer = ({ triggeredEvent }: EventTriggererProps) => {
       const data: EventData = {
         herotag: formData.herotag,
         amount: formData.amount,
-        data: formData.data,
+        data: formData.message,
       };
 
       try {
         if (herotag) {
-          if (triggeredEvent === "ifttt")
-            await triggerIftttEvent(herotag, data);
-          if (triggeredEvent === "streamElements")
-            await triggerStreamElementsEvent(herotag, data);
+          await postTriggerEvent(herotag, data);
         }
       } catch (error) {
         handleError(error.message);
       }
     },
-    [herotag, triggeredEvent, handleError, formData]
+    [herotag, handleError, formData]
   );
 
   const handleOnChange = useCallback(
@@ -74,15 +76,16 @@ const EventTriggerer = ({ triggeredEvent }: EventTriggererProps) => {
             endAdornment="EGLD"
             onChange={handleOnChange}
             value={formData.amount}
+            type="number"
           ></Input>
         </FormRow>
         <FormRow>
           <Input
-            inputName="data"
+            inputName="message"
             inputLabel="Message"
             isTextContent
             onChange={handleOnChange}
-            value={formData.data}
+            value={formData.message}
           ></Input>
         </FormRow>
         <Button variant="outlined" color="secondary" type="submit">

@@ -132,7 +132,7 @@ const Ifttt = () => {
         </IftttIntegrationForm>
       </ContentContainer>
 
-      <EventTriggerer triggeredEvent="ifttt"></EventTriggerer>
+      <EventTriggerer></EventTriggerer>
 
       <ActivateIntegration>
         Activate Integration

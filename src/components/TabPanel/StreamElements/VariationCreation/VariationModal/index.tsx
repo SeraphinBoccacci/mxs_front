@@ -139,7 +139,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.duration}
                 onChange={handleOnChange}
                 value={formData?.duration}
-                isTypeNumber
+                type="number"
                 endAdornment="seconds"
               ></Input>
               <Input
@@ -148,8 +148,8 @@ export const VariationModal = ({
                 inputName={VariationLenses.requiredAmount}
                 onChange={handleOnChange}
                 value={formData?.requiredAmount}
-                isTypeNumber
                 endAdornment="¤EGLD¤"
+                type="number"
               ></Input>
               <Input
                 inputLabel="Chances"
@@ -157,7 +157,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.chances}
                 onChange={handleOnChange}
                 value={formData?.chances}
-                isTypeNumber
+                type="number"
               ></Input>
             </SectionRow>
             <SectionRow>
@@ -179,7 +179,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.width}
                 onChange={handleOnChange}
                 value={formData?.width}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
               <Input
@@ -187,7 +187,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.heigth}
                 onChange={handleOnChange}
                 value={formData?.heigth}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
             </SectionRow>
@@ -212,7 +212,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.sound_soundDelay}
                 onChange={handleOnChange}
                 value={formData?.[VariationLenses.sound_soundDelay]}
-                isTypeNumber
+                type="number"
                 endAdornment="seconds"
                 tooltipText="Time between alert end and alert start"
               ></Input>
@@ -221,7 +221,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.sound_soundOffset}
                 onChange={handleOnChange}
                 value={formData?.[VariationLenses.sound_soundOffset]}
-                isTypeNumber
+                type="number"
                 endAdornment="seconds"
                 tooltipText="Time between alert end and alert end"
               ></Input>
@@ -246,7 +246,7 @@ export const VariationModal = ({
                 inputLabel="Width"
                 inputName={VariationLenses.image_width}
                 value={formData?.[VariationLenses.image_width]}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
               <Input
@@ -254,7 +254,7 @@ export const VariationModal = ({
                 inputLabel="Height"
                 inputName={VariationLenses.image_height}
                 value={formData?.[VariationLenses.image_height]}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
             </SectionRow>
@@ -299,7 +299,7 @@ export const VariationModal = ({
                 inputLabel="Width"
                 inputName={VariationLenses.text_width}
                 value={formData?.[VariationLenses.text_width]}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
               <Input
@@ -307,7 +307,7 @@ export const VariationModal = ({
                 inputLabel="Height"
                 inputName={VariationLenses.text_height}
                 value={formData?.[VariationLenses.text_height]}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
             </SectionRow>
@@ -317,7 +317,7 @@ export const VariationModal = ({
                 inputLabel="Font Size"
                 inputName={VariationLenses.text_size}
                 value={formData?.[VariationLenses.text_size]}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
               <Input
@@ -333,7 +333,7 @@ export const VariationModal = ({
                 inputLabel="Line Height"
                 inputName={VariationLenses.text_lineHeight}
                 value={formData?.[VariationLenses.text_lineHeight]}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
               <Input
@@ -341,7 +341,7 @@ export const VariationModal = ({
                 inputLabel="Letter Spacing"
                 inputName={VariationLenses.text_letterSpacing}
                 value={formData?.[VariationLenses.text_letterSpacing]}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
               <Input
@@ -349,7 +349,7 @@ export const VariationModal = ({
                 inputLabel="Word Spacing"
                 inputName={VariationLenses.text_wordSpacing}
                 value={formData?.[VariationLenses.text_wordSpacing]}
-                isTypeNumber
+                type="number"
                 endAdornment="px"
               ></Input>
             </SectionRow>{" "}
@@ -369,7 +369,7 @@ export const VariationModal = ({
                   inputLabel="Stroke Width"
                   inputName={VariationLenses.text_stroke_width}
                   value={formData?.[VariationLenses.text_stroke_width]}
-                  isTypeNumber
+                  type="number"
                   endAdornment="px"
                 ></Input>
                 <Input

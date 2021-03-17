@@ -72,7 +72,7 @@ export const iftttTutorial: TutorialStepElement[] = [
         text: (
           <Text>
             You can choose every service proposed by IFTTT. There more than 600
-            services available ! Pick one and click on{" "}
+            services available! Pick one and click on{" "}
             <Emphasize>Validate</Emphasize>.
           </Text>
         ),

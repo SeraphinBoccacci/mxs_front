@@ -47,7 +47,7 @@ const features = {
       key: "features_02",
     },
     {
-      title: "3. Start Streaming !",
+      title: "3. Start Streaming!",
       content: (
         <FeatureParagraph>
           Share your herotag to your community and let them support your
@@ -76,7 +76,7 @@ const features = {
       title: "2. Buy or deposit EGLDs",
       content: (
         <FeatureParagraph>
-          It is as easier as buying Bits on Twitch !<br></br>A list of ¤EGLD
+          It is as easier as buying Bits on Twitch!<br></br>A list of ¤EGLD
           brokers is available{" "}
           <Link
             target="_blank"

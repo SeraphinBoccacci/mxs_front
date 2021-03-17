@@ -118,9 +118,9 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
         </Button>
       </ConnectionForm>
       <ChangeModePhrase>
-        You are already have an account ?
+        You are already have an account?
         <ChangeModeSpan onClick={handleClickAccountConnection}>
-          Connect !
+          Connect!
         </ChangeModeSpan>
       </ChangeModePhrase>
     </>

@@ -49,15 +49,15 @@ export const AnimationSettings = ({
             `${pathString}_animation_enter_duration` as VariationLenses
           }
           value={formData?.[`${pathString}_animation_enter_duration`]}
-          isTypeNumber
           endAdornment="seconds"
           onChange={onChange}
+          type="number"
         ></Input>
         <Input
           inputLabel="Delay"
           inputName={`${pathString}_animation_enter_delay` as VariationLenses}
           value={formData?.[`${pathString}_animation_enter_delay`]}
-          isTypeNumber
+          type="number"
           endAdornment="seconds"
           onChange={onChange}
         ></Input>
@@ -75,7 +75,7 @@ export const AnimationSettings = ({
           inputLabel="Duration"
           inputName={`${pathString}_animation_exit_duration` as VariationLenses}
           value={formData?.[`${pathString}_animation_exit_duration`]}
-          isTypeNumber
+          type="number"
           endAdornment="seconds"
           onChange={onChange}
         ></Input>
@@ -83,7 +83,7 @@ export const AnimationSettings = ({
           inputLabel="Offset"
           inputName={`${pathString}_animation_exit_offset` as VariationLenses}
           value={formData?.[`${pathString}_animation_exit_offset`]}
-          isTypeNumber
+          type="number"
           endAdornment="seconds"
           onChange={onChange}
         ></Input>

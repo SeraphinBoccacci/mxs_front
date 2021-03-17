@@ -13,8 +13,8 @@ module.exports = {
   prod: {
     "default-src": ["'self'", "*", "data:", "https:"],
     "font-src": ["'self'", "https:"],
-    "img-src": ["data:", "https:", "blob:", "'self'"],
-    "media-src": ["data:", "https:", "blob:", "'self'"],
+    "img-src": ["*"],
+    "media-src": ["*"],
     "script-src": ["'self'", "'unsafe-inline'"],
     "style-src": ["'self'", "'unsafe-inline'"],
     "script-src-elem": ["'unsafe-inline'", "*"],

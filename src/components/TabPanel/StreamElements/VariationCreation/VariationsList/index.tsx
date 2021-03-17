@@ -21,6 +21,7 @@ import {
 } from "../../../../../services/streamElements";
 import { invertColor } from "../../../../../utils/color";
 import { AuthContext } from "../../../../AuthContext";
+import { ErrorHandlingContext } from "../../../../ErrorHandlingContext";
 import Table from "../../../../Table";
 import { isRowNest, Row, RowNest } from "../../../../Table/TableBody/TableRow";
 import { Variation } from "../../interface";
@@ -69,6 +70,8 @@ export const VariationsList = ({
   setFocusedVariationIndex,
 }: VariationsListProps) => {
   const { herotag } = useContext(AuthContext);
+  const { handleError } = useContext(ErrorHandlingContext);
+
   const [selectedRows, setSelectedRows] = useState<Row[]>([]);
   const [isOnGatheringMode, setIsOnGatheringMode] = useState<boolean>(false);
   const [formattedRows, setFormatedRows] = useState<(Row | RowNest)[]>([]);
@@ -200,49 +203,60 @@ export const VariationsList = ({
   useEffect(() => {
     if (!herotag) return;
 
-    getRowsStructure(herotag).then((rowsStructure) => {
-      const rowsFromVariations = rows(variations);
+    getRowsStructure(herotag)
+      .then((rowsStructure) => {
+        const rowsFromVariations = rows(variations);
 
-      if (!rowsStructure) {
-        setFormatedRows(rowsFromVariations);
+        if (!rowsStructure) {
+          setFormatedRows(rowsFromVariations);
 
-        return;
-      }
+          return;
+        }
 
-      const structuredRows = rowsStructure.map(
-        ({ rows, rowsGroupName }, rowIndex) => ({
-          headerText: rowsGroupName,
-          onHeaderTextChange: updateHeaderText(
-            rowIndex,
-            rowsStructure,
-            herotag
-          ),
-          rows: rows
-            .map((nestedRowId) =>
-              rowsFromVariations.find(({ id }) => id === nestedRowId)
-            )
-            .filter(Boolean),
-        })
-      );
-
-      const structuredRowsWithNotRegisteredOnes = [
-        // Structure from server
-        ...structuredRows,
-        // Rows below are not part of any group
-        ...rowsFromVariations.filter(
-          (row) =>
-            !structuredRows.some((structuredRow) =>
-              structuredRow.rows.some(
-                (nestedStructuredRow) =>
-                  nestedStructuredRow?.variationName === row.variationName
+        const structuredRows = rowsStructure.map(
+          ({ rows, rowsGroupName }, rowIndex) => ({
+            headerText: rowsGroupName,
+            onHeaderTextChange: updateHeaderText(
+              rowIndex,
+              rowsStructure,
+              herotag
+            ),
+            rows: rows
+              .map((nestedRowId) =>
+                rowsFromVariations.find(({ id }) => id === nestedRowId)
               )
-            )
-        ),
-      ] as (Row | RowNest)[];
+              .filter(Boolean),
+          })
+        );
 
-      setFormatedRows(structuredRowsWithNotRegisteredOnes);
-    });
-  }, [variations, herotag, setFormatedRows, updateHeaderText, rows]);
+        const structuredRowsWithNotRegisteredOnes = [
+          // Structure from server
+          ...structuredRows,
+          // Rows below are not part of any group
+          ...rowsFromVariations.filter(
+            (row) =>
+              !structuredRows.some((structuredRow) =>
+                structuredRow.rows.some(
+                  (nestedStructuredRow) =>
+                    nestedStructuredRow?.variationName === row.variationName
+                )
+              )
+          ),
+        ] as (Row | RowNest)[];
+
+        setFormatedRows(structuredRowsWithNotRegisteredOnes);
+      })
+      .catch((error) => {
+        handleError(error?.message);
+      });
+  }, [
+    variations,
+    herotag,
+    setFormatedRows,
+    updateHeaderText,
+    rows,
+    handleError,
+  ]);
 
   const rowsGroups: RowNest[] = useMemo(() => formattedRows.filter(isRowNest), [
     formattedRows,

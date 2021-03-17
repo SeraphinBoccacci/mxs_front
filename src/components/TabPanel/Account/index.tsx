@@ -1,16 +1,22 @@
-import { Button } from "@material-ui/core";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import React from "react";
+import { useHistory } from "react-router";
 
 import { toggleStreamingActivation } from "../../../services/user";
 import { ContentContainer } from "../../../styles/global";
-import { AuthContext } from "../../AuthContext";
+import { useAuth } from "../../AuthContext";
 import AuthModal, { ModalKinds } from "../../AuthModal";
 import { Paragraph } from "../style";
-import { AccountContainer, ActivateIntegration, ActivateSwitch } from "./style";
+import {
+  AccountContainer,
+  ActivateIntegration,
+  ActivateSwitch,
+  Button,
+} from "./style";
 
 const Account = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setTokenData, setHerotag } = useAuth();
+  const history = useHistory();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isStreamActive, setIsStreamActive] = useState(false);
@@ -38,6 +44,13 @@ const Account = () => {
     setIsAuthModalOpened(false);
   }, [setIsAuthModalOpened]);
 
+  const handleDisconnect = useCallback(() => {
+    setTokenData(null);
+    setHerotag("");
+
+    history.push("/");
+  }, [setTokenData, setHerotag, history]);
+
   return (
     <>
       <AccountContainer>
@@ -59,8 +72,19 @@ const Account = () => {
           </ActivateIntegration>
         </ContentContainer>
         <ContentContainer>
-          <Button color="secondary" onClick={handleModalOpen}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleModalOpen}
+          >
             Modify Password
+          </Button>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={handleDisconnect}
+          >
+            Disconnect
           </Button>
         </ContentContainer>
       </AccountContainer>

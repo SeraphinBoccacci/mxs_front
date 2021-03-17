@@ -32,12 +32,11 @@ interface InputProps {
   onChange:
     | ((event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void)
     | ((event: ChangeEvent<HTMLInputElement>) => void);
-  isTypeNumber?: boolean;
   isTextContent?: boolean;
   endAdornment?: string;
   tooltipText?: string;
   isDisabled?: boolean;
-  type?: "password";
+  type?: "password" | "number";
 }
 
 const Input = ({
@@ -60,13 +59,16 @@ const Input = ({
       className={isTextContent ? classes.textContent : classes.formControl}
       variant="outlined"
     >
-      <InputLabel htmlFor={inputName}>{inputLabel}</InputLabel>
+      {!!inputLabel && (
+        <InputLabel htmlFor={inputName}>{inputLabel}</InputLabel>
+      )}
       <OutlinedInput
         type={type}
         disabled={isDisabled}
         onChange={onChange}
         rows={3}
         rowsMin={3}
+        rowsMax={3}
         multiline={isTextContent}
         name={inputName}
         value={value || ""}

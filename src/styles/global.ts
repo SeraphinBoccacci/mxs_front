@@ -104,6 +104,9 @@ export const ContentContainer = styled(Paper)`
   height: max-content !important;
   padding: 1rem 2rem !important;
 
+  display: flex;
+  flex-direction: column;
+
   @media (min-width: 800px) {
     margin: 2rem auto !important;
     padding: 0.8rem 3rem !important;

@@ -27,7 +27,7 @@ const BaseTemplateIntegration = ({
       <Tutorial tutorial={streamElementsTutorial}></Tutorial>
       {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape ? (
         <div>
-          <EventTriggerer triggeredEvent="streamElements"></EventTriggerer>
+          <EventTriggerer></EventTriggerer>
           <CodeSnippets
             jsSnippet={jsSnippet(user?.herotag || "{{your-herotag}}")}
             htmlSnippet={htmlSnippet}
@@ -35,7 +35,7 @@ const BaseTemplateIntegration = ({
           ></CodeSnippets>
         </div>
       ) : (
-        <EventTriggerer triggeredEvent="streamElements"></EventTriggerer>
+        <EventTriggerer></EventTriggerer>
       )}
     </div>
   );

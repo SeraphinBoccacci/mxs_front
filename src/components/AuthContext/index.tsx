@@ -12,6 +12,7 @@ import { useHistory } from "react-router";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useQueryString } from "../../hooks/useQueryString";
 import { getUserData } from "../../services/user";
+import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import { Variation } from "../TabPanel/StreamElements/interface";
 
 export enum UserAccountStatus {
@@ -72,6 +73,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [queryStringHerotag, setQueryStringHerotag] = useQueryString("herotag");
   const [herotag, setStateHerotag] = useState(queryStringHerotag);
 
+  const { handleError } = useContext(ErrorHandlingContext);
+
   const setHerotag = useCallback(
     (herotag: string) => {
       setQueryStringHerotag(herotag);
@@ -92,10 +95,14 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isAuthenticated)
-      getUserData().then((data) => {
-        setUser(data);
-        setHerotag(data.herotag);
-      });
+      getUserData()
+        .then((data) => {
+          setUser(data);
+          setHerotag(data.herotag);
+        })
+        .catch((error) => {
+          handleError(error?.message);
+        });
     // eslint-disable-next-line
   }, [isAuthenticated]);
 

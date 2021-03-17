@@ -32,23 +32,9 @@ export const getUserData = async () => {
   return data;
 };
 
-export const triggerIftttEvent = (herotag: string, data: EventData) => {
+export const triggerEvent = (herotag: string, data: EventData) => {
   return axiosPost(
-    `${config.apiUrl}/user/trigger/ifttt`,
-    {
-      herotag,
-      data,
-    },
-    { withToken: true }
-  );
-};
-
-export const triggerStreamElementsEvent = (
-  herotag: string,
-  data: EventData
-) => {
-  return axiosPost(
-    `${config.apiUrl}/user/trigger/streamElements`,
+    `${config.apiUrl}/user/trigger-event`,
     {
       herotag,
       data,

@@ -29,9 +29,9 @@ const AccountActivation = ({
   if (isVerified)
     return (
       <Column>
-        <FormTitle>{"Profile Verified !"}</FormTitle>{" "}
+        <FormTitle>Account activated!</FormTitle>
         <TransactionReferenceP>
-          Your account has been verified ! <br></br>You can login now !
+          Your account has been verified! <br></br>You can login now!
         </TransactionReferenceP>
         {isOnlyPasswordEdit ? (
           <div></div>

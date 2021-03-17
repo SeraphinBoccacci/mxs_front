@@ -1,3 +1,4 @@
+import { Button, CircularProgress } from "@material-ui/core";
 import Tab from "@material-ui/core/Tab";
 import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRounded";
 import { lazy, Suspense, useCallback, useContext } from "react";
@@ -8,7 +9,7 @@ import { useQueryString } from "../../hooks/useQueryString";
 import { AuthContext } from "../AuthContext";
 import { TabPanel } from "../TabPanel";
 import { NotDevelopped } from "../TabPanel/NotDevelopped";
-import { AppBar, Tabs } from "./style";
+import { AppBar, RightNode, Tabs } from "./style";
 
 const Account = lazy(() => {
   return import("../TabPanel/Account");
@@ -41,31 +42,46 @@ const Lab = () => {
     };
   }, []);
 
-  const handleClick = useCallback(() => {
+  const handleDisconnect = useCallback(() => {
     setTokenData(null);
     setHerotag("");
 
     history.push("/");
   }, [setTokenData, setHerotag, history]);
 
+  const handleGoToHome = useCallback(() => {
+    history.push("/");
+  }, [history]);
+
   const value = Number(activeTab);
 
   return (
     <div>
       <AppBar position="static" color="primary">
-        <Tabs value={value} onChange={handleChange}>
+        <Tabs
+          variant="scrollable"
+          scrollButtons="auto"
+          value={value}
+          onChange={handleChange}
+        >
           <Tab label="User Account" {...a11yProps(0)} />
           <Tab label="IFTTT Particle" {...a11yProps(1)} />
           <Tab label="Stream Elements Particle" {...a11yProps(2)} />
           <Tab label="StreamLabs Particle" {...a11yProps(3)} />
           <Tab label="OBS Particle" {...a11yProps(4)} />
         </Tabs>
-        <PowerSettingsNewRoundedIcon
-          onClick={handleClick}
-          style={{ cursor: "pointer" }}
-        ></PowerSettingsNewRoundedIcon>
+        <RightNode>
+          <Button onClick={handleGoToHome}>Home</Button>
+          <Button onClick={handleDisconnect}>
+            <PowerSettingsNewRoundedIcon></PowerSettingsNewRoundedIcon>
+          </Button>
+        </RightNode>
       </AppBar>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <CircularProgress size="4rem" style={{ margin: "auto auto" }} />
+        }
+      >
         <TabPanel value={value} index={0}>
           <Account></Account>
         </TabPanel>

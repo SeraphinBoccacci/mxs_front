@@ -29,10 +29,9 @@ const PasswordEdition = ({
   if (isVerified)
     return (
       <Column>
-        <FormTitle>{"Profile Verified !"}</FormTitle>{" "}
+        <FormTitle>Password Edit Confirmed!</FormTitle>
         <TransactionReferenceP>
-          Your password has been modified ! <br></br>You can use it to login now
-          !
+          Your password has been modified! <br></br>You can use it to login now!
         </TransactionReferenceP>
         {isOnlyPasswordEdit ? (
           <div></div>

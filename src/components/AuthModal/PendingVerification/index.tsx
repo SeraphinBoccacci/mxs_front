@@ -46,7 +46,9 @@ export const PendingVerification = ({
             );
           }
         })
-        .catch((error) => handleError(error.message));
+        .catch((error) => {
+          handleError(error.message);
+        });
 
       const interval = setInterval(async () => {
         const isVerified = await getIsVerified(herotag);

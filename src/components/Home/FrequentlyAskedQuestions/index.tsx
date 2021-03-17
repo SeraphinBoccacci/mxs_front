@@ -14,7 +14,7 @@ import {
 const questionsAndAnswers = [
   {
     id: "panel_1",
-    question: "Why would I need to send my donations via Maiar ?",
+    question: "Why would I need to send my donations via Maiar?",
     answer: (
       <div>
         When you support a creator via a platform, there is a middleman between
@@ -28,47 +28,47 @@ const questionsAndAnswers = [
   {
     id: "panel_2",
     question:
-      "How will the creator I send my EGLD to be notified of the transaction ?",
+      "How will the creator I send my EGLD to be notified of the transaction?",
     answer: (
       <div>
         We have developped a webhook &quot;watching&quot; Elrond&rsquo;s
         blockchain, that detects every new transaction sent to a creator. The
         creator only needs to signup on StreamParticles and create his very own
         particles to connect with the blockchain. Customized experiences
-        garantied !
+        garantied!
       </div>
     ),
   },
   {
     id: "panel_3",
-    question: "It is safe ?",
+    question: "It is safe?",
     answer: (
       <div>
         It is 100% safe, all you have to do is keeping safe and secret your
         mnemonic phrase that Maiar gives you when you create a wallet. Then your
         EGLDs are secured by a state of the art blockchain technology developped
-        by Elrond !
+        by Elrond!
       </div>
     ),
   },
   {
     id: "panel_4",
-    question: "Do I have to create an account on StreamParticles ?",
+    question: "Do I have to create an account on StreamParticles?",
     answer: (
       <div>
-        Absolutely not ! Only creators need to create an account on
-        StreamParticles ! We, by the way, do no retain any data about you (no
-        cookies either !)
+        Absolutely not! Only creators need to create an account on
+        StreamParticles! We, by the way, do no retain any data about you (no
+        cookies either!)
       </div>
     ),
   },
   {
     id: "panel_5",
-    question: "Can I send a personnalized message to the creator ?",
+    question: "Can I send a personnalized message to the creator?",
     answer: (
       <div>
         When processing a transaction on Maiar Wallet, you will be able to write
-        your very own message to your creators, without any limit !
+        your very own message to your creators, without any limit!
       </div>
     ),
   },

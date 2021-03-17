@@ -150,9 +150,9 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
         </RecoveryActionCTA>
       </RecoveryActionsCTAs>
       <ChangeModePhrase>
-        You don&rsquo;t have an account ?
+        You don&rsquo;t have an account?
         <ChangeModeSpan onClick={handleClickAccountCreation}>
-          Create One !
+          Create One!
         </ChangeModeSpan>
       </ChangeModePhrase>
     </>
