@@ -89,6 +89,7 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
             inputLabel="Herotag"
             onChange={handleOnChange}
             isDisabled={isSubmitting}
+            autoComplete="off"
           ></Input>
 
           <Input
@@ -98,6 +99,7 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
             onChange={handleOnChange}
             isDisabled={isSubmitting}
             type="password"
+            autoComplete="off"
           ></Input>
           <Input
             value={formData.confirm}
@@ -106,6 +108,7 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
             onChange={handleOnChange}
             isDisabled={isSubmitting}
             type="password"
+            autoComplete="off"
           ></Input>
         </Inputs>
         <Button

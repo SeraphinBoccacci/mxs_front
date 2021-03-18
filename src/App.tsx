@@ -1,12 +1,10 @@
-import "./App.css";
-
-import { CircularProgress } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import AuthProvider from "./components/AuthContext";
 import ErrorHandler from "./components/ErrorHandlingContext";
+import LoadingScreen from "./components/LoadingScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import { theme } from "./styles/theme";
 
@@ -24,11 +22,7 @@ function App() {
       <Router>
         <ErrorHandler>
           <AuthProvider>
-            <Suspense
-              fallback={
-                <CircularProgress size="4rem" style={{ margin: "auto auto" }} />
-              }
-            >
+            <Suspense fallback={<LoadingScreen></LoadingScreen>}>
               <Route exact path="/">
                 <Home />
               </Route>

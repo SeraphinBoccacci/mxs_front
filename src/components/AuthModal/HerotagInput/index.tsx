@@ -76,6 +76,7 @@ export const HerotagInput = ({
             inputLabel="Herotag"
             onChange={handleOnChange}
             isDisabled={isSubmitting}
+            autoComplete="off"
           ></Input>
         </Inputs>
         <Button

@@ -10,7 +10,7 @@ import { AuthContext } from "../../../AuthContext";
 import CodeSnippets from "../../../CodeSnippets";
 import { ErrorHandlingContext } from "../../../ErrorHandlingContext";
 import { Variation } from "../interface";
-import { Content, IframeContainer } from "./style";
+import { AlertText, BoldText, Content, IframeContainer } from "./style";
 import { VariationModal } from "./VariationModal";
 import { VariationsList } from "./VariationsList";
 
@@ -109,12 +109,14 @@ const VariationCreation = ({
       ></VariationModal>
       <ContentContainer>
         <Alert severity="warning">
-          You should copy and paste the code snippets below in your
-          StreamElements editor every time you add, remove or update a
-          variation.
-          <br></br>
-          <br></br>
-          This action is not needed when you reorganize your variations sets.
+          <AlertText>
+            You should copy and paste the code snippets below in your
+            StreamElements editor <BoldText>every time</BoldText> you add,
+            remove or update a variation.
+            <br></br>
+            <br></br>
+            This action is not needed when you reorganize your variations sets.
+          </AlertText>
         </Alert>
       </ContentContainer>
       {files && (

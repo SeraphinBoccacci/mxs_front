@@ -19,7 +19,7 @@ const questionsAndAnswers = [
       <div>
         When you support a creator via a platform, there is a middleman between
         you and the creator, the platform which charges you. StreamParticles is
-        a free and open source project that aims at let you support the creators
+        a free and open source project that aims to let you support the creators
         without middlemen (via Maiar) and notify him about your donation
         (StreamParticles).
       </div>
@@ -35,7 +35,7 @@ const questionsAndAnswers = [
         blockchain, that detects every new transaction sent to a creator. The
         creator only needs to signup on StreamParticles and create his very own
         particles to connect with the blockchain. Customized experiences
-        garantied!
+        guaranteed!
       </div>
     ),
   },
@@ -44,7 +44,7 @@ const questionsAndAnswers = [
     question: "It is safe?",
     answer: (
       <div>
-        It is 100% safe, all you have to do is keeping safe and secret your
+        It is 100% safe, all you have to do is to keep safe and secret your
         mnemonic phrase that Maiar gives you when you create a wallet. Then your
         EGLDs are secured by a state of the art blockchain technology developped
         by Elrond!

@@ -5,6 +5,7 @@ import {
   InputLabel,
   makeStyles,
   OutlinedInput,
+  OutlinedInputProps,
   Theme,
   Tooltip,
 } from "@material-ui/core";
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface InputProps {
+type InputProps = OutlinedInputProps & {
   inputName: string | VariationLenses;
   inputLabel: string;
   value?: string | number;
@@ -36,8 +37,7 @@ interface InputProps {
   endAdornment?: string;
   tooltipText?: string;
   isDisabled?: boolean;
-  type?: "password" | "number";
-}
+};
 
 const Input = ({
   inputName,

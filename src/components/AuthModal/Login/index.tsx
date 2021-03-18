@@ -30,7 +30,8 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
   const history = useHistory();
 
   const [formData, setFormData] = useForm<{
-    herotag?: string;
+    // herotag input should be named with 'username' in order to be understood by password managers
+    username?: string;
     password?: string;
   }>({});
 
@@ -41,10 +42,10 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
       setIsSubmitting(true);
 
       try {
-        if (!formData.herotag || !formData.password)
+        if (!formData.username || !formData.password)
           throw new Error("INVALID_FORM");
 
-        const data = await authenticate(formData.herotag, formData.password);
+        const data = await authenticate(formData.username, formData.password);
 
         setIsSubmitting(false);
 
@@ -54,7 +55,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
             expirationTimestamp: Date.now() + data.expiresIn * 1000,
           });
 
-          setHerotag(formData.herotag);
+          setHerotag(formData.username);
 
           handleClose();
 
@@ -75,7 +76,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
       }
     },
     [
-      formData.herotag,
+      formData.username,
       formData.password,
       handleClose,
       history,
@@ -113,11 +114,13 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
         <Inputs>
           <Input
             tooltipText="Your herotag is the username you set when you registered on Maiar."
-            value={formData.herotag}
-            inputName="herotag"
+            value={formData.username}
+            inputName="username"
             inputLabel="Herotag"
             onChange={handleOnChange}
             isDisabled={isSubmitting}
+            autoComplete="username"
+            type="text"
           ></Input>
           <Input
             tooltipText="Your herotag is the username you set when you registered on Maiar."
@@ -127,6 +130,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
             onChange={handleOnChange}
             type="password"
             isDisabled={isSubmitting}
+            autoComplete="password"
           ></Input>
           <div></div>
         </Inputs>

@@ -1,4 +1,4 @@
-import { Button, CircularProgress } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Tab from "@material-ui/core/Tab";
 import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRounded";
 import { lazy, Suspense, useCallback, useContext } from "react";
@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 
 import { useQueryString } from "../../hooks/useQueryString";
 import { AuthContext } from "../AuthContext";
+import LoadingScreen from "../LoadingScreen";
 import { TabPanel } from "../TabPanel";
 import { NotDevelopped } from "../TabPanel/NotDevelopped";
 import { AppBar, RightNode, Tabs } from "./style";
@@ -77,11 +78,7 @@ const Lab = () => {
           </Button>
         </RightNode>
       </AppBar>
-      <Suspense
-        fallback={
-          <CircularProgress size="4rem" style={{ margin: "auto auto" }} />
-        }
-      >
+      <Suspense fallback={<LoadingScreen></LoadingScreen>}>
         <TabPanel value={value} index={0}>
           <Account></Account>
         </TabPanel>

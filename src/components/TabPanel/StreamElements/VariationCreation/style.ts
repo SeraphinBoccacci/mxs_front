@@ -141,3 +141,12 @@ export const NewVariationButton = styled(Button)`
   left: 50% !important;
   transform: translateX(-50%) !important;
 `;
+
+export const AlertText = styled.span`
+  font-family: ${fonts.Ubuntu};
+`;
+
+export const BoldText = styled.span`
+  font-weight: 700;
+  font-size: 0.96rem;
+`;
