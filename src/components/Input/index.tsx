@@ -1,11 +1,14 @@
 import {
   createStyles,
   FormControl,
+  Input as TInput,
   InputAdornment,
+  InputBase,
   InputLabel,
   makeStyles,
   OutlinedInput,
   OutlinedInputProps,
+  TextField,
   Theme,
   Tooltip,
 } from "@material-ui/core";
@@ -67,8 +70,6 @@ const Input = ({
         disabled={isDisabled}
         onChange={onChange}
         rows={3}
-        rowsMin={3}
-        rowsMax={3}
         multiline={isTextContent}
         name={inputName}
         value={value || ""}

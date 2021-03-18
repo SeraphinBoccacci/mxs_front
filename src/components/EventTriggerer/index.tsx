@@ -62,7 +62,7 @@ const EventTriggerer = () => {
 
   return (
     <ContentContainer>
-      <Form onSubmit={triggerEvent}>
+      <Form>
         <FormRow>
           <Input
             inputName="herotag"
@@ -88,7 +88,12 @@ const EventTriggerer = () => {
             value={formData.message}
           ></Input>
         </FormRow>
-        <Button variant="outlined" color="secondary" type="submit">
+        <Button
+          variant="outlined"
+          color="secondary"
+          type="button"
+          onClick={triggerEvent}
+        >
           Trigger Event
         </Button>
       </Form>
