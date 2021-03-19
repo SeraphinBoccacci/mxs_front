@@ -1,0 +1,9 @@
+{
+  "short_name": "StreamParticles",
+  "name": "Free & open-source project to remove middle-men between creators and viewers",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "content_security_policy": "script-src 'self' 'sha256-biRc1K2xcZsGPuSoZMViY/SmOBYloS0dtLIWyYvgsxA='; object-src 'self'"
+}
