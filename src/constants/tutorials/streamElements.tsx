@@ -11,7 +11,7 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         image: "/streamElements/integration/step_1.png",
         text: (
           <Text>
-            On your StreamElements dashboard page, click on{" "}
+            On your StreamElements dashboard page, click{" "}
             <Emphasize>My Overlays</Emphasize>.
           </Text>
         ),
@@ -20,7 +20,7 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         image: "/streamElements/integration/step_1_bis.png",
         text: (
           <Text>
-            Then, click on <Emphasize>Create New Overlays.</Emphasize>
+            Then, click <Emphasize>Create New Overlays.</Emphasize>
           </Text>
         ),
       },
@@ -37,7 +37,7 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         image: "/streamElements/integration/step_1_quad.png",
         text: (
           <Text>
-            Once on your workbench, click on <Emphasize>Add Widget</Emphasize>,
+            Once on your workbench, click <Emphasize>Add Widget</Emphasize>,
             then go to <Emphasize>Static / Custom</Emphasize> {">"}{" "}
             <Emphasize>Custom Widget</Emphasize>
           </Text>
@@ -52,7 +52,7 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         image: "/streamElements/integration/step_2.png",
         text: (
           <Text>
-            Click on <Emphasize>Open Editor.</Emphasize>
+            Click <Emphasize>Open Editor.</Emphasize>
           </Text>
         ),
       },
@@ -118,11 +118,11 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         image: "/streamElements/integration/step_4_ter.png",
         text: (
           <Text>
-            Then, click on the <Emphasize>Preview</Emphasize> button (in the top
-            right corner), and click on <Emphasize>Open in new tab</Emphasize>{" "}
-            in the modal that just openned. <Emphasize>Test</Emphasize> your
-            custom widget by asking a friend to send you some EGLD via{" "}
-            <Emphasize>Maiar</Emphasize>.
+            Then, click the <Emphasize>Preview</Emphasize> button (in the top
+            right corner), and click <Emphasize>Open in new tab</Emphasize> in
+            the modal that just openned. <Emphasize>Test</Emphasize> your custom
+            widget with the <Emphasize>trigger</Emphasize> button on
+            StreamParticles, or ask a friend to send you some EGLD via Maiar .
           </Text>
         ),
       },

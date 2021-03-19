@@ -16,7 +16,7 @@ export const iftttTutorial: TutorialStepElement[] = [
             On your home page, you&rsquo;ll find a <Emphasize>
               Create
             </Emphasize>{" "}
-            button in the top right corner, click on it to create an{" "}
+            button in the top right corner, click it to create an{" "}
             <Emphasize>Applet</Emphasize>.
           </Text>
         ),
@@ -24,13 +24,13 @@ export const iftttTutorial: TutorialStepElement[] = [
     ],
   },
   {
-    label: "Setup your Applet's listenner",
+    label: "Setup your Applet's listener",
     content: [
       {
         image: "/ifttt/integration/step_2.png",
         text: (
           <Text>
-            Click on <Emphasize>If This</Emphasize> button.
+            Click <Emphasize>If This</Emphasize> button.
           </Text>
         ),
       },
@@ -46,7 +46,7 @@ export const iftttTutorial: TutorialStepElement[] = [
         image: "/ifttt/integration/step_2_ter.png",
         text: (
           <Text>
-            Then click on the only available option,{" "}
+            Then click the only available option,{" "}
             <Emphasize>Receive a web request</Emphasize>.<br></br>You&rsquo;ll
             be prompted to fill an <Emphasize>EventName</Emphasize>, choose
             yours and fill it in StreamParticles Lab, just below this tutorial.
@@ -72,7 +72,7 @@ export const iftttTutorial: TutorialStepElement[] = [
         text: (
           <Text>
             You can choose every service proposed by IFTTT. There more than 600
-            services available! Pick one and click on{" "}
+            services available! Pick one and click{" "}
             <Emphasize>Validate</Emphasize>.
           </Text>
         ),
@@ -81,7 +81,7 @@ export const iftttTutorial: TutorialStepElement[] = [
         image: "/ifttt/integration/step_3_ter.png",
         text: (
           <Text>
-            Finally, on this screen, click on the <Emphasize>Finish</Emphasize>{" "}
+            Finally, on this screen, click the <Emphasize>Finish</Emphasize>{" "}
             button.
           </Text>
         ),
@@ -97,7 +97,7 @@ export const iftttTutorial: TutorialStepElement[] = [
           <Text>
             Now you need to find out your <Emphasize>TriggerKey</Emphasize> to
             complete your IFTTT integration.<br></br>
-            Go to your <Emphasize>Applet</Emphasize> Homepage and click on the{" "}
+            Go to your <Emphasize>Applet</Emphasize> Homepage and click the{" "}
             <Emphasize>WebHooks</Emphasize> logo (at the top of your Applet
             description).
           </Text>
@@ -107,7 +107,7 @@ export const iftttTutorial: TutorialStepElement[] = [
         image: "/ifttt/integration/step_4_bis.png",
         text: (
           <Text>
-            On the <Emphasize>WebHooks</Emphasize> page, click on{" "}
+            On the <Emphasize>WebHooks</Emphasize> page, click{" "}
             <Emphasize>Documentation</Emphasize> in the top right corner.
           </Text>
         ),

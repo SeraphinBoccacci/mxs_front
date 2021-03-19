@@ -15,8 +15,10 @@ export const Paragraph = styled.p`
   font-family: ${fonts.Ubuntu};
   font-size: 0.9rem;
   line-height: 1.6rem;
-  text-align: center;
+  text-align: justify;
   max-width: 20rem;
+
+  margin: 0.6rem 0;
 
   @media (min-width: 700px) {
     font-size: 1rem;

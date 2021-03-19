@@ -53,7 +53,7 @@ const questionsAndAnswers = [
   },
   {
     id: "panel_4",
-    question: "Do I have to create an account on StreamParticles?",
+    question: "As a viewer, do I have to create an account on StreamParticles?",
     answer: (
       <div>
         Absolutely not! Only creators need to create an account on

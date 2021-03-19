@@ -8,7 +8,7 @@ import {
   modifyIftttIntegration,
   toggleIftttIntegration,
 } from "../../../services/ifttt";
-import { ContentContainer } from "../../../styles/global";
+import { ContentContainer, Emphasize } from "../../../styles/global";
 import { AuthContext } from "../../AuthContext";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
 import EventTriggerer from "../../EventTriggerer";
@@ -101,8 +101,23 @@ const Ifttt = () => {
     <IftttIntegrationContainer>
       <ContentContainer elevation={3} variant="elevation">
         <Paragraph>
-          IFTTT is a free platform that helps all your products and services
-          work better together.
+          <Emphasize>
+            <a target="about:blank" href="https://ifttt.com/">
+              IFTTT
+            </a>
+          </Emphasize>
+          is a free platform that helps all your products and services work
+          better together.
+        </Paragraph>
+        <Paragraph>
+          For example, you can easily create special applets that make your
+          smart bulbs blink everytime you receive a Maiar donation, or even
+          other applets that make your Google Assistant speak something out loud
+          when you receive eGLD on your Herotag.
+        </Paragraph>
+        <Paragraph>
+          If you only want onstream animations, please switch to the other
+          Particles&rsquo; tabs.
         </Paragraph>
       </ContentContainer>
       <Tutorial tutorial={iftttTutorial}></Tutorial>

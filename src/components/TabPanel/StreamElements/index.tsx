@@ -3,7 +3,7 @@ import React from "react";
 import { withBreakpoints } from "react-breakpoints";
 
 import { useQueryString } from "../../../hooks/useQueryString";
-import { ContentContainer } from "../../../styles/global";
+import { ContentContainer, Emphasize } from "../../../styles/global";
 import Switch from "../../Switch";
 import { Paragraph } from "../style";
 import BaseTemplateIntegration from "./BaseTemplateIntegration";
@@ -19,10 +19,23 @@ const StreamElementsIntegration = () => {
     <StreamElementsIntegrationContainer>
       <ContentContainer elevation={3} variant="elevation">
         <Paragraph>
-          Stream Elements is an all-in-one platform that helps creator along all
-          their content management. For instance, it lets them create customized
-          overlays to react to viewers&rsquo; support. That&rsquo;s what
-          we&rsquo;ll be working on in this particle.
+          <Emphasize>
+            <a target="about:blank" href="https://streamelements.com/">
+              Stream Elements
+            </a>
+          </Emphasize>
+          is an all-in-one platform that helps creators along all their content
+          management.
+        </Paragraph>
+        <Paragraph>
+          For instance, it lets you create customized overlays to react to
+          viewers&rsquo; support. That&rsquo;s what we&rsquo;ll be working on in
+          this particle.
+        </Paragraph>
+        <Paragraph>
+          You can either choose a base template which is the basic
+          StreamParticles animation and sound or go with your own GIFs and
+          sounds that will be triggered depending on the variations you set.
         </Paragraph>
       </ContentContainer>
 

@@ -62,8 +62,8 @@ const features = {
       title: "1. Create a Maiar wallet, it's free",
       content: (
         <FeatureParagraph>
-          Maiar requires only your phone number and let you own some
-          crypto-currencies on your phone. More documentations{" "}
+          Maiar only requires your phone number and let’s you own some
+          cryptocurrencies. More documentation{" "}
           <Link target="_blank" rel="noreferrer" href="https://maiar.com/">
             here
           </Link>
@@ -76,7 +76,7 @@ const features = {
       title: "2. Buy or deposit EGLDs",
       content: (
         <FeatureParagraph>
-          It is as easier as buying Bits on Twitch!<br></br>A list of ¤EGLD
+          It is as easy as buying Bits on Twitch!<br></br>A list of ¤EGLD
           brokers is available{" "}
           <Link
             target="_blank"
@@ -94,8 +94,8 @@ const features = {
       title: "3. Support your favorite creators",
       content: (
         <FeatureParagraph>
-          And enjoy full interaction on their live streams. They get 100% of
-          what you send them.
+          And enjoy full interaction on their livestreams. They get 100% of what
+          you send them.
         </FeatureParagraph>
       ),
       key: "features_06",
