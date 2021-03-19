@@ -1,44 +1,72 @@
-import axios from "axios";
-
+import { UserAccountStatus } from "../components/AuthContext";
 import config from "../config/config";
+import { axiosGet, axiosPost } from "../utils/axios";
 
-export const authenticate = async (herotag: string, password: string) => {
-  const res = await axios.post(`${config.apiUrl}/authenticate`, {
+interface AuthenticateResponse {
+  herotag: string;
+  token: string;
+  expiresIn: number;
+}
+
+export const authenticate = async (
+  herotag: string,
+  password: string
+): Promise<AuthenticateResponse | undefined> => {
+  return axiosPost(`${config.apiUrl}/authenticate`, {
     herotag,
     password,
   });
-
-  return res.data;
 };
+
+interface CreateAccountResponse {
+  hasBeenSuccessfullyCreated: true;
+  herotag: string;
+}
 
 export const createAccount = async (
   herotag: string,
   password: string,
   confirm: string
-) => {
-  const res = await axios.post(`${config.apiUrl}/create-account`, {
+): Promise<CreateAccountResponse | undefined> => {
+  return axiosPost(`${config.apiUrl}/create-account`, {
     herotag,
     password,
     confirm,
   });
-
-  return res.data;
 };
 
-export const getIsVerified = async (herotag: string) => {
-  try {
-    const res = await axios.get(
-      `${config.apiUrl}//verification-status/${herotag}`
-    );
-
-    return res?.data || false;
-  } catch (error) {}
-};
-
-export const getReference = async (herotag: string) => {
-  const res = await axios.get(
-    `${config.apiUrl}/verification-reference/${herotag}`
+export const getIsVerified = async (herotag: string): Promise<boolean> => {
+  const data = await axiosGet(
+    `${config.apiUrl}/verification-status/${herotag}`
   );
 
-  return res?.data || "";
+  return data?.isStatusVerified || false;
+};
+
+export const getReference = (
+  herotag: string
+): Promise<{
+  verificationReference: string | null;
+  accountStatus: UserAccountStatus;
+}> => {
+  return axiosGet(`${config.apiUrl}/verification-reference/${herotag}`);
+};
+
+// This request respond with submitted herotag if it is linked to an account else throw an error
+export const submitHerotag = async (herotag: string): Promise<string> => {
+  const data = await axiosGet(`${config.apiUrl}/is-valid-herotag/${herotag}`);
+
+  return data?.herotag;
+};
+
+export const editPassword = async (
+  herotag: string,
+  password: string,
+  confirm: string
+): Promise<void> => {
+  await axiosPost(`${config.apiUrl}/edit-password`, {
+    herotag,
+    password,
+    confirm,
+  });
 };

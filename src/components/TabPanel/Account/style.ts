@@ -1,4 +1,4 @@
-import { Switch } from "@material-ui/core";
+import { Button as MaterialButton, Switch } from "@material-ui/core";
 import styled from "styled-components";
 
 import { colors } from "../../../constants/index";
@@ -32,4 +32,8 @@ export const ActivateIntegration = styled.div`
 
 export const ActivateSwitch = styled(Switch)`
   margin: auto 0;
+`;
+
+export const Button = styled(MaterialButton)`
+  margin: 0.8rem 0 !important;
 `;

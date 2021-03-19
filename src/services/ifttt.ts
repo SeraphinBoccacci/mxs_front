@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { postWithAuth } from "../utils/axios";
+import { axiosPost } from "../utils/axios";
 
 export const modifyIftttIntegration = async (
   herotag: string,
@@ -7,12 +7,16 @@ export const modifyIftttIntegration = async (
   triggerKey: string
 ) => {
   try {
-    const data = await postWithAuth(`${config.apiUrl}/user/ifttt/${herotag}`, {
-      ifttt: {
-        eventName,
-        triggerKey,
+    const data = await axiosPost(
+      `${config.apiUrl}/user/ifttt/${herotag}`,
+      {
+        ifttt: {
+          eventName,
+          triggerKey,
+        },
       },
-    });
+      { withToken: true }
+    );
 
     return data;
   } catch (err) {}
@@ -23,11 +27,12 @@ export const toggleIftttIntegration = async (
   isActive: boolean
 ) => {
   try {
-    const res = await postWithAuth(
+    const res = await axiosPost(
       `${config.apiUrl}/user/ifttt/is-active/${herotag}`,
       {
         isActive,
-      }
+      },
+      { withToken: true }
     );
 
     return res.data;

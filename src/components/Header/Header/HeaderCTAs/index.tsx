@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import { useQueryString } from "../../../../hooks/useQueryString";
 import { AuthContext } from "../../../AuthContext";
-import ModalConnect from "../../../AuthModal";
+import AuthModal from "../../../AuthModal";
 import { ButtonsContainer } from "./style";
 
 export const HeaderCTAs = () => {
@@ -15,10 +15,6 @@ export const HeaderCTAs = () => {
   const [isConnectModalOpenned, setIsModalOpenned] = useQueryString(
     "isConnectModalOpenned"
   );
-  const [
-    isOnPendingVerificationScreen,
-    setIsOnPendingVerificationScreen,
-  ] = useQueryString("isOnPendingVerificationScreen");
 
   return (
     <>
@@ -30,10 +26,10 @@ export const HeaderCTAs = () => {
           <Button
             variant="contained"
             onClick={() => {
-              history.push("/console");
+              history.push("/lab");
             }}
           >
-            Console
+            Lab
           </Button>
         ) : (
           <>
@@ -45,14 +41,10 @@ export const HeaderCTAs = () => {
             >
               Connect
             </Button>
-            <ModalConnect
+            <AuthModal
               isConnectModalOpenned={isConnectModalOpenned}
               handleClose={() => setIsModalOpenned(false)}
-              isOnPendingVerificationScreen={isOnPendingVerificationScreen}
-              setIsOnPendingVerificationScreen={
-                setIsOnPendingVerificationScreen
-              }
-            ></ModalConnect>
+            ></AuthModal>
           </>
         )}
       </ButtonsContainer>

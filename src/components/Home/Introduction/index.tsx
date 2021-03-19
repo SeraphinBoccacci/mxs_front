@@ -1,8 +1,9 @@
 import React from "react";
 
-import logoFacebook from "../../../assets/facebook.png";
-import logoTwitch from "../../../assets/twitch_logo.png";
-import logoYoutube from "../../../assets/youtube.png";
+import logoObs from "../../../assets/obsLogo.png";
+import logoStreamLabsObs from "../../../assets/streamlabsObsLogo.png";
+import logoTwitchStudio from "../../../assets/twitchStudioLogo.png";
+import logoXPlit from "../../../assets/xplitLogo.png";
 import CallToActions from "./CallToActions";
 import {
   CatchPhraseAndImage,
@@ -57,11 +58,36 @@ const Introduction = ({
         </CatchPhraseContainer>
       </CatchPhraseAndImage>
       <ReferencesContainer>
-        <ReferencesTitle>Active on those great platforms</ReferencesTitle>
+        <ReferencesTitle>Works great with</ReferencesTitle>
         <ReferencesContent>
-          <Reference logoPath={logoTwitch}>Twitch</Reference>
-          <Reference logoPath={logoYoutube}>Youtube</Reference>
-          <Reference logoPath={logoFacebook}>Facebook</Reference>
+          <Reference
+            target="about:blank"
+            href="https://obsproject.com/fr"
+            logoPath={logoObs}
+          >
+            OBS
+          </Reference>
+          <Reference
+            target="about:blank"
+            href="https://streamlabs.com/streamlabs-obs?l=fr-FR"
+            logoPath={logoStreamLabsObs}
+          >
+            StreamLabs OBS
+          </Reference>
+          <Reference
+            target="about:blank"
+            href="https://www.xsplit.com/"
+            logoPath={logoXPlit}
+          >
+            XSplit
+          </Reference>
+          <Reference
+            target="about:blank"
+            href="https://www.twitch.tv/broadcast/studio"
+            logoPath={logoTwitchStudio}
+          >
+            Twitch Studio
+          </Reference>
         </ReferencesContent>
       </ReferencesContainer>
     </Section>

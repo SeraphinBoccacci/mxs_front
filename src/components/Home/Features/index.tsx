@@ -6,14 +6,12 @@ import DonutSmallRoundedIcon from "@material-ui/icons/DonutSmallRounded";
 import HighlightRoundedIcon from "@material-ui/icons/HighlightRounded";
 import MovieCreationRoundedIcon from "@material-ui/icons/MovieCreationRounded";
 import VideoCallRoundedIcon from "@material-ui/icons/VideoCallRounded";
-import { AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import React from "react";
 
 import { Link } from "../../../styles/global";
 import Switch from "../../Switch";
 import {
-  ContentContainer,
   Feature,
   FeaturePaper,
   FeatureParagraph,
@@ -24,35 +22,43 @@ import {
   FeaturesSubContent,
   FeaturesSubTitle,
   FeaturesTitle,
+  FeatureTitle,
 } from "./style";
 
 const features = {
   creator: [
     {
-      title: "1. Create your account",
+      title: <FeatureTitle>1. Create your accounts</FeatureTitle>,
       content: (
         <FeatureParagraph>
-          It&rsquo;s totally free. A herotag, a password and your integration
-          settings are the only informations we store.
+          You just need to{" "}
+          <Link
+            href="https://get.maiar.com/referral/6vcqxt658e"
+            target="about:blank"
+          >
+            create your Maiar wallet
+          </Link>{" "}
+          and your account on StreamParticles. It&rsquo;s totally free.
         </FeatureParagraph>
       ),
       key: "features_01",
     },
     {
-      title: "2. Use our integration console",
+      title: <FeatureTitle>2. Set your alerts</FeatureTitle>,
       content: (
         <FeatureParagraph>
-          Our powerfull webhook connected to Maiar, combined with our console,
-          let you customize the interaction with Maiar donators
+          Upload your own GIFs, your own Audios. Configure all the variations
+          you need. Create a fully customized interaction with your donators.
         </FeatureParagraph>
       ),
       key: "features_02",
     },
     {
-      title: "3. Start Streaming !",
+      title: <FeatureTitle>3. Start Streaming!</FeatureTitle>,
       content: (
         <FeatureParagraph>
-          That&rsquo;s it ! Three steps then cut the commissions !
+          Share your herotag to your community and let them support your
+          content.
         </FeatureParagraph>
       ),
       key: "features_03",
@@ -60,11 +66,22 @@ const features = {
   ],
   viewer: [
     {
-      title: "1. Create a Maiar wallet, it's free",
+      title: (
+        <FeatureTitle>
+          1.{" "}
+          <Link
+            href="https://get.maiar.com/referral/6vcqxt658e"
+            target="about:blank"
+          >
+            Create a Maiar wallet
+          </Link>{" "}
+          , it&lsquo;s free
+        </FeatureTitle>
+      ),
       content: (
         <FeatureParagraph>
-          Maiar requires only your phone number and let you own some
-          crypto-currencies on your phone. More documentations{" "}
+          Maiar only requires your phone number and let’s you own some
+          cryptocurrencies. More documentation{" "}
           <Link target="_blank" rel="noreferrer" href="https://maiar.com/">
             here
           </Link>
@@ -74,11 +91,11 @@ const features = {
       key: "features_04",
     },
     {
-      title: "2. Deposit a bunch of eGLD",
+      title: <FeatureTitle>2. Buy or deposit EGLDs</FeatureTitle>,
       content: (
         <FeatureParagraph>
-          To be able to send them via Maiar. A list of ¤eGLD brokers is
-          available{" "}
+          It is as easy as buying Bits on Twitch!<br></br>A list of ¤EGLD
+          brokers is available{" "}
           <Link
             target="_blank"
             rel="noreferrer"
@@ -92,11 +109,11 @@ const features = {
       key: "features_05",
     },
     {
-      title: "3. Support your favorite creators",
+      title: <FeatureTitle>3. Support your favorite creators</FeatureTitle>,
       content: (
         <FeatureParagraph>
-          And enjoy full interaction on their live streams. They get 100% of
-          what you send them.
+          And enjoy full interaction on their livestreams. They get 100% of what
+          you send them.
         </FeatureParagraph>
       ),
       key: "features_06",
@@ -141,48 +158,55 @@ const Features = ({
     setFocusedFeatureKey(isViewer ? "features_04" : "features_01");
   }, [isViewer, setFocusedFeatureKey]);
 
+  const handleSwitch = useCallback(
+    (isChecked) => {
+      setIsViewer(isChecked);
+      setFocusedFeatureKey(isChecked ? "features_04" : "features_01");
+    },
+    [setIsViewer, setFocusedFeatureKey]
+  );
+
+  const featuresContent = useMemo(
+    () =>
+      features[isViewer ? "viewer" : "creator"].map(
+        ({ title, content, key }) => {
+          const Icon = iconsMapper[key];
+
+          return (
+            <FeaturePaper
+              key={key}
+              onMouseEnter={() => setFocusedFeatureKey(key)}
+            >
+              <Icon fontSize={false ? "large" : "small"}></Icon>
+              <Feature>
+                {title}
+                {content}
+              </Feature>
+            </FeaturePaper>
+          );
+        }
+      ),
+    [isViewer]
+  );
+
   return (
     <FeaturesContainer id="features">
       <FeaturesHeader>
-        <FeaturesTitle>How does it works ?</FeaturesTitle>
+        <FeaturesTitle>How does it work?</FeaturesTitle>
         <FeaturesSubTitle>Nothing simpler.</FeaturesSubTitle>
         <Switch
           isActive={isViewer}
-          setIsActive={(isChecked) => {
-            setIsViewer(isChecked);
-            setFocusedFeatureKey(isChecked ? "features_04" : "features_01");
-          }}
+          setIsActive={handleSwitch}
           offLabel="Creator"
           onLabel="Viewer"
         ></Switch>
       </FeaturesHeader>
       <FeaturesContent isRowReverse={!isViewer}>
-        <ContentContainer>
-          <FeaturesSubContent>
-            {features[isViewer ? "viewer" : "creator"].map(
-              ({ title, content, key }) => {
-                const Icon = iconsMapper[key];
-
-                return (
-                  <FeaturePaper
-                    key={key}
-                    onMouseEnter={() => setFocusedFeatureKey(key)}
-                  >
-                    <Icon fontSize={false ? "large" : "small"}></Icon>
-                    <Feature>
-                      <h3>{title}</h3>
-                      {content}
-                    </Feature>
-                  </FeaturePaper>
-                );
-              }
-            )}
-          </FeaturesSubContent>
-          <FeatureScreen
-            key={`backgrounds-${focusedFeatureKey}`}
-            background={backgrounds[focusedFeatureKey] as string}
-          ></FeatureScreen>
-        </ContentContainer>
+        <FeaturesSubContent>{featuresContent}</FeaturesSubContent>
+        <FeatureScreen
+          key={`backgrounds-${focusedFeatureKey}`}
+          background={backgrounds[focusedFeatureKey] as string}
+        ></FeatureScreen>
       </FeaturesContent>
     </FeaturesContainer>
   );

@@ -4,7 +4,7 @@ import { colors } from "../../../constants";
 
 export const HeaderContainer = styled.header`
   position: fixed;
-  z-index: 30;
+  z-index: 200;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

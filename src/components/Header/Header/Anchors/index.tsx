@@ -20,7 +20,7 @@ const Anchors = () => {
     <AnchorsContainer>
       <Anchor onClick={() => scrollTo("home")}>Home</Anchor>
       <Anchor onClick={() => scrollTo("features")}>Features</Anchor>
-      <Anchor onClick={() => scrollTo("community")}>Community</Anchor>
+      <Anchor onClick={() => scrollTo("community")}>FAQ</Anchor>
     </AnchorsContainer>
   );
 };

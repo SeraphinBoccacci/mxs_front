@@ -1,5 +1,5 @@
 import StepLabel from "@material-ui/core/StepLabel";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import React from "react";
 
 import { TutorialStepElement } from "../../constants/tutorials";
@@ -16,24 +16,38 @@ import {
 
 export const Tutorial = ({ tutorial }: { tutorial: TutorialStepElement[] }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isTutorialVisible, setIsTutorialVisible] = useState(true);
+  const [isTutorialVisible, setIsTutorialVisible] = useState(false);
 
-  const goToStep = (stepIndex: number) => {
-    setActiveStep(stepIndex);
-  };
+  const goToStep = useCallback(
+    (stepIndex: number) => {
+      setActiveStep(stepIndex);
+    },
+    [setActiveStep]
+  );
+
+  const handleOnHide = useCallback(() => {
+    setIsTutorialVisible((prevState) => !prevState);
+  }, [setIsTutorialVisible]);
 
   const activeStepData = tutorial[activeStep];
 
+  const step = useMemo(
+    () =>
+      activeStepData.content.map(({ image, text }, index) => (
+        <StepContent key={`activeStepData-${index}`}>
+          {image && <Image src={image}></Image>}
+          {text}
+        </StepContent>
+      )),
+    [activeStepData]
+  );
+
   return (
     <TutorialContainer>
-      <HideButton
-        onClick={() => setIsTutorialVisible((prevState) => !prevState)}
-        variant="contained"
-        color="secondary"
-      >
+      <HideButton onClick={handleOnHide} variant="contained" color="secondary">
         {isTutorialVisible ? "Hide" : "Show"} tutorial
       </HideButton>
-      {isTutorialVisible ? (
+      {isTutorialVisible && (
         <>
           <StepperContainer>
             <Stepper activeStep={activeStep} alternativeLabel>
@@ -48,16 +62,9 @@ export const Tutorial = ({ tutorial }: { tutorial: TutorialStepElement[] }) => {
               )}
             </Stepper>
           </StepperContainer>
-          <TutorialStep>
-            {activeStepData.content.map(({ image, text }, index) => (
-              <StepContent key={`activeStepData-${index}`}>
-                <Image src={image}></Image>
-                <>{text}</>
-              </StepContent>
-            ))}
-          </TutorialStep>
+          <TutorialStep>{step}</TutorialStep>
         </>
-      ) : null}
+      )}
     </TutorialContainer>
   );
 };

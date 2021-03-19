@@ -9,9 +9,7 @@ import { HeaderContainer } from "./style";
 const Header = () => {
   return (
     <HeaderContainer>
-      <LogoContainer style={{ background: "white" }}>
-        <Logo></Logo>
-      </LogoContainer>
+      <Logo></Logo>
       <Anchors></Anchors>
       <HeaderCTAs></HeaderCTAs>
     </HeaderContainer>

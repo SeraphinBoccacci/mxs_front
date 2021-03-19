@@ -272,7 +272,7 @@ export const ReferencesContent = styled.div`
   margin: 1rem 0;
 `;
 
-export const Reference = styled.div<{ logoPath?: string }>`
+export const Reference = styled.a<{ logoPath?: string }>`
   position: relative;
 
   height: 30px;
@@ -306,15 +306,16 @@ export const Reference = styled.div<{ logoPath?: string }>`
     height: 30px;
 
     background-image: ${({ logoPath }) => `url(${logoPath})`};
-    background-size: cover;
+    background-size: contain;
     background-position: center right;
+    background-repeat: no-repeat;
 
     filter: grayscale(100%);
 
     transition: 0.9s;
 
     @media (min-width: 450px) {
-      left: -40px;
+      left: -50px;
 
       width: 50px;
       height: 50px;

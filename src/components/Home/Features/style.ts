@@ -60,6 +60,8 @@ export const ContentContainer = styled.div`
   width: max-content;
 
   display: flex;
+
+  margin: 3rem auto;
 `;
 
 export const FeaturesSubContent = styled.div`
@@ -124,6 +126,15 @@ export const Feature = styled.div`
     & h3 {
       font-size: 1.2rem;
     }
+  }
+`;
+
+export const FeatureTitle = styled.h3`
+  font-family: ${fonts.Ubuntu};
+  font-size: 1rem;
+
+  @media (min-width: 1100px) {
+    font-size: 1.2rem;
   }
 `;
 

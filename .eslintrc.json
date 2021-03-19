@@ -6,7 +6,7 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "plugin:react/recommended"
+        "plugin:react-hooks/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -29,6 +29,7 @@
         "simple-import-sort/exports": "error",
         "quotes": ["error", "double"],
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-        "react/no-unescaped-entities": "error"
+        "react/no-unescaped-entities": "error",
+        "react/prop-types": 0
     }
 }

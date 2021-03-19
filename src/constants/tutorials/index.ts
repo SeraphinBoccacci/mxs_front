@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 
 import { iftttTutorial } from "./ifttt";
+import { streamElementsBase } from "./streamElementsBase";
+import { streamElementsCustom } from "./streamElementsCustom";
 
 export interface TutorialStepElement {
   label: string;
@@ -10,4 +12,4 @@ export interface TutorialStepElement {
   }[];
 }
 
-export { iftttTutorial };
+export { iftttTutorial, streamElementsBase, streamElementsCustom };

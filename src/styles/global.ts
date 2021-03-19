@@ -1,3 +1,4 @@
+import { Paper } from "@material-ui/core";
 import styled from "styled-components";
 
 import { colors, fonts } from "../constants";
@@ -43,17 +44,34 @@ export const Text = styled.p`
 `;
 
 export const Emphasize = styled.span`
+  position: relative;
   background-color: ${colors.quad};
   color: ${colors.primary};
   margin: 0 0.1rem;
   padding: 0.1rem 0.4rem;
 
   border-radius: 99px;
+
+  & > a::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: ${colors.primary};
+    width: 100%;
+
+    transition: 0.1s;
+  }
+
+  & > a:hover::before {
+    height: 3px;
+  }
 `;
 
 export const Link = styled.a`
   position: relative;
-  font-size: 0.8rem;
+
   padding: 0 0.2rem;
 
   cursor: pointer;
@@ -77,5 +95,25 @@ export const Link = styled.a`
     height: 3px;
 
     background-color: ${colors.quad};
+  }
+`;
+
+export const ContentContainer = styled(Paper)`
+  margin: 1.4rem auto !important;
+  width: max-content !important;
+  height: max-content !important;
+  padding: 1rem 2rem !important;
+
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 800px) {
+    margin: 2rem auto !important;
+    padding: 0.8rem 3rem !important;
+  }
+
+  @media (min-width: 1100px) {
+    margin: 3rem auto !important;
+    padding: 1rem 4rem !important;
   }
 `;
