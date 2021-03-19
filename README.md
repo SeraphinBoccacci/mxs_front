@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+# StreamParticles backend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+1. [Introduction](#introduction)
+2. [Stack](#stack)
+3. [Support](#support)
+4. [What's next? (roadmap)](#roadmap)
+5. [Contributing](#contributing)
 
-In the project directory, you can run:
+Foobar is a Python library for dealing with word pluralization.
 
-### `yarn start`
+## Introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Welcome on [StreamParticles](https://streamparticles.io/) FrontEnd Repo.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+StreamParticles is a free & open source alert tool for creators & streamers. Get custom onstream alerts every time you receive a cryptodonation through Maiar and your Herotag.
 
-### `yarn test`
+StreamParticles uses [Maiar](https://maiar.com/) technology to let you interact freely, without intermediary between you and the creators you support.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Maiar is powered by the amazing technology of the [Elrond](https://elrond.com/) blockchain, and is going to radically change the way we interact with money.
 
-### `yarn build`
+## Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ReactJS
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+styled-component
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Material-UI
 
-### `yarn eject`
+RestAPI
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Jest
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Support
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Telegram [StreamParticles](https://t.me/streamparticles)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<a name="roadmap"></a>
 
-## Learn More
+## What's next? (roadmap)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Improve code quality all along the project (front & back)
+- Create new particles (OBS & StreamLabs)
+- Create new customizations on SE particle (Kappagen)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
+
+Feel free to contribute to the project and resolve some of opened issues.
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate and base your PRs on develop branch
+
+FOR ISSUES AND BUGS, PLEASE USE THE ISSUE TEMPLATE
+
+## Contributors
+
+This project is an idea of @[jigme](https://twitter.com/ClichesDeJigme), the technical basis have been developed by @[serabocca06](https://twitter.com/sera_bocca)
+
+Anyone who wants to help (UI design) is welcome!
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
