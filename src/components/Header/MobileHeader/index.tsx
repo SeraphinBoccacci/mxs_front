@@ -3,7 +3,6 @@ import React from "react";
 
 import MenuBurger from "../../../assets/icons/MenuBurger";
 import Logo from "../../../assets/icons/StreamParticlesLogo";
-import { LogoContainer } from "../../../styles/global";
 import Menu from "./Menu";
 import { HeaderContainer } from "./style";
 
@@ -13,9 +12,7 @@ const MobileHeader = () => {
     <>
       <Menu isMenuOpenned={isActive} setIsMenuOpenned={setIsActive}></Menu>
       <HeaderContainer>
-        <LogoContainer style={{ background: "white" }}>
-          <Logo width={"100"}></Logo>
-        </LogoContainer>
+        <Logo width={"100"}></Logo>
         <MenuBurger
           onClick={() => setIsActive((prev) => !prev)}
           isActive={isActive}

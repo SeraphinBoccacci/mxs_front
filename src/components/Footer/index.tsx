@@ -52,9 +52,7 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <LogoContainer style={{ background: "white" }}>
-        <Logo></Logo>
-      </LogoContainer>
+      <Logo></Logo>
       <Columns>
         <DoubleColumn>
           <ColumnParagraph>
