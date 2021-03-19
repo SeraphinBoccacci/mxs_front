@@ -71,7 +71,7 @@ export const Emphasize = styled.span`
 
 export const Link = styled.a`
   position: relative;
-  font-size: 0.8rem;
+
   padding: 0 0.2rem;
 
   cursor: pointer;

@@ -2,7 +2,7 @@ import React from "react";
 //@ts-ignore
 import { withBreakpoints } from "react-breakpoints";
 
-import { streamElementsTutorial } from "../../../../constants/tutorials/streamElements";
+import { streamElementsBase } from "../../../../constants/tutorials";
 import { useAuth } from "../../../AuthContext";
 import CodeSnippets from "../../../CodeSnippets";
 import EventTriggerer from "../../../EventTriggerer";
@@ -24,18 +24,14 @@ const BaseTemplateIntegration = ({
 
   return (
     <div>
-      <Tutorial tutorial={streamElementsTutorial}></Tutorial>
-      {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape ? (
-        <div>
-          <EventTriggerer></EventTriggerer>
-          <CodeSnippets
-            jsSnippet={jsSnippet(user?.herotag || "{{your-herotag}}")}
-            htmlSnippet={htmlSnippet}
-            cssSnippet={cssSnippet}
-          ></CodeSnippets>
-        </div>
-      ) : (
-        <EventTriggerer></EventTriggerer>
+      <Tutorial tutorial={streamElementsBase}></Tutorial>
+      <EventTriggerer></EventTriggerer>
+      {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape && (
+        <CodeSnippets
+          jsSnippet={jsSnippet(user?.herotag || "{{your-herotag}}")}
+          htmlSnippet={htmlSnippet}
+          cssSnippet={cssSnippet}
+        ></CodeSnippets>
       )}
     </div>
   );

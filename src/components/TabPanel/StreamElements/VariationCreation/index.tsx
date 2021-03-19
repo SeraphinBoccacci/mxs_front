@@ -1,8 +1,6 @@
 /* eslint-disable quotes */
 import Alert from "@material-ui/lab/Alert";
 import React, { useCallback, useContext, useEffect, useState } from "react";
-//@ts-ignore
-import { withBreakpoints } from "react-breakpoints";
 
 import { getUserVariations } from "../../../../services/streamElements";
 import { ContentContainer } from "../../../../styles/global";
@@ -20,17 +18,7 @@ export interface VariationsFiles {
   javascript: string;
 }
 
-type breakpoints = { [key: string]: number };
-
-interface VariationCreationProps {
-  breakpoints: breakpoints;
-  currentBreakpoint: string;
-}
-
-const VariationCreation = ({
-  breakpoints,
-  currentBreakpoint,
-}: VariationCreationProps) => {
+const VariationCreation = () => {
   const [variations, setVariations] = useState<Variation[]>([]);
   const [files, setFiles] = useState<VariationsFiles>();
   const [focusedVariationIndex, setFocusedVariationIndex] = useState<number>();
@@ -72,8 +60,6 @@ const VariationCreation = ({
   const handleClose = useCallback(() => {
     setFocusedVariationIndex(undefined);
   }, [setFocusedVariationIndex]);
-
-  if (breakpoints[currentBreakpoint] < breakpoints.tabletLandscape) return null;
 
   return (
     <div>
@@ -130,4 +116,4 @@ const VariationCreation = ({
   );
 };
 
-export default withBreakpoints(VariationCreation);
+export default VariationCreation;

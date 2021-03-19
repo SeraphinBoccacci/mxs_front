@@ -129,6 +129,15 @@ export const Feature = styled.div`
   }
 `;
 
+export const FeatureTitle = styled.h3`
+  font-family: ${fonts.Ubuntu};
+  font-size: 1rem;
+
+  @media (min-width: 1100px) {
+    font-size: 1.2rem;
+  }
+`;
+
 export const FeatureParagraph = styled.p`
   font-family: ${fonts.Roboto};
   color: #c5c5c5;

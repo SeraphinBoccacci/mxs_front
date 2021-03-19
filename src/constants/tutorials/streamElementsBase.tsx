@@ -3,9 +3,9 @@ import React from "react";
 import { Emphasize, Text } from "../../styles/global";
 import { TutorialStepElement } from ".";
 
-export const streamElementsTutorial: TutorialStepElement[] = [
+export const streamElementsBase: TutorialStepElement[] = [
   {
-    label: "Start custom widget creation",
+    label: "Begin widget creation",
     content: [
       {
         image: "/streamElements/integration/step_1.png",
@@ -52,7 +52,7 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         image: "/streamElements/integration/step_2.png",
         text: (
           <Text>
-            Click <Emphasize>Open Editor.</Emphasize>
+            Click <Emphasize>Open Editor</Emphasize>.
           </Text>
         ),
       },
@@ -61,14 +61,6 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         text: (
           <Text>
             Then, remove placeholder data on <Emphasize>Field</Emphasize> Tab.
-          </Text>
-        ),
-      },
-      {
-        image: "/streamElements/integration/step_2_ter.png",
-        text: (
-          <Text>
-            Do the same on <Emphasize>Data</Emphasize> Tab.
           </Text>
         ),
       },
@@ -81,10 +73,9 @@ export const streamElementsTutorial: TutorialStepElement[] = [
         image: "/streamElements/integration/step_3.png",
         text: (
           <Text>
-            Copy and paste the <Emphasize>code</Emphasize> below this tutorial
-            on the three others Tabs (other screens just below). Make sure to
-            fill the sockets configuration with your own{" "}
-            <Emphasize>herotag</Emphasize>.
+            Copy and paste the <Emphasize>code snippets</Emphasize> below this
+            tutorial in the JS / HTML / CSS tabs (other screens just below) on
+            StreamElements
           </Text>
         ),
       },
@@ -99,7 +90,7 @@ export const streamElementsTutorial: TutorialStepElement[] = [
     ],
   },
   {
-    label: "Save project and test preview",
+    label: "Save project and test your overlay",
     content: [
       {
         image: "/streamElements/integration/step_4.png",

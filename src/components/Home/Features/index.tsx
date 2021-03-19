@@ -22,22 +22,29 @@ import {
   FeaturesSubContent,
   FeaturesSubTitle,
   FeaturesTitle,
+  FeatureTitle,
 } from "./style";
 
 const features = {
   creator: [
     {
-      title: "1. Create your accounts",
+      title: <FeatureTitle>1. Create your accounts</FeatureTitle>,
       content: (
         <FeatureParagraph>
-          You just need to create your Maiar wallet and your account on
-          StreamParticles. It&rsquo;s totally free.
+          You just need to{" "}
+          <Link
+            href="https://get.maiar.com/referral/6vcqxt658e"
+            target="about:blank"
+          >
+            create your Maiar wallet
+          </Link>{" "}
+          and your account on StreamParticles. It&rsquo;s totally free.
         </FeatureParagraph>
       ),
       key: "features_01",
     },
     {
-      title: "2. Set your alerts",
+      title: <FeatureTitle>2. Set your alerts</FeatureTitle>,
       content: (
         <FeatureParagraph>
           Upload your own GIFs, your own Audios. Configure all the variations
@@ -47,7 +54,7 @@ const features = {
       key: "features_02",
     },
     {
-      title: "3. Start Streaming!",
+      title: <FeatureTitle>3. Start Streaming!</FeatureTitle>,
       content: (
         <FeatureParagraph>
           Share your herotag to your community and let them support your
@@ -59,7 +66,18 @@ const features = {
   ],
   viewer: [
     {
-      title: "1. Create a Maiar wallet, it's free",
+      title: (
+        <FeatureTitle>
+          1.{" "}
+          <Link
+            href="https://get.maiar.com/referral/6vcqxt658e"
+            target="about:blank"
+          >
+            Create a Maiar wallet
+          </Link>{" "}
+          , it&lsquo;s free
+        </FeatureTitle>
+      ),
       content: (
         <FeatureParagraph>
           Maiar only requires your phone number and let’s you own some
@@ -73,7 +91,7 @@ const features = {
       key: "features_04",
     },
     {
-      title: "2. Buy or deposit EGLDs",
+      title: <FeatureTitle>2. Buy or deposit EGLDs</FeatureTitle>,
       content: (
         <FeatureParagraph>
           It is as easy as buying Bits on Twitch!<br></br>A list of ¤EGLD
@@ -91,7 +109,7 @@ const features = {
       key: "features_05",
     },
     {
-      title: "3. Support your favorite creators",
+      title: <FeatureTitle>3. Support your favorite creators</FeatureTitle>,
       content: (
         <FeatureParagraph>
           And enjoy full interaction on their livestreams. They get 100% of what
@@ -161,7 +179,7 @@ const Features = ({
             >
               <Icon fontSize={false ? "large" : "small"}></Icon>
               <Feature>
-                <h3>{title}</h3>
+                {title}
                 {content}
               </Feature>
             </FeaturePaper>

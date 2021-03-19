@@ -16,7 +16,7 @@ import {
 
 export const Tutorial = ({ tutorial }: { tutorial: TutorialStepElement[] }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isTutorialVisible, setIsTutorialVisible] = useState(true);
+  const [isTutorialVisible, setIsTutorialVisible] = useState(false);
 
   const goToStep = useCallback(
     (stepIndex: number) => {
@@ -31,12 +31,12 @@ export const Tutorial = ({ tutorial }: { tutorial: TutorialStepElement[] }) => {
 
   const activeStepData = tutorial[activeStep];
 
-  const steps = useMemo(
+  const step = useMemo(
     () =>
       activeStepData.content.map(({ image, text }, index) => (
         <StepContent key={`activeStepData-${index}`}>
-          <Image src={image}></Image>
-          <>{text}</>
+          {image && <Image src={image}></Image>}
+          {text}
         </StepContent>
       )),
     [activeStepData]
@@ -62,7 +62,7 @@ export const Tutorial = ({ tutorial }: { tutorial: TutorialStepElement[] }) => {
               )}
             </Stepper>
           </StepperContainer>
-          <TutorialStep>{steps}</TutorialStep>
+          <TutorialStep>{step}</TutorialStep>
         </>
       )}
     </TutorialContainer>
