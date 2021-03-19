@@ -61,7 +61,7 @@ const PasswordEdition = ({
         <TransactionReferenceP>
           Send a (micro) transaction to{" "}
           <TransactionReferenceHighlighted>
-            serabocca06.elrond
+            streamparticles.elrond
           </TransactionReferenceHighlighted>{" "}
           with this reference :{" "}
           <TransactionReferenceHighlighted>
