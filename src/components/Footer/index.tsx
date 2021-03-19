@@ -1,15 +1,15 @@
-// import { colors } from "../../constants";
-// import LogoAndName from "../LogoAndName";
+import React from "react";
+
 import Logo from "../../assets/icons/StreamParticlesLogo";
 import { LogoContainer } from "../../styles/global";
 import {
-  Columns,
-  DoubleColumn,
-  FooterContainer,
   Column,
-  ColumnTitle,
   ColumnItem,
   ColumnParagraph,
+  Columns,
+  ColumnTitle,
+  DoubleColumn,
+  FooterContainer,
 } from "./style";
 
 const Footer = () => {

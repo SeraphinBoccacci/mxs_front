@@ -22,7 +22,7 @@ export const colors = {
   third: "#0f276c",
   quad: "#ceff1a",
   soft_black: "#2a2a2a",
-  black: "#000000",
+  black: "#121212",
 
   warning: "#E6C229",
   success: "#157F1F",

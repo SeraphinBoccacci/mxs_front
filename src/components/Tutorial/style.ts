@@ -1,10 +1,11 @@
 import {
-  Paper,
-  Stepper as MaterialStepper,
-  Step as MaterialStep,
   Button,
+  Paper,
+  Step as MaterialStep,
+  Stepper as MaterialStepper,
 } from "@material-ui/core";
 import styled from "styled-components";
+
 import { colors } from "../../constants";
 import { FlexColumn } from "../../styles/global";
 
@@ -31,6 +32,10 @@ export const TutorialContainer = styled(Paper)`
 export const StepperContainer = styled.div`
   width: calc(100% - 4rem);
   overflow: scroll;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
   margin: 0 2rem;
 `;

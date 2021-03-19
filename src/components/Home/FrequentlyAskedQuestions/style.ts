@@ -1,10 +1,11 @@
-import styled from "styled-components";
-import { colors, fonts } from "../../../constants";
 import {
   Accordion as MaterialAccordion,
   AccordionDetails as MaterialAccordionDetails,
   AccordionSummary as MaterialAccordionSummary,
 } from "@material-ui/core";
+import styled from "styled-components";
+
+import { colors, fonts } from "../../../constants";
 import { FlexColumn } from "../../../styles/global";
 
 export const FaqContainer = styled.section`

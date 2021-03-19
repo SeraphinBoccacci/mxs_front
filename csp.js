@@ -1,0 +1,32 @@
+module.exports = {
+  dev: {
+    "default-src": ["'self'", "*", "data:", "https:"],
+    "font-src": ["'self'", "https:"],
+    "script-src": ["'unsafe-inline'"],
+    "img-src": ["data:", "https:", "blob:", "'self'", "http://localhost:4000"],
+    "media-src": [
+      "data:",
+      "https:",
+      "blob:",
+      "'self'",
+      "http://localhost:4000",
+    ],
+    "frame-src": ["'self'"],
+    "style-src": ["'unsafe-inline'"],
+    "connect-src": ["*"],
+    "script-src-elem": ["'unsafe-inline'", "*"],
+    "style-src-elem": ["'unsafe-inline'", "https:"],
+  },
+  prod: {
+    "default-src": ["'self'", "*", "data:", "https:"],
+    "font-src": ["'self'", "https:"],
+    "script-src": ["'unsafe-inline'"],
+    "img-src": ["data:", "https:", "blob:", "'self'"],
+    "media-src": ["data:", "https:", "blob:", "'self'"],
+    "frame-src": ["'self'"],
+    "style-src": ["'unsafe-inline'"],
+    "connect-src": ["*"],
+    "script-src-elem": ["'unsafe-inline'", "*"],
+    "style-src-elem": ["'unsafe-inline'", "https:"],
+  },
+};

@@ -1,15 +1,17 @@
 import StepLabel from "@material-ui/core/StepLabel";
 import { useState } from "react";
+import React from "react";
+
 import { TutorialStepElement } from "../../constants/tutorials";
 import {
-  TutorialStep,
-  TutorialContainer,
+  HideButton,
   Image,
+  Step,
   StepContent,
   Stepper,
   StepperContainer,
-  Step,
-  HideButton,
+  TutorialContainer,
+  TutorialStep,
 } from "./style";
 
 export const Tutorial = ({ tutorial }: { tutorial: TutorialStepElement[] }) => {

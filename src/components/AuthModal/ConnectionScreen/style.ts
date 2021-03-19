@@ -1,6 +1,7 @@
-import styled from "styled-components";
-import { colors, fonts } from "../../../constants";
 import { Button as MaterialButton } from "@material-ui/core";
+import styled from "styled-components";
+
+import { colors, fonts } from "../../../constants";
 
 export const ConnectionForm = styled.form`
   display: flex;

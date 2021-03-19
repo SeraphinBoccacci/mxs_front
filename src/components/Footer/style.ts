@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { colors, fonts } from "../../constants";
 
 export const FooterContainer = styled.footer`

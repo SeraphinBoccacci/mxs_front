@@ -1,5 +1,7 @@
-import { TutorialStepElement } from ".";
+import React from "react";
+
 import { Emphasize, Text } from "../../styles/global";
+import { TutorialStepElement } from ".";
 
 export const streamElementsTutorial: TutorialStepElement[] = [
   {

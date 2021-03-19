@@ -1,8 +1,8 @@
 import { Paper } from "@material-ui/core";
 import styled from "styled-components";
+
 import { colors, fonts } from "../../../constants";
 import { FlexColumn } from "../../../styles/global";
-import { motion } from "framer-motion";
 
 export const FeaturesContainer = styled.section`
   width: 100vw;
@@ -37,9 +37,7 @@ export const FeaturesSubTitle = styled.h4`
   margin-top: -1.1rem;
 `;
 
-export const FeaturesContent = styled(motion.div)<{ isRowReverse: boolean }>`
-  position: absolute;
-
+export const FeaturesContent = styled.div<{ isRowReverse: boolean }>`
   display: flex;
   overflow: hidden;
 
@@ -48,8 +46,7 @@ export const FeaturesContent = styled(motion.div)<{ isRowReverse: boolean }>`
 
   flex-direction: column;
 
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
 
   @media (min-width: 800px) {
     width: max-content;
@@ -65,7 +62,7 @@ export const ContentContainer = styled.div`
   display: flex;
 `;
 
-export const FeaturesSubContent = styled(motion.div)`
+export const FeaturesSubContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;

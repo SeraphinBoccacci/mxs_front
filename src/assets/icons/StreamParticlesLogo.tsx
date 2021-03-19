@@ -1,3 +1,5 @@
+import React from "react";
+
 const Logo = ({ width = "185.4" }: { width?: string }) => {
   return (
     <svg viewBox="0 0 185.4 26.265" width={width} height="26.265">
