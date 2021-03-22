@@ -1,5 +1,4 @@
 import {
-  Button,
   Paper,
   Step as MaterialStep,
   Stepper as MaterialStepper,
@@ -77,10 +76,15 @@ export const Image = styled.img`
   margin: 0 auto;
 `;
 
-export const HideButton = styled(Button)`
-  position: relative !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: max-content !important;
+export const Buttons = styled.div`
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin: 1.3rem auto !important;
+
+  > * {
+    margin: 0 2rem !important;
+  }
 `;

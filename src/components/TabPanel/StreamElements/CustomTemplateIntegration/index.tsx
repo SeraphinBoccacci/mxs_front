@@ -5,6 +5,7 @@ import { withBreakpoints } from "react-breakpoints";
 import { streamElementsCustom } from "../../../../constants/tutorials";
 import EventTriggerer from "../../../EventTriggerer";
 import { Tutorial } from "../../../Tutorial";
+import { StreamElementsIntegrationContainer } from "../style";
 import VariationCreation from "../VariationCreation";
 
 type Breakpoints = { [key: string]: number };
@@ -19,13 +20,13 @@ const CustomTemplateIntegration = ({
   currentBreakpoint,
 }: BaseTemplateIntegrationProps) => {
   return (
-    <div>
+    <StreamElementsIntegrationContainer>
       <Tutorial tutorial={streamElementsCustom}></Tutorial>
       <EventTriggerer></EventTriggerer>
       {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape && (
         <VariationCreation></VariationCreation>
       )}
-    </div>
+    </StreamElementsIntegrationContainer>
   );
 };
 

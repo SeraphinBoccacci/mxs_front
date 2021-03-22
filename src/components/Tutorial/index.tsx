@@ -1,10 +1,11 @@
+import { Button } from "@material-ui/core";
 import StepLabel from "@material-ui/core/StepLabel";
 import { useCallback, useMemo, useState } from "react";
 import React from "react";
 
 import { TutorialStepElement } from "../../constants/tutorials";
 import {
-  HideButton,
+  Buttons,
   Image,
   Step,
   StepContent,
@@ -14,7 +15,13 @@ import {
   TutorialStep,
 } from "./style";
 
-export const Tutorial = ({ tutorial }: { tutorial: TutorialStepElement[] }) => {
+export const Tutorial = ({
+  tutorial,
+  videoTutorialLink,
+}: {
+  tutorial: TutorialStepElement[];
+  videoTutorialLink?: string;
+}) => {
   const [activeStep, setActiveStep] = useState(0);
   const [isTutorialVisible, setIsTutorialVisible] = useState(false);
 
@@ -44,9 +51,19 @@ export const Tutorial = ({ tutorial }: { tutorial: TutorialStepElement[] }) => {
 
   return (
     <TutorialContainer>
-      <HideButton onClick={handleOnHide} variant="contained" color="secondary">
-        {isTutorialVisible ? "Hide" : "Show"} tutorial
-      </HideButton>
+      <Buttons>
+        <Button onClick={handleOnHide} variant="contained" color="secondary">
+          {isTutorialVisible ? "Hide" : "Show"} tutorial
+        </Button>
+        {!!videoTutorialLink && (
+          <Button variant="outlined" color="secondary">
+            <a href="videoTutorialLink" target="about:blank">
+              Video Tutorial
+            </a>
+          </Button>
+        )}
+      </Buttons>
+
       {isTutorialVisible && (
         <>
           <StepperContainer>

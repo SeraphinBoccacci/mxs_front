@@ -1,14 +1,11 @@
 import {
   createStyles,
   FormControl,
-  Input as TInput,
   InputAdornment,
-  InputBase,
   InputLabel,
   makeStyles,
   OutlinedInput,
   OutlinedInputProps,
-  TextField,
   Theme,
   Tooltip,
 } from "@material-ui/core";
