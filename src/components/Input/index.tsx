@@ -55,17 +55,18 @@ const Input = ({
   const input = (
     <FormControl
       size="small"
-      color="secondary"
       className={isTextContent ? classes.textContent : classes.formControl}
       variant="outlined"
+      color="primary"
     >
-      {!!inputLabel && (
-        <InputLabel htmlFor={inputName}>{inputLabel}</InputLabel>
-      )}
+      <InputLabel variant="outlined" color="secondary" htmlFor={inputName}>
+        {inputLabel}
+      </InputLabel>
       <OutlinedInput
         type={type}
         disabled={isDisabled}
         onChange={onChange}
+        notched
         rows={3}
         multiline={isTextContent}
         name={inputName}

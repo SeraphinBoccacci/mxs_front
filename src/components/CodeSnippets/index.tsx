@@ -31,29 +31,33 @@ const CodeSnippets = ({
   return (
     <CodeSnippetsContainer>
       <CodeSnippetsButtons>
-        {!!jsSnippet ? (
+        {!!jsSnippet && (
           <Button
             onClick={() => setLang("javascript")}
-            variant="outlined"
+            variant={lang === "javascript" ? "contained" : "outlined"}
             color="secondary"
           >
             Javascript
           </Button>
-        ) : null}
-        {!!htmlSnippet ? (
-          <Button onClick={() => setLang("html")} color="secondary">
+        )}
+        {!!htmlSnippet && (
+          <Button
+            onClick={() => setLang("html")}
+            variant={lang === "html" ? "contained" : "outlined"}
+            color="secondary"
+          >
             Html
           </Button>
-        ) : null}{" "}
-        {!!cssSnippet ? (
+        )}
+        {!!cssSnippet && (
           <Button
             onClick={() => setLang("css")}
-            variant="contained"
+            variant={lang === "css" ? "contained" : "outlined"}
             color="secondary"
           >
             Css
           </Button>
-        ) : null}
+        )}
         <Button onClick={() => navigator.clipboard.writeText(codeString[lang])}>
           <FileCopyIcon></FileCopyIcon>
         </Button>

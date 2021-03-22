@@ -82,9 +82,8 @@ const Select = ({
       }
       size="small"
       variant="outlined"
-      color="secondary"
     >
-      <InputLabel>{inputLabel}</InputLabel>
+      <InputLabel color="secondary">{inputLabel}</InputLabel>
       <MaterialSelect onChange={onChange} value={value || ""} name={inputName}>
         {options.map((option, index) => (
           <MenuItem
