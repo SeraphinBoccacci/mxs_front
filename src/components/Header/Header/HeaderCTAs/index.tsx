@@ -19,8 +19,13 @@ export const HeaderCTAs = () => {
   return (
     <>
       <ButtonsContainer>
-        <Button variant="outlined" onClick={() => {}}>
-          Docs
+        <Button variant="outlined">
+          <a
+            target="about:blank"
+            href="https://github.com/SeraphinBoccacci/StreamParticles_BACK/blob/main/README.md"
+          >
+            Docs
+          </a>
         </Button>
         {isAuthenticated ? (
           <Button

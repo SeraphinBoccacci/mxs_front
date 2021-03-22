@@ -8,6 +8,7 @@ import CodeSnippets from "../../../CodeSnippets";
 import EventTriggerer from "../../../EventTriggerer";
 import { Tutorial } from "../../../Tutorial";
 import { cssSnippet, htmlSnippet, jsSnippet } from "../codeSnippets/template";
+import { StreamElementsIntegrationContainer } from "../style";
 
 type Breakpoints = { [key: string]: number };
 
@@ -23,7 +24,7 @@ const BaseTemplateIntegration = ({
   const { user } = useAuth();
 
   return (
-    <div>
+    <StreamElementsIntegrationContainer>
       <Tutorial tutorial={streamElementsBase}></Tutorial>
       <EventTriggerer></EventTriggerer>
       {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape && (
@@ -33,7 +34,7 @@ const BaseTemplateIntegration = ({
           cssSnippet={cssSnippet}
         ></CodeSnippets>
       )}
-    </div>
+    </StreamElementsIntegrationContainer>
   );
 };
 

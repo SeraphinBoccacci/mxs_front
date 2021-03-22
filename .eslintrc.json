@@ -4,10 +4,6 @@
         "es2021": true,
         "node": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended"
-    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
@@ -16,6 +12,10 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended"
+    ],
     "plugins": [
         "react",
         "@typescript-eslint", 

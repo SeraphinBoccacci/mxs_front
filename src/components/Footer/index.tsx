@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import Logo from "../../assets/icons/StreamParticlesLogo";
 import config from "../../config/config";
-import { Emphasize, LogoContainer } from "../../styles/global";
+import { Emphasize } from "../../styles/global";
 import { axiosGet } from "../../utils/axios";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import Switch from "../Switch";
@@ -68,7 +68,16 @@ const Footer = () => {
         </DoubleColumn>
         <Column>
           <ColumnTitle>Ressources</ColumnTitle>
-          <ColumnItem>Documentation</ColumnItem>
+          <ColumnItem>
+            <span>
+              <a
+                target="about:blank"
+                href="https://github.com/SeraphinBoccacci/StreamParticles_BACK/blob/main/README.md"
+              >
+                Documentation
+              </a>
+            </span>
+          </ColumnItem>
           <ColumnItem>
             <span>
               <a target="about:blank" href="https://t.me/streamparticles">
