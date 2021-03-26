@@ -1,14 +1,12 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 
 import StyledLab from "../components/Lab";
+import Seo from "../components/Seo";
 
 const Lab = () => {
   return (
     <>
-      <Helmet>
-        <title>Lab</title>
-      </Helmet>
+      <Seo metaTitle="Lab"></Seo>
       <StyledLab></StyledLab>
     </>
   );
