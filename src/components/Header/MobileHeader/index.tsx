@@ -1,10 +1,10 @@
 import { useState } from "react";
 import React from "react";
 
-import MenuBurger from "../../../assets/icons/MenuBurger";
 import Logo from "../../../assets/icons/StreamParticlesLogo";
+import MenuBurger from "../../MenuBurger";
+import { HeaderContainer } from "../style";
 import Menu from "./Menu";
-import { HeaderContainer } from "./style";
 
 const MobileHeader = () => {
   const [isActive, setIsActive] = useState(false);
@@ -12,11 +12,10 @@ const MobileHeader = () => {
     <>
       <Menu isMenuOpenned={isActive} setIsMenuOpenned={setIsActive}></Menu>
       <HeaderContainer>
-        <Logo width={"100"}></Logo>
+        <Logo></Logo>
         <MenuBurger
-          onClick={() => setIsActive((prev) => !prev)}
-          isActive={isActive}
-          width="50px"
+          open={isActive}
+          setOpen={() => setIsActive((prev) => !prev)}
         ></MenuBurger>
       </HeaderContainer>
     </>

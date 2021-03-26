@@ -1,9 +1,9 @@
 import React from "react";
 
 import Logo from "../../../assets/icons/StreamParticlesLogo";
+import { HeaderContainer } from "../style";
 import Anchors from "./Anchors";
 import { HeaderCTAs } from "./HeaderCTAs";
-import { HeaderContainer } from "./style";
 
 const Header = () => {
   return (

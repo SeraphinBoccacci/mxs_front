@@ -18,14 +18,12 @@ export const MenuContainer = styled.div<{ isMenuOpenned: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 40;
-
-  transition: 0.5s;
 
   background: ${colors.primary};
-  width: ${({ isMenuOpenned }) => (isMenuOpenned ? "75vw" : "0")};
-  overflow: hidden;
-  height: 60vh;
+
+  width: ${({ isMenuOpenned }) => (isMenuOpenned ? "18rem" : "0")};
+  height: 25rem;
+
   padding: ${({ isMenuOpenned }) => (isMenuOpenned ? "4rem 3rem 0" : "0")};
 
   border-bottom-left-radius: 13px;
@@ -34,4 +32,8 @@ export const MenuContainer = styled.div<{ isMenuOpenned: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
+  z-index: 40;
+  transition: 0.5s;
+  overflow: hidden;
 `;

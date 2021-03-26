@@ -1,9 +1,5 @@
 import React from "react";
 
-import logoObs from "../../../assets/obsLogo.png";
-import logoStreamLabsObs from "../../../assets/streamlabsObsLogo.png";
-import logoTwitchStudio from "../../../assets/twitchStudioLogo.png";
-import logoXPlit from "../../../assets/xplitLogo.png";
 import CallToActions from "./CallToActions";
 import {
   CatchPhraseAndImage,
@@ -12,8 +8,10 @@ import {
   LittleDisclaimer,
   MainCatchPhrase,
   Reference,
+  ReferenceImage,
   ReferencesContainer,
   ReferencesContent,
+  ReferencesText,
   ReferencesTitle,
   Section,
   ShortCatchPhraseChip,
@@ -60,33 +58,27 @@ const Introduction = ({
       <ReferencesContainer>
         <ReferencesTitle>Works great with</ReferencesTitle>
         <ReferencesContent>
-          <Reference
-            target="about:blank"
-            href="https://obsproject.com/fr"
-            logoPath={logoObs}
-          >
-            OBS
+          <Reference target="about:blank" href="https://obsproject.com/fr">
+            <ReferenceImage src="/obsLogo.png"></ReferenceImage>
+            <ReferencesText>OBS</ReferencesText>
           </Reference>
           <Reference
             target="about:blank"
             href="https://streamlabs.com/streamlabs-obs?l=fr-FR"
-            logoPath={logoStreamLabsObs}
           >
-            StreamLabs OBS
+            <ReferenceImage src="/streamlabsObsLogo.png"></ReferenceImage>
+            <ReferencesText>StreamLabs OBS</ReferencesText>
           </Reference>
-          <Reference
-            target="about:blank"
-            href="https://www.xsplit.com/"
-            logoPath={logoXPlit}
-          >
-            XSplit
+          <Reference target="about:blank" href="https://www.xsplit.com/">
+            <ReferenceImage src="/xplitLogo.png"></ReferenceImage>
+            <ReferencesText>XSplit</ReferencesText>
           </Reference>
           <Reference
             target="about:blank"
             href="https://www.twitch.tv/broadcast/studio"
-            logoPath={logoTwitchStudio}
           >
-            Twitch Studio
+            <ReferenceImage src="/twitchStudioLogo.png"></ReferenceImage>
+            <ReferencesText>Twitch Studio</ReferencesText>
           </Reference>
         </ReferencesContent>
       </ReferencesContainer>

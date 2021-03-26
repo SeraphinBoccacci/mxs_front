@@ -9,7 +9,7 @@ export const Section = styled.section`
   height: max-content;
   width: 100vw;
   background-color: #060606;
-  padding: 6rem 0 4rem;
+  padding: 6rem 0 2rem;
 
   overflow-x: hidden;
 
@@ -23,20 +23,7 @@ export const Section = styled.section`
   background-size: contain;
   background-repeat: no-repeat;
 
-  @media (min-width: 450px) {
-    padding: 6rem 0 14rem;
-  }
-
-  @media (min-width: 550px) {
-    padding: 6rem 0 16rem;
-  }
-
-  @media (min-width: 800px) {
-    padding: 6rem 0 17rem;
-  }
-
   @media (min-width: 980px) {
-    padding: 6rem 0 2rem;
     background-image: url("/planet_2.jpeg");
   }
 `;
@@ -165,9 +152,9 @@ export const ReferencesContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  margin: 2rem 0 10rem;
+  margin: 2rem 0;
 
-  height: 8rem;
+  height: max-content;
   width: 100%;
 
   @media (min-width: 450px) {
@@ -188,7 +175,7 @@ export const ReferencesTitle = styled.h2`
   text-align: center;
 
   font-size: 0.8rem;
-  line-height: 1rem;
+  line-height: 2rem;
   letter-spacing: 1.2px;
 
   font-variant-caps: all-small-caps;
@@ -204,13 +191,19 @@ export const ReferencesTitle = styled.h2`
     content: "";
     position: absolute;
     top: 50%;
-    left: -7rem;
+    left: -6rem;
 
     width: 6rem;
     height: 1px;
 
     border-radius: 999px;
     background-color: ${colors.quad};
+
+    @media (min-width: 500px) {
+      left: -12rem;
+
+      width: 10rem;
+    }
 
     @media (min-width: 800px) {
       left: -15rem;
@@ -235,13 +228,19 @@ export const ReferencesTitle = styled.h2`
     content: "";
     position: absolute;
     top: 50%;
-    right: -7rem;
+    right: -6rem;
 
     width: 6rem;
     height: 1px;
 
     border-radius: 999px;
     background-color: ${colors.quad};
+
+    @media (min-width: 500px) {
+      right: -12rem;
+
+      width: 10rem;
+    }
 
     @media (min-width: 800px) {
       right: -15rem;
@@ -269,60 +268,82 @@ export const ReferencesContent = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+
   margin: 1rem 0;
+  padding: 0 0.4rem;
 `;
 
-export const Reference = styled.a<{ logoPath?: string }>`
+export const Reference = styled.a`
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  height: max-content;
+
+  backdrop-filter: blur(20px);
+  border-radius: 0.4rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  @media (min-width: 700px) {
+    margin: 1rem 2rem;
+    border-radius: 0.5rem;
+  }
+
+  @media (min-width: 1000px) {
+    margin: 2rem;
+    border-radius: 0.6rem;
+  }
+
+  &:hover img {
+    filter: grayscale(0%);
+  }
+`;
+
+export const ReferencesText = styled.div`
   position: relative;
 
-  height: 30px;
-  padding: 0 1rem;
-
-  font-size: 1.2rem;
+  font-size: 0.7rem;
   font-family: ${fonts.Roboto};
   color: ${colors.secondary};
 
+  height: 30px;
   line-height: 30px;
-
-  margin: 0 2rem 2rem 4rem;
 
   cursor: pointer;
 
-  @media (min-width: 450px) {
-    height: 50px;
+  @media (min-width: 700px) {
+    font-size: 1.2rem;
 
+    height: 40px;
+    line-height: 40px;
+  }
+
+  @media (min-width: 1000px) {
     font-size: 1.6rem;
 
+    height: 50px;
     line-height: 50px;
   }
+`;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -25px;
+export const ReferenceImage = styled.img`
+  width: 30px;
+  height: 30px;
 
-    width: 30px;
-    height: 30px;
+  margin: auto 0.4rem;
 
-    background-image: ${({ logoPath }) => `url(${logoPath})`};
-    background-size: contain;
-    background-position: center right;
-    background-repeat: no-repeat;
+  filter: grayscale(100%);
 
-    filter: grayscale(100%);
+  transition: 0.9s;
 
-    transition: 0.9s;
-
-    @media (min-width: 450px) {
-      left: -50px;
-
-      width: 50px;
-      height: 50px;
-    }
+  @media (min-width: 700px) {
+    width: 40px;
+    height: 40px;
   }
 
-  &:hover::before {
-    filter: grayscale(0%);
+  @media (min-width: 1000px) {
+    width: 50px;
+    height: 50px;
   }
 `;
