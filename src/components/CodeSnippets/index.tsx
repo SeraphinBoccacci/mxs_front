@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import React, { useState } from "react";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import React, { useMemo, useState } from "react";
+import { atomOneDarkReasonable } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import {
   CodeSnippet,
@@ -20,13 +20,18 @@ const CodeSnippets = ({
   htmlSnippet,
   cssSnippet,
 }: CodeSnippetsProps) => {
-  const [lang, setLang] = useState<"javascript" | "html" | "css">("javascript");
+  const [lang, setLang] = useState<"javascript" | "htmlbars" | "css">(
+    "javascript"
+  );
 
-  const codeString = {
-    javascript: jsSnippet || "",
-    html: htmlSnippet || "",
-    css: cssSnippet || "",
-  };
+  const codeString = useMemo(
+    () => ({
+      javascript: jsSnippet || "",
+      htmlbars: htmlSnippet || "",
+      css: cssSnippet || "",
+    }),
+    [jsSnippet, htmlSnippet, cssSnippet]
+  );
 
   return (
     <CodeSnippetsContainer>
@@ -42,8 +47,8 @@ const CodeSnippets = ({
         )}
         {!!htmlSnippet && (
           <Button
-            onClick={() => setLang("html")}
-            variant={lang === "html" ? "contained" : "outlined"}
+            onClick={() => setLang("htmlbars")}
+            variant={lang === "htmlbars" ? "contained" : "outlined"}
             color="secondary"
           >
             Html
@@ -62,7 +67,11 @@ const CodeSnippets = ({
           <FileCopyIcon></FileCopyIcon>
         </Button>
       </CodeSnippetsButtons>
-      <CodeSnippet language={lang} style={dark}>
+      <CodeSnippet
+        language={lang}
+        style={atomOneDarkReasonable}
+        showLineNumbers
+      >
         {codeString[lang]}
       </CodeSnippet>
     </CodeSnippetsContainer>

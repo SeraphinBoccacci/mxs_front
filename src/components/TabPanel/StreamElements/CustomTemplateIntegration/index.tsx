@@ -21,7 +21,10 @@ const CustomTemplateIntegration = ({
 }: BaseTemplateIntegrationProps) => {
   return (
     <StreamElementsIntegrationContainer>
-      <Tutorial tutorial={streamElementsCustom}></Tutorial>
+      <Tutorial
+        videoTutorialLink="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=290s"
+        tutorial={streamElementsCustom}
+      ></Tutorial>
       <EventTriggerer></EventTriggerer>
       {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape && (
         <VariationCreation></VariationCreation>

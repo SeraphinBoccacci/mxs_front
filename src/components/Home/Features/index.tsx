@@ -39,6 +39,13 @@ const features = {
             create your Maiar wallet
           </Link>{" "}
           and your account on StreamParticles. It&rsquo;s totally free.
+          <br></br>A tutorial is available{" "}
+          <Link
+            href="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=0s"
+            target="about:blank"
+          >
+            here
+          </Link>
         </FeatureParagraph>
       ),
       key: "features_01",
@@ -49,6 +56,13 @@ const features = {
         <FeatureParagraph>
           Upload your own GIFs, your own Audios. Configure all the variations
           you need. Create a fully customized interaction with your donators.
+          <br></br>A tutorial is available{" "}
+          <Link
+            href="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=80s"
+            target="about:blank"
+          >
+            here
+          </Link>
         </FeatureParagraph>
       ),
       key: "features_02",

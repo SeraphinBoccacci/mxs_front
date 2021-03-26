@@ -85,18 +85,16 @@ export const FeaturesSubContent = styled.div`
 export const FeaturePaper = styled(Paper)`
   position: relative;
   left: 0;
-  height: max-content;
+  height: 12rem !important;
+
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 
   padding: 0.7rem;
   margin: 0.7rem;
 
   transition: 0.4s !important;
-
-  cursor: help;
 
   &:hover {
     border-radius: 20px;
@@ -114,6 +112,10 @@ export const Feature = styled.div`
   width: 100%;
   flex: 1;
   margin-left: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   & h3 {
     font-family: ${fonts.Ubuntu};
