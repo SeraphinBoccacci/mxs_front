@@ -2,11 +2,11 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 interface SeoProps {
-  lang: string;
-  metaTitle: string;
-  metaDescription: string;
-  metaUrl: string;
-  metaImage: string;
+  lang?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaUrl?: string;
+  metaImage?: string;
 }
 
 function Seo({

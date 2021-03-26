@@ -1,6 +1,5 @@
 import { useState } from "react";
 import React from "react";
-import { Helmet } from "react-helmet";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -14,9 +13,6 @@ export default function Home() {
 
   return (
     <div>
-      <Helmet>
-        <title>StreamParticles</title>
-      </Helmet>
       <Header></Header>
       <Introduction setIsViewer={setIsViewer}></Introduction>
       <Features isViewer={isViewer} setIsViewer={setIsViewer}></Features>

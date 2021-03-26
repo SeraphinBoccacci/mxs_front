@@ -7,10 +7,10 @@ module.exports = {
     "font-src": ["'self'", "https:"],
     "img-src": ["*"],
     "media-src": ["*"],
-    "script-src": ["'self'", "'unsafe-inline'"],
+    "script-src": ["'self'", "'unsafe-inline'", "https://www.youtube.com"],
     "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-    "script-src-elem": ["'unsafe-inline'", "*"],
+    "script-src-elem": ["'unsafe-inline'", "*", "https://www.youtube.com"],
     "style-src-elem": ["'unsafe-inline'", "https:"],
-    "connect-src": ["*"],
+    "connect-src": ["*", "https://www.youtube.com"],
   },
 };

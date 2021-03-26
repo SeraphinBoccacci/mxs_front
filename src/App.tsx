@@ -6,6 +6,7 @@ import AuthProvider from "./components/AuthContext";
 import ErrorHandler from "./components/ErrorHandlingContext";
 import LoadingScreen from "./components/LoadingScreen";
 import PrivateRoute from "./components/PrivateRoute";
+import Seo from "./components/Seo";
 import { theme } from "./styles/theme";
 
 const Home = lazy(() => {
@@ -19,6 +20,7 @@ const Lab = lazy(() => {
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Seo></Seo>
       <Router>
         <ErrorHandler>
           <AuthProvider>
