@@ -1,33 +1,36 @@
 import styled from "styled-components";
 
-import { colors, fonts, weights } from "../../../../constants";
+import { colors, fonts } from "../../../../constants";
 
 export const AnchorsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
-  width: 20rem;
-  margin-left: -10%;
+  width: 11rem;
+
+  @media (min-width: 1000px) {
+    width: 16rem;
+  }
 `;
 
 export const Anchor = styled.label`
   position: relative;
   color: ${colors.secondary};
   font-family: ${fonts.Ubuntu};
-  font-weight: ${weights.Ubuntu.thin};
-  font-size: 1rem;
 
-  transition: 0.7s;
-
-  padding: 0.1rem 0.6rem;
-
-  line-height: 2rem;
+  font-size: 0.85rem;
 
   width: max-content;
+  line-height: 2rem;
 
+  transition: 0.7s;
   cursor: pointer;
+
+  @media (min-width: 800px) {
+    font-size: 1rem;
+  }
 
   &:hover {
     color: ${colors.quad};

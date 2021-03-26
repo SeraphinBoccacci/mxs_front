@@ -72,8 +72,8 @@ export const FeaturesSubContent = styled.div`
 
   justify-content: space-between;
 
-  @media (min-width: 500px) {
-    width: 20rem;
+  @media (min-width: 700px) {
+    width: 25rem;
     margin: 0 2rem;
   }
 
@@ -85,7 +85,7 @@ export const FeaturesSubContent = styled.div`
 export const FeaturePaper = styled(Paper)`
   position: relative;
   left: 0;
-  height: 12rem !important;
+  height: 40vw !important;
 
   display: flex;
   flex-direction: row;
@@ -98,12 +98,20 @@ export const FeaturePaper = styled(Paper)`
 
   &:hover {
     border-radius: 20px;
-    left: 1rem;
+  }
+
+  @media (min-width: 700px) {
+    padding: 0.85rem;
+    margin: 0.85rem;
+
+    height: 9rem !important;
   }
 
   @media (min-width: 1100px) {
     padding: 1rem;
     margin: 1rem;
+
+    height: 12rem !important;
   }
 `;
 
@@ -117,23 +125,19 @@ export const Feature = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  & h3 {
-    font-family: ${fonts.Ubuntu};
-    font-size: 1rem;
-  }
-
   @media (min-width: 1100px) {
     margin-left: 1.5rem;
-
-    & h3 {
-      font-size: 1.2rem;
-    }
   }
 `;
 
 export const FeatureTitle = styled.h3`
   font-family: ${fonts.Ubuntu};
+  margin: 0.3rem 0;
   font-size: 1rem;
+
+  @media (min-width: 700px) {
+    font-size: 1.1rem;
+  }
 
   @media (min-width: 1100px) {
     font-size: 1.2rem;
@@ -143,14 +147,20 @@ export const FeatureTitle = styled.h3`
 export const FeatureParagraph = styled.p`
   font-family: ${fonts.Roboto};
   color: #c5c5c5;
-  font-size: 0.65rem;
-  line-height: 1.4rem;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
   text-align: left;
 
   width: 100%;
 
+  @media (min-width: 700px) {
+    font-size: 0.85rem;
+    line-height: 1.3rem;
+  }
+
   @media (min-width: 1100px) {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.4rem;
     text-align: left;
   }
 `;

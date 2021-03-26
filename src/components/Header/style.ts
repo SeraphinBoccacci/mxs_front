@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../../constants";
+import { colors } from "../../constants";
 
 export const HeaderContainer = styled.header`
   position: fixed;
@@ -13,5 +13,13 @@ export const HeaderContainer = styled.header`
   width: 100%;
   height: 5rem;
 
-  padding: 0 10%;
+  padding: 0 1rem;
+
+  @media (min-width: 700px) {
+    padding: 0 2rem;
+  }
+
+  @media (min-width: 1000px) {
+    padding: 0 5rem;
+  }
 `;

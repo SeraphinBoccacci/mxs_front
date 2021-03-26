@@ -17,42 +17,40 @@ export const HeaderCTAs = () => {
   );
 
   return (
-    <>
-      <ButtonsContainer>
-        <Button variant="outlined">
-          <a
-            target="about:blank"
-            href="https://github.com/SeraphinBoccacci/StreamParticles_BACK/blob/main/README.md"
-          >
-            Docs
-          </a>
+    <ButtonsContainer>
+      <Button variant="outlined">
+        <a
+          target="about:blank"
+          href="https://github.com/SeraphinBoccacci/StreamParticles_BACK/blob/main/README.md"
+        >
+          Docs
+        </a>
+      </Button>
+      {isAuthenticated ? (
+        <Button
+          variant="contained"
+          onClick={() => {
+            history.push("/lab");
+          }}
+        >
+          Lab
         </Button>
-        {isAuthenticated ? (
+      ) : (
+        <>
           <Button
             variant="contained"
             onClick={() => {
-              history.push("/lab");
+              setIsModalOpenned(true);
             }}
           >
-            Lab
+            Connect
           </Button>
-        ) : (
-          <>
-            <Button
-              variant="contained"
-              onClick={() => {
-                setIsModalOpenned(true);
-              }}
-            >
-              Connect
-            </Button>
-            <AuthModal
-              isConnectModalOpenned={isConnectModalOpenned}
-              handleClose={() => setIsModalOpenned(false)}
-            ></AuthModal>
-          </>
-        )}
-      </ButtonsContainer>
-    </>
+          <AuthModal
+            isConnectModalOpenned={isConnectModalOpenned}
+            handleClose={() => setIsModalOpenned(false)}
+          ></AuthModal>
+        </>
+      )}
+    </ButtonsContainer>
   );
 };
