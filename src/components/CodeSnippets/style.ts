@@ -7,6 +7,9 @@ export const CodeSnippetsContainer = styled(Paper)`
   flex-direction: column;
 
   width: 50rem;
+  height: 80vh;
+
+  overflow-y: scroll;
 
   margin: 3rem auto;
   padding: 1rem;

@@ -120,7 +120,10 @@ const Ifttt = () => {
           Particles&rsquo; tabs.
         </Paragraph>
       </ContentContainer>
-      <Tutorial tutorial={iftttTutorial}></Tutorial>
+      <Tutorial
+        videoTutorialLink="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=96s"
+        tutorial={iftttTutorial}
+      ></Tutorial>
       <ContentContainer elevation={3} variant="elevation">
         <IftttIntegrationForm onSubmit={handleSubmit}>
           <FormInputs>

@@ -57,7 +57,7 @@ export const Tutorial = ({
         </Button>
         {!!videoTutorialLink && (
           <Button variant="outlined" color="secondary">
-            <a href="videoTutorialLink" target="about:blank">
+            <a href={videoTutorialLink} target="about:blank">
               Video Tutorial
             </a>
           </Button>

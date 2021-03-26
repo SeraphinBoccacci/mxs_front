@@ -25,7 +25,10 @@ const BaseTemplateIntegration = ({
 
   return (
     <StreamElementsIntegrationContainer>
-      <Tutorial tutorial={streamElementsBase}></Tutorial>
+      <Tutorial
+        videoTutorialLink="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=179s"
+        tutorial={streamElementsBase}
+      ></Tutorial>
       <EventTriggerer></EventTriggerer>
       {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape && (
         <CodeSnippets
