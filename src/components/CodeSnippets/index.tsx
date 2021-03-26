@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { atomOneDarkReasonable } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import {
@@ -10,41 +10,41 @@ import {
 } from "./style";
 
 interface CodeSnippetsProps {
-  jsSnippet?: string;
   htmlSnippet?: string;
   cssSnippet?: string;
+  jsSnippet?: string;
 }
 
 const CodeSnippets = ({
-  jsSnippet,
   htmlSnippet,
   cssSnippet,
+  jsSnippet,
 }: CodeSnippetsProps) => {
-  const [lang, setLang] = useState<"javascript" | "htmlbars" | "css">(
-    "javascript"
+  const [hasJustCopied, setHasJustCopied] = useState(false);
+  const [lang, setLang] = useState<"htmlbars" | "css" | "javascript">(
+    "htmlbars"
   );
 
   const codeString = useMemo(
     () => ({
-      javascript: jsSnippet || "",
       htmlbars: htmlSnippet || "",
       css: cssSnippet || "",
+      javascript: jsSnippet || "",
     }),
-    [jsSnippet, htmlSnippet, cssSnippet]
+    [htmlSnippet, cssSnippet, jsSnippet]
   );
+
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(codeString[lang]);
+    setHasJustCopied(true);
+    setTimeout(() => {
+      setHasJustCopied(false);
+    }, 1300);
+  }, [setHasJustCopied, codeString, lang]);
 
   return (
     <CodeSnippetsContainer>
       <CodeSnippetsButtons>
-        {!!jsSnippet && (
-          <Button
-            onClick={() => setLang("javascript")}
-            variant={lang === "javascript" ? "contained" : "outlined"}
-            color="secondary"
-          >
-            Javascript
-          </Button>
-        )}
         {!!htmlSnippet && (
           <Button
             onClick={() => setLang("htmlbars")}
@@ -63,8 +63,17 @@ const CodeSnippets = ({
             Css
           </Button>
         )}
-        <Button onClick={() => navigator.clipboard.writeText(codeString[lang])}>
-          <FileCopyIcon></FileCopyIcon>
+        {!!jsSnippet && (
+          <Button
+            onClick={() => setLang("javascript")}
+            variant={lang === "javascript" ? "contained" : "outlined"}
+            color="secondary"
+          >
+            Javascript
+          </Button>
+        )}
+        <Button onClick={handleCopy}>
+          {hasJustCopied ? "Copied" : <FileCopyIcon></FileCopyIcon>}
         </Button>
       </CodeSnippetsButtons>
       <CodeSnippet
