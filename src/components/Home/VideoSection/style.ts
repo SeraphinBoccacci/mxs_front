@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors, fonts } from "../../../constants";
 
 export const Container = styled.div`
+  position: relative;
   width: 100%;
   height: 40rem;
   background: ${colors.soft_black};
