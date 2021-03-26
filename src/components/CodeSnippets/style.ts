@@ -7,7 +7,7 @@ export const CodeSnippetsContainer = styled(Paper)`
   flex-direction: column;
 
   width: 50rem;
-  height: 80vh;
+  height: max-content;
 
   overflow-y: scroll;
 
@@ -24,6 +24,7 @@ export const CodeSnippetsButtons = styled.div`
 
 export const CodeSnippet = styled(SyntaxHighlighter)`
   width: 45rem;
+  height: 30rem;
   margin: 1rem auto;
   padding: 1rem !important;
 `;
