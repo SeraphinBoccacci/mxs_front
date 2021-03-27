@@ -24,6 +24,7 @@ export const Anchor = styled.label`
 
   width: max-content;
   line-height: 2rem;
+  padding: 0 0.5rem;
 
   transition: 0.7s;
   cursor: pointer;
