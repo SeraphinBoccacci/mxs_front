@@ -40,6 +40,7 @@ export const Columns = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: left;
 
   @media (min-width: 800px) {
     flex-direction: row;
@@ -79,14 +80,6 @@ export const Column = styled.div`
   width: 10rem;
 
   margin-bottom: 3rem;
-
-  &:nth-child(even) {
-    margin-left: 50%;
-  }
-
-  &:nth-child(odd) {
-    margin-right: 50%;
-  }
 
   @media (min-width: 800px) {
     &:nth-child(even) {

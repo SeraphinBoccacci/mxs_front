@@ -1,5 +1,5 @@
 import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import {
   Accordion,
@@ -84,30 +84,26 @@ const FrequentlyAskedQuestions = () => {
     [setExpandedPanel]
   );
 
-  const accordions = useMemo(
-    () =>
-      questionsAndAnswers.map(({ question, answer, id }, index) => (
-        <Accordion
-          color="primary"
-          key={`frequently-asked-questions-${index}`}
-          expanded={expandedPanel === id}
-          onChange={handleChange(id)}
-        >
-          <AccordionSummary expandIcon={<AddOutlinedIcon />}>
-            {question}
-          </AccordionSummary>
-          <AccordionDetails>{answer}</AccordionDetails>
-        </Accordion>
-      )),
-    [expandedPanel, handleChange]
-  );
-
   return (
     <FaqContainer id="community">
       <FaqHeader>
         <FaqTitle>Frequently Asked Questions</FaqTitle>
       </FaqHeader>
-      <Accordions>{accordions}</Accordions>
+      <Accordions>
+        {questionsAndAnswers.map(({ question, answer, id }, index) => (
+          <Accordion
+            color="primary"
+            key={`frequently-asked-questions-${index}`}
+            expanded={expandedPanel === id}
+            onChange={handleChange(id)}
+          >
+            <AccordionSummary expandIcon={<AddOutlinedIcon />}>
+              {question}
+            </AccordionSummary>
+            <AccordionDetails>{answer}</AccordionDetails>
+          </Accordion>
+        ))}
+      </Accordions>
     </FaqContainer>
   );
 };
