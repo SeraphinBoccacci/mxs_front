@@ -32,12 +32,13 @@ const CreatorPart = () => {
       </FooterModalParagraph>
       <FooterModalParagraph>
         Your <Emphasize>viewers</Emphasize> won’t have to go through this
-        process to send donations and tips to your herotag. All they need is a{" "}
-        {maiar} wallet with EGLD on it (or even other cryptocurrencies supported
-        by {maiar}) and of course you’ll have to let them know your herotag.
+        process to send tips and donations and tips to your herotag. All they
+        need is a {maiar} wallet with EGLD on it (or even other cryptocurrencies
+        supported by {maiar}) and of course you’ll have to let them know your
+        herotag.
       </FooterModalParagraph>
       <FooterModalParagraph>
-        Now you can easily receive donations{" "}
+        Now you can easily receive tips and donations{" "}
         <Emphasize>without any middleman</Emphasize>: you’ll get 100% of what
         your viewers want to tip you. To top it all, you’ll be able to set your
         own <Emphasize>alerts and variations</Emphasize> for great chat

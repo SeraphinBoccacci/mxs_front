@@ -30,7 +30,7 @@ const Introduction = ({
           <ShortCatchPhraseChip
             color="primary"
             size="small"
-            label="Fast, inexpensive and interactive donations"
+            label="Fast, inexpensive and interactive tips and donations"
           ></ShortCatchPhraseChip>
           <InnerContainer>
             <MainCatchPhrase>
@@ -50,8 +50,9 @@ const Introduction = ({
           </InnerContainer>
 
           <LittleDisclaimer>
-            StreamParticles, is a free & open-source project. Feel free to
-            donate via erd
+            StreamParticles, is a free & open-source project.
+            <br></br>
+            Feel free to donate to streamparticles.elrond
           </LittleDisclaimer>
         </CatchPhraseContainer>
       </CatchPhraseAndImage>

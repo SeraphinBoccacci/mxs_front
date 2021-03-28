@@ -14,13 +14,13 @@ import {
 const questionsAndAnswers = [
   {
     id: "panel_1",
-    question: "Why would I need to send my donations via Maiar?",
+    question: "Why would I need to send my tips and donations via Maiar?",
     answer: (
       <div>
         When you support a creator via a platform, there is a middleman between
         you and the creator, the platform which charges you. StreamParticles is
         a free and open source project that aims to let you support the creators
-        without middlemen (via Maiar) and notify him about your donation
+        without middlemen (via Maiar) and notify him about your tip or donation
         (StreamParticles).
       </div>
     ),
