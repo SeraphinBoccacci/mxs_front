@@ -111,9 +111,9 @@ const Ifttt = () => {
         </Paragraph>
         <Paragraph>
           For example, you can easily create special applets that make your
-          smart bulbs blink everytime you receive a Maiar donation, or even
-          other applets that make your Google Assistant speak something out loud
-          when you receive eGLD on your Herotag.
+          smart bulbs blink everytime you receive a Maiar tip or donation, or
+          even other applets that make your Google Assistant speak something out
+          loud when you receive eGLD on your Herotag.
         </Paragraph>
         <Paragraph>
           If you only want onstream animations, please switch to the other

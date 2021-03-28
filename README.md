@@ -14,7 +14,7 @@ Foobar is a Python library for dealing with word pluralization.
 
 Welcome on [StreamParticles](https://streamparticles.io/) FrontEnd Repo.
 
-StreamParticles is a free & open source alert tool for creators & streamers. Get custom onstream alerts every time you receive a cryptodonation through Maiar and your Herotag.
+StreamParticles is a free & open source alert tool for creators & streamers. Get custom onstream alerts every time you receive a crypto-tips through Maiar and your Herotag.
 
 StreamParticles uses [Maiar](https://maiar.com/) technology to let you interact freely, without intermediary between you and the creators you support.
 
