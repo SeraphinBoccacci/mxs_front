@@ -62,6 +62,10 @@ export const Accordion = styled(MaterialAccordion)`
   border-radius: 20px !important;
 
   margin: 0.8rem 0;
+
+  &::before {
+    background-color: transparent !important;
+  }
 `;
 
 export const AccordionSummary = styled(MaterialAccordionSummary)`
