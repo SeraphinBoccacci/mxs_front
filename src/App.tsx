@@ -1,7 +1,5 @@
 import { ThemeProvider } from "@material-ui/core/styles";
-import { createBrowserHistory } from "history";
-import React, { lazy, Suspense, useEffect } from "react";
-import ReactGA from "react-ga";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import AuthProvider from "./components/AuthContext";
@@ -9,7 +7,6 @@ import ErrorHandler from "./components/ErrorHandlingContext";
 import LoadingScreen from "./components/LoadingScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import Seo from "./components/Seo";
-import config from "./config/config";
 import { theme } from "./styles/theme";
 
 const Home = lazy(() => {
@@ -21,16 +18,6 @@ const Lab = lazy(() => {
 });
 
 function App() {
-  useEffect(() => {
-    if (config.googleAnalyticsStreamId) {
-      const history = createBrowserHistory();
-      ReactGA.initialize(config.googleAnalyticsStreamId);
-      history.listen((location) => {
-        ReactGA.pageview(location.pathname + location.search);
-      });
-    }
-  });
-
   return (
     <ThemeProvider theme={theme}>
       <Seo></Seo>
