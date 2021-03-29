@@ -37,7 +37,7 @@ const jsLines = (herotag: string) => [
   "    setTimeout(() => {",
   "      $(`#widget-container-${currentIndex}`).remove();",
   "    }, 1000);",
-  "  }, 10700);",
+  "  }, 10000);",
   "};",
   "",
   `const socket = io("${config.url}", {`,
