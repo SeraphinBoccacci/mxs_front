@@ -90,6 +90,7 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
             onChange={handleOnChange}
             isDisabled={isSubmitting}
             autoComplete="off"
+            endAdornment=".elrond"
           ></Input>
 
           <Input

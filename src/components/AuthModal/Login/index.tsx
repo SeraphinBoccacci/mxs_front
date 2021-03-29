@@ -121,6 +121,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
             isDisabled={isSubmitting}
             autoComplete="username"
             type="text"
+            endAdornment=".elrond"
           ></Input>
           <Input
             tooltipText="Your herotag is the username you set when you registered on Maiar."
