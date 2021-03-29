@@ -77,6 +77,7 @@ export const HerotagInput = ({
             onChange={handleOnChange}
             isDisabled={isSubmitting}
             autoComplete="off"
+            endAdornment=".elrond"
           ></Input>
         </Inputs>
         <Button
