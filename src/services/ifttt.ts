@@ -1,7 +1,7 @@
 import config from "../config/config";
 import { axiosPost } from "../utils/axios";
 
-export const modifyIftttIntegration = async (
+export const modifyIftttParticle = async (
   herotag: string,
   eventName: string,
   triggerKey: string
@@ -22,7 +22,7 @@ export const modifyIftttIntegration = async (
   } catch (err) {}
 };
 
-export const toggleIftttIntegration = async (
+export const toggleIftttParticle = async (
   herotag: string,
   isActive: boolean
 ) => {

@@ -21,9 +21,18 @@ export enum UserAccountStatus {
   PENDING_EDIT_PASSWORD_VERIFICATION,
 }
 
-export interface IftttIntegrationData {
+export interface IftttParticleData {
   eventName: string;
   triggerKey: string;
+  isActive: boolean;
+}
+
+export interface StreamElementData {
+  variations: Variation[];
+  rowsStructure: {
+    rows: string[];
+    rowsGroupName?: string | undefined;
+  }[];
   isActive: boolean;
 }
 
@@ -39,14 +48,9 @@ export interface UserType {
   verificationStartDate?: string;
   passwordEditionVerificationStartDate?: string;
   integrations?: {
-    ifttt?: IftttIntegrationData;
-    streamElements?: {
-      variations: Variation[];
-      rowsStructure: {
-        rows: string[];
-        rowsGroupName?: string | undefined;
-      }[];
-    };
+    ifttt?: IftttParticleData;
+    streamElements?: StreamElementData;
+    minimumRequiredAmount?: number;
   };
   isStreaming?: boolean;
   streamingStartDate?: Date | null;

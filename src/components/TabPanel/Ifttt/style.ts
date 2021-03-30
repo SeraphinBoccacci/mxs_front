@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 import { colors, fonts } from "../../../constants/index";
 
-export const IftttIntegrationContainer = styled.div`
+export const IftttParticleContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
 `;
 
-export const IftttIntegrationForm = styled.form`
+export const IftttParticleForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -115,24 +115,4 @@ export const FormInput = styled.input`
   &:focus::placeholder {
     font-size: 0;
   }
-`;
-
-export const ActivateIntegration = styled.div`
-  height: 3rem;
-  line-height: 3rem;
-  width: 17rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
-  margin: 3rem auto;
-
-  border-radius: 6px;
-
-  color: ${colors.primary};
-  background-color: ${colors.secondary};
-`;
-
-export const ActivateSwitch = styled(Switch)`
-  margin: auto 0;
 `;

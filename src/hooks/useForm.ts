@@ -4,7 +4,9 @@ export type BaseReducerState = { [x: string]: string };
 
 type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-export const useForm = <FormValues extends { [x: string]: string | undefined }>(
+export const useForm = <
+  FormValues extends { [x: string]: number | string | undefined }
+>(
   initialValue: FormValues
 ): [FormValues, Dispatch<Event | { value: FormValues }>] => {
   const isFromInputEvent = useCallback(
