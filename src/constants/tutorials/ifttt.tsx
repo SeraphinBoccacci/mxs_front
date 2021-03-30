@@ -96,7 +96,7 @@ export const iftttTutorial: TutorialStepElement[] = [
         text: (
           <Text>
             Now you need to find out your <Emphasize>TriggerKey</Emphasize> to
-            complete your IFTTT integration.<br></br>
+            complete your IFTTT particle.<br></br>
             Go to your <Emphasize>Applet</Emphasize> Homepage and click the{" "}
             <Emphasize>WebHooks</Emphasize> logo (at the top of your Applet
             description).
@@ -125,14 +125,14 @@ export const iftttTutorial: TutorialStepElement[] = [
     ],
   },
   {
-    label: "Activate your integration",
+    label: "Activate your particle",
     content: [
       {
         text: (
           <div>
             Just below this tutorial, you can choose wether or not to activate
-            your IFTTT Integration, to make it with your others integration once
-            you are streaming
+            your IFTTT Particle, to make it with your others particles once you
+            are streaming
           </div>
         ),
       },

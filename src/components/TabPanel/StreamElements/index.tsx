@@ -1,22 +1,47 @@
-import React from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 //@ts-ignore
 import { withBreakpoints } from "react-breakpoints";
 
 import { useQueryString } from "../../../hooks/useQueryString";
+import { toggleStreamElementsParticle } from "../../../services/streamElements";
 import { ContentContainer, Emphasize } from "../../../styles/global";
+import { AuthContext } from "../../AuthContext";
 import Switch from "../../Switch";
+import ActivationSwitch from "../ActivationSwitch";
 import { Paragraph } from "../style";
-import BaseTemplateIntegration from "./BaseTemplateIntegration";
-import CustomTemplateIntegration from "./CustomTemplateIntegration";
-import { StreamElementsIntegrationContainer } from "./style";
+import BaseTemplateParticle from "./BaseTemplateParticle";
+import CustomTemplateParticle from "./CustomTemplateParticle";
+import { StreamElementsParticleContainer } from "./style";
 
-const StreamElementsIntegration = () => {
+const StreamElementsParticle = () => {
+  const { user } = useContext(AuthContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [isOnCustomTemplate, setIsOnCustomTemplate] = useQueryString(
     "isOnCustom"
   );
 
+  const [isParticleActive, setIsParticleActive] = useState(
+    user?.integrations?.ifttt?.isActive || false
+  );
+
+  useEffect(() => {
+    setIsParticleActive(user?.integrations?.streamElements?.isActive || false);
+  }, [setIsParticleActive, user]);
+
+  const handleSwitchChange = useCallback(async () => {
+    setIsSubmitting(true);
+
+    if (user && user.herotag) {
+      await toggleStreamElementsParticle(user.herotag, !isParticleActive);
+      setIsParticleActive((prev) => !prev);
+
+      setIsSubmitting(false);
+    }
+  }, [setIsSubmitting, setIsParticleActive, isParticleActive, user]);
+
   return (
-    <StreamElementsIntegrationContainer>
+    <StreamElementsParticleContainer>
       <ContentContainer elevation={3} variant="elevation">
         <Paragraph>
           <Emphasize>
@@ -39,6 +64,13 @@ const StreamElementsIntegration = () => {
         </Paragraph>
       </ContentContainer>
 
+      <ActivationSwitch
+        label="Activate Particle"
+        isSubmitting={isSubmitting}
+        isActive={isParticleActive}
+        onChange={handleSwitchChange}
+      ></ActivationSwitch>
+
       <Switch
         variant="inverted"
         isActive={isOnCustomTemplate}
@@ -47,12 +79,12 @@ const StreamElementsIntegration = () => {
         onLabel="Custom template"
       ></Switch>
       {isOnCustomTemplate ? (
-        <CustomTemplateIntegration></CustomTemplateIntegration>
+        <CustomTemplateParticle></CustomTemplateParticle>
       ) : (
-        <BaseTemplateIntegration></BaseTemplateIntegration>
+        <BaseTemplateParticle></BaseTemplateParticle>
       )}
-    </StreamElementsIntegrationContainer>
+    </StreamElementsParticleContainer>
   );
 };
 
-export default withBreakpoints(StreamElementsIntegration);
+export default withBreakpoints(StreamElementsParticle);

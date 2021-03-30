@@ -2,7 +2,7 @@ import { Paper } from "@material-ui/core";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import styled from "styled-components";
 
-export const StreamElementsIntegrationContainer = styled.div`
+export const StreamElementsParticleContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;

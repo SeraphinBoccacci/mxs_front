@@ -5,8 +5,8 @@ import React from "react";
 import { iftttTutorial } from "../../../constants/tutorials";
 import { useForm } from "../../../hooks/useForm";
 import {
-  modifyIftttIntegration,
-  toggleIftttIntegration,
+  modifyIftttParticle,
+  toggleIftttParticle,
 } from "../../../services/ifttt";
 import { ContentContainer, Emphasize } from "../../../styles/global";
 import { AuthContext } from "../../AuthContext";
@@ -14,12 +14,11 @@ import { ErrorHandlingContext } from "../../ErrorHandlingContext";
 import EventTriggerer from "../../EventTriggerer";
 import Input from "../../Input";
 import { Tutorial } from "../../Tutorial";
+import ActivationSwitch from "../ActivationSwitch";
 import {
-  ActivateIntegration,
-  ActivateSwitch,
   FormInputs,
-  IftttIntegrationContainer,
-  IftttIntegrationForm,
+  IftttParticleContainer,
+  IftttParticleForm,
   Paragraph,
 } from "./style";
 
@@ -27,7 +26,7 @@ const Ifttt = () => {
   const { user } = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [isIntegrationActive, setIsIntegrationActive] = useState(
+  const [isParticleActive, setIsParticleActive] = useState(
     user?.integrations?.ifttt?.isActive || false
   );
 
@@ -48,8 +47,8 @@ const Ifttt = () => {
   }, [setFormData, user]);
 
   useEffect(() => {
-    setIsIntegrationActive(user?.integrations?.ifttt?.isActive || false);
-  }, [setIsIntegrationActive, user]);
+    setIsParticleActive(user?.integrations?.ifttt?.isActive || false);
+  }, [setIsParticleActive, user]);
 
   const handleOnChange = useCallback(
     (data) => {
@@ -65,7 +64,7 @@ const Ifttt = () => {
       try {
         setIsSubmitting(true);
         if (formData.eventName && formData.triggerKey && user && user.herotag)
-          await modifyIftttIntegration(
+          await modifyIftttParticle(
             user.herotag,
             formData.eventName,
             formData.triggerKey
@@ -90,15 +89,15 @@ const Ifttt = () => {
     setIsSubmitting(true);
 
     if (user && user.herotag) {
-      await toggleIftttIntegration(user.herotag, !isIntegrationActive);
-      setIsIntegrationActive((prev) => !prev);
+      await toggleIftttParticle(user.herotag, !isParticleActive);
+      setIsParticleActive((prev) => !prev);
 
       setIsSubmitting(false);
     }
-  }, [setIsSubmitting, setIsIntegrationActive, isIntegrationActive, user]);
+  }, [setIsSubmitting, setIsParticleActive, isParticleActive, user]);
 
   return (
-    <IftttIntegrationContainer>
+    <IftttParticleContainer>
       <ContentContainer elevation={3} variant="elevation">
         <Paragraph>
           <Emphasize>
@@ -120,12 +119,20 @@ const Ifttt = () => {
           Particles&rsquo; tabs.
         </Paragraph>
       </ContentContainer>
+
+      <ActivationSwitch
+        label="Activate Particle"
+        isSubmitting={isSubmitting}
+        isActive={isParticleActive}
+        onChange={handleSwitchChange}
+      ></ActivationSwitch>
+
       <Tutorial
         videoTutorialLink="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=96s"
         tutorial={iftttTutorial}
       ></Tutorial>
       <ContentContainer elevation={3} variant="elevation">
-        <IftttIntegrationForm onSubmit={handleSubmit}>
+        <IftttParticleForm onSubmit={handleSubmit}>
           <FormInputs>
             <Input
               isDisabled={isSubmitting}
@@ -147,21 +154,11 @@ const Ifttt = () => {
           <Button variant="outlined" color="secondary" type="submit">
             Submit
           </Button>
-        </IftttIntegrationForm>
+        </IftttParticleForm>
       </ContentContainer>
 
       <EventTriggerer></EventTriggerer>
-
-      <ActivateIntegration>
-        Activate Integration
-        <ActivateSwitch
-          disabled={isSubmitting}
-          checked={isIntegrationActive}
-          onChange={handleSwitchChange}
-          color="primary"
-        ></ActivateSwitch>
-      </ActivateIntegration>
-    </IftttIntegrationContainer>
+    </IftttParticleContainer>
   );
 };
 

@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import Logo from "../../assets/icons/StreamParticlesLogo";
 import config from "../../config/config";
+import { getEgldPrice } from "../../services/user";
 import { Emphasize } from "../../styles/global";
 import { axiosGet } from "../../utils/axios";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
@@ -39,7 +40,7 @@ const Footer = () => {
   const { handleError } = useContext(ErrorHandlingContext);
 
   useEffect(() => {
-    axiosGet(`${config.apiUrl}/egld-price`)
+    getEgldPrice()
       .then((data) => {
         if (!data) return;
 

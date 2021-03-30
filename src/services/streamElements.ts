@@ -120,3 +120,20 @@ export const updateRowsStructure = async (
 
   return data;
 };
+
+export const toggleStreamElementsParticle = async (
+  herotag: string,
+  isActive: boolean
+) => {
+  try {
+    const res = await axiosPost(
+      `${config.apiUrl}/user/streamElements/is-active/${herotag}`,
+      {
+        isActive,
+      },
+      { withToken: true }
+    );
+
+    return res.data;
+  } catch (err) {}
+};

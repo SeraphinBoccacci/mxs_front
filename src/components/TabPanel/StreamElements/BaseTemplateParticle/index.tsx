@@ -8,23 +8,23 @@ import CodeSnippets from "../../../CodeSnippets";
 import EventTriggerer from "../../../EventTriggerer";
 import { Tutorial } from "../../../Tutorial";
 import { cssSnippet, htmlSnippet, jsSnippet } from "../codeSnippets/template";
-import { StreamElementsIntegrationContainer } from "../style";
+import { StreamElementsParticleContainer } from "../style";
 
 type Breakpoints = { [key: string]: number };
 
-interface BaseTemplateIntegrationProps {
+interface BaseTemplateParticleProps {
   breakpoints: Breakpoints;
   currentBreakpoint: string;
 }
 
-const BaseTemplateIntegration = ({
+const BaseTemplateParticle = ({
   breakpoints,
   currentBreakpoint,
-}: BaseTemplateIntegrationProps) => {
+}: BaseTemplateParticleProps) => {
   const { user } = useAuth();
 
   return (
-    <StreamElementsIntegrationContainer>
+    <StreamElementsParticleContainer>
       <Tutorial
         videoTutorialLink="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=179s"
         tutorial={streamElementsBase}
@@ -37,8 +37,8 @@ const BaseTemplateIntegration = ({
           cssSnippet={cssSnippet}
         ></CodeSnippets>
       )}
-    </StreamElementsIntegrationContainer>
+    </StreamElementsParticleContainer>
   );
 };
 
-export default withBreakpoints(BaseTemplateIntegration);
+export default withBreakpoints(BaseTemplateParticle);

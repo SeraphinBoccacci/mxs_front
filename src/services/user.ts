@@ -42,3 +42,19 @@ export const triggerEvent = (herotag: string, data: EventData) => {
     { withToken: true }
   );
 };
+
+export const updateMinimumRequiredAmount = (
+  herotag: string,
+  minimumRequiredAmount: number
+) => {
+  return axiosPost(
+    `${config.apiUrl}/user/update-minimum-required-amount`,
+    {
+      herotag,
+      minimumRequiredAmount,
+    },
+    { withToken: true }
+  );
+};
+
+export const getEgldPrice = () => axiosGet(`${config.apiUrl}/egld-price`);

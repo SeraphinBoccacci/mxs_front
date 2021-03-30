@@ -5,22 +5,22 @@ import { withBreakpoints } from "react-breakpoints";
 import { streamElementsCustom } from "../../../../constants/tutorials";
 import EventTriggerer from "../../../EventTriggerer";
 import { Tutorial } from "../../../Tutorial";
-import { StreamElementsIntegrationContainer } from "../style";
+import { StreamElementsParticleContainer } from "../style";
 import VariationCreation from "../VariationCreation";
 
 type Breakpoints = { [key: string]: number };
 
-interface BaseTemplateIntegrationProps {
+interface BaseTemplateParticleProps {
   breakpoints: Breakpoints;
   currentBreakpoint: string;
 }
 
-const CustomTemplateIntegration = ({
+const CustomTemplateParticle = ({
   breakpoints,
   currentBreakpoint,
-}: BaseTemplateIntegrationProps) => {
+}: BaseTemplateParticleProps) => {
   return (
-    <StreamElementsIntegrationContainer>
+    <StreamElementsParticleContainer>
       <Tutorial
         videoTutorialLink="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=290s"
         tutorial={streamElementsCustom}
@@ -29,8 +29,8 @@ const CustomTemplateIntegration = ({
       {breakpoints[currentBreakpoint] > breakpoints.tabletLandscape && (
         <VariationCreation></VariationCreation>
       )}
-    </StreamElementsIntegrationContainer>
+    </StreamElementsParticleContainer>
   );
 };
 
-export default withBreakpoints(CustomTemplateIntegration);
+export default withBreakpoints(CustomTemplateParticle);
