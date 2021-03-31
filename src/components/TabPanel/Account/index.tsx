@@ -144,6 +144,7 @@ const Account = () => {
                 the tip on your Herotag but it won’t trigger onstream animations
                 or IFTTT actions.
                 <br></br>
+                <br></br>
                 When unset, or set to “0”, there is no minimum.
               </FormCaption>
               <Input

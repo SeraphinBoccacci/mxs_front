@@ -30,9 +30,16 @@ export const Form = styled.form`
   }
 `;
 
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+`;
+
 export const FormCaption = styled.p`
-  width: 30rem;
-  height: max-content;
   font-family: ${fonts.Roboto};
   font-size: 0.85rem;
   text-align: justify;
@@ -42,19 +49,12 @@ export const FormCaption = styled.p`
 `;
 
 export const Comment = styled.p`
-  width: 30rem;
+  width: 100%;
   height: 2rem;
-  line-height: 2rem;
+  line-height: 1rem;
   font-family: ${fonts.Ubuntu};
   font-size: 0.75rem;
   text-align: center;
 
   margin: 0 auto 1rem;
-`;
-
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 `;
