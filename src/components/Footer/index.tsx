@@ -4,10 +4,8 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import React, { useContext, useEffect, useState } from "react";
 
 import Logo from "../../assets/icons/StreamParticlesLogo";
-import config from "../../config/config";
 import { getEgldPrice } from "../../services/user";
 import { Emphasize } from "../../styles/global";
-import { axiosGet } from "../../utils/axios";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import Switch from "../Switch";
 import CreatorPart from "./CreatorPart";
