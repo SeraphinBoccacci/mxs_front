@@ -12,12 +12,17 @@ import { ContentContainer } from "../../../styles/global";
 import { useAuth } from "../../AuthContext";
 import AuthModal, { ModalKinds } from "../../AuthModal";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
-import { Form } from "../../EventTriggerer/style";
 import Input from "../../Input";
 import ActivationSwitch from "../ActivationSwitch";
-import { Comment } from "../StreamElements/VariationCreation/VariationModal/style";
 import { Paragraph } from "../style";
-import { AccountContainer, Button } from "./style";
+import {
+  AccountContainer,
+  Button,
+  Column,
+  Comment,
+  Form,
+  FormCaption,
+} from "./style";
 
 const Account = () => {
   const { user, setTokenData, setHerotag } = useAuth();
@@ -130,23 +135,33 @@ const Account = () => {
         </ContentContainer>
         <ContentContainer>
           <Form onSubmit={handleSubmit}>
-            <div>
+            <Column>
+              <FormCaption>
+                If you want to prevent animation spamming on your stream
+                (because technically, people can tip microcents), you can set a
+                minimum required amount. If someone sends you a tip that is
+                smaller than the minimum required amount, you will still receive
+                the tip on your Herotag but it won’t trigger onstream animations
+                or IFTTT actions.
+                <br></br>
+                When unset, or set to “0”, there is no minimum.
+              </FormCaption>
               <Input
                 isDisabled={isSubmitting}
                 inputName="minimumRequiredAmount"
                 inputLabel="Min. required amount"
                 value={formData.minimumRequiredAmount}
                 onChange={handleOnChange}
-                tooltipText="To prevent spams"
                 type="number"
               ></Input>
-              {formData.minimumRequiredAmount && (
-                <Comment>
-                  Will allow amounts above ~$
-                  {(currentPrice * formData.minimumRequiredAmount).toFixed(2)}
-                </Comment>
-              )}
-            </div>
+              <Comment>
+                {formData.minimumRequiredAmount &&
+                  `Won't react to transactions with amount below ~$
+                  ${(currentPrice * formData.minimumRequiredAmount).toFixed(
+                    2
+                  )}`}
+              </Comment>
+            </Column>
 
             <Button variant="outlined" color="secondary" type="submit">
               Submit
