@@ -8,7 +8,7 @@ import { useAuth } from "../../../AuthContext";
 import { ErrorHandlingContext } from "../../../ErrorHandlingContext";
 import Input from "../../../Input";
 import Upload from "../../../Upload";
-import { Comment, Form } from "../style";
+import { Comment, Form, OnboardingTitle } from "../style";
 import { Button, FormContent, HowTo } from "./style";
 
 interface MinimumEgoldAmountFormProps {
@@ -81,6 +81,7 @@ const MinimumEgoldAmountForm = ({
 
   return (
     <ContentContainer>
+      <OnboardingTitle>Your custom tipping page</OnboardingTitle>
       <Form onSubmit={handleSubmit}>
         <FormContent>
           <Input
@@ -103,12 +104,11 @@ const MinimumEgoldAmountForm = ({
               you.
             </Comment>
             <HowTo tabIndex={0}>
-              <span>How to find my herotag ?</span>
+              <span>How to find my herotag QR Code ?</span>
               <img src="/qrcodeScreenShot.gif"></img>
             </HowTo>
           </div>
         </FormContent>
-
         <FlexRow>
           <Button variant="contained" color="primary" type="submit">
             Submit
@@ -119,7 +119,7 @@ const MinimumEgoldAmountForm = ({
             type="button"
             onClick={goToOnBoardingPage}
           >
-            My onboarding page
+            My tipping page
           </Button>
         </FlexRow>
       </Form>

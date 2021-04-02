@@ -9,7 +9,7 @@ import {
   Theme,
   Tooltip,
 } from "@material-ui/core";
-import React, { ChangeEvent, memo } from "react";
+import React, { ChangeEvent, memo, ReactNode } from "react";
 
 import { VariationLenses } from "../Lab/StreamElements/interface";
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     textContent: {
       width: "100%",
-      margin: "0 2rem",
+      margin: theme.spacing(1),
     },
   })
 );
@@ -34,7 +34,7 @@ type InputProps = OutlinedInputProps & {
     | ((event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void)
     | ((event: ChangeEvent<HTMLInputElement>) => void);
   isTextContent?: boolean;
-  endAdornment?: string;
+  endAdornment?: string | ReactNode;
   tooltipText?: string;
   isDisabled?: boolean;
 };
@@ -67,7 +67,7 @@ const Input = ({
         disabled={isDisabled}
         onChange={onChange}
         notched
-        rows={3}
+        rowsMin={3}
         multiline={isTextContent}
         name={inputName}
         value={value || ""}
