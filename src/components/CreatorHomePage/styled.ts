@@ -121,14 +121,28 @@ export const StepNumber = styled.div`
   }
 `;
 
-export const Herotag = styled.span`
+export const Herotag = styled.div`
   font-family: ${fonts.Code};
-  color: ${colors.secondary};
+  font-weight: 500;
+  color: ${colors.primary};
   font-size: 1.5rem;
+  line-height: 2rem;
+  padding: 0.4rem 0.8rem;
+
+  border-radius: 0.5rem;
+
+  background-color: ${colors.secondary};
 
   @media (min-width: 30rem) {
+    padding: 0.5rem 1rem;
     font-size: 2rem;
+    line-height: 2.5rem;
   }
+`;
+
+export const Arobase = styled.span`
+  color: #e3179d;
+  font-family: ${fonts.Ubuntu};
 `;
 
 export const QrCode = styled.img`

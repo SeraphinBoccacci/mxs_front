@@ -7,6 +7,7 @@ import { getViewerOnboardingData } from "../../services/user";
 import { FlexColumn, FlexRow } from "../../styles/global";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import {
+  Arobase,
   Box,
   Container,
   Content,
@@ -67,7 +68,10 @@ const StreamerHomePage = () => {
             <FlexRow>
               <StepTitle>
                 Donate to my herotag : <br></br>
-                <Herotag>@{herotag}</Herotag>
+                <Herotag>
+                  <Arobase>@</Arobase>
+                  {herotag.replace("@", "").replace(".elrond", "")}
+                </Herotag>
               </StepTitle>
               <StepNumber>3.</StepNumber>
             </FlexRow>
@@ -77,7 +81,10 @@ const StreamerHomePage = () => {
           <Box>
             <StepTitle>
               Donate to my herotag : <br></br>
-              <Herotag>@{herotag}</Herotag>
+              <Herotag>
+                <Arobase>@</Arobase>
+                {herotag.replace("@", "").replace(".elrond", "")}
+              </Herotag>
             </StepTitle>
             <StepNumber>3.</StepNumber>
           </Box>

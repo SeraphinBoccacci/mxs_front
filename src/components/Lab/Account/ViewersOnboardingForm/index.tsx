@@ -9,7 +9,7 @@ import { ErrorHandlingContext } from "../../../ErrorHandlingContext";
 import Input from "../../../Input";
 import Upload from "../../../Upload";
 import { Comment, Form } from "../style";
-import { Button, FormContent } from "./style";
+import { Button, FormContent, HowTo } from "./style";
 
 interface MinimumEgoldAmountFormProps {
   setIsSubmitting: (isSubmitting: boolean) => void;
@@ -89,6 +89,7 @@ const MinimumEgoldAmountForm = ({
             inputLabel="Referral Link"
             value={formData.referralLink}
             onChange={handleOnChange}
+            tooltipText="Past your referral link here"
           ></Input>
           <Upload
             inputName="herotagQrCodePath"
@@ -96,9 +97,16 @@ const MinimumEgoldAmountForm = ({
             value={formData.herotagQrCodePath}
             onChange={handleOnChange}
           ></Upload>
-          <Comment>
-            Upload your herotag QR Code to easily let your viewers support you.
-          </Comment>
+          <div>
+            <Comment>
+              Upload your herotag QR Code to easily let your viewers support
+              you.
+            </Comment>
+            <HowTo tabIndex={0}>
+              <span>How to find my herotag ?</span>
+              <img src="/qrcodeScreenShot.gif"></img>
+            </HowTo>
+          </div>
         </FormContent>
 
         <FlexRow>

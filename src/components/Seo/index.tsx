@@ -10,7 +10,7 @@ interface SeoProps {
 }
 
 function Seo({
-  lang = "fr",
+  lang = "en",
   metaTitle = "StreamParticles",
   metaDescription = "Get custom onstream alerts every time you receive a cryptodonation through Maiar and your Herotag ⚡",
   metaUrl = "https://streamparticles.io/",
