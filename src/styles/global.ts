@@ -99,13 +99,21 @@ export const Link = styled.a`
 `;
 
 export const ContentContainer = styled(Paper)`
-  margin: 1.4rem auto !important;
-  width: max-content !important;
+  width: 90vw !important;
+
   height: max-content !important;
-  padding: 1rem 2rem !important;
+  margin: 1rem auto !important;
+  padding: 0.5rem 0.6rem !important;
 
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 500px) {
+    margin: 1.4rem auto !important;
+    padding: 1rem 2rem !important;
+
+    width: max-content !important;
+  }
 
   @media (min-width: 800px) {
     margin: 2rem auto !important;
