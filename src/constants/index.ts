@@ -1,6 +1,7 @@
 export const fonts = {
   Roboto: "'Roboto', sans-serif",
   Ubuntu: "'Ubuntu', sans-serif",
+  Code: "'Source Code Pro', monospace",
 };
 
 export const weights = {
