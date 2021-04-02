@@ -15,6 +15,6 @@ export const ChatBotGeneratorForm = styled.div`
 `;
 
 export const Button = styled(MaterialButton)`
-  margin: 0.3rem 1rem !important;
+  margin: 0.3rem auto !important;
   width: 10rem !important;
 `;
