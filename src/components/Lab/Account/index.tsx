@@ -1,44 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
-import Carousel from "react-material-ui-carousel";
 import { useHistory } from "react-router";
 
-import config from "../../../config/config";
 import { toggleStreamingActivation } from "../../../services/user";
 import { ContentContainer } from "../../../styles/global";
 import { useAuth } from "../../AuthContext";
 import AuthModal, { ModalKinds } from "../../AuthModal";
 import ActivationSwitch from "../ActivationSwitch";
 import { Paragraph } from "../TabPanel/style";
+import BannersCaroussel from "./BannersCaroussel";
 import ChatBotGenerator from "./ChatBotGenerator";
 import MinimumEgoldAmountForm from "./MinimumEgoldAmountForm";
-import {
-  AccountContainer,
-  Button,
-  CarousselContent,
-  CarousselImage,
-  OnboardingTitle,
-} from "./style";
+import { AccountContainer, Button } from "./style";
 import ViewersOnboardingForm from "./ViewersOnboardingForm";
-
-const images = [
-  {
-    src: "/stream_particles_banners/twitch_pannel_1.jpg",
-    link: `${config.url}/stream_particles_banners/twitch_pannel_1.jpg`,
-  },
-  {
-    src: "/stream_particles_banners/twitch_pannel_2.jpg",
-    link: `${config.url}/stream_particles_banners/twitch_pannel_2.jpg`,
-  },
-  {
-    src: "/stream_particles_banners/twitch_pannel_3.jpg",
-    link: `${config.url}/stream_particles_banners/twitch_pannel_3.jpg`,
-  },
-  {
-    src: "/stream_particles_banners/twitch_pannel_4.jpg",
-    link: `${config.url}/stream_particles_banners/twitch_pannel_4.jpg`,
-  },
-];
 
 const Account = () => {
   const { user, setTokenData, setHerotag } = useAuth();
@@ -97,22 +71,8 @@ const Account = () => {
           isSubmitting={isSubmitting}
         ></MinimumEgoldAmountForm>
 
-        <ContentContainer>
-          <OnboardingTitle>Twitch Panels</OnboardingTitle>
-          <Carousel
-            stopAutoPlayOnHover
-            animation="fade"
-            interval={5000}
-            timeout={400}
-            swipe
-          >
-            {images.map((image, i) => (
-              <CarousselContent key={i} href={image.src} download>
-                <CarousselImage src={image.src}></CarousselImage>
-              </CarousselContent>
-            ))}
-          </Carousel>
-        </ContentContainer>
+        <BannersCaroussel></BannersCaroussel>
+
         <ViewersOnboardingForm
           setIsSubmitting={setIsSubmitting}
           isSubmitting={isSubmitting}

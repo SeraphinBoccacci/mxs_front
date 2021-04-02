@@ -87,7 +87,7 @@ const MinimumEgoldAmountForm = ({
           <Input
             isDisabled={isSubmitting}
             inputName="referralLink"
-            inputLabel="Referral Link"
+            inputLabel="Your maiar referral link"
             value={formData.referralLink}
             onChange={handleOnChange}
             tooltipText="Past your referral link here"
@@ -104,7 +104,7 @@ const MinimumEgoldAmountForm = ({
               you.
             </Comment>
             <HowTo tabIndex={0}>
-              <span>How to find my herotag QR Code ?</span>
+              <span>How to find my herotag QR Code?</span>
               <img src="/qrcodeScreenShot.gif"></img>
             </HowTo>
           </div>
