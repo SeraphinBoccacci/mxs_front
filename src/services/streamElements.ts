@@ -1,4 +1,4 @@
-import { Variation } from "../components/TabPanel/StreamElements/interface";
+import { Variation } from "../components/Lab/StreamElements/interface";
 import config from "../config/config";
 import { axiosDelete, axiosGet, axiosPost, axiosPut } from "../utils/axios";
 

@@ -14,12 +14,17 @@ export const UploadContainer = styled.div`
 `;
 
 export const ImagePreviewContainer = styled.div`
-  width: 10rem;
-  height: 10rem;
+  width: 5rem;
+  height: 5rem;
 
   background: url("/background_transparent.png");
   background-size: cover;
   background-repeat: no-repeat;
+
+  @media (min-width: 25rem) {
+    width: 10rem;
+    height: 10rem;
+  }
 `;
 
 export const ImagePreview = styled.img`

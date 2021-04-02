@@ -84,6 +84,7 @@ export const TransactionReferenceP = styled.p`
 `;
 export const TransactionReferenceHighlighted = styled.span`
   color: ${colors.quad};
+  font-family: ${fonts.Code};
 `;
 
 export const Alert = styled(MaterialAlert)`

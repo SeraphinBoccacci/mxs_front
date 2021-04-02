@@ -9,7 +9,7 @@ import React, {
 
 import config from "../../config/config";
 import { uploadFile } from "../../services/streamElements";
-import { VariationLenses } from "../TabPanel/StreamElements/interface";
+import { VariationLenses } from "../Lab/StreamElements/interface";
 import {
   Controllers,
   ImagePreview,
@@ -18,7 +18,7 @@ import {
 } from "./style";
 
 interface UploadProps {
-  inputName: VariationLenses;
+  inputName: VariationLenses | string;
   inputLabel: string;
   isAudio?: boolean;
   value?: string;

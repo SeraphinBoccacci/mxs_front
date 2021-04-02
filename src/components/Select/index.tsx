@@ -15,7 +15,7 @@ import {
   TextPositions,
   VariationLenses,
   VariationPositions,
-} from "../TabPanel/StreamElements/interface";
+} from "../Lab/StreamElements/interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

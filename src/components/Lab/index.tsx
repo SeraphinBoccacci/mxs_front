@@ -8,20 +8,20 @@ import { useHistory } from "react-router-dom";
 import { useQueryString } from "../../hooks/useQueryString";
 import { AuthContext } from "../AuthContext";
 import LoadingScreen from "../LoadingScreen";
-import { TabPanel } from "../TabPanel";
-import { NotDevelopped } from "../TabPanel/NotDevelopped";
+import { NotDevelopped } from "./NotDevelopped";
 import { AppBar, RightNode, Tabs } from "./style";
+import { TabPanel } from "./TabPanel";
 
 const Account = lazy(() => {
-  return import("../TabPanel/Account");
+  return import("./Account");
 });
 
 const Ifttt = lazy(() => {
-  return import("../TabPanel/Ifttt");
+  return import("./Ifttt");
 });
 
 const StreamElements = lazy(() => {
-  return import("../TabPanel/StreamElements");
+  return import("./StreamElements");
 });
 
 const Lab = () => {

@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import React, { ChangeEvent, memo } from "react";
 
-import { VariationLenses } from "../TabPanel/StreamElements/interface";
+import { VariationLenses } from "../Lab/StreamElements/interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

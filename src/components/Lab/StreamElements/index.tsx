@@ -8,7 +8,7 @@ import { ContentContainer, Emphasize } from "../../../styles/global";
 import { AuthContext } from "../../AuthContext";
 import Switch from "../../Switch";
 import ActivationSwitch from "../ActivationSwitch";
-import { Paragraph } from "../style";
+import { Paragraph } from "../TabPanel/style";
 import BaseTemplateParticle from "./BaseTemplateParticle";
 import CustomTemplateParticle from "./CustomTemplateParticle";
 import { StreamElementsParticleContainer } from "./style";

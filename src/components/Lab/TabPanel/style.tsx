@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors, fonts } from "../../constants";
+import { colors, fonts } from "../../../constants";
 
 export const TabPanelContainer = styled.div`
   min-height: 100vh;

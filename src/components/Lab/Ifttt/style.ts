@@ -1,4 +1,3 @@
-import { Switch } from "@material-ui/core";
 import styled from "styled-components";
 
 import { colors, fonts } from "../../../constants/index";
