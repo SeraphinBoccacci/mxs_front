@@ -1,7 +1,7 @@
 import { Button as MaterialButton } from "@material-ui/core";
 import styled from "styled-components";
 
-import { fonts } from "../../../constants";
+import { colors, fonts } from "../../../constants";
 
 export const AccountContainer = styled.div`
   display: flex;
@@ -57,4 +57,54 @@ export const Comment = styled.p`
   text-align: center;
 
   margin: 0 auto 1rem;
+`;
+
+export const OnboardingTitle = styled.h4`
+  text-align: center;
+  font-size: 1.4rem;
+
+  font-family: ${fonts.Roboto};
+`;
+
+export const CarousselContent = styled.a`
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.6rem;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    content: "Download";
+    font-family: ${fonts.Ubuntu};
+    font-size: 1.4rem;
+    color: ${colors.secondary}00;
+
+    text-align: center;
+    line-height: 10rem;
+
+    width: 100%;
+    height: 100%;
+
+    background: ${colors.soft_black}00;
+
+    transition: 0.4s;
+
+    cursor: pointer;
+  }
+
+  &:hover::before {
+    color: ${colors.secondary}ff;
+    background: ${colors.soft_black}bb;
+  }
+`;
+
+export const CarousselImage = styled.img`
+  width: 100%;
+
+  @media (min-width: 30rem) {
+    width: 25rem;
+  }
 `;

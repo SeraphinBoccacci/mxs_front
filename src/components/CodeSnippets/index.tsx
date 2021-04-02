@@ -1,8 +1,8 @@
 import { Button } from "@material-ui/core";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { atomOneDarkReasonable } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
+import CopyPasteButton from "../CopyPasteButton";
 import {
   CodeSnippet,
   CodeSnippetsButtons,
@@ -20,7 +20,6 @@ const CodeSnippets = ({
   cssSnippet,
   jsSnippet,
 }: CodeSnippetsProps) => {
-  const [hasJustCopied, setHasJustCopied] = useState(false);
   const [lang, setLang] = useState<"htmlbars" | "css" | "javascript">(
     "htmlbars"
   );
@@ -33,14 +32,6 @@ const CodeSnippets = ({
     }),
     [htmlSnippet, cssSnippet, jsSnippet]
   );
-
-  const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(codeString[lang]);
-    setHasJustCopied(true);
-    setTimeout(() => {
-      setHasJustCopied(false);
-    }, 1300);
-  }, [setHasJustCopied, codeString, lang]);
 
   return (
     <CodeSnippetsContainer>
@@ -72,9 +63,7 @@ const CodeSnippets = ({
             Javascript
           </Button>
         )}
-        <Button onClick={handleCopy}>
-          {hasJustCopied ? "Copied" : <FileCopyIcon></FileCopyIcon>}
-        </Button>
+        <CopyPasteButton dataToCopy={codeString[lang]}></CopyPasteButton>
       </CodeSnippetsButtons>
       <CodeSnippet
         language={lang}
