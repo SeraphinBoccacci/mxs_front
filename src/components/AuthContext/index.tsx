@@ -13,7 +13,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useQueryString } from "../../hooks/useQueryString";
 import { getUserData } from "../../services/user";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
-import { Variation } from "../TabPanel/StreamElements/interface";
+import { Variation } from "../Lab/StreamElements/interface";
 
 export enum UserAccountStatus {
   PENDING_VERIFICATION = 0,

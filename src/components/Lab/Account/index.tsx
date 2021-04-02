@@ -14,7 +14,7 @@ import AuthModal, { ModalKinds } from "../../AuthModal";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
 import Input from "../../Input";
 import ActivationSwitch from "../ActivationSwitch";
-import { Paragraph } from "../style";
+import { Paragraph } from "../TabPanel/style";
 import {
   AccountContainer,
   Button,
