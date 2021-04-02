@@ -57,8 +57,6 @@ const Account = () => {
             Activate particles in your streaming content by switching on the
             toggle below.
           </Paragraph>
-        </ContentContainer>
-        <ContentContainer>
           <ActivationSwitch
             label="Start Streaming"
             isSubmitting={isSubmitting}
