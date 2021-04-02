@@ -18,7 +18,7 @@ import {
 } from "./style";
 
 interface UploadProps {
-  inputName: VariationLenses;
+  inputName: VariationLenses | string;
   inputLabel: string;
   isAudio?: boolean;
   value?: string;

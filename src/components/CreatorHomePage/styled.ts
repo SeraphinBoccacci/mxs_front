@@ -51,6 +51,37 @@ export const Box = styled(FlexRow)`
   }
 `;
 
+export const HerotagBox = styled(Box)`
+  & > div {
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.4s;
+  }
+
+  &:hover > div {
+    filter: blur(5px);
+  }
+
+  & > img {
+    opacity: 0;
+
+    transition: 0.3s;
+
+    cursor: none;
+
+    transform: translateY(20px);
+  }
+
+  &:hover > img {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 export const MaiarImage = styled.img`
   width: 6rem;
   border-radius: 8px;
@@ -98,4 +129,11 @@ export const Herotag = styled.span`
   @media (min-width: 30rem) {
     font-size: 2rem;
   }
+`;
+
+export const QrCode = styled.img`
+  position: absolute;
+  z-index: 50;
+  width: 10rem;
+  margin: 0 auto;
 `;

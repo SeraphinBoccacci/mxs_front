@@ -48,12 +48,36 @@ export const updateMinimumRequiredAmount = (
   minimumRequiredAmount: number
 ) => {
   return axiosPost(
-    `${config.apiUrl}/user/update-minimum-required-amount`,
+    `${config.apiUrl}/user/minimum-required-amount`,
     {
       herotag,
       minimumRequiredAmount,
     },
     { withToken: true }
+  );
+};
+
+export const updateViewerOnboardingData = (
+  herotag: string,
+  referralLink?: string,
+  herotagQrCodePath?: string
+) => {
+  return axiosPost(
+    `${config.apiUrl}/user/viewers-onboarding-data`,
+    {
+      herotag,
+      referralLink,
+      herotagQrCodePath,
+    },
+    { withToken: true }
+  );
+};
+
+export const getViewerOnboardingData = (
+  herotag: string
+): Promise<{ referralLink?: string; herotagQrCodePath?: string }> => {
+  return axiosGet(
+    `${config.apiUrl}/user/viewers-onboarding-data/herotag/${herotag}`
   );
 };
 

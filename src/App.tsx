@@ -12,7 +12,7 @@ import ErrorHandler from "./components/ErrorHandlingContext";
 import LoadingScreen from "./components/LoadingScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import Seo from "./components/Seo";
-import StreamerHomePage from "./pages/StreamerHomePage";
+import CreatorHomePage from "./pages/CreatorHomePage";
 import { theme } from "./styles/theme";
 
 const Home = lazy(() => {
@@ -35,8 +35,8 @@ function App() {
                 <Route exact path="/">
                   <Home />
                 </Route>
-                <Route exact path="/streamer/:herotag">
-                  <StreamerHomePage></StreamerHomePage>
+                <Route exact path="/creator/:herotag">
+                  <CreatorHomePage></CreatorHomePage>
                 </Route>
                 <PrivateRoute exact path="/lab">
                   <Lab />

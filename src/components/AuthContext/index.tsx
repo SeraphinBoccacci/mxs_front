@@ -54,6 +54,9 @@ export interface UserType {
   };
   isStreaming?: boolean;
   streamingStartDate?: Date | null;
+
+  referralLink?: string;
+  herotagQrCodePath?: string;
 }
 
 export const AuthContext = createContext<{
