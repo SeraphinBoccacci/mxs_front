@@ -108,6 +108,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
           setHerotag(data.herotag);
         })
         .catch((error) => {
+          setTokenData(null);
+          history.push("/");
           handleError(error?.message);
         });
     // eslint-disable-next-line
