@@ -124,14 +124,13 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
             endAdornment=".elrond"
           ></Input>
           <Input
-            tooltipText="Your herotag is the username you set when you registered on Maiar."
             value={formData.password}
             inputName="password"
             inputLabel="Password"
             onChange={handleOnChange}
             type="password"
             isDisabled={isSubmitting}
-            autoComplete="password"
+            autoComplete="current-password"
           ></Input>
           <div></div>
         </Inputs>

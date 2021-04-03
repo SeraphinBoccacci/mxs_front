@@ -67,6 +67,10 @@ const snackBarDataMapper: SnackBarDataMapper = {
     severity: "error",
     message: "Your form is invalid. Please fill all the fields.",
   },
+  INVALID_TOKEN: {
+    severity: "warning",
+    message: "You've been disconnect",
+  },
   DEFAULT: {
     severity: "error",
     message: "An unknown error occured.",

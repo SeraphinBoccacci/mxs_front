@@ -49,6 +49,7 @@ const Input = ({
   tooltipText,
   isDisabled,
   type,
+  ...props
 }: InputProps) => {
   const classes = useStyles();
 
@@ -70,6 +71,7 @@ const Input = ({
         rowsMin={3}
         multiline={isTextContent}
         name={inputName}
+        id={inputName}
         value={value || ""}
         endAdornment={
           !!endAdornment ? (
@@ -78,6 +80,7 @@ const Input = ({
             ""
           )
         }
+        {...props}
       />
     </FormControl>
   );
