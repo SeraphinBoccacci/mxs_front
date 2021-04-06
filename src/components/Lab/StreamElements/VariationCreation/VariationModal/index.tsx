@@ -132,6 +132,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.name}
                 onChange={handleOnChange}
                 value={formData?.name}
+                width="10rem"
               ></Input>
               <Input
                 inputLabel="Duration"
@@ -141,6 +142,7 @@ export const VariationModal = ({
                 value={formData?.duration}
                 type="number"
                 endAdornment="seconds"
+                width="3rem"
               ></Input>
               <Input
                 inputLabel="Required Amount"
@@ -148,8 +150,9 @@ export const VariationModal = ({
                 inputName={VariationLenses.requiredAmount}
                 onChange={handleOnChange}
                 value={formData?.requiredAmount}
-                endAdornment="¤EGLD¤"
+                endAdornment="EGLD"
                 type="number"
+                width="3rem"
               ></Input>
               <Input
                 inputLabel="Chances"
@@ -158,6 +161,7 @@ export const VariationModal = ({
                 onChange={handleOnChange}
                 value={formData?.chances}
                 type="number"
+                width="3rem"
               ></Input>
             </SectionRow>
             <SectionRow>
@@ -166,6 +170,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.backgroundColor}
                 onChange={handleOnChange}
                 value={formData?.backgroundColor || "#ffffff"}
+                width="4rem"
               ></Input>
               <Select
                 options={variationPositionOptions}
@@ -181,6 +186,7 @@ export const VariationModal = ({
                 value={formData?.width}
                 type="number"
                 endAdornment="px"
+                width="3rem"
               ></Input>
               <Input
                 inputLabel="Height"
@@ -189,6 +195,7 @@ export const VariationModal = ({
                 value={formData?.heigth}
                 type="number"
                 endAdornment="px"
+                width="3rem"
               ></Input>
             </SectionRow>
           </SectionContent>
@@ -215,6 +222,7 @@ export const VariationModal = ({
                 type="number"
                 endAdornment="seconds"
                 tooltipText="Time between alert end and alert start"
+                width="3rem"
               ></Input>
               <Input
                 inputLabel="Sound Offset"
@@ -224,6 +232,7 @@ export const VariationModal = ({
                 type="number"
                 endAdornment="seconds"
                 tooltipText="Time between alert end and alert end"
+                width="3rem"
               ></Input>
             </SectionRow>
           </SectionContent>
@@ -248,6 +257,7 @@ export const VariationModal = ({
                 value={formData?.[VariationLenses.image_width]}
                 type="number"
                 endAdornment="px"
+                width="3rem"
               ></Input>
               <Input
                 onChange={handleOnChange}
@@ -256,6 +266,7 @@ export const VariationModal = ({
                 value={formData?.[VariationLenses.image_height]}
                 type="number"
                 endAdornment="px"
+                width="3rem"
               ></Input>
             </SectionRow>
             <AnimationSettings
@@ -287,6 +298,7 @@ export const VariationModal = ({
                 inputName={VariationLenses.text_content}
                 value={formData?.[VariationLenses.text_content]}
                 isTextContent
+                width="30rem"
               ></Input>
               <Comment>
                 You can use the variables <i>{"{{herotag}}"}</i>,{"  "}
@@ -301,6 +313,7 @@ export const VariationModal = ({
                 value={formData?.[VariationLenses.text_width]}
                 type="number"
                 endAdornment="px"
+                width="3rem"
               ></Input>
               <Input
                 onChange={handleOnChange}
@@ -309,9 +322,8 @@ export const VariationModal = ({
                 value={formData?.[VariationLenses.text_height]}
                 type="number"
                 endAdornment="px"
+                width="3rem"
               ></Input>
-            </SectionRow>
-            <SectionRow>
               <Input
                 onChange={handleOnChange}
                 inputLabel="Font Size"
@@ -319,12 +331,14 @@ export const VariationModal = ({
                 value={formData?.[VariationLenses.text_size]}
                 type="number"
                 endAdornment="px"
+                width="3rem"
               ></Input>
               <Input
                 onChange={handleOnChange}
                 inputLabel="Font Color"
                 inputName={VariationLenses.text_color}
                 value={formData?.[VariationLenses.text_color]}
+                width="4rem"
               ></Input>
             </SectionRow>
             <SectionRow>
@@ -335,6 +349,7 @@ export const VariationModal = ({
                 value={formData?.[VariationLenses.text_lineHeight]}
                 type="number"
                 endAdornment="px"
+                width="3rem"
               ></Input>
               <Input
                 onChange={handleOnChange}
@@ -343,6 +358,7 @@ export const VariationModal = ({
                 value={formData?.[VariationLenses.text_letterSpacing]}
                 type="number"
                 endAdornment="px"
+                width="4rem"
               ></Input>
               <Input
                 onChange={handleOnChange}
@@ -351,6 +367,7 @@ export const VariationModal = ({
                 value={formData?.[VariationLenses.text_wordSpacing]}
                 type="number"
                 endAdornment="px"
+                width="4rem"
               ></Input>
             </SectionRow>{" "}
             <TextAlignRadioGroup
@@ -371,12 +388,14 @@ export const VariationModal = ({
                   value={formData?.[VariationLenses.text_stroke_width]}
                   type="number"
                   endAdornment="px"
+                  width="4rem"
                 ></Input>
                 <Input
                   onChange={handleOnChange}
                   inputLabel="Stroke Color"
                   inputName={VariationLenses.text_stroke_color}
                   value={formData?.[VariationLenses.text_stroke_color]}
+                  width="4rem"
                 ></Input>
               </SectionRow>
             </SubSection>

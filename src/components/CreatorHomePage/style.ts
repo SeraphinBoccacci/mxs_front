@@ -62,7 +62,7 @@ export const HerotagBox = styled(Box)`
     transition: 0.4s;
   }
 
-  &:hover > div {
+  &:hover .blurrable {
     filter: blur(5px);
   }
 
@@ -102,6 +102,8 @@ export const StepTitle = styled.h4`
   margin: 0;
 
   text-align: center;
+
+  transition: 0.4s;
 
   @media (min-width: 30rem) {
     font-size: 1.2rem;

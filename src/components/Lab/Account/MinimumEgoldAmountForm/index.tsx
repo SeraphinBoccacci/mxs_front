@@ -99,6 +99,7 @@ const MinimumEgoldAmountForm = ({
             value={formData.minimumRequiredAmount}
             onChange={handleOnChange}
             type="number"
+            centered
           ></Input>
           <Comment>
             {formData.minimumRequiredAmount &&

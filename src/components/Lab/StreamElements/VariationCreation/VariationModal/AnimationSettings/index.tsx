@@ -52,6 +52,7 @@ export const AnimationSettings = ({
           endAdornment="seconds"
           onChange={onChange}
           type="number"
+          width="3rem"
         ></Input>
         <Input
           inputLabel="Delay"
@@ -60,6 +61,7 @@ export const AnimationSettings = ({
           type="number"
           endAdornment="seconds"
           onChange={onChange}
+          width="3rem"
         ></Input>
       </SectionRow>
       <SectionRow>
@@ -78,6 +80,7 @@ export const AnimationSettings = ({
           type="number"
           endAdornment="seconds"
           onChange={onChange}
+          width="3rem"
         ></Input>
         <Input
           inputLabel="Offset"
@@ -86,6 +89,7 @@ export const AnimationSettings = ({
           type="number"
           endAdornment="seconds"
           onChange={onChange}
+          width="3rem"
         ></Input>
       </SectionRow>
     </SubSection>

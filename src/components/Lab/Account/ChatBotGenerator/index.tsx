@@ -1,6 +1,8 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
+import config from "../../../../config/config";
 import { useForm } from "../../../../hooks/useForm";
+import { useQueryString } from "../../../../hooks/useQueryString";
 import { ContentContainer, FlexColumn } from "../../../../styles/global";
 import CopyPasteButton from "../../../CopyPasteButton";
 import Input from "../../../Input";
@@ -18,17 +20,8 @@ const commandNames = [
   "!herotag",
 ];
 
-const commandContents = [
-  "You can easily tip with with crypto using eGOLD. Download the free Maiar App <insérer automatiquement onboard link du streamer>, claim your Herotag (username), buy eGOLD and send tips me directly to my Herotag: <insérer le @ du streamer>",
-  "You can tip with crypto by sending eGOLD to <insérer le @ du streamer> using the free Maiar App: <insérer automatiquement onboard link du streamer>",
-  "Feel free to donate eGLD using Maiar (<insérer automatiquement onboard link du streamer>), it’s easy, fast, cheap! My Herotag is <insérer le @ du streamer>",
-  "My Maiar Herotag is <insérer le @ du streamer>. You can send me eGLD via the Maiar app: <insérer automatiquement onboard link du streamer>",
-  "It was inevitable. I’m on Maiar and thanks to my Herotag @<insérer le @ du streamer> you can tip me using crypto eGOLD. To know more about it, click this link: <insérer automatiquement onboard link du streamer>",
-  "Download Maiar, it’s free and allows you to get eGOLD <insérer automatiquement onboard link du streamer>. As you may know, I do accept eGOLD tips because it’s easy and fast. My Herotag is <insérer le @ du streamer>.",
-  "eGOLD tips are highly appreciated. You can easily tip me using Maiar <insérer automatiquement onboard link du streamer>. My Herotag is <insérer le @ du streamer>.",
-];
-
 const ChatBotGenerator = () => {
+  const [herotag = ""] = useQueryString("herotag");
   const [formData, setFormData] = useForm<{
     commandName?: string;
     commandContent?: string;
@@ -39,6 +32,21 @@ const ChatBotGenerator = () => {
       setFormData(data);
     },
     [setFormData]
+  );
+
+  const onBoardingPageLink = `${config.url}/creator/${herotag}`;
+
+  const commandContents = useMemo(
+    () => [
+      `You can easily tip with with crypto using eGOLD. Download the free Maiar App ${onBoardingPageLink}, claim your Herotag (username), buy eGOLD and send tips me directly to my Herotag: ${herotag}`,
+      `You can tip with crypto by sending eGOLD to ${herotag} using the free Maiar App: ${onBoardingPageLink}`,
+      `Feel free to donate eGLD using Maiar (${onBoardingPageLink}), it’s easy, fast, cheap! My Herotag is ${herotag}`,
+      `My Maiar Herotag is ${herotag}. You can send me eGLD via the Maiar app: ${onBoardingPageLink}`,
+      `It was inevitable. I’m on Maiar and thanks to my Herotag @${herotag} you can tip me using crypto eGOLD. To know more about it, click this link: ${onBoardingPageLink}`,
+      `Download Maiar, it’s free and allows you to get eGOLD ${onBoardingPageLink}. As you may know, I do accept eGOLD tips because it’s easy and fast. My Herotag is ${herotag}.`,
+      `eGOLD tips are highly appreciated. You can easily tip me using Maiar ${onBoardingPageLink}. My Herotag is ${herotag}.`,
+    ],
+    [onBoardingPageLink, herotag]
   );
 
   const generateRandomCommand = useCallback(() => {
@@ -56,7 +64,7 @@ const ChatBotGenerator = () => {
         commandContent: commandContents[randomCommandContentIndex],
       },
     });
-  }, [setFormData]);
+  }, [setFormData, commandContents]);
 
   useEffect(() => {
     generateRandomCommand();

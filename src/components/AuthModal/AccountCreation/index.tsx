@@ -91,6 +91,8 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
             isDisabled={isSubmitting}
             autoComplete="off"
             endAdornment=".elrond"
+            centered
+            width="10rem"
           ></Input>
 
           <Input
@@ -101,6 +103,8 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
             isDisabled={isSubmitting}
             type="password"
             autoComplete="off"
+            centered
+            width="13rem"
           ></Input>
           <Input
             value={formData.confirm}
@@ -110,6 +114,8 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
             isDisabled={isSubmitting}
             type="password"
             autoComplete="off"
+            centered
+            width="13rem"
           ></Input>
         </Inputs>
         <Button

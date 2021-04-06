@@ -17,7 +17,7 @@ import {
   QrCode,
   StepNumber,
   StepTitle,
-} from "./styled";
+} from "./style";
 
 const StreamerHomePage = () => {
   const [referralLink, setReferralLink] = useState<string>();
@@ -66,7 +66,7 @@ const StreamerHomePage = () => {
         {!!herotagQrCodePath ? (
           <HerotagBox>
             <FlexRow>
-              <StepTitle>
+              <StepTitle className="blurrable">
                 Donate to my herotag : <br></br>
                 <Herotag>
                   <Arobase>@</Arobase>
