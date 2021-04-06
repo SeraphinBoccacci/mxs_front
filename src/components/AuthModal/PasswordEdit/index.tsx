@@ -92,6 +92,8 @@ export const PasswordEdit = ({
             isDisabled={isSubmitting}
             onChange={handleOnChange}
             autoComplete="off"
+            centered
+            width="10rem"
           ></Input>
           <Input
             type="password"
@@ -101,6 +103,8 @@ export const PasswordEdit = ({
             isDisabled={isSubmitting}
             onChange={handleOnChange}
             autoComplete="off"
+            centered
+            width="10rem"
           ></Input>
         </Inputs>
         <Button

@@ -24,6 +24,7 @@ export const colors = {
   quad: "#ceff1a",
   soft_black: "#2a2a2a",
   black: "#121212",
+  gray: "#C0C0C0",
 
   warning: "#E6C229",
   success: "#157F1F",

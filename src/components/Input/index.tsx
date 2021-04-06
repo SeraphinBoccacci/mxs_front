@@ -1,91 +1,22 @@
-import {
-  createStyles,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  makeStyles,
-  OutlinedInput,
-  OutlinedInputProps,
-  Theme,
-  Tooltip,
-} from "@material-ui/core";
-import React, { ChangeEvent, memo, ReactNode } from "react";
+import { Tooltip } from "@material-ui/core";
+import React, { memo } from "react";
 
-import { VariationLenses } from "../Lab/StreamElements/interface";
+import Base, { BaseProps } from "./Base";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formControl: {
-      padding: theme.spacing(0),
-      margin: theme.spacing(1),
-    },
-    textContent: {
-      width: "100%",
-      margin: theme.spacing(1),
-    },
-  })
-);
-
-type InputProps = OutlinedInputProps & {
-  inputName: string | VariationLenses;
-  inputLabel: string;
-  value?: string | number;
-  onChange:
-    | ((event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void)
-    | ((event: ChangeEvent<HTMLInputElement>) => void);
-  isTextContent?: boolean;
-  endAdornment?: string | ReactNode;
+type InputProps = BaseProps & {
   tooltipText?: string;
-  isDisabled?: boolean;
 };
 
-const Input = ({
-  inputName,
-  inputLabel,
-  value = "",
-  onChange,
-  endAdornment,
-  isTextContent,
-  tooltipText,
-  isDisabled,
-  type,
-  ...props
-}: InputProps) => {
-  const classes = useStyles();
-
-  const input = (
-    <FormControl
-      size="small"
-      className={isTextContent ? classes.textContent : classes.formControl}
-      variant="outlined"
-      color="primary"
-    >
-      <InputLabel variant="outlined" color="secondary" htmlFor={inputName}>
-        {inputLabel}
-      </InputLabel>
-      <OutlinedInput
-        type={type}
-        disabled={isDisabled}
-        onChange={onChange}
-        notched
-        rowsMin={3}
-        multiline={isTextContent}
-        name={inputName}
-        id={inputName}
-        value={value || ""}
-        endAdornment={
-          !!endAdornment ? (
-            <InputAdornment position="end">{endAdornment}</InputAdornment>
-          ) : (
-            ""
-          )
-        }
-        {...props}
-      />
-    </FormControl>
+const Input = ({ tooltipText, ...inputProps }: InputProps) => {
+  return tooltipText ? (
+    <Tooltip title={tooltipText}>
+      <div>
+        <Base {...inputProps}></Base>
+      </div>
+    </Tooltip>
+  ) : (
+    <Base {...inputProps}></Base>
   );
-
-  return tooltipText ? <Tooltip title={tooltipText}>{input}</Tooltip> : input;
 };
 
 export default memo(Input);

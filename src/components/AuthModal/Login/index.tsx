@@ -122,6 +122,8 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
             autoComplete="username"
             type="text"
             endAdornment=".elrond"
+            centered
+            width="10rem"
           ></Input>
           <Input
             value={formData.password}
@@ -131,6 +133,8 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
             type="password"
             isDisabled={isSubmitting}
             autoComplete="current-password"
+            centered
+            width="13rem"
           ></Input>
           <div></div>
         </Inputs>

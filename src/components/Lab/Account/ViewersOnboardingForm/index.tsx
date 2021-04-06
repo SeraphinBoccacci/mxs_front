@@ -91,6 +91,7 @@ const MinimumEgoldAmountForm = ({
             value={formData.referralLink}
             onChange={handleOnChange}
             tooltipText="Past your referral link here"
+            centered
           ></Input>
           <Upload
             inputName="herotagQrCodePath"

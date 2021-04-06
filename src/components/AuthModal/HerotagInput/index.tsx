@@ -78,6 +78,8 @@ export const HerotagInput = ({
             isDisabled={isSubmitting}
             autoComplete="off"
             endAdornment=".elrond"
+            centered
+            width="10rem"
           ></Input>
         </Inputs>
         <Button
