@@ -53,9 +53,14 @@ export const InputLabel = styled.label`
   cursor: text;
 `;
 
-export const Adornment = styled.div`
+interface AdornmentProps {
+  isVisible?: boolean;
+}
+
+export const Adornment = styled.div<AdornmentProps>`
   width: max-content;
   overflow: hidden;
+  z-index: 50;
 
   line-height: 2.5rem;
   text-align: right;
@@ -67,4 +72,6 @@ export const Adornment = styled.div`
   transform: scaleX(0);
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
   transform-origin: right;
+
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
 `;
