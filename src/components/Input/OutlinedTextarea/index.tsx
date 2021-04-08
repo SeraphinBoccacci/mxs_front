@@ -33,14 +33,10 @@ const OutlinedTextarea = ({
   }, [textarea]);
 
   useEffect(() => {
-    const inteval = setInterval(() => {
+    setTimeout(() => {
       handleResize();
     }, 500);
-
-    return () => {
-      clearInterval(inteval);
-    };
-  }, [textarea, handleResize]);
+  }, [handleResize]);
 
   const handleTextAreaOnChange = useCallback(
     (event) => {
@@ -62,6 +58,7 @@ const OutlinedTextarea = ({
       ref={textarea}
       onChange={handleTextAreaOnChange}
       onFocus={handleResize}
+      placeholder=" "
     ></OutlinedTextArea>
   );
 };

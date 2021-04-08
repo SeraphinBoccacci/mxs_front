@@ -32,7 +32,9 @@ const Base = (props: BaseProps) => {
         <OutlinedInput {...props} value={value}></OutlinedInput>
       )}
       <InputLabel htmlFor={inputName}>{inputLabel}</InputLabel>
-      {!!endAdornment && <Adornment>{endAdornment}</Adornment>}
+      {!!endAdornment && (
+        <Adornment isVisible={!!value}> {endAdornment}</Adornment>
+      )}
     </InputContainer>
   );
 };
