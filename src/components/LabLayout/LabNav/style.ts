@@ -18,7 +18,6 @@ export const StyledNav = styled.nav`
 
   background-color: ${colors.primary};
   overflow-y: visible;
-  overflow-x: scroll;
 `;
 
 export const StyledList = styled.ul`

@@ -20,6 +20,7 @@ const LabLayout = ({
 }: LabLayoutProps) => {
   const Nav =
     breakpoints[currentBreakpoint] > breakpoints.tablet ? LabNav : MobileLabNav;
+
   return (
     <StyledLabLayoutContainer>
       <Nav></Nav>
