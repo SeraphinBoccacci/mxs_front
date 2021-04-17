@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useCallback, useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
 
+import routes from "../../../constants/routes";
 import { useForm } from "../../../hooks/useForm";
+import { useHistoryWithQueryString } from "../../../hooks/useHistoryWithQuerystring";
 import { authenticate } from "../../../services/auth";
 import { useAuth } from "../../AuthContext";
 import { ErrorHandlingContext } from "../../ErrorHandlingContext";
@@ -27,7 +28,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
   const { setTokenData, setHerotag } = useAuth();
   const { handleError } = useContext(ErrorHandlingContext);
 
-  const history = useHistory();
+  const [pushToHistory] = useHistoryWithQueryString();
 
   const [formData, setFormData] = useForm<{
     // herotag input should be named with 'username' in order to be understood by password managers
@@ -59,7 +60,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
 
           handleClose();
 
-          history.push("/lab");
+          pushToHistory(routes.userAccountSettings);
         } else throw new Error("AUTH_FAILED");
       } catch (error) {
         setIsSubmitting(false);
@@ -79,7 +80,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
       formData.username,
       formData.password,
       handleClose,
-      history,
+      pushToHistory,
       setTokenData,
       setIsSubmitting,
       setHerotag,
@@ -123,7 +124,7 @@ export const Login = ({ handleClose, setModalKind }: LoginProps) => {
             type="text"
             endAdornment=".elrond"
             centered
-            width="10rem"
+            width="13rem"
           ></Input>
           <Input
             value={formData.password}

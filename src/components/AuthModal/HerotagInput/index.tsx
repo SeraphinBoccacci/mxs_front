@@ -79,7 +79,7 @@ export const HerotagInput = ({
             autoComplete="off"
             endAdornment=".elrond"
             centered
-            width="10rem"
+            width="13rem"
           ></Input>
         </Inputs>
         <Button

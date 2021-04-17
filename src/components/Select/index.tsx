@@ -15,7 +15,7 @@ import {
   TextPositions,
   VariationLenses,
   VariationPositions,
-} from "../Lab/StreamElements/interface";
+} from "../../pages/OverlaysSettings/interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

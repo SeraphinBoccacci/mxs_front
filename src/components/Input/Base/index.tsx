@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 
-import { VariationLenses } from "../../Lab/StreamElements/interface";
-import OutlinedInput, { OutlinedInputProps } from "../OutlinedInput";
-import OutlinedTextArea, { OutlinedTextareaProps } from "../OutlinedTextarea";
+import { VariationLenses } from "../../../pages/OverlaysSettings/interface";
+import OutlinedInput, { OutlinedInputProps } from "./OutlinedInput";
+import OutlinedTextArea, { OutlinedTextareaProps } from "./OutlinedTextarea";
 import { Adornment, InputContainer, InputLabel } from "./style";
 
 export type BaseProps = (OutlinedInputProps | OutlinedTextareaProps) & {
@@ -22,10 +22,10 @@ const isTextArea = (
 };
 
 const Base = (props: BaseProps) => {
-  const { value, centered, inputName, inputLabel, endAdornment } = props;
+  const { width, value, centered, inputName, inputLabel, endAdornment } = props;
 
   return (
-    <InputContainer isEmpty={!value} centered={centered}>
+    <InputContainer width={width} isEmpty={!value} centered={centered}>
       {isTextArea(props) ? (
         <OutlinedTextArea {...props} value={value}></OutlinedTextArea>
       ) : (
@@ -33,7 +33,7 @@ const Base = (props: BaseProps) => {
       )}
       <InputLabel htmlFor={inputName}>{inputLabel}</InputLabel>
       {!!endAdornment && (
-        <Adornment isVisible={!!value}> {endAdornment}</Adornment>
+        <Adornment isVisible={!!value}>{endAdornment}</Adornment>
       )}
     </InputContainer>
   );
