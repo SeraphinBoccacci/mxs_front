@@ -9,11 +9,12 @@ import {
 import React from "react";
 import { useHistory } from "react-router";
 
+import routes from "../../constants/routes";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useQueryString } from "../../hooks/useQueryString";
+import { Variation } from "../../pages/OverlaysSettings/interface";
 import { getUserData } from "../../services/user";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
-import { Variation } from "../Lab/StreamElements/interface";
 
 export enum UserAccountStatus {
   PENDING_VERIFICATION = 0,
@@ -109,7 +110,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         })
         .catch((error) => {
           setTokenData(null);
-          history.push("/");
+          history.push(routes.home);
           handleError(error?.message);
         });
     // eslint-disable-next-line

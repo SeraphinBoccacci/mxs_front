@@ -8,8 +8,8 @@ import React, {
 } from "react";
 
 import config from "../../config/config";
+import { VariationLenses } from "../../pages/OverlaysSettings/interface";
 import { uploadFile } from "../../services/streamElements";
-import { VariationLenses } from "../Lab/StreamElements/interface";
 import {
   Controllers,
   ImagePreview,

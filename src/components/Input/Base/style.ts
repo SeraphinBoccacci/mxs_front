@@ -5,13 +5,14 @@ import { colors, fonts } from "../../../constants";
 interface InputContainerProps {
   isEmpty: boolean;
   centered?: boolean;
+  width?: string;
 }
 
 export const InputContainer = styled.div<InputContainerProps>`
   position: relative;
-  width: max-content;
+  width: ${({ width }) => width || "100%"};
   height: max-content;
-  margin: ${({ centered }) => (centered ? "1rem auto" : "1rem")};
+  margin: ${({ centered }) => (centered ? "1rem auto" : "1rem 0")};
 
   display: flex;
   flex-direction: row;
@@ -37,7 +38,7 @@ export const InputLabel = styled.label`
   left: 0;
 
   height: 100%;
-  width: 100%;
+  flex: 1;
 
   line-height: 2.25rem;
   text-overflow: ellipsis;
@@ -58,8 +59,9 @@ interface AdornmentProps {
 }
 
 export const Adornment = styled.div<AdornmentProps>`
+  position: relative;
+  top: 0.1rem;
   width: max-content;
-  overflow: hidden;
   z-index: 50;
 
   line-height: 2.5rem;

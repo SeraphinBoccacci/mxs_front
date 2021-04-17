@@ -1,5 +1,5 @@
-import { Variation } from "../components/Lab/StreamElements/interface";
 import config from "../config/config";
+import { Variation } from "../pages/OverlaysSettings/interface";
 import { axiosDelete, axiosGet, axiosPost, axiosPut } from "../utils/axios";
 
 export const uploadFile = async (

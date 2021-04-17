@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 
+import routes from "../../constants/routes";
 import { useAuth } from "../AuthContext";
 
 function PrivateRoute({
@@ -12,7 +13,9 @@ function PrivateRoute({
   return (
     <Route
       {...rest}
-      render={() => (isAuthenticated ? children : <Redirect to="/" />)}
+      render={() =>
+        isAuthenticated ? children : <Redirect to={routes.home} />
+      }
     />
   );
 }

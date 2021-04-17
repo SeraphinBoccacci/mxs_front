@@ -92,7 +92,7 @@ export const AccountCreation = ({ setModalKind }: AccountCreationProps) => {
             autoComplete="off"
             endAdornment=".elrond"
             centered
-            width="10rem"
+            width="13rem"
           ></Input>
 
           <Input
