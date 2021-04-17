@@ -9,9 +9,9 @@ type EnvConfig = { [key: string]: Config };
 
 const config: EnvConfig = {
   local: {
-    url: "http://192.168.1.26:4000",
-    apiUrl: "http://192.168.1.26:4000/api",
-    uploadsUrl: "http://192.168.1.26:4000/uploads",
+    url: "http://localhost:4000",
+    apiUrl: "http://localhost:4000/api",
+    uploadsUrl: "http://localhost:4000/uploads",
     //use public folder directly
     downloadBaseUrl: "",
   },
