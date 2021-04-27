@@ -32,6 +32,29 @@ export const getUserData = async () => {
   return data;
 };
 
+export const uploadFile = async (
+  fileType: "images" | "audios",
+  file: File
+): Promise<string> => {
+  const formData = new FormData();
+
+  formData.append("media", file, file.name);
+
+  try {
+    const filePath = await axiosPost(
+      `${config.uploadsUrl}/${fileType}`,
+      formData,
+      { withToken: true }
+    );
+
+    if (!filePath) throw new Error("NO_FILE_PATH_RETURNED");
+
+    return filePath;
+  } catch (error) {
+    return "";
+  }
+};
+
 export const triggerEvent = (herotag: string, data: EventData) => {
   return axiosPost(
     `${config.apiUrl}/user/trigger-event`,

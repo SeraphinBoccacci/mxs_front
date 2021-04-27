@@ -1,13 +1,13 @@
 import React, { ChangeEvent, createRef, useCallback, useEffect } from "react";
 
-import { VariationLenses } from "../../../../pages/OverlaysSettings/interface";
+import { AlertVariationLenses } from "../../../../interfaces/alerts";
 import { OutlinedTextArea } from "./style";
 
 export type OutlinedTextareaProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLTextAreaElement>,
   HTMLTextAreaElement
 > & {
-  inputName: string | VariationLenses;
+  inputName: string | AlertVariationLenses;
   value?: string | number;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   isTextContent?: boolean;

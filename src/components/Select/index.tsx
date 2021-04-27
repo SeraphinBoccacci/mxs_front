@@ -10,12 +10,12 @@ import {
 import React, { memo } from "react";
 
 import {
+  AlertPositions,
+  AlertVariationLenses,
   EnterAnimationTypes,
   ExitAnimationTypes,
   TextPositions,
-  VariationLenses,
-  VariationPositions,
-} from "../../pages/OverlaysSettings/interface";
+} from "../../interfaces/alerts";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface Option {
   label: string;
   value:
-    | VariationPositions
+    | AlertPositions
     | TextPositions
     | EnterAnimationTypes
     | ExitAnimationTypes
@@ -50,7 +50,7 @@ export interface Option {
 interface SelectProps {
   options: Option[];
   size?: "large";
-  inputName: VariationLenses;
+  inputName: AlertVariationLenses;
   inputLabel: string;
   onChange:
     | ((

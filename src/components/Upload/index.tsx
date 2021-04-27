@@ -8,8 +8,8 @@ import React, {
 } from "react";
 
 import config from "../../config/config";
-import { VariationLenses } from "../../pages/OverlaysSettings/interface";
-import { uploadFile } from "../../services/streamElements";
+import { AlertVariationLenses } from "../../interfaces/alerts";
+import { uploadFile } from "../../services/user";
 import {
   Controllers,
   ImagePreview,
@@ -18,7 +18,7 @@ import {
 } from "./style";
 
 interface UploadProps {
-  inputName: VariationLenses | string;
+  inputName: AlertVariationLenses | string;
   inputLabel: string;
   isAudio?: boolean;
   value?: string;

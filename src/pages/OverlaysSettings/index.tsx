@@ -5,22 +5,15 @@ import { withBreakpoints } from "react-breakpoints";
 import ActivationSwitch from "../../components/ActivationSwitch";
 import { AuthContext } from "../../components/AuthContext";
 import LabLayout from "../../components/LabLayout";
-import Switch from "../../components/Switch";
-import { useQueryString } from "../../hooks/useQueryString";
-import { toggleStreamElementsParticle } from "../../services/streamElements";
-import { Paragraph } from "../../styles/global";
-import { ContentContainer, Emphasize } from "../../styles/global";
-import BaseTemplateParticle from "./BaseTemplateParticle";
-import CustomTemplateParticle from "./CustomTemplateParticle";
+import { toggleOverlaysParticle } from "../../services/overlays";
+import ContextProvider from "./Context";
+import MyOverlays from "./MyOverlays";
+import OverlaysIntroduction from "./OverlaysIntroduction";
 import { StreamElementsParticleContainer } from "./style";
 
 const StreamElementsParticle = () => {
   const { user } = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [isOnCustomTemplate, setIsOnCustomTemplate] = useQueryString(
-    "isOnCustom"
-  );
 
   const [isParticleActive, setIsParticleActive] = useState(
     user?.integrations?.ifttt?.isActive || false
@@ -34,7 +27,7 @@ const StreamElementsParticle = () => {
     setIsSubmitting(true);
 
     if (user && user.herotag) {
-      await toggleStreamElementsParticle(user.herotag, !isParticleActive);
+      await toggleOverlaysParticle(user.herotag, !isParticleActive);
       setIsParticleActive((prev) => !prev);
 
       setIsSubmitting(false);
@@ -42,51 +35,32 @@ const StreamElementsParticle = () => {
   }, [setIsSubmitting, setIsParticleActive, isParticleActive, user]);
 
   return (
-    <LabLayout>
-      <StreamElementsParticleContainer>
-        <ContentContainer elevation={3} variant="elevation">
-          <Paragraph>
-            <Emphasize>
-              <a target="about:blank" href="https://streamelements.com/">
-                Stream Elements
-              </a>
-            </Emphasize>
-            is an all-in-one platform that helps creators along all their
-            content management.
-          </Paragraph>
-          <Paragraph>
-            For instance, it lets you create customized overlays to react to
-            viewers&rsquo; support. That&rsquo;s what we&rsquo;ll be working on
-            in this particle.
-          </Paragraph>
-          <Paragraph>
-            You can either choose a base template which is the basic
-            StreamParticles animation and sound or go with your own GIFs and
-            sounds that will be triggered depending on the variations you set.
-          </Paragraph>
-        </ContentContainer>
+    <ContextProvider>
+      <LabLayout>
+        <StreamElementsParticleContainer>
+          <OverlaysIntroduction></OverlaysIntroduction>
 
-        <ActivationSwitch
-          label="Activate Particle"
-          isSubmitting={isSubmitting}
-          isActive={isParticleActive}
-          onChange={handleSwitchChange}
-        ></ActivationSwitch>
+          <ActivationSwitch
+            label="Activate Particle"
+            isSubmitting={isSubmitting}
+            isActive={isParticleActive}
+            onChange={handleSwitchChange}
+          ></ActivationSwitch>
 
-        <Switch
-          variant="inverted"
-          isActive={isOnCustomTemplate}
-          setIsActive={setIsOnCustomTemplate}
-          offLabel="Base template"
-          onLabel="Custom template"
-        ></Switch>
-        {isOnCustomTemplate ? (
-          <CustomTemplateParticle></CustomTemplateParticle>
-        ) : (
-          <BaseTemplateParticle></BaseTemplateParticle>
-        )}
-      </StreamElementsParticleContainer>
-    </LabLayout>
+          <MyOverlays></MyOverlays>
+
+          {/* <Tutorial
+        videoTutorialLink="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=290s"
+        tutorial={overlaysCustom}
+      ></Tutorial> */}
+
+          {/* <Tutorial
+        videoTutorialLink="https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=179s"
+        tutorial={overlaysBase}
+      ></Tutorial> */}
+        </StreamElementsParticleContainer>
+      </LabLayout>
+    </ContextProvider>
   );
 };
 
