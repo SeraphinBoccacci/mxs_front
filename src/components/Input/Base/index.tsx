@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
 
-import { VariationLenses } from "../../../pages/OverlaysSettings/interface";
+import { AlertVariationLenses } from "../../../interfaces/alerts";
 import OutlinedInput, { OutlinedInputProps } from "./OutlinedInput";
 import OutlinedTextArea, { OutlinedTextareaProps } from "./OutlinedTextarea";
 import { Adornment, InputContainer, InputLabel } from "./style";
 
 export type BaseProps = (OutlinedInputProps | OutlinedTextareaProps) & {
-  inputName: string | VariationLenses;
+  inputName: string | AlertVariationLenses;
   inputLabel: string;
   value?: string | number;
   endAdornment?: string | ReactNode;

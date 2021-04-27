@@ -1,13 +1,13 @@
 import React, { ChangeEvent, createRef } from "react";
 
-import { VariationLenses } from "../../../../pages/OverlaysSettings/interface";
+import { AlertVariationLenses } from "../../../../interfaces/alerts";
 import { OutlinedInput as StyledOutlinedInput } from "./style";
 
 export type OutlinedInputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 > & {
-  inputName: string | VariationLenses;
+  inputName: string | AlertVariationLenses;
   value?: string | number;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   isDisabled?: boolean;

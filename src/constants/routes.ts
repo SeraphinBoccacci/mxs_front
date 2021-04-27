@@ -15,12 +15,14 @@ const chatBotsTwitch = `${chatBots}/twitch`;
 
 const tutorial = `${lab}/tutorial/:tutorialId`;
 
-const streamElementBaseTutorial = `${lab}/tutorial/stream-elements-base`;
-const streamElementCustomTutorial = `${lab}/tutorial/stream-elements-custom`;
+const overlaysBaseTutorial = `${lab}/tutorial/overlays-base`;
+const overlaysCustomTutorial = `${lab}/tutorial/overlays-custom`;
 const iftttTutorial = `${lab}/tutorial/ifttt`;
 const chatBotsTwitchTutorial = `${lab}/tutorial/chat-bots-twitch`;
 
 const tippingPage = "/creator/:herotag";
+const browserSourcePage = "/browser-source/herotag/:herotag/overlay/:overlayId";
+const overlayEditorPage = "/editor/overlay/:overlayId";
 
 const routes = {
   home: "/",
@@ -36,10 +38,12 @@ const routes = {
   chatBotsTwitch,
   tutorial,
   chatBotsTutorials,
-  streamElementBaseTutorial,
-  streamElementCustomTutorial,
+  streamElementBaseTutorial: overlaysBaseTutorial,
+  overlaysCustomTutorial,
   iftttTutorial,
   chatBotsTwitchTutorial,
+  browserSourcePage,
+  overlayEditorPage,
 };
 
 export default routes;

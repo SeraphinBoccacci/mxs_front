@@ -51,6 +51,14 @@ const UserAccountSettings = lazy(() => {
   return import("./pages/UserAccountSettings");
 });
 
+const BrowserSource = lazy(() => {
+  return import("./pages/BrowserSource");
+});
+
+const OverlayEditor = lazy(() => {
+  return import("./pages/OverlayEditor");
+});
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -95,6 +103,14 @@ function App() {
 
                 <Route path={routes.tutorial}>
                   <Tutorial></Tutorial>
+                </Route>
+
+                <Route path={routes.browserSourcePage}>
+                  <BrowserSource></BrowserSource>
+                </Route>
+
+                <Route path={routes.overlayEditorPage}>
+                  <OverlayEditor></OverlayEditor>
                 </Route>
 
                 {/* Default Route */}

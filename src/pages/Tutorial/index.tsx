@@ -7,8 +7,8 @@ import LabLayout from "../../components/LabLayout";
 import VideoPlayer from "../../components/VideoPlayer";
 import {
   iftttTutorial,
-  streamElementsBase,
-  streamElementsCustom,
+  overlaysBase,
+  overlaysCustom,
   TutorialStepElement,
 } from "../../constants/tutorials";
 import {
@@ -24,8 +24,8 @@ import {
 
 export enum TutorialIds {
   ifttt = "ifttt",
-  streamElementsBaseTemplate = "streamElementsBaseTemplate",
-  streamElementsCustomTemplate = "streamElementsCustomTemplate",
+  overlaysBaseTemplate = "streamElementsBaseTemplate",
+  overlaysCustomCustomTemplate = "streamElementsCustomTemplate",
 }
 
 interface TutorialContent {
@@ -42,13 +42,13 @@ const tutorials = {
     videoTitle: "Ifttt Setup",
     videoContent: "https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=96s",
   },
-  [TutorialIds.streamElementsBaseTemplate]: {
-    textContent: streamElementsBase,
+  [TutorialIds.overlaysBaseTemplate]: {
+    textContent: overlaysBase,
     videoTitle: "Base Animation Setup",
     videoContent: "https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=179s",
   },
-  [TutorialIds.streamElementsCustomTemplate]: {
-    textContent: streamElementsCustom,
+  [TutorialIds.overlaysCustomCustomTemplate]: {
+    textContent: overlaysCustom,
     videoTitle: "Custom Animation Setup",
     videoContent: "https://www.youtube.com/watch?v=yMB6Nn3w8Ls&t=290s",
   },

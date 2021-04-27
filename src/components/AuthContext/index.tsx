@@ -12,7 +12,7 @@ import { useHistory } from "react-router";
 import routes from "../../constants/routes";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useQueryString } from "../../hooks/useQueryString";
-import { Variation } from "../../pages/OverlaysSettings/interface";
+import { AlertVariation } from "../../interfaces/alerts";
 import { getUserData } from "../../services/user";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
 
@@ -29,7 +29,7 @@ export interface IftttParticleData {
 }
 
 export interface StreamElementData {
-  variations: Variation[];
+  variations: AlertVariation[];
   rowsStructure: {
     rows: string[];
     rowsGroupName?: string | undefined;
