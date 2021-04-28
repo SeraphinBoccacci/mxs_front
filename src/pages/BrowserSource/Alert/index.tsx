@@ -109,16 +109,6 @@ const Alert = ({ alert, data }: AlertProps) => {
     alert.text?.animation?.exit?.offset,
   ]);
 
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      console.log(i + "_");
-      i++;
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const [audioSrc, imageSrc] = useMemo(() => {
     const now = new Date().getTime();
 

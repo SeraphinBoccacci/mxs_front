@@ -93,8 +93,6 @@ const BrowserSource = () => {
 
       const alertDuration = 2500 + (variation.duration || 1) * 1000;
 
-      console.log(alertDuration);
-
       setIsOverlayDisplayed(true);
       setAlertVariation(variation);
       setTransactionData(data);
