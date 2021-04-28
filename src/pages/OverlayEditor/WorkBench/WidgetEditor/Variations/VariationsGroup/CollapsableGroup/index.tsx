@@ -80,7 +80,7 @@ const CollapsableGroup = ({
 
     const updated: VariationGroup = {
       ...groups[updatedGroupIndex],
-      title: groupName || "Unnamed variation group",
+      title: groupName || "Unnamed group",
     };
 
     setGroups([...before, updated, ...after]);
