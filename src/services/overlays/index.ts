@@ -10,20 +10,6 @@ import {
   updateAlertVariation,
 } from "./alerts";
 
-const toggleOverlaysParticle = async (herotag: string, isActive: boolean) => {
-  try {
-    const res = await axiosPost(
-      `${config.apiUrl}/user/overlays/is-active/${herotag}`,
-      {
-        isActive,
-      },
-      { withToken: true }
-    );
-
-    return res.data;
-  } catch (err) {}
-};
-
 const getUserOverlay = async (
   herotag: string,
   overlayId: string
@@ -95,6 +81,5 @@ export {
   getManyUserOverlays,
   getUserAlertVariations,
   getUserOverlay,
-  toggleOverlaysParticle,
   updateAlertVariation,
 };
