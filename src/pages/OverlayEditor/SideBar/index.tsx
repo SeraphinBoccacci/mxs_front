@@ -26,6 +26,16 @@ const SideBar = () => {
     setIsAddWidgetOpenned(true);
   }, [setIsAddWidgetOpenned]);
 
+  const handleSelectAlertWidget = useCallback(() => {
+    if (overlay?.alerts && selectedWidget !== WidgetsKinds.ALERTS) {
+      setSelectedWidget(WidgetsKinds.ALERTS);
+      setWidgetData(overlay?.alerts);
+    } else {
+      setSelectedWidget(null);
+      setWidgetData(null);
+    }
+  }, [setSelectedWidget, setWidgetData, overlay?.alerts, selectedWidget]);
+
   return (
     <Container>
       {!hasAtLeastOneWidget ? (
@@ -45,10 +55,7 @@ const SideBar = () => {
             {overlay?.alerts && (
               <WidgetsItem
                 isFocused={selectedWidget === WidgetsKinds.ALERTS}
-                onClick={() => {
-                  setSelectedWidget(WidgetsKinds.ALERTS);
-                  setWidgetData(overlay.alerts);
-                }}
+                onClick={handleSelectAlertWidget}
               >
                 Alerts
               </WidgetsItem>
