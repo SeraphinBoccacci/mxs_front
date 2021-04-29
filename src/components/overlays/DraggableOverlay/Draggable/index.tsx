@@ -1,6 +1,6 @@
 import React, { createRef, ReactNode, useCallback, useState } from "react";
 
-import { WidgetsKinds } from "../../../services/overlays";
+import { WidgetsKinds } from "../../../../services/overlays";
 import { Background, Container, Content, DraggableContent } from "./style";
 
 interface DraggableProps {
@@ -8,7 +8,7 @@ interface DraggableProps {
   widgetId: string;
   positionData: { offsetTop: number; offsetLeft: number };
   isSelected: boolean;
-  selectWidget: any;
+  selectWidget: (_id: string | undefined) => void;
   onDragEnd: (
     _id: string,
     kind: WidgetsKinds,

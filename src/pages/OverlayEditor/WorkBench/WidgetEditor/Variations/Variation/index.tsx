@@ -9,7 +9,10 @@ import { Draggable } from "react-beautiful-dnd";
 
 import { useErrorHandlingContext } from "../../../../../../components/ErrorHandlingContext";
 import { useQueryString } from "../../../../../../hooks/useQueryString";
-import { deleteAlertVariation } from "../../../../../../services/overlays";
+import {
+  deleteAlertVariation,
+  WidgetsKinds,
+} from "../../../../../../services/overlays";
 import { AlertVariation } from "../../../../../../types/alerts";
 import { invertColor } from "../../../../../../utils/color";
 import { useEditorContext } from "../../../../Context";
@@ -35,6 +38,7 @@ const Variation = ({ variation, index }: TableRowProps) => {
     handleFocusOnVariation,
     hiddenWidgets,
     toggleWidgetVisibility,
+    displayWidget,
   } = useEditorContext();
   const { handleError } = useErrorHandlingContext();
   const [herotag] = useQueryString("herotag");
@@ -73,7 +77,7 @@ const Variation = ({ variation, index }: TableRowProps) => {
                 <Button
                   size="small"
                   onClick={() => {
-                    // removeVariation(variationIndex);
+                    displayWidget(WidgetsKinds.ALERTS, variation);
                   }}
                 >
                   <PlayArrowRoundedIcon

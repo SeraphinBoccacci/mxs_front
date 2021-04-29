@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import { useQueryString } from "../../hooks/useQueryString";
+import { useQueryString } from "../../../hooks/useQueryString";
 import {
   getUserOverlay,
   updateAlertVariation,
   WidgetsKinds,
-} from "../../services/overlays";
-import { EventData } from "../../types/ifttt";
-import { OverlayData } from "../../types/overlays";
+} from "../../../services/overlays";
+import { EventData } from "../../../types/ifttt";
+import { OverlayData } from "../../../types/overlays";
 import Alert from "./Alert";
 import Draggable from "./Draggable";
 import { Container } from "./style";
@@ -19,7 +19,7 @@ const transactionData: EventData = {
   data: "TEST MESSAGE",
 };
 
-const DraggableBrowserSource = () => {
+const DraggableOverlay = () => {
   const { overlayId } = useParams<{
     overlayId: string;
   }>();
@@ -80,7 +80,7 @@ const DraggableBrowserSource = () => {
         return (
           <Draggable
             isSelected={draggedWidget === alertVariation._id}
-            selectWidget={(_id: string) => setDraggedWidget(_id)}
+            selectWidget={(_id?: string) => setDraggedWidget(_id)}
             key={alertVariation._id}
             widgetId={alertVariation._id}
             positionData={positionData}
@@ -98,4 +98,4 @@ const DraggableBrowserSource = () => {
   );
 };
 
-export default DraggableBrowserSource;
+export default DraggableOverlay;

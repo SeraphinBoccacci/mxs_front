@@ -22,6 +22,11 @@ import { Alerts, AlertVariation } from "../../../types/alerts";
 import { OverlayData, VariationGroup } from "../../../types/overlays";
 import VariationModal from "../VariationModal";
 
+interface WidgetToDisplayData {
+  widgetKind: WidgetsKinds;
+  widget: AlertVariation;
+}
+
 interface ContextProps {
   isAddWidgetOpenned: boolean;
   setIsAddWidgetOpenned: Dispatch<SetStateAction<boolean>>;
@@ -38,6 +43,8 @@ interface ContextProps {
   updateVariation: (updatedVariation: AlertVariation) => void;
   toggleWidgetVisibility: (widgetId: string) => void;
   hiddenWidgets: string[];
+  widgetToDisplayData?: WidgetToDisplayData;
+  displayWidget: (widgetKind: WidgetsKinds, widget: AlertVariation) => void;
 }
 
 const Context = createContext<ContextProps>({
@@ -55,6 +62,7 @@ const Context = createContext<ContextProps>({
   updateVariation: () => {},
   toggleWidgetVisibility: () => {},
   hiddenWidgets: [],
+  displayWidget: () => {},
 });
 
 interface EditorContextProviderProps {
@@ -70,6 +78,10 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
   const [widgetData, setWidgetData] = useState<Alerts | null>(null);
   const [overlay, setOverlay] = useState<OverlayData>();
   const [groups, setGroups] = useState<VariationGroup[]>([]);
+  const [
+    widgetToDisplayData,
+    setWidgetToDisplayData,
+  ] = useState<WidgetToDisplayData>();
   const [focusedVariation, setFocusedVariation] = useState<AlertVariation>();
   const [herotag] = useQueryString("herotag");
   const { overlayId } = useParams<{ overlayId: string }>();
@@ -127,6 +139,28 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
     [setHiddenWidgets]
   );
 
+  const displayWidget = useCallback(
+    (widgetKind: WidgetsKinds, widget: AlertVariation) => {
+      if (widgetKind === WidgetsKinds.ALERTS) {
+        const selected = selectedWidget;
+
+        const alertDuration = 2500 + (widget.duration || 1) * 1000;
+
+        setSelectedWidget(null);
+        setWidgetToDisplayData(undefined);
+
+        setTimeout(() => {
+          setWidgetToDisplayData({ widgetKind, widget });
+          setTimeout(() => {
+            setWidgetToDisplayData(undefined);
+            setSelectedWidget(selected);
+          }, alertDuration);
+        }, 500);
+      }
+    },
+    [setSelectedWidget, setWidgetToDisplayData, selectedWidget]
+  );
+
   if (!overlay) return <LoadingScreen></LoadingScreen>;
 
   return (
@@ -147,6 +181,8 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
         updateVariation,
         toggleWidgetVisibility,
         hiddenWidgets,
+        widgetToDisplayData,
+        displayWidget,
       }}
     >
       {children}

@@ -7,15 +7,15 @@ export const Container = styled.div`
   flex: 1;
 `;
 
-export const Iframe = styled.iframe`
+export const PlayableOverlayContainer = styled.div`
   position: absolute;
   height: 1080px;
   width: 1920px;
 
-  z-index: 100;
-
   top: calc(50% - 540px);
   left: calc(50% - 960px);
+
+  overflow: hidden;
 
   background-image: linear-gradient(
       to bottom,
@@ -54,19 +54,15 @@ export const Iframe = styled.iframe`
   }
 `;
 
-export const WorkBenchIframe = styled(Iframe)`
-  z-index: 200;
-`;
-
-export const BrowserSourceContainer = styled.div`
+export const Iframe = styled.iframe`
   position: absolute;
   height: 1080px;
   width: 1920px;
 
+  z-index: 100;
+
   top: calc(50% - 540px);
   left: calc(50% - 960px);
-
-  overflow: hidden;
 
   background-image: linear-gradient(
       to bottom,

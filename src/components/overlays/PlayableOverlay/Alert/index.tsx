@@ -1,14 +1,12 @@
 import { pick } from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
 
-import config from "../../../config/config";
-import { AlertVariation } from "../../../types/alerts";
-import { EventData } from "../../../types/ifttt";
+import config from "../../../../config/config";
+import { AlertVariation } from "../../../../types/alerts";
+import { EventData } from "../../../../types/ifttt";
 import {
   StyledContainer,
   StyledImage,
-  StyledImageContainer,
-  StyledImageScreen,
   StyledParagraph,
   StyledTextContainer,
 } from "./style";
@@ -125,24 +123,23 @@ const Alert = ({ alert, data }: AlertProps) => {
       textPosition={alert.text?.position}
       width={alert.width}
       height={alert.heigth}
+      offsetTop={alert.offsetTop}
+      offsetLeft={alert.offsetLeft}
     >
       {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
       {alert.image?.imagePath && (
-        <StyledImageContainer>
-          <StyledImageScreen></StyledImageScreen>
-          <StyledImage
-            shouldImageExit={shouldImageExit}
-            width={alert?.image?.width}
-            height={alert?.image?.height}
-            isVisible={isImageDisplayed}
-            enterAnimationType={alert?.image?.animation?.enter?.type}
-            enterAnimationDuration={alert?.image?.animation?.enter?.duration}
-            enterAnimationDelay={alert?.image?.animation?.enter?.delay}
-            exitAnimationType={alert?.image?.animation?.exit?.type}
-            exitAnimationDuration={alert?.image?.animation?.exit?.duration}
-            src={imageSrc}
-          ></StyledImage>
-        </StyledImageContainer>
+        <StyledImage
+          shouldImageExit={shouldImageExit}
+          width={alert?.image?.width}
+          height={alert?.image?.height}
+          isVisible={isImageDisplayed}
+          enterAnimationType={alert?.image?.animation?.enter?.type}
+          enterAnimationDuration={alert?.image?.animation?.enter?.duration}
+          enterAnimationDelay={alert?.image?.animation?.enter?.delay}
+          exitAnimationType={alert?.image?.animation?.exit?.type}
+          exitAnimationDuration={alert?.image?.animation?.exit?.duration}
+          src={imageSrc}
+        ></StyledImage>
       )}
       {alert.text?.content && (
         <StyledTextContainer

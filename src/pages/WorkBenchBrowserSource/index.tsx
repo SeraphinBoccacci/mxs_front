@@ -1,6 +1,6 @@
 import React from "react";
 
-import DraggableBrowserSource from "../../components/DraggableBrowserSource";
+import DraggableOverlay from "../../components/overlays/DraggableOverlay";
 
 export interface TransactionData {
   amount: number;
@@ -9,7 +9,7 @@ export interface TransactionData {
 }
 
 const WorkBenchBrowserSource = () => {
-  return <DraggableBrowserSource></DraggableBrowserSource>;
+  return <DraggableOverlay></DraggableOverlay>;
 };
 
 export default WorkBenchBrowserSource;
