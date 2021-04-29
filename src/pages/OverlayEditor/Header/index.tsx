@@ -61,7 +61,7 @@ const Header = () => {
             </div>
           )}
         </Button>
-        <Button disabled={!browserSource} variant="outlined" color="secondary">
+        <Button disabled={!browserSource} variant="contained" color="secondary">
           {browserSource ? (
             <a href={browserSource} target="about:blank">
               Preview
@@ -69,9 +69,6 @@ const Header = () => {
           ) : (
             "Preview"
           )}
-        </Button>
-        <Button variant="contained" color="secondary">
-          Save
         </Button>
       </Buttons>
     </Container>
