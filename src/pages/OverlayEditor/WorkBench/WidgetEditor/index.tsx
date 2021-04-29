@@ -4,11 +4,11 @@ import React, { useCallback } from "react";
 import { useErrorHandlingContext } from "../../../../components/ErrorHandlingContext";
 import { colors } from "../../../../constants/colors";
 import { useQueryString } from "../../../../hooks/useQueryString";
-import { AlertVariation } from "../../../../interfaces/alerts";
 import {
   createAlertVariation,
   createAlertVariationsGroup,
 } from "../../../../services/overlays";
+import { AlertVariation } from "../../../../types/alerts";
 import { useEditorContext } from "../../Context";
 import { Background, Buttons, Container } from "./style";
 import Variations from "./Variations";

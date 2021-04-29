@@ -1,12 +1,10 @@
 import React from "react";
 
 import Input from "../../../../components/Input";
-import Select from "../../../../components/Select";
 import {
   AlertVariationFormData,
   AlertVariationLenses,
-} from "../../../../interfaces/alerts";
-import { variationPositionOptions } from "../constants";
+} from "../../../../types/alerts";
 import { Section, SectionContent, SectionRow, SectionTitle } from "../style";
 
 interface TextParametersProps {
@@ -68,13 +66,6 @@ const VariationParameters = ({
             value={formData?.backgroundColor || "#ffffff"}
             width="8rem"
           ></Input>
-          <Select
-            options={variationPositionOptions}
-            inputName={AlertVariationLenses.position}
-            onChange={handleOnChange}
-            inputLabel="Position"
-            value={formData?.position}
-          ></Select>
           <Input
             inputLabel="Width"
             inputName={AlertVariationLenses.width}
@@ -89,6 +80,24 @@ const VariationParameters = ({
             inputName={AlertVariationLenses.heigth}
             onChange={handleOnChange}
             value={formData?.heigth}
+            type="number"
+            endAdornment="px"
+            width="8rem"
+          ></Input>
+          <Input
+            inputLabel="Top"
+            inputName={AlertVariationLenses.offsetTop}
+            onChange={handleOnChange}
+            value={formData?.offsetTop}
+            type="number"
+            endAdornment="px"
+            width="8rem"
+          ></Input>
+          <Input
+            inputLabel="Left"
+            inputName={AlertVariationLenses.offsetLeft}
+            onChange={handleOnChange}
+            value={formData?.offsetLeft}
             type="number"
             endAdornment="px"
             width="8rem"

@@ -9,11 +9,11 @@ import React, {
 
 import LoadingScreen from "../../../components/LoadingScreen";
 import { useQueryString } from "../../../hooks/useQueryString";
-import { OverlaysData } from "../../../interfaces/overlays";
 import { getManyUserOverlays } from "../../../services/overlays";
+import { OverlayData } from "../../../types/overlays";
 
 interface ContextProps {
-  overlays: OverlaysData[];
+  overlays: OverlayData[];
   getManyOverlays: (herotag: string) => Promise<void>;
 }
 
@@ -27,7 +27,7 @@ interface ContextProviderProps {
 }
 
 const ContextProvider = ({ children }: ContextProviderProps) => {
-  const [overlays, setOverlays] = useState<OverlaysData[]>();
+  const [overlays, setOverlays] = useState<OverlayData[]>();
   const [herotag] = useQueryString("herotag");
 
   const getManyOverlays = useCallback(

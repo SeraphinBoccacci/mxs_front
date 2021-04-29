@@ -10,12 +10,11 @@ import {
 import React, { memo } from "react";
 
 import {
-  AlertPositions,
   AlertVariationLenses,
   EnterAnimationTypes,
   ExitAnimationTypes,
   TextPositions,
-} from "../../interfaces/alerts";
+} from "../../types/alerts";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,12 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface Option {
   label: string;
-  value:
-    | AlertPositions
-    | TextPositions
-    | EnterAnimationTypes
-    | ExitAnimationTypes
-    | string;
+  value: TextPositions | EnterAnimationTypes | ExitAnimationTypes | string;
 }
 
 interface SelectProps {

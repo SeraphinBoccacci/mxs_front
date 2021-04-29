@@ -22,6 +22,8 @@ const chatBotsTwitchTutorial = `${lab}/tutorial/chat-bots-twitch`;
 
 const tippingPage = "/creator/:herotag";
 const browserSourcePage = "/browser-source/herotag/:herotag/overlay/:overlayId";
+const workBenchBrowserSourcePage =
+  "/work-bench-browser-source/herotag/:herotag/overlay/:overlayId";
 const overlayEditorPage = "/editor/overlay/:overlayId";
 
 const routes = {
@@ -43,6 +45,7 @@ const routes = {
   iftttTutorial,
   chatBotsTwitchTutorial,
   browserSourcePage,
+  workBenchBrowserSourcePage,
   overlayEditorPage,
 };
 

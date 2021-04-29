@@ -1,6 +1,6 @@
 import React, { ChangeEvent, createRef, useCallback, useEffect } from "react";
 
-import { AlertVariationLenses } from "../../../../interfaces/alerts";
+import { AlertVariationLenses } from "../../../../types/alerts";
 import { OutlinedTextArea } from "./style";
 
 export type OutlinedTextareaProps = React.DetailedHTMLProps<

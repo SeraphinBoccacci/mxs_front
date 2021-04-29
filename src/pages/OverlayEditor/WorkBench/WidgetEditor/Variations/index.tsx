@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
 import { useQueryString } from "../../../../../hooks/useQueryString";
-import { AlertVariation } from "../../../../../interfaces/alerts";
-import { VariationGroup } from "../../../../../interfaces/overlays";
 import { updateAlertVariationsGroups } from "../../../../../services/overlays/alerts";
+import { AlertVariation } from "../../../../../types/alerts";
+import { VariationGroup } from "../../../../../types/overlays";
 import { useEditorContext } from "../../../Context";
 import {
   Actions,

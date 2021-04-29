@@ -5,7 +5,7 @@ import Select from "../../../../components/Select";
 import {
   AlertVariationFormData,
   AlertVariationLenses,
-} from "../../../../interfaces/alerts";
+} from "../../../../types/alerts";
 import {
   enterAnimationTypesOptions,
   exitAnimationTypesOptions,

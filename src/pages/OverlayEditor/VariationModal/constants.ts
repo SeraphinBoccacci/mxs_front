@@ -1,22 +1,8 @@
 import {
-  AlertPositions,
   EnterAnimationTypes,
   ExitAnimationTypes,
   TextPositions,
-} from "../../../interfaces/alerts";
-
-export const variationPositionOptions = [
-  { label: "None", value: "" },
-  { label: "Top Left", value: AlertPositions.TopLeft },
-  { label: "Top Center", value: AlertPositions.TopCenter },
-  { label: "Top Right", value: AlertPositions.TopRight },
-  { label: "Bottom Left", value: AlertPositions.BottomLeft },
-  { label: "Bottom Center", value: AlertPositions.BottomCenter },
-  { label: "Bottom Right", value: AlertPositions.BottomRight },
-  { label: "Center Left", value: AlertPositions.CenterLeft },
-  { label: "Center Center", value: AlertPositions.CenterCenter },
-  { label: "Center Right", value: AlertPositions.CenterRight },
-];
+} from "../../../types/alerts";
 
 export const textPositionsOptions = [
   { label: "None", value: "" },

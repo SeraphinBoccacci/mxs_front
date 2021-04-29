@@ -7,7 +7,7 @@ import {
   AlertVariation,
   AlertVariationFormData,
   TextStyles,
-} from "../../../interfaces/alerts";
+} from "../../../types/alerts";
 import ImageParameters from "./ImageParameters";
 import SoundParameters from "./SoundParameters";
 import { Modal } from "./style";

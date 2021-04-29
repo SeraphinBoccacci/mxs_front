@@ -4,10 +4,7 @@ import FormatItalicRoundedIcon from "@material-ui/icons/FormatItalicRounded";
 import FormatUnderlinedRoundedIcon from "@material-ui/icons/FormatUnderlinedRounded";
 import React, { ChangeEvent, useCallback } from "react";
 
-import {
-  AlertVariationLenses,
-  TextStyles,
-} from "../../../../../interfaces/alerts";
+import { AlertVariationLenses, TextStyles } from "../../../../../types/alerts";
 import { SectionRow } from "../../style";
 
 interface TextStylesProps {

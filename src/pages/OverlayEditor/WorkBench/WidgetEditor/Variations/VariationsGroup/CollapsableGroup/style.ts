@@ -2,6 +2,7 @@ import { Modal, Paper } from "@material-ui/core";
 import styled from "styled-components";
 
 import { colors } from "../../../../../../../constants";
+import { FlexRow } from "../../../../../../../styles/global";
 
 interface ContainerProps {
   isExpanded: boolean;
@@ -35,6 +36,7 @@ export const VariationGroupHeader = styled.div`
 
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 
   & > button {
     width: 32px;
@@ -46,6 +48,18 @@ export const VariationGroupHeader = styled.div`
 
     transform: scale(0.8);
   }
+`;
+
+export const LeftNode = styled.div`
+  display: flex;
+`;
+
+export const RightNode = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-right: 2rem;
 `;
 
 interface ArrowContainerProps {
@@ -87,15 +101,10 @@ export const DroppableContainer = styled.div<{ isDraggingOver?: boolean }>`
   padding: 0 0.2rem;
 `;
 
-export const StyledModal = styled(Modal)`
+export const StyledConfirmModal = styled(Modal)`
   width: 20rem !important;
-  height: 10rem !important;
+  height: max-content !important;
   margin: auto;
-`;
-
-export const StyledPaper = styled(Paper)`
-  width: 20rem !important;
-  height: 10rem !important;
 `;
 
 export const StyledForm = styled.div`
@@ -105,4 +114,29 @@ export const StyledForm = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+`;
+
+export const StyledEditModal = styled(Modal)`
+  width: 30rem !important;
+  height: max-content !important;
+  margin: auto;
+`;
+
+export const StyledPaper = styled(Paper)`
+  width: 100% !important;
+  height: 100% !important;
+
+  padding: 1.4rem !important;
+`;
+
+export const StyledParagraph = styled.p`
+  text-align: center;
+`;
+
+export const Buttons = styled(FlexRow)`
+  width: 20rem;
+
+  justify-content: space-evenly;
+
+  margin-top: 2rem;
 `;

@@ -1,6 +1,6 @@
 import config from "../../config/config";
-import { AlertVariation } from "../../interfaces/alerts";
-import { VariationGroup } from "../../interfaces/overlays";
+import { AlertVariation } from "../../types/alerts";
+import { VariationGroup } from "../../types/overlays";
 import { axiosDelete, axiosGet, axiosPost, axiosPut } from "../../utils/axios";
 
 const endpoint = `${config.apiUrl}/alerts`;
@@ -98,6 +98,19 @@ export const updateAlertVariationsGroups = async (
       overlayId,
       groups,
     },
+    { withToken: true }
+  );
+
+  return data;
+};
+
+export const deleteAlertsVariationsGroup = async (
+  herotag: string,
+  overlayId: string,
+  groupId: string
+): Promise<void> => {
+  const data = await axiosDelete(
+    `${endpoint}/group/herotag/${herotag}/overlay/${overlayId}/group/${groupId}`,
     { withToken: true }
   );
 

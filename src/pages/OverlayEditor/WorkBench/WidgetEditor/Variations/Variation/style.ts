@@ -75,3 +75,21 @@ export const Actions = styled(Cell)`
   width: 40%;
   height: 2.3rem;
 `;
+
+export const Visibility = styled(Cell)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+
+  width: 5%;
+  height: 2.3rem;
+
+  & > img {
+    height: 100%;
+  }
+
+  cursor: pointer;
+`;

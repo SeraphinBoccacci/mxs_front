@@ -5,7 +5,7 @@ import Upload from "../../../../components/Upload";
 import {
   AlertVariationFormData,
   AlertVariationLenses,
-} from "../../../../interfaces/alerts";
+} from "../../../../types/alerts";
 import { AnimationSettings } from "../AnimationSettings";
 import { Section, SectionContent, SectionRow, SectionTitle } from "../style";
 

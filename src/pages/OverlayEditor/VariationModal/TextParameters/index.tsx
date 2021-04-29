@@ -7,7 +7,7 @@ import {
   AlertVariationFormData,
   AlertVariationLenses,
   TextStyles,
-} from "../../../../interfaces/alerts";
+} from "../../../../types/alerts";
 import { AnimationSettings } from "../AnimationSettings";
 import { textPositionsOptions } from "../constants";
 import {

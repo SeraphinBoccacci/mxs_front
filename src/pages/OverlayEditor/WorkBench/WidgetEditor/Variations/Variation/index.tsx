@@ -2,13 +2,15 @@ import { Button } from "@material-ui/core";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
-import React, { useCallback } from "react";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import React, { useCallback, useMemo } from "react";
 import { Draggable } from "react-beautiful-dnd";
 
 import { useErrorHandlingContext } from "../../../../../../components/ErrorHandlingContext";
 import { useQueryString } from "../../../../../../hooks/useQueryString";
-import { AlertVariation } from "../../../../../../interfaces/alerts";
 import { deleteAlertVariation } from "../../../../../../services/overlays";
+import { AlertVariation } from "../../../../../../types/alerts";
 import { invertColor } from "../../../../../../utils/color";
 import { useEditorContext } from "../../../../Context";
 import {
@@ -18,6 +20,7 @@ import {
   ContainerRow,
   RequiredAmount,
   VariationName,
+  Visibility,
 } from "./style";
 
 interface TableRowProps {
@@ -30,6 +33,8 @@ const Variation = ({ variation, index }: TableRowProps) => {
     overlay,
     getOverlayData,
     handleFocusOnVariation,
+    hiddenWidgets,
+    toggleWidgetVisibility,
   } = useEditorContext();
   const { handleError } = useErrorHandlingContext();
   const [herotag] = useQueryString("herotag");
@@ -44,6 +49,11 @@ const Variation = ({ variation, index }: TableRowProps) => {
       handleError(error.message);
     }
   }, [variation, getOverlayData, herotag, overlay, handleError]);
+
+  const isWidgetVisible = useMemo(
+    () => !hiddenWidgets.some((id) => id === variation._id),
+    [variation, hiddenWidgets]
+  );
 
   return (
     <Draggable draggableId={variation._id} index={index}>
@@ -100,6 +110,27 @@ const Variation = ({ variation, index }: TableRowProps) => {
                 </Button>
               </Cell>
             </Actions>
+            <Visibility
+              onClick={() => {
+                toggleWidgetVisibility(variation._id);
+              }}
+            >
+              {isWidgetVisible ? (
+                <VisibilityIcon
+                  fontSize="small"
+                  style={{
+                    color: invertColor(variation.backgroundColor),
+                  }}
+                ></VisibilityIcon>
+              ) : (
+                <VisibilityOffIcon
+                  fontSize="small"
+                  style={{
+                    color: invertColor(variation.backgroundColor),
+                  }}
+                ></VisibilityOffIcon>
+              )}
+            </Visibility>
           </ContainerRow>
         );
       }}

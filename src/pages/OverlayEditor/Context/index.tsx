@@ -13,13 +13,13 @@ import { useParams } from "react-router";
 import { useErrorHandlingContext } from "../../../components/ErrorHandlingContext";
 import LoadingScreen from "../../../components/LoadingScreen";
 import { useQueryString } from "../../../hooks/useQueryString";
-import { Alerts, AlertVariation } from "../../../interfaces/alerts";
-import { OverlaysData, VariationGroup } from "../../../interfaces/overlays";
 import {
   getUserOverlay,
   updateAlertVariation,
   WidgetsKinds,
 } from "../../../services/overlays";
+import { Alerts, AlertVariation } from "../../../types/alerts";
+import { OverlayData, VariationGroup } from "../../../types/overlays";
 import VariationModal from "../VariationModal";
 
 interface ContextProps {
@@ -30,12 +30,14 @@ interface ContextProps {
   widgetData: Alerts | null;
   setWidgetData: Dispatch<SetStateAction<Alerts | null>>;
   hasAtLeastOneWidget: boolean;
-  overlay?: OverlaysData;
+  overlay?: OverlayData;
   getOverlayData: () => void;
   groups: VariationGroup[];
   setGroups: Dispatch<SetStateAction<VariationGroup[]>>;
   handleFocusOnVariation: (variation: AlertVariation) => void;
   updateVariation: (updatedVariation: AlertVariation) => void;
+  toggleWidgetVisibility: (widgetId: string) => void;
+  hiddenWidgets: string[];
 }
 
 const Context = createContext<ContextProps>({
@@ -51,6 +53,8 @@ const Context = createContext<ContextProps>({
   setGroups: () => {},
   handleFocusOnVariation: () => {},
   updateVariation: () => {},
+  toggleWidgetVisibility: () => {},
+  hiddenWidgets: [],
 });
 
 interface EditorContextProviderProps {
@@ -62,8 +66,9 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
   const [selectedWidget, setSelectedWidget] = useState<WidgetsKinds | null>(
     null
   );
+  const [hiddenWidgets, setHiddenWidgets] = useState<string[]>([]);
   const [widgetData, setWidgetData] = useState<Alerts | null>(null);
-  const [overlay, setOverlay] = useState<OverlaysData>();
+  const [overlay, setOverlay] = useState<OverlayData>();
   const [groups, setGroups] = useState<VariationGroup[]>([]);
   const [focusedVariation, setFocusedVariation] = useState<AlertVariation>();
   const [herotag] = useQueryString("herotag");
@@ -109,6 +114,19 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
     setFocusedVariation(undefined);
   }, [setFocusedVariation]);
 
+  const toggleWidgetVisibility = useCallback(
+    (widgetId: string) => {
+      setHiddenWidgets((prev) => {
+        if (prev.some((id) => id === widgetId)) {
+          return prev.filter((id) => id !== widgetId);
+        } else {
+          return [...prev, widgetId];
+        }
+      });
+    },
+    [setHiddenWidgets]
+  );
+
   if (!overlay) return <LoadingScreen></LoadingScreen>;
 
   return (
@@ -127,6 +145,8 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
         setGroups,
         handleFocusOnVariation,
         updateVariation,
+        toggleWidgetVisibility,
+        hiddenWidgets,
       }}
     >
       {children}

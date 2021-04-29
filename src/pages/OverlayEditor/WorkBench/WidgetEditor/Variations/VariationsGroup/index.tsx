@@ -1,8 +1,8 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 
-import { AlertVariation } from "../../../../../../interfaces/alerts";
-import { VariationGroupKinds } from "../../../../../../interfaces/overlays";
+import { AlertVariation } from "../../../../../../types/alerts";
+import { VariationGroupKinds } from "../../../../../../types/overlays";
 import CollapsableGroup from "./CollapsableGroup";
 
 interface TableRowProps {

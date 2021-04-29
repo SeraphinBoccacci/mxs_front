@@ -5,7 +5,7 @@ import Upload from "../../../../components/Upload";
 import {
   AlertVariationFormData,
   AlertVariationLenses,
-} from "../../../../interfaces/alerts";
+} from "../../../../types/alerts";
 import { Section, SectionContent, SectionRow, SectionTitle } from "../style";
 
 interface TextParametersProps {

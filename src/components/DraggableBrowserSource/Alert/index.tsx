@@ -3,17 +3,19 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import config from "../../../config/config";
 import { AlertVariation } from "../../../types/alerts";
-import { TransactionData } from "..";
+import { EventData } from "../../../types/ifttt";
 import {
   StyledContainer,
   StyledImage,
+  StyledImageContainer,
+  StyledImageScreen,
   StyledParagraph,
   StyledTextContainer,
 } from "./style";
 
 interface AlertProps {
   alert: AlertVariation;
-  data: TransactionData;
+  data: EventData;
 }
 
 const Alert = ({ alert, data }: AlertProps) => {
@@ -123,23 +125,24 @@ const Alert = ({ alert, data }: AlertProps) => {
       textPosition={alert.text?.position}
       width={alert.width}
       height={alert.heigth}
-      offsetTop={alert.offsetTop}
-      offsetLeft={alert.offsetLeft}
     >
       {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
       {alert.image?.imagePath && (
-        <StyledImage
-          shouldImageExit={shouldImageExit}
-          width={alert?.image?.width}
-          height={alert?.image?.height}
-          isVisible={isImageDisplayed}
-          enterAnimationType={alert?.image?.animation?.enter?.type}
-          enterAnimationDuration={alert?.image?.animation?.enter?.duration}
-          enterAnimationDelay={alert?.image?.animation?.enter?.delay}
-          exitAnimationType={alert?.image?.animation?.exit?.type}
-          exitAnimationDuration={alert?.image?.animation?.exit?.duration}
-          src={imageSrc}
-        ></StyledImage>
+        <StyledImageContainer>
+          <StyledImageScreen></StyledImageScreen>
+          <StyledImage
+            shouldImageExit={shouldImageExit}
+            width={alert?.image?.width}
+            height={alert?.image?.height}
+            isVisible={isImageDisplayed}
+            enterAnimationType={alert?.image?.animation?.enter?.type}
+            enterAnimationDuration={alert?.image?.animation?.enter?.duration}
+            enterAnimationDelay={alert?.image?.animation?.enter?.delay}
+            exitAnimationType={alert?.image?.animation?.exit?.type}
+            exitAnimationDuration={alert?.image?.animation?.exit?.duration}
+            src={imageSrc}
+          ></StyledImage>
+        </StyledImageContainer>
       )}
       {alert.text?.content && (
         <StyledTextContainer
@@ -156,7 +159,7 @@ const Alert = ({ alert, data }: AlertProps) => {
           {alert.text.content
             .replaceAll("{{herotag}}", data.herotag)
             .replaceAll("{{amount}}", String(data.amount))
-            .replaceAll("{{message}}", data.message)
+            .replaceAll("{{message}}", data.data)
             .split("\n")
             .map((paragraph, index) => (
               <StyledParagraph

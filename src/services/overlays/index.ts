@@ -1,5 +1,5 @@
 import config from "../../config/config";
-import { OverlaysData } from "../../interfaces/overlays";
+import { OverlayData } from "../../types/overlays";
 import { axiosDelete, axiosGet, axiosPost } from "../../utils/axios";
 import {
   createAlertVariation,
@@ -13,7 +13,7 @@ import {
 const getUserOverlay = async (
   herotag: string,
   overlayId: string
-): Promise<OverlaysData | null> => {
+): Promise<OverlayData | null> => {
   const res = await axiosGet(
     `${config.apiUrl}/overlays/herotag/${herotag}/overlay/${overlayId}`
   );
@@ -21,9 +21,7 @@ const getUserOverlay = async (
   return res || null;
 };
 
-const getManyUserOverlays = async (
-  herotag: string
-): Promise<OverlaysData[]> => {
+const getManyUserOverlays = async (herotag: string): Promise<OverlayData[]> => {
   const res = await axiosGet(`${config.apiUrl}/overlays/herotag/${herotag}`, {
     withToken: true,
   });

@@ -9,6 +9,7 @@ import TwitchIcon from "../../../assets/icons/labNavIcons/Twitch";
 import routes from "../../../constants/routes";
 import { useHistoryWithQueryString } from "../../../hooks/useHistoryWithQuerystring";
 import { useAuth } from "../../AuthContext";
+import EventTriggerer from "../../EventTriggerer";
 import { RightNode, StyledList, StyledNav } from "./style";
 import TabItem from "./TabItem";
 
@@ -80,6 +81,7 @@ const LabNav = () => {
         {sections.map((section) => (
           <TabItem key={section.id} {...section}></TabItem>
         ))}
+        <EventTriggerer></EventTriggerer>
       </StyledList>
       <RightNode>
         <Button onClick={handleGoToHome}>Home</Button>

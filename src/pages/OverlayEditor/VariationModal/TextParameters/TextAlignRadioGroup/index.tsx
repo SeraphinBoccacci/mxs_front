@@ -4,7 +4,7 @@ import FormatAlignLeftRoundedIcon from "@material-ui/icons/FormatAlignLeftRounde
 import FormatAlignRightRoundedIcon from "@material-ui/icons/FormatAlignRightRounded";
 import React, { ChangeEvent, useCallback } from "react";
 
-import { AlertVariationLenses } from "../../../../../interfaces/alerts";
+import { AlertVariationLenses } from "../../../../../types/alerts";
 import { SectionRow } from "../../style";
 
 interface TextAlignRadioGroupProps {

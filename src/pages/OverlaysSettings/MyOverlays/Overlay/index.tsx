@@ -4,13 +4,13 @@ import React, { useCallback } from "react";
 
 import { useHistoryWithQueryString } from "../../../../hooks/useHistoryWithQuerystring";
 import { useQueryString } from "../../../../hooks/useQueryString";
-import { OverlaysData } from "../../../../interfaces/overlays";
 import { deleteOverlay } from "../../../../services/overlays";
+import { OverlayData } from "../../../../types/overlays";
 import { useOverlayContext } from "../../Context";
 import { Buttons, Container, Image, ImageContainer } from "./style";
 
 interface OverlayProps {
-  overlay: OverlaysData;
+  overlay: OverlayData;
 }
 
 const Overlay = ({ overlay }: OverlayProps) => {

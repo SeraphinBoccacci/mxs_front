@@ -1,7 +1,7 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 
-import { AlertVariation } from "../../../../../../interfaces/alerts";
+import { AlertVariation } from "../../../../../../types/alerts";
 import { useEditorContext } from "../../../../Context";
 import VariationsGroup from "../VariationsGroup";
 import { TableBody as StyledTableBody } from "./style";

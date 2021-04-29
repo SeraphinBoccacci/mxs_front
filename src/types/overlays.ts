@@ -12,17 +12,16 @@ export interface VariationGroup {
   kind: VariationGroupKinds;
 }
 
-export interface OverlaysData {
+export interface OverlayData {
   _id: string;
+  isActive: boolean;
+  rowsStructure?: {
+    rows: string[];
+    rowsGroupName?: string | undefined;
+  }[];
   generatedLink: string;
   alerts: {
     variations: AlertVariation[];
     groups: VariationGroup[];
   };
-  // donationBar: { type: String, required: false },
-  // particlesFalls: {
-  //   variations: { type: String, required: false },
-  //   structure: { type: String, required: false },
-  // },
-  // topDonators: { type: String, required: false },
 }

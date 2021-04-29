@@ -3,9 +3,9 @@ import { useParams } from "react-router";
 import io from "socket.io-client";
 
 import config from "../../config/config";
-import { AlertVariation } from "../../interfaces/alerts";
-import { OverlaysData } from "../../interfaces/overlays";
 import { getUserOverlay } from "../../services/overlays";
+import { AlertVariation } from "../../types/alerts";
+import { OverlayData } from "../../types/overlays";
 import Alert from "./Alert";
 
 export interface TransactionData {
@@ -62,7 +62,7 @@ const BrowserSource = () => {
     overlayId: string;
     herotag: string;
   }>();
-  const [overlay, setOverlay] = useState<OverlaysData>();
+  const [overlay, setOverlay] = useState<OverlayData>();
   const [transactionData, setTransactionData] = useState<TransactionData>();
   const [isOverlayDisplayed, setIsOverlayDisplayed] = useState(false);
   const [alertVariation, setAlertVariation] = useState<AlertVariation>();

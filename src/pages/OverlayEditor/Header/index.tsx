@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import KeyboardBackspaceRoundedIcon from "@material-ui/icons/KeyboardBackspaceRounded";
 import React, { useCallback, useState } from "react";
 
+import EventTriggerer from "../../../components/EventTriggerer";
 import config from "../../../config/config";
 import routes from "../../../constants/routes";
 import { useHistoryWithQueryString } from "../../../hooks/useHistoryWithQuerystring";
@@ -33,12 +34,16 @@ const Header = () => {
 
   return (
     <Container>
-      <Button>
-        <KeyboardBackspaceRoundedIcon
-          onClick={handleGoToMyOverlays}
-          fontSize="large"
-        ></KeyboardBackspaceRoundedIcon>
-      </Button>
+      <Buttons>
+        <Button>
+          <KeyboardBackspaceRoundedIcon
+            onClick={handleGoToMyOverlays}
+            fontSize="large"
+          ></KeyboardBackspaceRoundedIcon>
+        </Button>
+        <EventTriggerer></EventTriggerer>
+      </Buttons>
+
       <Buttons>
         <Button
           disabled={!browserSource}
