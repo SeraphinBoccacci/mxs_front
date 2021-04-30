@@ -1,11 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
-import { useQueryString } from "../../../../../hooks/useQueryString";
-import { updateAlertVariationsGroups } from "../../../../../services/overlays/alerts";
-import { AlertVariation } from "../../../../../types/alerts";
 import { VariationGroup } from "../../../../../types/overlays";
 import { useEditorContext } from "../../../Context";
+import { useWidgetVariationsContext } from "../WidgetVariationsContext";
 import {
   Actions,
   Chances,
@@ -39,19 +37,12 @@ const updateBetween = (
 };
 
 const Variations = () => {
-  const [herotag] = useQueryString("herotag");
-  const { overlay, setGroups, groups } = useEditorContext();
-  const [sortedVariations, setSortedVariations] = useState<AlertVariation[]>(
-    overlay?.alerts.variations || []
-  );
-
-  useEffect(() => {
-    setSortedVariations(overlay?.alerts.variations || []);
-  }, [overlay?.alerts.variations]);
+  const { updateVariationsGroup } = useWidgetVariationsContext();
+  const { setGroups, groups } = useEditorContext();
 
   const handleOnDragEnd = useCallback(
     async (result) => {
-      if (!overlay || !result.destination) return;
+      if (!result.destination) return;
 
       if (result.type === "variation") {
         const sourceGroupIndex = groups.findIndex(
@@ -95,7 +86,7 @@ const Variations = () => {
           updateBetween(sourceGroupIndex, updatedSourceGroup, groups)
         );
 
-        updateAlertVariationsGroups(herotag, overlay?._id, updatedGroups);
+        updateVariationsGroup(updatedGroups);
 
         setGroups(updatedGroups);
 
@@ -116,14 +107,14 @@ const Variations = () => {
           updatedSource
         ) as VariationGroup[];
 
-        updateAlertVariationsGroups(herotag, overlay?._id, updatedDestination);
+        updateVariationsGroup(updatedDestination);
 
         setGroups(updatedDestination);
 
         return;
       }
     },
-    [herotag, groups, overlay, setGroups]
+    [groups, setGroups, updateVariationsGroup]
   );
 
   return (
@@ -135,7 +126,7 @@ const Variations = () => {
           <Chances>Apparition Probabilities</Chances>
           <Actions>Actions</Actions>
         </Header>
-        <VariationsList variations={sortedVariations}></VariationsList>
+        <VariationsList></VariationsList>
       </Container>
     </DragDropContext>
   );

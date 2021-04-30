@@ -1,5 +1,13 @@
 import { AlertVariation } from "./alerts";
 
+export interface WidgetVariation {
+  _id: string;
+  name: string;
+  backgroundColor: string;
+  chances?: number;
+  requiredAmount?: number;
+}
+
 export enum VariationGroupKinds {
   DEFAULT = "DEFAULT",
   CUSTOM = "CUSTOM",

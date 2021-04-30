@@ -1,17 +1,15 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 
-import { AlertVariation } from "../../../../../../types/alerts";
+import { WidgetVariation } from "../../../../../../types/overlays";
 import { useEditorContext } from "../../../../Context";
+import { useWidgetVariationsContext } from "../../WidgetVariationsContext";
 import VariationsGroup from "../VariationsGroup";
 import { TableBody as StyledTableBody } from "./style";
 
-interface TableBodyProps {
-  variations: AlertVariation[];
-}
-
-const TableBody = ({ variations }: TableBodyProps) => {
+const VariationsList = () => {
   const { groups } = useEditorContext();
+  const { variations } = useWidgetVariationsContext();
 
   if (!groups) return null;
 
@@ -36,7 +34,7 @@ const TableBody = ({ variations }: TableBodyProps) => {
                     .map((variationId) =>
                       variations.find(({ _id }) => variationId === _id)
                     )
-                    .filter(Boolean) as AlertVariation[]
+                    .filter(Boolean) as WidgetVariation[]
                 }
               ></VariationsGroup>
             );
@@ -48,4 +46,4 @@ const TableBody = ({ variations }: TableBodyProps) => {
   );
 };
 
-export default TableBody;
+export default VariationsList;

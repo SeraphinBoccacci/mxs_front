@@ -4,18 +4,13 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Draggable } from "react-beautiful-dnd";
 
-import { useErrorHandlingContext } from "../../../../../../components/ErrorHandlingContext";
-import { useQueryString } from "../../../../../../hooks/useQueryString";
-import {
-  deleteAlertVariation,
-  WidgetsKinds,
-} from "../../../../../../services/overlays";
-import { AlertVariation } from "../../../../../../types/alerts";
+import { WidgetVariation } from "../../../../../../types/overlays";
 import { invertColor } from "../../../../../../utils/color";
 import { useEditorContext } from "../../../../Context";
+import { useWidgetVariationsContext } from "../../WidgetVariationsContext";
 import {
   Actions,
   Cell,
@@ -26,33 +21,21 @@ import {
   Visibility,
 } from "./style";
 
-interface TableRowProps {
-  variation: AlertVariation;
+interface VariationProps {
+  variation: WidgetVariation;
   index: number;
 }
 
-const Variation = ({ variation, index }: TableRowProps) => {
+const Variation = ({ variation, index }: VariationProps) => {
   const {
-    overlay,
-    getOverlayData,
     handleFocusOnVariation,
     hiddenWidgets,
     toggleWidgetVisibility,
     displayWidget,
   } = useEditorContext();
-  const { handleError } = useErrorHandlingContext();
-  const [herotag] = useQueryString("herotag");
 
-  const removeVariation = useCallback(async () => {
-    try {
-      if (overlay)
-        await deleteAlertVariation(herotag, overlay?._id, variation._id);
-
-      getOverlayData();
-    } catch (error) {
-      handleError(error.message);
-    }
-  }, [variation, getOverlayData, herotag, overlay, handleError]);
+  const { deleteVariation } = useWidgetVariationsContext();
+  const { widgetKind } = useWidgetVariationsContext();
 
   const isWidgetVisible = useMemo(
     () => !hiddenWidgets.some((id) => id === variation._id),
@@ -77,7 +60,7 @@ const Variation = ({ variation, index }: TableRowProps) => {
                 <Button
                   size="small"
                   onClick={() => {
-                    displayWidget(WidgetsKinds.ALERTS, variation);
+                    if (widgetKind) displayWidget(widgetKind, variation);
                   }}
                 >
                   <PlayArrowRoundedIcon
@@ -104,7 +87,10 @@ const Variation = ({ variation, index }: TableRowProps) => {
                 </Button>
               </Cell>
               <Cell>
-                <Button size="small" onClick={removeVariation}>
+                <Button
+                  size="small"
+                  onClick={() => deleteVariation(variation._id)}
+                >
                   <DeleteRoundedIcon
                     fontSize="small"
                     style={{

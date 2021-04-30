@@ -7,17 +7,13 @@ import { DraggableProvided, Droppable } from "react-beautiful-dnd";
 
 import { useErrorHandlingContext } from "../../../../../../../components/ErrorHandlingContext";
 import Input from "../../../../../../../components/Input";
-import { useQueryString } from "../../../../../../../hooks/useQueryString";
-import {
-  deleteAlertsVariationsGroup,
-  updateAlertVariationsGroups,
-} from "../../../../../../../services/overlays/alerts";
-import { AlertVariation } from "../../../../../../../types/alerts";
 import {
   VariationGroup,
   VariationGroupKinds,
+  WidgetVariation,
 } from "../../../../../../../types/overlays";
 import { useEditorContext } from "../../../../../Context";
+import { useWidgetVariationsContext } from "../../../WidgetVariationsContext";
 import Variation from "../../Variation";
 import {
   ArrowContainer,
@@ -40,7 +36,7 @@ interface CollapsableGroupProps {
   variationGroupTitle: string;
   variationGroupId: string;
   variationGroupKind: VariationGroupKinds;
-  variations: AlertVariation[];
+  variations: WidgetVariation[];
 }
 
 const CollapsableGroup = ({
@@ -50,9 +46,12 @@ const CollapsableGroup = ({
   variationGroupKind,
   variations,
 }: CollapsableGroupProps) => {
-  const { groups, setGroups, overlay, getOverlayData } = useEditorContext();
-  const [herotag] = useQueryString("herotag");
+  const { groups, setGroups } = useEditorContext();
   const { handleError } = useErrorHandlingContext();
+  const {
+    deleteVariationsGroup,
+    updateVariationsGroup,
+  } = useWidgetVariationsContext();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isModalEditOpenned, setIsModalEditOpenned] = useState(false);
   const [isModalConfirmOpenned, setIsModalConfirmOpenned] = useState(false);
@@ -87,8 +86,6 @@ const CollapsableGroup = ({
 
   const handleOnSubmit = useCallback(() => {
     try {
-      if (!overlay) return;
-
       const updatedGroupIndex = groups.findIndex(
         ({ _id }) => _id === variationGroupId
       );
@@ -105,11 +102,7 @@ const CollapsableGroup = ({
       };
 
       setGroups([...before, updated, ...after]);
-      updateAlertVariationsGroups(herotag, overlay?._id, [
-        ...before,
-        updated,
-        ...after,
-      ]);
+      updateVariationsGroup([...before, updated, ...after]);
     } catch (error) {
       handleError(error.message);
     } finally {
@@ -120,32 +113,15 @@ const CollapsableGroup = ({
     groups,
     variationGroupId,
     groupName,
-    overlay,
-    herotag,
+    updateVariationsGroup,
     handleError,
     closeEditModal,
   ]);
 
-  const deleteVariationsGroup = useCallback(async () => {
-    try {
-      if (!overlay) return;
-
-      await deleteAlertsVariationsGroup(herotag, overlay._id, variationGroupId);
-
-      await getOverlayData();
-    } catch (error) {
-      handleError(error.message);
-    } finally {
-      closeConfirmModal();
-    }
-  }, [
-    getOverlayData,
-    overlay,
-    herotag,
-    variationGroupId,
-    handleError,
-    closeConfirmModal,
-  ]);
+  const handleDeleteVariationsGroup = useCallback(async () => {
+    await deleteVariationsGroup(variationGroupId);
+    closeConfirmModal();
+  }, [variationGroupId, deleteVariationsGroup, closeConfirmModal]);
 
   return (
     <>
@@ -205,7 +181,7 @@ const CollapsableGroup = ({
               <Button
                 color="secondary"
                 variant="contained"
-                onClick={deleteVariationsGroup}
+                onClick={handleDeleteVariationsGroup}
               >
                 Delete
               </Button>

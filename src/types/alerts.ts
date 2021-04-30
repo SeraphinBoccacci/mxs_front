@@ -1,3 +1,5 @@
+import { WidgetVariation } from "./overlays";
+
 export interface Sound {
   soundPath?: string;
   soundDelay?: string;
@@ -30,13 +32,8 @@ export interface Text {
   };
 }
 
-export interface AlertVariation {
-  _id: string;
-  name: string;
-  backgroundColor: string;
+export interface AlertVariation extends WidgetVariation {
   duration?: number;
-  chances?: number;
-  requiredAmount?: number;
   width?: number;
   heigth?: number;
   offsetTop?: number;

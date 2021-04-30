@@ -111,14 +111,11 @@ const Alert = ({ alert, data }: AlertProps) => {
     alert.text?.animation?.exit?.offset,
   ]);
 
-  const [audioSrc, imageSrc] = useMemo(() => {
+  const imageSrc = useMemo(() => {
     const now = new Date().getTime();
 
-    return [
-      `${config.url}/audios/${`${alert.sound?.soundPath}?ts=${now}`}`,
-      `${config.url}/images/${`${alert.image?.imagePath}?ts=${now}`}`,
-    ];
-  }, [alert.sound, alert.image]);
+    return `${config.url}/images/${`${alert.image?.imagePath}?ts=${now}`}`;
+  }, [alert.image]);
 
   return (
     <StyledContainer
@@ -126,7 +123,6 @@ const Alert = ({ alert, data }: AlertProps) => {
       width={alert.width}
       height={alert.heigth}
     >
-      {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
       {alert.image?.imagePath && (
         <StyledImageContainer>
           <StyledImageScreen></StyledImageScreen>

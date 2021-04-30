@@ -15,7 +15,7 @@ import { ModalContent, ModalHeader } from "./style";
 import TextParameters from "./TextParameters";
 import VariationParameters from "./VariationParameters";
 
-interface VariationModalProps {
+interface AlertVariationEditionModalProps {
   variationData?: AlertVariation;
   updateVariation?: (updatedVariation: AlertVariation) => void;
   onClose: () => void;
@@ -53,11 +53,11 @@ const formatVariation = (variation: AlertVariation | null) => {
   return Object.fromEntries(nestedFields(variation, ""));
 };
 
-const VariationModal = ({
+const AlertVariationEditionModal = ({
   variationData,
   updateVariation,
   onClose,
-}: VariationModalProps) => {
+}: AlertVariationEditionModalProps) => {
   const [formData, setFormData] = useForm<AlertVariationFormData>({});
 
   useEffect(() => {
@@ -116,4 +116,4 @@ const VariationModal = ({
   );
 };
 
-export default VariationModal;
+export default AlertVariationEditionModal;

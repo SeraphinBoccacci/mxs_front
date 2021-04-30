@@ -2,10 +2,21 @@ import React, { useMemo } from "react";
 
 import PlayableOverlay from "../../../components/overlays/PlayableOverlay";
 import { useQueryString } from "../../../hooks/useQueryString";
+import {
+  createAlertVariation,
+  createAlertVariationsGroup,
+  deleteAlertVariation,
+  updateAlertVariation,
+  WidgetsKinds,
+} from "../../../services/overlays";
+import {
+  deleteAlertsVariationsGroup,
+  updateAlertVariationsGroups,
+} from "../../../services/overlays/alerts";
 import { useEditorContext } from "../Context";
 import AddWidget from "./AddWidget";
 import { Container, Iframe, PlayableOverlayContainer } from "./style";
-import WidgetEditor from "./WidgetEditor";
+import WidgetVariations from "./WidgetVariations";
 
 const WorkBench = () => {
   const [herotag] = useQueryString("herotag");
@@ -31,7 +42,20 @@ const WorkBench = () => {
   // PlayableOverlay
   return (
     <Container>
-      {!!selectedWidget && <WidgetEditor></WidgetEditor>}
+      {!!overlay && selectedWidget === WidgetsKinds.ALERTS && (
+        <WidgetVariations
+          overlayId={overlay._id}
+          variations={overlay.alerts.variations}
+          widgetKind={selectedWidget}
+          createVariation={createAlertVariation}
+          updateVariation={updateAlertVariation}
+          deleteVariation={deleteAlertVariation}
+          createVariationsGroup={createAlertVariationsGroup}
+          updateVariationsGroup={updateAlertVariationsGroups}
+          deleteVariationsGroup={deleteAlertsVariationsGroup}
+        ></WidgetVariations>
+      )}
+
       {isAddWidgetOpenned && <AddWidget></AddWidget>}
 
       {!!widgetToDisplayData ? (

@@ -20,7 +20,7 @@ import {
 } from "../../../services/overlays";
 import { Alerts, AlertVariation } from "../../../types/alerts";
 import { OverlayData, VariationGroup } from "../../../types/overlays";
-import VariationModal from "../VariationModal";
+import AlertVariationEditionModal from "../AlertVariationEditionModal";
 
 interface WidgetToDisplayData {
   widgetKind: WidgetsKinds;
@@ -186,11 +186,11 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
       }}
     >
       {children}
-      <VariationModal
+      <AlertVariationEditionModal
         onClose={handleClose}
         updateVariation={updateVariation}
         variationData={focusedVariation}
-      ></VariationModal>
+      ></AlertVariationEditionModal>
     </Context.Provider>
   );
 };
