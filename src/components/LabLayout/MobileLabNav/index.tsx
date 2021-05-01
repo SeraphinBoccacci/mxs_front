@@ -9,6 +9,7 @@ import TwitchIcon from "../../../assets/icons/labNavIcons/Twitch";
 import routes from "../../../constants/routes";
 import { useHistoryWithQueryString } from "../../../hooks/useHistoryWithQuerystring";
 import { useAuth } from "../../AuthContext";
+import EventTriggerer from "../../EventTriggerer";
 import MenuBurger from "../../MenuBurger";
 import {
   BottomNode,
@@ -118,6 +119,7 @@ const MobileLabNav = () => {
                 )}
               </StyledListItem>
             ))}
+            <EventTriggerer></EventTriggerer>
           </StyledList>
           <BottomNode>
             <Button size="large" onClick={handleGoToHome}>

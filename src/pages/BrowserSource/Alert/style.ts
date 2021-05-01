@@ -1,12 +1,11 @@
 import styled, { css, keyframes } from "styled-components";
 
 import {
-  AlertPositions,
   EnterAnimationTypes,
   ExitAnimationTypes,
   TextPositions,
   TextStyles,
-} from "../../../interfaces/alerts";
+} from "../../../types/alerts";
 
 const slideLeftEnter = keyframes`
     from {
@@ -130,54 +129,6 @@ const exitAnimationMapper = (animation?: ExitAnimationTypes) => {
   return mapper[animation || ExitAnimationTypes.slideLeft];
 };
 
-const positionMapper = (position?: AlertPositions) => {
-  const mapper = {
-    [AlertPositions.BottomCenter]: css`
-      bottom: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-    `,
-    [AlertPositions.BottomLeft]: css`
-      bottom: 1rem;
-      left: 1rem;
-    `,
-    [AlertPositions.BottomRight]: css`
-      bottom: 1rem;
-      right: 1rem;
-    `,
-    [AlertPositions.CenterCenter]: css`
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-    `,
-    [AlertPositions.CenterLeft]: css`
-      top: 50%;
-      left: 1rem;
-      transform: translateY(-50%);
-    `,
-    [AlertPositions.CenterRight]: css`
-      top: 50%;
-      right: 1rem;
-      transform: translateY(-50%);
-    `,
-    [AlertPositions.TopCenter]: css`
-      top: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-    `,
-    [AlertPositions.TopLeft]: css`
-      top: 1rem;
-      left: 1rem;
-    `,
-    [AlertPositions.TopRight]: css`
-      top: 1rem;
-      right: 1rem;
-    `,
-  };
-
-  return mapper[position || AlertPositions.BottomRight];
-};
-
 const displayMapper = (position?: TextPositions) => {
   const mapper = {
     [TextPositions.over]: css`
@@ -216,21 +167,25 @@ const displayMapper = (position?: TextPositions) => {
 };
 
 interface StyledContainerProps {
-  position?: AlertPositions;
   textPosition?: TextPositions;
   width?: number;
   height?: number;
+  offsetTop?: number;
+  offsetLeft?: number;
 }
 
 export const StyledContainer = styled.div<StyledContainerProps>`
   position: absolute;
   width: ${({ width }) => (width ? `${width}px` : "max-content")};
   height: ${({ height }) => (height ? `${height}px` : "max-content")};
+
+  top: ${({ offsetTop }) => `${offsetTop}px`};
+  left: ${({ offsetLeft }) => `${offsetLeft}px`};
+
   padding: 0;
   overflow: hidden;
   font-family: "Noto Sans JP", sans-serif;
 
-  ${({ position }) => positionMapper(position)};
   ${({ textPosition }) => displayMapper(textPosition)};
 `;
 

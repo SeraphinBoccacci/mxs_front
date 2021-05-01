@@ -1,6 +1,6 @@
 import React, { ChangeEvent, createRef } from "react";
 
-import { AlertVariationLenses } from "../../../../interfaces/alerts";
+import { AlertVariationLenses } from "../../../../types/alerts";
 import { OutlinedInput as StyledOutlinedInput } from "./style";
 
 export type OutlinedInputProps = React.DetailedHTMLProps<

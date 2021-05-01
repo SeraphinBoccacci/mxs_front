@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import styled from "styled-components";
 
 import { colors } from "../../../constants";
@@ -42,4 +43,8 @@ export const Buttons = styled.div`
     font-size: 0.9rem !important;
     line-height: 0.9rem;
   }
+`;
+
+export const CopyButton = styled(Button)`
+  width: 10rem;
 `;

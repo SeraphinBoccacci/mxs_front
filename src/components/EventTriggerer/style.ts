@@ -1,4 +1,24 @@
+import { Button, Modal, Paper } from "@material-ui/core";
 import styled from "styled-components";
+
+export const StyledModal = styled(Modal)`
+  width: max-content;
+  height: max-content;
+  margin: auto;
+`;
+
+export const StyledPaper = styled(Paper)`
+  width: 33rem;
+
+  padding: 2rem;
+`;
+
+export const StyledButton = styled(Button)`
+  height: 2rem;
+  line-height: 2rem;
+
+  margin: auto 0 auto 2rem !important;
+`;
 
 export const Form = styled.form`
   height: max-content;

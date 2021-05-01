@@ -5,7 +5,6 @@ import React from "react";
 import ActivationSwitch from "../../components/ActivationSwitch";
 import { AuthContext } from "../../components/AuthContext";
 import { ErrorHandlingContext } from "../../components/ErrorHandlingContext";
-import EventTriggerer from "../../components/EventTriggerer";
 import Input from "../../components/Input";
 import LabLayout from "../../components/LabLayout";
 import { Tutorial } from "../../components/Tutorial";
@@ -154,8 +153,6 @@ const IftttSettings = () => {
             </Button>
           </IftttParticleForm>
         </ContentContainer>
-
-        <EventTriggerer></EventTriggerer>
       </IftttParticleContainer>
     </LabLayout>
   );

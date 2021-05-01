@@ -1,11 +1,6 @@
 import config from "../config/config";
+import { EventData } from "../types/ifttt";
 import { axiosGet, axiosPost } from "../utils/axios";
-
-export interface EventData {
-  herotag: string;
-  amount: string;
-  data: string;
-}
 
 export const toggleStreamingActivation = async (
   herotag: string,

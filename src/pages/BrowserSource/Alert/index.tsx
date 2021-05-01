@@ -2,7 +2,7 @@ import { pick } from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
 
 import config from "../../../config/config";
-import { AlertVariation } from "../../../interfaces/alerts";
+import { AlertVariation } from "../../../types/alerts";
 import { TransactionData } from "..";
 import {
   StyledContainer,
@@ -109,16 +109,6 @@ const Alert = ({ alert, data }: AlertProps) => {
     alert.text?.animation?.exit?.offset,
   ]);
 
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      console.log(i + "_");
-      i++;
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const [audioSrc, imageSrc] = useMemo(() => {
     const now = new Date().getTime();
 
@@ -130,10 +120,11 @@ const Alert = ({ alert, data }: AlertProps) => {
 
   return (
     <StyledContainer
-      position={alert.position}
       textPosition={alert.text?.position}
       width={alert.width}
       height={alert.heigth}
+      offsetTop={alert.offsetTop}
+      offsetLeft={alert.offsetLeft}
     >
       {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
       {alert.image?.imagePath && (

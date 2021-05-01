@@ -1,0 +1,184 @@
+import { pick } from "lodash";
+import React, { useEffect, useMemo, useState } from "react";
+
+import config from "../../../../config/config";
+import { AlertVariation } from "../../../../types/alerts";
+import { EventData } from "../../../../types/ifttt";
+import {
+  StyledContainer,
+  StyledImage,
+  StyledImageContainer,
+  StyledImageScreen,
+  StyledParagraph,
+  StyledTextContainer,
+} from "./style";
+
+interface AlertProps {
+  alert: AlertVariation;
+  data: EventData;
+}
+
+const Alert = ({ alert, data }: AlertProps) => {
+  const [shouldImageExit, setShouldImageExit] = useState(false);
+  const [isImageDisplayed, setIsImageDisplayed] = useState(false);
+  const [shouldTextExit, setShouldTextExit] = useState(false);
+  const [isTextDisplayed, setIsTextDisplayed] = useState(false);
+
+  useEffect(() => {
+    let enterTimeout: NodeJS.Timeout;
+    if (alert.image?.animation?.enter?.delay) {
+      const enterDuration = alert.image?.animation?.enter?.delay * 1000;
+
+      enterTimeout = setTimeout(() => {
+        setIsImageDisplayed(true);
+      }, enterDuration);
+    } else {
+      setIsImageDisplayed(true);
+    }
+
+    const timeBeforeExitProcessStart =
+      ((alert.duration || 0) -
+        (alert.image?.animation?.exit?.duration || 0) -
+        (alert.image?.animation?.exit?.offset || 0)) *
+      1000;
+
+    const exitDuration = (alert.image?.animation?.exit?.duration || 0) * 1000;
+
+    const exitTimeout = setTimeout(() => {
+      setShouldImageExit(true);
+
+      setTimeout(() => {
+        setIsImageDisplayed(false);
+      }, exitDuration);
+    }, timeBeforeExitProcessStart);
+
+    //clean up
+    return () => {
+      clearTimeout(exitTimeout);
+
+      if (enterTimeout) clearTimeout(enterTimeout);
+    };
+  }, [
+    setShouldImageExit,
+    setIsImageDisplayed,
+    alert.duration,
+    alert.image?.animation?.exit?.duration,
+    alert.image?.animation?.enter?.delay,
+    alert.image?.animation?.exit?.offset,
+  ]);
+
+  useEffect(() => {
+    let enterTimeout: NodeJS.Timeout;
+
+    if (alert.text?.animation?.enter?.delay) {
+      const enterDuration = alert.text?.animation?.enter?.delay * 1000;
+
+      enterTimeout = setTimeout(() => {
+        setIsTextDisplayed(true);
+      }, enterDuration);
+    } else {
+      setIsTextDisplayed(true);
+    }
+
+    const timeBeforeExitProcessStart =
+      ((alert.duration || 0) -
+        (alert.text?.animation?.exit?.duration || 0) -
+        (alert.text?.animation?.exit?.offset || 0)) *
+      1000;
+
+    const exitDuration = (alert.text?.animation?.exit?.duration || 0) * 1000;
+
+    const exitTimeout = setTimeout(() => {
+      setShouldTextExit(true);
+
+      setTimeout(() => {
+        setIsTextDisplayed(false);
+      }, exitDuration);
+    }, timeBeforeExitProcessStart);
+
+    //clean up
+    return () => {
+      clearTimeout(exitTimeout);
+
+      if (enterTimeout) clearTimeout(enterTimeout);
+    };
+  }, [
+    setShouldTextExit,
+    setIsTextDisplayed,
+    alert.duration,
+    alert.text?.animation?.exit?.duration,
+    alert.text?.animation?.enter?.delay,
+    alert.text?.animation?.exit?.offset,
+  ]);
+
+  const imageSrc = useMemo(() => {
+    const now = new Date().getTime();
+
+    return `${config.url}/images/${`${alert.image?.imagePath}?ts=${now}`}`;
+  }, [alert.image]);
+
+  return (
+    <StyledContainer
+      textPosition={alert.text?.position}
+      width={alert.width}
+      height={alert.heigth}
+    >
+      {alert.image?.imagePath && (
+        <StyledImageContainer>
+          <StyledImageScreen></StyledImageScreen>
+          <StyledImage
+            shouldImageExit={shouldImageExit}
+            width={alert?.image?.width}
+            height={alert?.image?.height}
+            isVisible={isImageDisplayed}
+            enterAnimationType={alert?.image?.animation?.enter?.type}
+            enterAnimationDuration={alert?.image?.animation?.enter?.duration}
+            enterAnimationDelay={alert?.image?.animation?.enter?.delay}
+            exitAnimationType={alert?.image?.animation?.exit?.type}
+            exitAnimationDuration={alert?.image?.animation?.exit?.duration}
+            src={imageSrc}
+          ></StyledImage>
+        </StyledImageContainer>
+      )}
+      {alert.text?.content && (
+        <StyledTextContainer
+          shouldTextExit={shouldTextExit}
+          width={alert?.text?.width}
+          height={alert?.text?.height}
+          isVisible={isTextDisplayed}
+          enterAnimationType={alert?.text?.animation?.enter?.type}
+          enterAnimationDuration={alert?.text?.animation?.enter?.duration}
+          enterAnimationDelay={alert?.text?.animation?.enter?.delay}
+          exitAnimationType={alert?.text?.animation?.exit?.type}
+          exitAnimationDuration={alert?.text?.animation?.exit?.duration}
+        >
+          {alert.text.content
+            .replaceAll("{{herotag}}", data.herotag)
+            .replaceAll("{{amount}}", String(data.amount))
+            .replaceAll("{{message}}", data.data)
+            .split("\n")
+            .map((paragraph, index) => (
+              <StyledParagraph
+                key={`paragraph_${index}`}
+                strokeColor={alert?.text?.stroke?.color}
+                strokeWidth={alert?.text?.stroke?.width}
+                {...pick(alert.text, [
+                  "size",
+                  "color",
+                  "lineHeight",
+                  "letterSpacing",
+                  "wordSpacing",
+                  "textAlign",
+                  "textStyle",
+                ])}
+              >
+                {paragraph}
+              </StyledParagraph>
+            ))}
+        </StyledTextContainer>
+      )}
+    </StyledContainer>
+  );
+};
+
+export default Alert;

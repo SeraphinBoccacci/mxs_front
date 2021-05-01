@@ -8,8 +8,8 @@ import React, {
 } from "react";
 
 import config from "../../config/config";
-import { AlertVariationLenses } from "../../interfaces/alerts";
 import { uploadFile } from "../../services/user";
+import { AlertVariationLenses } from "../../types/alerts";
 import {
   Controllers,
   ImagePreview,

@@ -2,12 +2,13 @@ import { Button } from "@material-ui/core";
 import KeyboardBackspaceRoundedIcon from "@material-ui/icons/KeyboardBackspaceRounded";
 import React, { useCallback, useState } from "react";
 
+import EventTriggerer from "../../../components/EventTriggerer";
 import config from "../../../config/config";
 import routes from "../../../constants/routes";
 import { useHistoryWithQueryString } from "../../../hooks/useHistoryWithQuerystring";
 import { useQueryString } from "../../../hooks/useQueryString";
 import { useEditorContext } from "../Context";
-import { Buttons, Container } from "./style";
+import { Buttons, Container, CopyButton } from "./style";
 
 const Header = () => {
   const [hasJustCopied, setHasJustCopied] = useState(false);
@@ -33,14 +34,18 @@ const Header = () => {
 
   return (
     <Container>
-      <Button>
-        <KeyboardBackspaceRoundedIcon
-          onClick={handleGoToMyOverlays}
-          fontSize="large"
-        ></KeyboardBackspaceRoundedIcon>
-      </Button>
       <Buttons>
-        <Button
+        <Button>
+          <KeyboardBackspaceRoundedIcon
+            onClick={handleGoToMyOverlays}
+            fontSize="large"
+          ></KeyboardBackspaceRoundedIcon>
+        </Button>
+        <EventTriggerer></EventTriggerer>
+      </Buttons>
+
+      <Buttons>
+        <CopyButton
           disabled={!browserSource}
           onClick={handleCopy}
           variant="outlined"
@@ -55,8 +60,8 @@ const Header = () => {
               <span>Browser-source</span>
             </div>
           )}
-        </Button>
-        <Button disabled={!browserSource} variant="outlined" color="secondary">
+        </CopyButton>
+        <Button disabled={!browserSource} variant="contained" color="secondary">
           {browserSource ? (
             <a href={browserSource} target="about:blank">
               Preview
@@ -64,9 +69,6 @@ const Header = () => {
           ) : (
             "Preview"
           )}
-        </Button>
-        <Button variant="contained" color="secondary">
-          Save
         </Button>
       </Buttons>
     </Container>

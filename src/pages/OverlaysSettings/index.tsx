@@ -1,51 +1,19 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React from "react";
 //@ts-ignore
 import { withBreakpoints } from "react-breakpoints";
 
-import ActivationSwitch from "../../components/ActivationSwitch";
-import { AuthContext } from "../../components/AuthContext";
 import LabLayout from "../../components/LabLayout";
-import { toggleOverlaysParticle } from "../../services/overlays";
 import ContextProvider from "./Context";
 import MyOverlays from "./MyOverlays";
 import OverlaysIntroduction from "./OverlaysIntroduction";
 import { StreamElementsParticleContainer } from "./style";
 
 const StreamElementsParticle = () => {
-  const { user } = useContext(AuthContext);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [isParticleActive, setIsParticleActive] = useState(
-    user?.integrations?.ifttt?.isActive || false
-  );
-
-  useEffect(() => {
-    setIsParticleActive(user?.integrations?.streamElements?.isActive || false);
-  }, [setIsParticleActive, user]);
-
-  const handleSwitchChange = useCallback(async () => {
-    setIsSubmitting(true);
-
-    if (user && user.herotag) {
-      await toggleOverlaysParticle(user.herotag, !isParticleActive);
-      setIsParticleActive((prev) => !prev);
-
-      setIsSubmitting(false);
-    }
-  }, [setIsSubmitting, setIsParticleActive, isParticleActive, user]);
-
   return (
     <ContextProvider>
       <LabLayout>
         <StreamElementsParticleContainer>
           <OverlaysIntroduction></OverlaysIntroduction>
-
-          <ActivationSwitch
-            label="Activate Particle"
-            isSubmitting={isSubmitting}
-            isActive={isParticleActive}
-            onChange={handleSwitchChange}
-          ></ActivationSwitch>
 
           <MyOverlays></MyOverlays>
 

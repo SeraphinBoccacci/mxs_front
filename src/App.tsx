@@ -55,6 +55,10 @@ const BrowserSource = lazy(() => {
   return import("./pages/BrowserSource");
 });
 
+const WorkBenchBrowserSource = lazy(() => {
+  return import("./pages/WorkBenchBrowserSource");
+});
+
 const OverlayEditor = lazy(() => {
   return import("./pages/OverlayEditor");
 });
@@ -101,17 +105,21 @@ function App() {
                   <Twitch />
                 </PrivateRoute>
 
-                <Route path={routes.tutorial}>
+                <PrivateRoute path={routes.tutorial}>
                   <Tutorial></Tutorial>
-                </Route>
+                </PrivateRoute>
 
                 <Route path={routes.browserSourcePage}>
                   <BrowserSource></BrowserSource>
                 </Route>
 
-                <Route path={routes.overlayEditorPage}>
+                <PrivateRoute path={routes.workBenchBrowserSourcePage}>
+                  <WorkBenchBrowserSource></WorkBenchBrowserSource>
+                </PrivateRoute>
+
+                <PrivateRoute path={routes.overlayEditorPage}>
                   <OverlayEditor></OverlayEditor>
-                </Route>
+                </PrivateRoute>
 
                 {/* Default Route */}
 

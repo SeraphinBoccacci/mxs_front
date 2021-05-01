@@ -12,52 +12,14 @@ import { useHistory } from "react-router";
 import routes from "../../constants/routes";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useQueryString } from "../../hooks/useQueryString";
-import { AlertVariation } from "../../interfaces/alerts";
 import { getUserData } from "../../services/user";
+import { UserType } from "../../types/user";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
 
 export enum UserAccountStatus {
   PENDING_VERIFICATION = 0,
   VERIFIED,
   PENDING_EDIT_PASSWORD_VERIFICATION,
-}
-
-export interface IftttParticleData {
-  eventName: string;
-  triggerKey: string;
-  isActive: boolean;
-}
-
-export interface StreamElementData {
-  variations: AlertVariation[];
-  rowsStructure: {
-    rows: string[];
-    rowsGroupName?: string | undefined;
-  }[];
-  isActive: boolean;
-}
-
-export interface UserType {
-  _id?: string;
-  password?: string;
-  pendingPassword?: string;
-  herotag?: string;
-  erdAddress?: string;
-  status: UserAccountStatus;
-  verificationReference?: string;
-  passwordEditionVerificationReference?: string;
-  verificationStartDate?: string;
-  passwordEditionVerificationStartDate?: string;
-  integrations?: {
-    ifttt?: IftttParticleData;
-    streamElements?: StreamElementData;
-    minimumRequiredAmount?: number;
-  };
-  isStreaming?: boolean;
-  streamingStartDate?: Date | null;
-
-  referralLink?: string;
-  herotagQrCodePath?: string;
 }
 
 export const AuthContext = createContext<{

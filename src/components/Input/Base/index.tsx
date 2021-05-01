@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { AlertVariationLenses } from "../../../interfaces/alerts";
+import { AlertVariationLenses } from "../../../types/alerts";
 import OutlinedInput, { OutlinedInputProps } from "./OutlinedInput";
 import OutlinedTextArea, { OutlinedTextareaProps } from "./OutlinedTextarea";
 import { Adornment, InputContainer, InputLabel } from "./style";
