@@ -32,6 +32,7 @@ const Variation = ({ variation, index }: VariationProps) => {
     hiddenWidgets,
     toggleWidgetVisibility,
     displayWidget,
+    getOverlayData,
   } = useEditorContext();
 
   const { deleteVariation } = useWidgetVariationsContext();

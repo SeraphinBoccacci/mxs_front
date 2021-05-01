@@ -36,7 +36,7 @@ interface ContextProps {
   setWidgetData: Dispatch<SetStateAction<Alerts | null>>;
   hasAtLeastOneWidget: boolean;
   overlay?: OverlayData;
-  getOverlayData: () => void;
+  getOverlayData: () => Promise<void>;
   groups: VariationGroup[];
   setGroups: Dispatch<SetStateAction<VariationGroup[]>>;
   handleFocusOnVariation: (variation: AlertVariation) => void;
@@ -55,7 +55,7 @@ const Context = createContext<ContextProps>({
   widgetData: null,
   setWidgetData: () => {},
   hasAtLeastOneWidget: false,
-  getOverlayData: () => {},
+  getOverlayData: async () => {},
   groups: [],
   setGroups: () => {},
   handleFocusOnVariation: () => {},

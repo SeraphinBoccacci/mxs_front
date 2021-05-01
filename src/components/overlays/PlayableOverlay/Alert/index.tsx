@@ -5,11 +5,11 @@ import config from "../../../../config/config";
 import { AlertVariation } from "../../../../types/alerts";
 import { EventData } from "../../../../types/ifttt";
 import {
+  AnimatedImage,
+  AnimatedTextContainer,
   StyledContainer,
-  StyledImage,
   StyledParagraph,
-  StyledTextContainer,
-} from "./style";
+} from "../../styles.alerts";
 
 interface AlertProps {
   alert: AlertVariation;
@@ -127,22 +127,8 @@ const Alert = ({ alert, data }: AlertProps) => {
       offsetLeft={alert.offsetLeft}
     >
       {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
-      {alert.image?.imagePath && (
-        <StyledImage
-          shouldImageExit={shouldImageExit}
-          width={alert?.image?.width}
-          height={alert?.image?.height}
-          isVisible={isImageDisplayed}
-          enterAnimationType={alert?.image?.animation?.enter?.type}
-          enterAnimationDuration={alert?.image?.animation?.enter?.duration}
-          enterAnimationDelay={alert?.image?.animation?.enter?.delay}
-          exitAnimationType={alert?.image?.animation?.exit?.type}
-          exitAnimationDuration={alert?.image?.animation?.exit?.duration}
-          src={imageSrc}
-        ></StyledImage>
-      )}
       {alert.text?.content && (
-        <StyledTextContainer
+        <AnimatedTextContainer
           shouldTextExit={shouldTextExit}
           width={alert?.text?.width}
           height={alert?.text?.height}
@@ -176,7 +162,21 @@ const Alert = ({ alert, data }: AlertProps) => {
                 {paragraph}
               </StyledParagraph>
             ))}
-        </StyledTextContainer>
+        </AnimatedTextContainer>
+      )}
+      {alert.image?.imagePath && (
+        <AnimatedImage
+          shouldImageExit={shouldImageExit}
+          width={alert?.image?.width}
+          height={alert?.image?.height}
+          isVisible={isImageDisplayed}
+          enterAnimationType={alert?.image?.animation?.enter?.type}
+          enterAnimationDuration={alert?.image?.animation?.enter?.duration}
+          enterAnimationDelay={alert?.image?.animation?.enter?.delay}
+          exitAnimationType={alert?.image?.animation?.exit?.type}
+          exitAnimationDuration={alert?.image?.animation?.exit?.duration}
+          src={imageSrc}
+        ></AnimatedImage>
       )}
     </StyledContainer>
   );
