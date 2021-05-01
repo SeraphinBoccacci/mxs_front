@@ -5,13 +5,11 @@ import config from "../../../../config/config";
 import { AlertVariation } from "../../../../types/alerts";
 import { EventData } from "../../../../types/ifttt";
 import {
-  StyledContainer,
   StyledImage,
-  StyledImageContainer,
-  StyledImageScreen,
   StyledParagraph,
   StyledTextContainer,
-} from "./style";
+} from "../../styles.alerts";
+import { Container, StyledImageContainer, StyledImageScreen } from "./style";
 
 interface AlertProps {
   alert: AlertVariation;
@@ -118,28 +116,11 @@ const Alert = ({ alert, data }: AlertProps) => {
   }, [alert.image]);
 
   return (
-    <StyledContainer
+    <Container
       textPosition={alert.text?.position}
       width={alert.width}
       height={alert.heigth}
     >
-      {alert.image?.imagePath && (
-        <StyledImageContainer>
-          <StyledImageScreen></StyledImageScreen>
-          <StyledImage
-            shouldImageExit={shouldImageExit}
-            width={alert?.image?.width}
-            height={alert?.image?.height}
-            isVisible={isImageDisplayed}
-            enterAnimationType={alert?.image?.animation?.enter?.type}
-            enterAnimationDuration={alert?.image?.animation?.enter?.duration}
-            enterAnimationDelay={alert?.image?.animation?.enter?.delay}
-            exitAnimationType={alert?.image?.animation?.exit?.type}
-            exitAnimationDuration={alert?.image?.animation?.exit?.duration}
-            src={imageSrc}
-          ></StyledImage>
-        </StyledImageContainer>
-      )}
       {alert.text?.content && (
         <StyledTextContainer
           shouldTextExit={shouldTextExit}
@@ -177,7 +158,24 @@ const Alert = ({ alert, data }: AlertProps) => {
             ))}
         </StyledTextContainer>
       )}
-    </StyledContainer>
+      {alert.image?.imagePath && (
+        <StyledImageContainer>
+          <StyledImageScreen></StyledImageScreen>
+          <StyledImage
+            shouldImageExit={shouldImageExit}
+            width={alert?.image?.width}
+            height={alert?.image?.height}
+            isVisible={isImageDisplayed}
+            enterAnimationType={alert?.image?.animation?.enter?.type}
+            enterAnimationDuration={alert?.image?.animation?.enter?.duration}
+            enterAnimationDelay={alert?.image?.animation?.enter?.delay}
+            exitAnimationType={alert?.image?.animation?.exit?.type}
+            exitAnimationDuration={alert?.image?.animation?.exit?.duration}
+            src={imageSrc}
+          ></StyledImage>
+        </StyledImageContainer>
+      )}
+    </Container>
   );
 };
 

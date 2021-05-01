@@ -14,7 +14,7 @@ export type OutlinedInputProps = React.DetailedHTMLProps<
 };
 
 const OutlinedInput = ({
-  value = "",
+  value,
   inputName,
   onChange,
   isDisabled,
@@ -30,7 +30,7 @@ const OutlinedInput = ({
       disabled={isDisabled}
       onChange={onChange}
       placeholder=" "
-      value={value}
+      value={value || ""}
       ref={inputRef}
     ></StyledOutlinedInput>
   );
