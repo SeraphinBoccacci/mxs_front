@@ -9,6 +9,7 @@ import {
 } from "../../../services/overlays";
 import { EventData } from "../../../types/ifttt";
 import { OverlayData } from "../../../types/overlays";
+import { useErrorHandlingContext } from "../../ErrorHandlingContext";
 import Alert from "./Alert";
 import Draggable from "./Draggable";
 import { Container } from "./style";
@@ -28,6 +29,7 @@ const DraggableOverlay = () => {
   const hiddenWidgets = JSON.parse(hiddenWidgetsString);
   const [overlay, setOverlay] = useState<OverlayData>();
   const [draggedWidget, setDraggedWidget] = useState<string>();
+  const { handleError } = useErrorHandlingContext();
 
   const getOverlay = useCallback(async () => {
     const overlay = await getUserOverlay(herotag, overlayId);
@@ -51,13 +53,17 @@ const DraggableOverlay = () => {
         );
 
         if (variationToUpdate) {
-          await updateAlertVariation(herotag, overlay._id, {
-            ...variationToUpdate,
-            offsetTop,
-            offsetLeft,
-          });
+          try {
+            await updateAlertVariation(herotag, overlay._id, {
+              ...variationToUpdate,
+              offsetTop,
+              offsetLeft,
+            });
 
-          await getOverlay();
+            await getOverlay();
+          } catch (error) {
+            handleError(error.message);
+          }
         }
 
         setDraggedWidget(undefined);

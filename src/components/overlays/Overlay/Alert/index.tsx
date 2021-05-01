@@ -1,15 +1,15 @@
 import { pick } from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
 
-import config from "../../../config/config";
-import { AlertVariation } from "../../../types/alerts";
-import { TransactionData } from "..";
+import config from "../../../../config/config";
+import { AlertVariation } from "../../../../types/alerts";
 import {
+  AnimatedImage,
+  AnimatedTextContainer,
   StyledContainer,
-  StyledImage,
   StyledParagraph,
-  StyledTextContainer,
-} from "./style";
+} from "../../styles.alerts";
+import { TransactionData } from "..";
 
 interface AlertProps {
   alert: AlertVariation;
@@ -128,7 +128,7 @@ const Alert = ({ alert, data }: AlertProps) => {
     >
       {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
       {alert.text?.content && (
-        <StyledTextContainer
+        <AnimatedTextContainer
           shouldTextExit={shouldTextExit}
           width={alert?.text?.width}
           height={alert?.text?.height}
@@ -162,10 +162,10 @@ const Alert = ({ alert, data }: AlertProps) => {
                 {paragraph}
               </StyledParagraph>
             ))}
-        </StyledTextContainer>
+        </AnimatedTextContainer>
       )}
       {alert.image?.imagePath && (
-        <StyledImage
+        <AnimatedImage
           shouldImageExit={shouldImageExit}
           width={alert?.image?.width}
           height={alert?.image?.height}
@@ -176,7 +176,7 @@ const Alert = ({ alert, data }: AlertProps) => {
           exitAnimationType={alert?.image?.animation?.exit?.type}
           exitAnimationDuration={alert?.image?.animation?.exit?.duration}
           src={imageSrc}
-        ></StyledImage>
+        ></AnimatedImage>
       )}
     </StyledContainer>
   );

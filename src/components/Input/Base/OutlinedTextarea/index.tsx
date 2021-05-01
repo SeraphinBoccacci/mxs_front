@@ -15,7 +15,7 @@ export type OutlinedTextareaProps = React.DetailedHTMLProps<
 };
 
 const OutlinedTextarea = ({
-  value = "",
+  value,
   isDisabled,
   onChange,
   inputName,
@@ -51,7 +51,7 @@ const OutlinedTextarea = ({
       disabled={isDisabled}
       name={inputName}
       id={inputName}
-      value={value}
+      value={value || ""}
       ref={textarea}
       onChange={handleTextAreaOnChange}
       onFocus={handleResize}
