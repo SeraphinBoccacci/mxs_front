@@ -23,7 +23,7 @@ const SideBar = () => {
   } = useEditorContext();
 
   const handleOnClick = useCallback(() => {
-    setIsAddWidgetOpenned(true);
+    setIsAddWidgetOpenned((prev) => !prev);
   }, [setIsAddWidgetOpenned]);
 
   const handleSelectAlertWidget = useCallback(() => {

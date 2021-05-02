@@ -34,17 +34,15 @@ const Header = () => {
 
   return (
     <Container>
-      <Buttons>
-        <Button>
-          <KeyboardBackspaceRoundedIcon
-            onClick={handleGoToMyOverlays}
-            fontSize="large"
-          ></KeyboardBackspaceRoundedIcon>
-        </Button>
-        <EventTriggerer></EventTriggerer>
-      </Buttons>
+      <Button>
+        <KeyboardBackspaceRoundedIcon
+          onClick={handleGoToMyOverlays}
+          fontSize="large"
+        ></KeyboardBackspaceRoundedIcon>
+      </Button>
 
       <Buttons>
+        <EventTriggerer variant="outlined" color="secondary"></EventTriggerer>
         <CopyButton
           disabled={!browserSource}
           onClick={handleCopy}
