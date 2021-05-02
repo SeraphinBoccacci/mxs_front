@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button, ButtonProps } from "@material-ui/core";
 import React, {
   ChangeEvent,
   useCallback,
@@ -15,7 +15,7 @@ import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import Input from "../Input";
 import { Form, FormRow, StyledButton, StyledModal, StyledPaper } from "./style";
 
-const EventTriggerer = () => {
+const EventTriggerer = (props: ButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { herotag } = useAuth();
   const { handleError } = useContext(ErrorHandlingContext);
@@ -76,7 +76,9 @@ const EventTriggerer = () => {
 
   return (
     <>
-      <StyledButton onClick={handleOpen}>Trigger</StyledButton>
+      <StyledButton {...props} onClick={handleOpen}>
+        Trigger
+      </StyledButton>
       <StyledModal open={isOpen} onClose={handleClose}>
         <StyledPaper>
           <Form>

@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 
 import PlayableOverlay from "../../../components/overlays/PlayableOverlay";
+import config from "../../../config/config";
 import { useQueryString } from "../../../hooks/useQueryString";
 import {
   createAlertVariation,
@@ -33,7 +34,9 @@ const WorkBench = () => {
 
     return (
       !!overlay &&
-      `/work-bench-browser-source/herotag/${herotag}/overlay/${
+      `${
+        config.frontUrl
+      }/work-bench-browser-source/herotag/${herotag}/overlay/${
         overlay.generatedLink
       }?t=${now}&hiddenWidgets=${JSON.stringify(hiddenWidgets)}`
     );
