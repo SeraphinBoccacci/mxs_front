@@ -7,8 +7,8 @@ import React, {
   useState,
 } from "react";
 
+import { useAuth } from "../../../components/AuthContext";
 import LoadingScreen from "../../../components/LoadingScreen";
-import { useQueryString } from "../../../hooks/useQueryString";
 import { getManyUserOverlays } from "../../../services/overlays";
 import { OverlayData } from "../../../types/overlays";
 
@@ -28,7 +28,7 @@ interface ContextProviderProps {
 
 const ContextProvider = ({ children }: ContextProviderProps) => {
   const [overlays, setOverlays] = useState<OverlayData[]>();
-  const [herotag] = useQueryString("herotag");
+  const { herotag } = useAuth();
 
   const getManyOverlays = useCallback(
     async (herotag) => {

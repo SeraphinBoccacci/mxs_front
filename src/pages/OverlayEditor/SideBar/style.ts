@@ -79,6 +79,8 @@ export const AddWidgetButton = styled.button`
   width: 4rem;
   height: 4rem;
 
+  padding: 0;
+
   border-radius: 50%;
 
   background: ${colors.quad};
@@ -86,11 +88,12 @@ export const AddWidgetButton = styled.button`
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12);
 
   font-size: 3rem;
-  line-height: 4rem;
 
   transition: 0.2s;
   cursor: pointer;
   outline: none;
+
+  color: ${colors.primary};
 
   &:hover {
     transform: perspective(500px) translateZ(-30px);

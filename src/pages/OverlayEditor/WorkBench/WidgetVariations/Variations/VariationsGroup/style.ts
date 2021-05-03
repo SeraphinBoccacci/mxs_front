@@ -13,8 +13,6 @@ export const DraggableContainer = styled.div<ContainerProps>`
 
   width: 100%;
   height: max-content;
-
-  background: yellow;
 `;
 
 export const Cell = styled.div`

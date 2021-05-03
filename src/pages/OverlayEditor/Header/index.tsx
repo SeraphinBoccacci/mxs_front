@@ -2,17 +2,17 @@ import { Button } from "@material-ui/core";
 import KeyboardBackspaceRoundedIcon from "@material-ui/icons/KeyboardBackspaceRounded";
 import React, { useCallback, useState } from "react";
 
+import { useAuth } from "../../../components/AuthContext";
 import EventTriggerer from "../../../components/EventTriggerer";
 import config from "../../../config/config";
 import routes from "../../../constants/routes";
 import { useHistoryWithQueryString } from "../../../hooks/useHistoryWithQuerystring";
-import { useQueryString } from "../../../hooks/useQueryString";
 import { useEditorContext } from "../Context";
 import { Buttons, Container, CopyButton } from "./style";
 
 const Header = () => {
   const [hasJustCopied, setHasJustCopied] = useState(false);
-  const [herotag] = useQueryString("herotag");
+  const { herotag } = useAuth();
   const { overlay } = useEditorContext();
   const [pushHistory] = useHistoryWithQueryString();
 

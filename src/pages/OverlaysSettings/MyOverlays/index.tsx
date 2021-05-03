@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import React, { useCallback } from "react";
 
-import { useQueryString } from "../../../hooks/useQueryString";
+import { useAuth } from "../../../components/AuthContext";
 import { createOverlay } from "../../../services/overlays";
 import { ContentContainer } from "../../../styles/global";
 import { useOverlayContext } from "../Context";
@@ -9,13 +9,15 @@ import Overlay from "./Overlay";
 import { Header, OverlaysContainer, Title } from "./style";
 
 const MyOverlays = () => {
-  const [herotag] = useQueryString("herotag");
+  const { herotag } = useAuth();
   const { overlays, getManyOverlays } = useOverlayContext();
 
   const handleCreateOverlay = useCallback(async () => {
-    await createOverlay(herotag);
+    if (herotag) {
+      await createOverlay(herotag);
 
-    await getManyOverlays(herotag);
+      await getManyOverlays(herotag);
+    }
   }, [herotag, getManyOverlays]);
 
   return (

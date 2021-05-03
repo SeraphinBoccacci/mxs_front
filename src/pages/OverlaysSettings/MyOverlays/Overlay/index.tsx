@@ -2,8 +2,8 @@ import { Button } from "@material-ui/core";
 import DeleteOutlineRoundedIcon from "@material-ui/icons/DeleteOutlineRounded";
 import React, { useCallback } from "react";
 
+import { useAuth } from "../../../../components/AuthContext";
 import { useHistoryWithQueryString } from "../../../../hooks/useHistoryWithQuerystring";
-import { useQueryString } from "../../../../hooks/useQueryString";
 import { deleteOverlay } from "../../../../services/overlays";
 import { OverlayData } from "../../../../types/overlays";
 import { useOverlayContext } from "../../Context";
@@ -15,7 +15,7 @@ interface OverlayProps {
 
 const Overlay = ({ overlay }: OverlayProps) => {
   const { getManyOverlays } = useOverlayContext();
-  const [herotag] = useQueryString("herotag");
+  const { herotag } = useAuth();
   const [pushHistory] = useHistoryWithQueryString();
 
   const goToEditor = useCallback(() => {

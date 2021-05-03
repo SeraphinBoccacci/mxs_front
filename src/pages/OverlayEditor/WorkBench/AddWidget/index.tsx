@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 
+import { useAuth } from "../../../../components/AuthContext";
 import { useErrorHandlingContext } from "../../../../components/ErrorHandlingContext";
-import { useQueryString } from "../../../../hooks/useQueryString";
 import { addWidget, WidgetsKinds } from "../../../../services/overlays";
 import { useEditorContext } from "../../Context";
 import { Background, Container, WidgetButton } from "./style";
@@ -9,7 +9,7 @@ import { Background, Container, WidgetButton } from "./style";
 const AddWidget = () => {
   const { setIsAddWidgetOpenned, overlay, getOverlayData } = useEditorContext();
   const { handleError } = useErrorHandlingContext();
-  const [herotag] = useQueryString("herotag");
+  const { herotag } = useAuth();
 
   const handleOnBackgroundClick = useCallback(() => {
     setIsAddWidgetOpenned(false);
@@ -18,7 +18,7 @@ const AddWidget = () => {
   const handleAddWidget = useCallback(
     async (widget: WidgetsKinds) => {
       try {
-        if (overlay) {
+        if (overlay && herotag) {
           await addWidget(herotag, overlay?._id, widget);
 
           await getOverlayData();
@@ -42,9 +42,9 @@ const AddWidget = () => {
         >
           Alerts
         </WidgetButton>
-        <WidgetButton>Donation Bar</WidgetButton>
-        <WidgetButton>Particles Fall</WidgetButton>
-        <WidgetButton>Top Donators</WidgetButton>
+        <WidgetButton disabled>Donation Bar</WidgetButton>
+        <WidgetButton disabled>Particles Fall</WidgetButton>
+        <WidgetButton disabled>Top Donators</WidgetButton>
       </Container>
     </>
   );

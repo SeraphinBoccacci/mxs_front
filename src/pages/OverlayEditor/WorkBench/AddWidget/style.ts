@@ -45,11 +45,11 @@ export const Container = styled.div`
 
 export const WidgetButton = styled.button`
   width: 12rem;
-  height: 3rem;
+  height: 2.5rem;
 
   background: ${colors.secondary};
 
-  margin: 1rem auto;
+  margin: 0.5rem auto;
 
   border: none;
   border-radius: 3px;
@@ -71,5 +71,7 @@ export const WidgetButton = styled.button`
 
   &:disabled {
     background: ${colors.gray}77;
+
+    cursor: not-allowed;
   }
 `;

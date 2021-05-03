@@ -21,13 +21,13 @@ const transactionData: EventData = {
 };
 
 const DraggableOverlay = () => {
-  const { overlayId } = useParams<{
-    overlayId: string;
-  }>();
-  const [herotag] = useQueryString("herotag");
   const [hiddenWidgetsString] = useQueryString("hiddenWidgets");
   const [overlay, setOverlay] = useState<OverlayData>();
   const [draggedWidget, setDraggedWidget] = useState<string>();
+  const { overlayId, herotag } = useParams<{
+    overlayId: string;
+    herotag: string;
+  }>();
   const { handleError } = useErrorHandlingContext();
 
   const hiddenWidgets = useMemo(() => {
@@ -41,9 +41,11 @@ const DraggableOverlay = () => {
   }, [hiddenWidgetsString]);
 
   const getOverlay = useCallback(async () => {
-    const overlay = await getUserOverlay(herotag, overlayId);
+    if (herotag) {
+      const overlay = await getUserOverlay(herotag, overlayId);
 
-    if (overlay) setOverlay(overlay);
+      if (overlay) setOverlay(overlay);
+    }
   }, [overlayId, herotag]);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ const DraggableOverlay = () => {
           (variation) => variation._id === widgetId
         );
 
-        if (variationToUpdate) {
+        if (variationToUpdate && herotag) {
           try {
             await updateAlertVariation(herotag, overlay._id, {
               ...variationToUpdate,

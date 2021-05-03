@@ -1,4 +1,5 @@
 import { Button } from "@material-ui/core";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import React, { useCallback } from "react";
 
 import { WidgetsKinds } from "../../../services/overlays";
@@ -61,7 +62,9 @@ const SideBar = () => {
               </WidgetsItem>
             )}
           </WidgetsList>
-          <AddWidgetButton onClick={handleOnClick}>+</AddWidgetButton>
+          <AddWidgetButton onClick={handleOnClick}>
+            <AddRoundedIcon fontSize="large"></AddRoundedIcon>
+          </AddWidgetButton>
         </>
       )}
     </Container>
