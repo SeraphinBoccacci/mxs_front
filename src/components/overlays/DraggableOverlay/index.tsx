@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 
 import { useQueryString } from "../../../hooks/useQueryString";
@@ -26,10 +26,19 @@ const DraggableOverlay = () => {
   }>();
   const [herotag] = useQueryString("herotag");
   const [hiddenWidgetsString] = useQueryString("hiddenWidgets");
-  const hiddenWidgets = JSON.parse(hiddenWidgetsString);
   const [overlay, setOverlay] = useState<OverlayData>();
   const [draggedWidget, setDraggedWidget] = useState<string>();
   const { handleError } = useErrorHandlingContext();
+
+  const hiddenWidgets = useMemo(() => {
+    try {
+      const hidden = JSON.parse(hiddenWidgetsString);
+
+      return hidden || [];
+    } catch (error) {
+      return [];
+    }
+  }, [hiddenWidgetsString]);
 
   const getOverlay = useCallback(async () => {
     const overlay = await getUserOverlay(herotag, overlayId);
@@ -69,7 +78,7 @@ const DraggableOverlay = () => {
         setDraggedWidget(undefined);
       }
     },
-    [setDraggedWidget, herotag, overlay, getOverlay]
+    [setDraggedWidget, herotag, overlay, getOverlay, handleError]
   );
 
   return (
