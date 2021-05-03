@@ -84,7 +84,7 @@ const VariationParameters = ({
             endAdornment="px"
             width="8rem"
           ></Input>
-          {/* <Input
+          <Input
             inputLabel="Top"
             inputName={AlertVariationLenses.offsetTop}
             onChange={handleOnChange}
@@ -101,7 +101,7 @@ const VariationParameters = ({
             type="number"
             endAdornment="px"
             width="8rem"
-          ></Input> */}
+          ></Input>
         </SectionRow>
       </SectionContent>
     </Section>

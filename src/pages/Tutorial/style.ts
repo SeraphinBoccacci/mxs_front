@@ -1,5 +1,4 @@
 import {
-  Paper,
   Step as MaterialStep,
   Stepper as MaterialStepper,
 } from "@material-ui/core";

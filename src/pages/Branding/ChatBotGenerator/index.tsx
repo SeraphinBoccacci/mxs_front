@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 
+import { useAuth } from "../../../components/AuthContext";
 import CopyPasteButton from "../../../components/CopyPasteButton";
 import Input from "../../../components/Input";
 import config from "../../../config/config";
 import { useForm } from "../../../hooks/useForm";
-import { useQueryString } from "../../../hooks/useQueryString";
 import { ContentContainer, FlexColumn } from "../../../styles/global";
 import { OnboardingTitle } from "../style";
 import { Button, ChatBotGeneratorForm } from "./style";
@@ -21,7 +21,7 @@ const commandNames = [
 ];
 
 const ChatBotGenerator = () => {
-  const [herotag = ""] = useQueryString("herotag");
+  const { herotag = "" } = useAuth();
   const [formData, setFormData] = useForm<{
     commandName?: string;
     commandContent?: string;

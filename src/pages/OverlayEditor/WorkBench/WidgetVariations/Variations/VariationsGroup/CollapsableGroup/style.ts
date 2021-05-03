@@ -15,7 +15,7 @@ export const DraggableContainer = styled.div<ContainerProps>`
 
   margin: 0.6rem 0;
 
-  padding: 0.4rem;
+  padding: 2.6rem 0.4rem 0.2rem;
 
   width: 100%;
   height: max-content;
@@ -23,7 +23,7 @@ export const DraggableContainer = styled.div<ContainerProps>`
   transition: 0.3s;
 
   transition: ${({ isExpanded }) => (isExpanded ? "1s" : "0.3s")};
-  max-height: ${({ isExpanded }) => (isExpanded ? "100vh" : "2.6rem")};
+  max-height: ${({ isExpanded }) => (isExpanded ? "100vh" : "0")};
 
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12);
 
@@ -31,7 +31,9 @@ export const DraggableContainer = styled.div<ContainerProps>`
 `;
 
 export const VariationGroupHeader = styled.div`
-  width: 100%;
+  position: absolute;
+  top: 0.4rem;
+  width: calc(100% - 0.8rem);
   height: 2rem;
 
   display: flex;

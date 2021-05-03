@@ -5,9 +5,9 @@ import React, {
   useContext,
 } from "react";
 
+import { useAuth } from "../../../../../components/AuthContext";
 import { useErrorHandlingContext } from "../../../../../components/ErrorHandlingContext";
 import { colors } from "../../../../../constants/colors";
-import { useQueryString } from "../../../../../hooks/useQueryString";
 import { WidgetsKinds } from "../../../../../services/overlays";
 import { VariationGroup, WidgetVariation } from "../../../../../types/overlays";
 import { useEditorContext } from "../../../Context";
@@ -102,16 +102,18 @@ const WidgetVariationsContextProvider = ({
   deleteVariationsGroup,
 }: WidgetVariationsContextProviderProps) => {
   const { getOverlayData } = useEditorContext();
-  const [herotag] = useQueryString("herotag");
+  const { herotag } = useAuth();
   const { handleError } = useErrorHandlingContext();
 
   const handleCreateAlertVariation = useCallback(async () => {
     try {
-      const newVariation = generateRandomVariationName(variations);
+      if (herotag) {
+        const newVariation = generateRandomVariationName(variations);
 
-      await createVariation(herotag, overlayId, newVariation);
+        await createVariation(herotag, overlayId, newVariation);
 
-      await getOverlayData();
+        await getOverlayData();
+      }
     } catch (error) {
       handleError(error.message);
     }
@@ -127,9 +129,11 @@ const WidgetVariationsContextProvider = ({
   const handleDeleteVariation = useCallback(
     async (variationId) => {
       try {
-        await deleteVariation(herotag, overlayId, variationId);
+        if (herotag) {
+          await deleteVariation(herotag, overlayId, variationId);
 
-        getOverlayData();
+          getOverlayData();
+        }
       } catch (error) {
         handleError(error.message);
       }
@@ -139,9 +143,11 @@ const WidgetVariationsContextProvider = ({
 
   const handleCreateVariationsGroup = useCallback(async () => {
     try {
-      await createVariationsGroup(herotag, overlayId);
+      if (herotag) {
+        await createVariationsGroup(herotag, overlayId);
 
-      await getOverlayData();
+        await getOverlayData();
+      }
     } catch (error) {
       handleError(error.message);
     }
@@ -150,7 +156,9 @@ const WidgetVariationsContextProvider = ({
   const handleUpdateVariationsGroup = useCallback(
     async (variationsGroup: VariationGroup[]) => {
       try {
-        await updateVariationsGroup(herotag, overlayId, variationsGroup);
+        if (herotag) {
+          await updateVariationsGroup(herotag, overlayId, variationsGroup);
+        }
       } catch (error) {
         handleError(error.message);
       }
@@ -161,9 +169,11 @@ const WidgetVariationsContextProvider = ({
   const handleDeleteVariationsGroup = useCallback(
     async (variationGroupId: string) => {
       try {
-        await deleteVariationsGroup(herotag, overlayId, variationGroupId);
+        if (herotag) {
+          await deleteVariationsGroup(herotag, overlayId, variationGroupId);
 
-        await getOverlayData();
+          await getOverlayData();
+        }
       } catch (error) {
         handleError(error.message);
       }

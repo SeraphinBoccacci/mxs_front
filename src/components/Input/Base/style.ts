@@ -38,6 +38,7 @@ export const InputLabel = styled.label`
   left: 0;
 
   height: 100%;
+  max-width: 100%;
   flex: 1;
 
   line-height: 2.25rem;

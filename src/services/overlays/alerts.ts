@@ -20,11 +20,16 @@ export const createAlertVariation = async (
 };
 
 export const getAlertVariation = async (
+  herotag: string,
+  overlayId: string,
   variationId: string
 ): Promise<AlertVariation> => {
-  const data = await axiosGet(`${endpoint}/variation/${variationId}`, {
-    withToken: true,
-  });
+  const data = await axiosGet(
+    `${endpoint}/herotag/${herotag}/overlay/${overlayId}/variation/${variationId}`,
+    {
+      withToken: true,
+    }
+  );
 
   return data;
 };

@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 
+import { useAuth } from "../../../components/AuthContext";
 import PlayableOverlay from "../../../components/overlays/PlayableOverlay";
 import config from "../../../config/config";
-import { useQueryString } from "../../../hooks/useQueryString";
 import {
   createAlertVariation,
   createAlertVariationsGroup,
@@ -20,7 +20,7 @@ import { Container, Iframe, PlayableOverlayContainer } from "./style";
 import WidgetVariations from "./WidgetVariations";
 
 const WorkBench = () => {
-  const [herotag] = useQueryString("herotag");
+  const { herotag } = useAuth();
   const {
     isAddWidgetOpenned,
     overlay,
