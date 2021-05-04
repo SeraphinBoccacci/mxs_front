@@ -48,3 +48,8 @@ export const Buttons = styled.div`
 export const CopyButton = styled(Button)`
   width: 10rem;
 `;
+
+export const Link = styled.a`
+  height: max-content;
+  margin: auto;
+`;
