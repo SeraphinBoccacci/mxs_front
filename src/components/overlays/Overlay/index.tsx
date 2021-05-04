@@ -1,3 +1,4 @@
+import { omit } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import io from "socket.io-client";
@@ -14,7 +15,7 @@ export interface TransactionData {
   message: string;
 }
 
-const findVariation = (amount: number, variations: AlertVariation[]) => {
+const findVariation = (amount: number, variations: AlertVariation[] = []) => {
   const matchingVariations = variations
     // We keep only variations that match requiredAmount
     .filter((variation) => {
@@ -64,8 +65,9 @@ const Overlay = () => {
   }>();
   const [overlay, setOverlay] = useState<OverlayData>();
   const [transactionData, setTransactionData] = useState<TransactionData>();
-  const [isOverlayDisplayed, setIsOverlayDisplayed] = useState(false);
-  const [alertVariation, setAlertVariation] = useState<AlertVariation>();
+  const [alertVariations, setAlertVariations] = useState<
+    (AlertVariation & { timestamp: number })[]
+  >([]);
 
   const getOverlay = useCallback(async () => {
     const overlay = await getUserOverlay(herotag, overlayId);
@@ -77,6 +79,30 @@ const Overlay = () => {
     getOverlay();
   }, [overlayId, herotag, getOverlay]);
 
+  const displayVariation = useCallback(
+    (data: TransactionData, variations: AlertVariation[]) => {
+      const variation = findVariation(data.amount, variations);
+
+      if (!variation) return;
+
+      const alertDuration = 2500 + (variation.duration || 1) * 1000;
+
+      const variationTimestamp = Date.now();
+
+      setAlertVariations((prev) => [
+        ...prev,
+        { ...variation, timestamp: variationTimestamp },
+      ]);
+
+      setTimeout(() => {
+        setAlertVariations((prev) =>
+          prev.filter(({ timestamp }) => timestamp !== variationTimestamp)
+        );
+      }, alertDuration);
+    },
+    [setAlertVariations]
+  );
+
   useEffect(() => {
     const socket = io(config.url, {
       query: {
@@ -87,20 +113,9 @@ const Overlay = () => {
     socket.on("newDonation", (data: TransactionData) => {
       if (!overlay) return;
 
-      const variation = findVariation(data.amount, overlay.alerts.variations);
-
-      if (!variation) return;
-
-      const alertDuration = 2500 + (variation.duration || 1) * 1000;
-
-      setIsOverlayDisplayed(true);
-      setAlertVariation(variation);
       setTransactionData(data);
 
-      setTimeout(() => {
-        setIsOverlayDisplayed(false);
-        setAlertVariation(undefined);
-      }, alertDuration);
+      displayVariation(data, overlay?.alerts?.variations);
     });
 
     return () => {
@@ -110,11 +125,15 @@ const Overlay = () => {
 
   return (
     <div>
-      {isOverlayDisplayed && transactionData && (
+      {transactionData && (
         <div>
-          {!!alertVariation && (
-            <Alert alert={alertVariation} data={transactionData}></Alert>
-          )}
+          {alertVariations.map((alertVariation) => (
+            <Alert
+              key={alertVariation.timestamp}
+              alert={omit(alertVariation, "timestamp")}
+              data={transactionData}
+            ></Alert>
+          ))}
         </div>
       )}
     </div>

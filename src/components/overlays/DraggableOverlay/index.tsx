@@ -59,7 +59,7 @@ const DraggableOverlay = () => {
       if (!overlay) return;
 
       if (widgetKind === WidgetsKinds.ALERTS) {
-        const variationToUpdate = overlay.alerts.variations.find(
+        const variationToUpdate = overlay?.alerts?.variations?.find(
           (variation) => variation._id === widgetId
         );
 
@@ -85,7 +85,7 @@ const DraggableOverlay = () => {
 
   return (
     <Container>
-      {overlay?.alerts.variations.map((alertVariation) => {
+      {overlay?.alerts?.variations?.map((alertVariation) => {
         const positionData = {
           offsetTop: alertVariation.offsetTop || 0,
           offsetLeft: alertVariation.offsetLeft || 0,

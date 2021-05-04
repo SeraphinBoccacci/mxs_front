@@ -8,7 +8,7 @@ import config from "../../../config/config";
 import routes from "../../../constants/routes";
 import { useHistoryWithQueryString } from "../../../hooks/useHistoryWithQuerystring";
 import { useEditorContext } from "../Context";
-import { Buttons, Container, CopyButton } from "./style";
+import { Buttons, Container, CopyButton, Link } from "./style";
 
 const Header = () => {
   const [hasJustCopied, setHasJustCopied] = useState(false);
@@ -59,15 +59,26 @@ const Header = () => {
             </div>
           )}
         </CopyButton>
-        <Button disabled={!browserSource} variant="contained" color="secondary">
-          {browserSource ? (
-            <a href={browserSource} target="about:blank">
+        {browserSource ? (
+          <Link href={browserSource} target="about:blank">
+            <Button
+              disabled={!browserSource}
+              variant="contained"
+              color="secondary"
+            >
               Preview
-            </a>
-          ) : (
-            "Preview"
-          )}
-        </Button>
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            disabled={!browserSource}
+            variant="contained"
+            color="secondary"
+          >
+            Preview
+          </Button>
+        )}
+        <Button></Button>
       </Buttons>
     </Container>
   );
