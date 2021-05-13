@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import React, { useCallback } from "react";
 
-import { WidgetsKinds } from "../../../services/overlays";
+import { WidgetsKinds } from "../../../types/overlays";
 import { useEditorContext } from "../Context";
 import {
   AddWidgetButton,
@@ -27,15 +27,18 @@ const SideBar = () => {
     setIsAddWidgetOpenned((prev) => !prev);
   }, [setIsAddWidgetOpenned]);
 
-  const handleSelectAlertWidget = useCallback(() => {
-    if (overlay?.alerts && selectedWidget !== WidgetsKinds.ALERTS) {
-      setSelectedWidget(WidgetsKinds.ALERTS);
-      setWidgetData(overlay?.alerts);
-    } else {
-      setSelectedWidget(null);
-      setWidgetData(null);
-    }
-  }, [setSelectedWidget, setWidgetData, overlay?.alerts, selectedWidget]);
+  const toggleWidget = useCallback(
+    (widgetKind: WidgetsKinds) => {
+      if (overlay?.alerts && selectedWidget !== widgetKind) {
+        setSelectedWidget(widgetKind);
+        setWidgetData(overlay?.alerts);
+      } else {
+        setSelectedWidget(null);
+        setWidgetData(null);
+      }
+    },
+    [setSelectedWidget, setWidgetData, overlay?.alerts, selectedWidget]
+  );
 
   return (
     <Container>
@@ -56,9 +59,17 @@ const SideBar = () => {
             {overlay?.alerts && (
               <WidgetsItem
                 isFocused={selectedWidget === WidgetsKinds.ALERTS}
-                onClick={handleSelectAlertWidget}
+                onClick={() => toggleWidget(WidgetsKinds.ALERTS)}
               >
                 Alerts
+              </WidgetsItem>
+            )}
+            {overlay?.alerts && (
+              <WidgetsItem
+                isFocused={selectedWidget === WidgetsKinds.DONATION_BAR}
+                onClick={() => toggleWidget(WidgetsKinds.DONATION_BAR)}
+              >
+                Donation Bar
               </WidgetsItem>
             )}
           </WidgetsList>

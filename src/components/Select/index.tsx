@@ -9,13 +9,6 @@ import {
 } from "@material-ui/core";
 import React, { memo } from "react";
 
-import {
-  AlertVariationLenses,
-  EnterAnimationTypes,
-  ExitAnimationTypes,
-  TextPositions,
-} from "../../types/alerts";
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
@@ -38,13 +31,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface Option {
   label: string;
-  value: TextPositions | EnterAnimationTypes | ExitAnimationTypes | string;
+  value: string;
 }
 
 interface SelectProps {
   options: Option[];
   size?: "large";
-  inputName: AlertVariationLenses;
+  inputName: string;
   inputLabel: string;
   onChange:
     | ((

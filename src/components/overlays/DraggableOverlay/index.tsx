@@ -5,13 +5,14 @@ import { useQueryString } from "../../../hooks/useQueryString";
 import {
   getUserOverlay,
   updateAlertVariation,
-  WidgetsKinds,
 } from "../../../services/overlays";
+import { updateDonationBar } from "../../../services/overlays/donationBar";
 import { EventData } from "../../../types/ifttt";
-import { OverlayData } from "../../../types/overlays";
+import { OverlayData, WidgetsKinds } from "../../../types/overlays";
 import { useErrorHandlingContext } from "../../ErrorHandlingContext";
-import Alert from "./Alert";
-import Draggable from "./Draggable";
+import Draggable from "../Draggable";
+import Alert from "../widgets/alerts/DraggableAlert";
+import DonationBar from "../widgets/donationBars/DraggableDonationBar";
 import { Container } from "./style";
 
 const transactionData: EventData = {
@@ -24,10 +25,11 @@ const DraggableOverlay = () => {
   const [hiddenWidgetsString] = useQueryString("hiddenWidgets");
   const [overlay, setOverlay] = useState<OverlayData>();
   const [draggedWidget, setDraggedWidget] = useState<string>();
-  const { overlayId, herotag } = useParams<{
-    overlayId: string;
-    herotag: string;
-  }>();
+  const { overlayId, herotag } =
+    useParams<{
+      overlayId: string;
+      herotag: string;
+    }>();
   const { handleError } = useErrorHandlingContext();
 
   const hiddenWidgets = useMemo(() => {
@@ -70,15 +72,35 @@ const DraggableOverlay = () => {
               offsetTop,
               offsetLeft,
             });
-
-            await getOverlay();
           } catch (error) {
             handleError(error.message);
           }
         }
-
-        setDraggedWidget(undefined);
       }
+
+      if (
+        widgetKind === WidgetsKinds.DONATION_BAR &&
+        overlay.donationBar &&
+        herotag
+      ) {
+        try {
+          await updateDonationBar(herotag, overlay._id, {
+            ...overlay.donationBar,
+            offsetTop,
+            offsetLeft,
+          });
+        } catch (error) {
+          handleError(error.message);
+        }
+      }
+
+      try {
+        await getOverlay();
+      } catch (error) {
+        handleError(error.message);
+      }
+
+      setDraggedWidget(undefined);
     },
     [setDraggedWidget, herotag, overlay, getOverlay, handleError]
   );
@@ -102,6 +124,7 @@ const DraggableOverlay = () => {
             widgetId={alertVariation._id}
             positionData={positionData}
             onDragEnd={handleOnDragEnd}
+            widgetKind={WidgetsKinds.ALERTS}
           >
             <Alert
               key={alertVariation._id}
@@ -111,6 +134,24 @@ const DraggableOverlay = () => {
           </Draggable>
         );
       })}
+      {overlay?.donationBar && (
+        <Draggable
+          isSelected={draggedWidget === overlay?.donationBar._id}
+          selectWidget={(_id?: string) => setDraggedWidget(_id)}
+          widgetId={overlay?.donationBar._id}
+          positionData={{
+            offsetTop: overlay.donationBar.offsetTop || 0,
+            offsetLeft: overlay.donationBar.offsetLeft || 0,
+          }}
+          widgetKind={WidgetsKinds.DONATION_BAR}
+          onDragEnd={handleOnDragEnd}
+        >
+          <DonationBar
+            donationBar={overlay.donationBar}
+            progression={56}
+          ></DonationBar>
+        </Draggable>
+      )}
     </Container>
   );
 };

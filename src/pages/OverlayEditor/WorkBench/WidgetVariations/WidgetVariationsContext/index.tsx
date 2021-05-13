@@ -8,8 +8,11 @@ import React, {
 import { useAuth } from "../../../../../components/AuthContext";
 import { useErrorHandlingContext } from "../../../../../components/ErrorHandlingContext";
 import { colors } from "../../../../../constants/colors";
-import { WidgetsKinds } from "../../../../../services/overlays";
-import { VariationGroup, WidgetVariation } from "../../../../../types/overlays";
+import {
+  VariationGroup,
+  WidgetsKinds,
+  WidgetVariation,
+} from "../../../../../types/overlays";
 import { useEditorContext } from "../../../Context";
 
 interface ContextProps {
