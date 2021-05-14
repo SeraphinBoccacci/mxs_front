@@ -1,7 +1,10 @@
 import React from "react";
 
-import { WidgetsKinds } from "../../../../services/overlays";
-import { VariationGroup, WidgetVariation } from "../../../../types/overlays";
+import {
+  VariationGroup,
+  WidgetsKinds,
+  WidgetVariation,
+} from "../../../../types/overlays";
 import Panel from "./Panel";
 import WidgetVariationsContextProvider from "./WidgetVariationsContext";
 

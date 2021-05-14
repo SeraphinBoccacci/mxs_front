@@ -8,12 +8,12 @@ import {
   createAlertVariationsGroup,
   deleteAlertVariation,
   updateAlertVariation,
-  WidgetsKinds,
 } from "../../../services/overlays";
 import {
   deleteAlertsVariationsGroup,
   updateAlertVariationsGroups,
 } from "../../../services/overlays/alerts";
+import { WidgetsKinds } from "../../../types/overlays";
 import { useEditorContext } from "../Context";
 import AddWidget from "./AddWidget";
 import { Container, Iframe, PlayableOverlayContainer } from "./style";

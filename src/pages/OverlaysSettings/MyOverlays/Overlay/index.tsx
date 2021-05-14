@@ -33,7 +33,7 @@ const Overlay = ({ overlay }: OverlayProps) => {
   return (
     <Container>
       <ImageContainer>
-        <Image src="https://miro.medium.com/max/4800/1*iwyvpHWogyqrNmNFI2qb9g.jpeg"></Image>
+        <Image src="https://live.staticflickr.com/2230/2407413452_5b22ee5f86_b.jpg"></Image>
       </ImageContainer>
       <Buttons>
         <Button>

@@ -2,7 +2,8 @@ import React, { useCallback } from "react";
 
 import { useAuth } from "../../../../components/AuthContext";
 import { useErrorHandlingContext } from "../../../../components/ErrorHandlingContext";
-import { addWidget, WidgetsKinds } from "../../../../services/overlays";
+import { addWidget } from "../../../../services/overlays";
+import { WidgetsKinds } from "../../../../types/overlays";
 import { useEditorContext } from "../../Context";
 import { Background, Container, WidgetButton } from "./style";
 
@@ -42,7 +43,12 @@ const AddWidget = () => {
         >
           Alerts
         </WidgetButton>
-        <WidgetButton disabled>Donation Bar</WidgetButton>
+        <WidgetButton
+          disabled={!!overlay?.donationBar}
+          onClick={() => handleAddWidget(WidgetsKinds.DONATION_BAR)}
+        >
+          Donation Bar
+        </WidgetButton>
         <WidgetButton disabled>Particles Fall</WidgetButton>
         <WidgetButton disabled>Top Donators</WidgetButton>
       </Container>
