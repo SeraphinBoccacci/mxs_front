@@ -79,10 +79,9 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
     selectedWidgetKind,
     setSelectedWidgetKind,
   ] = useState<WidgetsKinds | null>(null);
-  const [
-    widgetToDisplayData,
-    setWidgetToDisplayData,
-  ] = useState<WidgetToDisplayData>();
+  const [widgetToDisplayData, setWidgetToDisplayData] = useState<
+    WidgetToDisplayData
+  >();
 
   const { overlayId } = useParams<{ overlayId: string }>();
   const { herotag } = useAuth();
@@ -175,7 +174,7 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
         setSelectedWidget: setSelectedWidgetKind,
         widgetData,
         setWidgetData,
-        hasAtLeastOneWidget: !!overlay.alerts,
+        hasAtLeastOneWidget: !!overlay.alerts || !!overlay.donationBar,
         overlay,
         getOverlayData,
         groups,

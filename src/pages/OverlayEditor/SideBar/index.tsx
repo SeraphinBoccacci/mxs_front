@@ -29,7 +29,20 @@ const SideBar = () => {
 
   const toggleWidget = useCallback(
     (widgetKind: WidgetsKinds) => {
-      if (overlay?.alerts && selectedWidget !== widgetKind) {
+      if (selectedWidget === widgetKind) {
+        setSelectedWidget(null);
+        setWidgetData(null);
+
+        return;
+      }
+
+      if (overlay?.alerts && widgetKind === WidgetsKinds.ALERTS) {
+        setSelectedWidget(widgetKind);
+        setWidgetData(overlay?.alerts);
+      } else if (
+        overlay?.donationBar &&
+        widgetKind === WidgetsKinds.DONATION_BAR
+      ) {
         setSelectedWidget(widgetKind);
         setWidgetData(overlay?.alerts);
       } else {
@@ -37,7 +50,13 @@ const SideBar = () => {
         setWidgetData(null);
       }
     },
-    [setSelectedWidget, setWidgetData, overlay?.alerts, selectedWidget]
+    [
+      setSelectedWidget,
+      setWidgetData,
+      overlay?.alerts,
+      selectedWidget,
+      overlay?.donationBar,
+    ]
   );
 
   return (
@@ -64,7 +83,7 @@ const SideBar = () => {
                 Alerts
               </WidgetsItem>
             )}
-            {overlay?.alerts && (
+            {overlay?.donationBar && (
               <WidgetsItem
                 isFocused={selectedWidget === WidgetsKinds.DONATION_BAR}
                 onClick={() => toggleWidget(WidgetsKinds.DONATION_BAR)}
