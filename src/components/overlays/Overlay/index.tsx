@@ -7,7 +7,8 @@ import config from "../../../config/config";
 import { getUserOverlay } from "../../../services/overlays";
 import { AlertVariation } from "../../../types/alerts";
 import { OverlayData } from "../../../types/overlays";
-import Alert from "./Alert";
+import Alert from "../widgets/alerts/Alert";
+import DonationBar from "../widgets/donationBars/DonationBar";
 
 export interface TransactionData {
   amount: number;
@@ -59,12 +60,14 @@ const findVariation = (amount: number, variations: AlertVariation[] = []) => {
 };
 
 const Overlay = () => {
-  const { overlayId, herotag } = useParams<{
-    overlayId: string;
-    herotag: string;
-  }>();
+  const { overlayId, herotag } =
+    useParams<{
+      overlayId: string;
+      herotag: string;
+    }>();
   const [overlay, setOverlay] = useState<OverlayData>();
   const [transactionData, setTransactionData] = useState<TransactionData>();
+  const [donationBarProgression, setDonationBarProgression] = useState(0);
   const [alertVariations, setAlertVariations] = useState<
     (AlertVariation & { timestamp: number })[]
   >([]);
@@ -78,6 +81,20 @@ const Overlay = () => {
   useEffect(() => {
     getOverlay();
   }, [overlayId, herotag, getOverlay]);
+
+  const updateDonationBarSentAmount = useCallback(
+    (amount: number) => {
+      const amountToSend = overlay?.donationBar?.donationGoalAmount.value || 1;
+
+      setDonationBarProgression((prevProgression) => {
+        const newProgression =
+          prevProgression + Math.round((amount / amountToSend) * 10000) / 100;
+
+        return newProgression > 100 ? 100 : newProgression;
+      });
+    },
+    [setDonationBarProgression, overlay]
+  );
 
   const displayVariation = useCallback(
     (data: TransactionData, variations: AlertVariation[]) => {
@@ -110,18 +127,22 @@ const Overlay = () => {
       },
     });
 
+    // Donation progression will be dynamically updated through socket
+    // but in case of a refresh, it can be refetch because it is saved in database
     socket.on("newDonation", (data: TransactionData) => {
       if (!overlay) return;
 
       setTransactionData(data);
 
       displayVariation(data, overlay?.alerts?.variations);
+
+      updateDonationBarSentAmount(data.amount);
     });
 
     return () => {
       socket.disconnect();
     };
-  }, [overlay, herotag]);
+  }, [overlay, updateDonationBarSentAmount, displayVariation, herotag]);
 
   return (
     <div>
@@ -135,6 +156,12 @@ const Overlay = () => {
             ></Alert>
           ))}
         </div>
+      )}
+      {overlay?.donationBar && (
+        <DonationBar
+          donationBar={overlay.donationBar}
+          progression={donationBarProgression}
+        ></DonationBar>
       )}
     </div>
   );

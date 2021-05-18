@@ -9,7 +9,6 @@ import React, {
 
 import config from "../../config/config";
 import { uploadFile } from "../../services/user";
-import { AlertVariationLenses } from "../../types/alerts";
 import {
   Controllers,
   ImagePreview,
@@ -18,7 +17,7 @@ import {
 } from "./style";
 
 interface UploadProps {
-  inputName: AlertVariationLenses | string;
+  inputName: string;
   inputLabel: string;
   isAudio?: boolean;
   value?: string;

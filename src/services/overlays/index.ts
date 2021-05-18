@@ -1,5 +1,5 @@
 import config from "../../config/config";
-import { OverlayData } from "../../types/overlays";
+import { OverlayData, WidgetsKinds } from "../../types/overlays";
 import { axiosDelete, axiosGet, axiosPost } from "../../utils/axios";
 import {
   createAlertVariation,
@@ -47,10 +47,6 @@ const deleteOverlay = async (herotag: string, overlayId: string) => {
 
   return res || [];
 };
-
-export enum WidgetsKinds {
-  "ALERTS" = "ALERTS",
-}
 
 const addWidget = async (
   herotag: string,

@@ -11,17 +11,16 @@ import React, {
 import { useParams } from "react-router";
 
 import { useAuth } from "../../../components/AuthContext";
-import { useErrorHandlingContext } from "../../../components/ErrorHandlingContext";
 import LoadingScreen from "../../../components/LoadingScreen";
-import {
-  getAlertVariation,
-  getUserOverlay,
-  updateAlertVariation,
-  WidgetsKinds,
-} from "../../../services/overlays";
+import { getAlertVariation, getUserOverlay } from "../../../services/overlays";
 import { Alerts, AlertVariation } from "../../../types/alerts";
-import { OverlayData, VariationGroup } from "../../../types/overlays";
-import AlertVariationEditionModal from "../AlertVariationEditionModal";
+import {
+  OverlayData,
+  VariationGroup,
+  WidgetsKinds,
+} from "../../../types/overlays";
+import AlertVariationEditionModal from "../modals/AlertVariationEditionModal";
+import DonationBarEditionModal from "../modals/DonationBarEditionModal";
 
 interface WidgetToDisplayData {
   widgetKind: WidgetsKinds;
@@ -41,7 +40,6 @@ interface ContextProps {
   groups: VariationGroup[];
   setGroups: Dispatch<SetStateAction<VariationGroup[]>>;
   focusOnVariation: (variation: AlertVariation) => void;
-  updateVariation: (updatedVariation: AlertVariation) => void;
   toggleWidgetVisibility: (widgetId: string) => void;
   hiddenWidgets: string[];
   widgetToDisplayData?: WidgetToDisplayData;
@@ -60,7 +58,6 @@ const Context = createContext<ContextProps>({
   groups: [],
   setGroups: () => {},
   focusOnVariation: () => {},
-  updateVariation: () => {},
   toggleWidgetVisibility: () => {},
   hiddenWidgets: [],
   displayWidget: () => {},
@@ -72,22 +69,22 @@ interface EditorContextProviderProps {
 
 const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
   const [isAddWidgetOpenned, setIsAddWidgetOpenned] = useState(false);
-  const [
-    selectedWidgetKind,
-    setSelectedWidgetKind,
-  ] = useState<WidgetsKinds | null>(null);
   const [hiddenWidgets, setHiddenWidgets] = useState<string[]>([]);
   const [widgetData, setWidgetData] = useState<Alerts | null>(null);
   const [overlay, setOverlay] = useState<OverlayData>();
   const [groups, setGroups] = useState<VariationGroup[]>([]);
-  const [
-    widgetToDisplayData,
-    setWidgetToDisplayData,
-  ] = useState<WidgetToDisplayData>();
   const [focusedVariation, setFocusedVariation] = useState<AlertVariation>();
-  const { herotag } = useAuth();
+
+  const [
+    selectedWidgetKind,
+    setSelectedWidgetKind,
+  ] = useState<WidgetsKinds | null>(null);
+  const [widgetToDisplayData, setWidgetToDisplayData] = useState<
+    WidgetToDisplayData
+  >();
+
   const { overlayId } = useParams<{ overlayId: string }>();
-  const { handleError } = useErrorHandlingContext();
+  const { herotag } = useAuth();
 
   const getOverlayData = useCallback(async () => {
     if (!herotag) return;
@@ -105,21 +102,6 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
     getOverlayData();
   }, [getOverlayData]);
 
-  const updateVariation = useCallback(
-    async (updatedVariation: AlertVariation) => {
-      try {
-        if (overlay?._id && herotag) {
-          await updateAlertVariation(herotag, overlay?._id, updatedVariation);
-
-          await getOverlayData();
-        }
-      } catch (error) {
-        handleError(error.message);
-      }
-    },
-    [getOverlayData, handleError, herotag, overlay?._id]
-  );
-
   const focusOnVariation = useCallback(
     (variation: AlertVariation) => {
       setFocusedVariation(variation);
@@ -128,8 +110,14 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
   );
 
   const handleClose = useCallback(() => {
-    setFocusedVariation(undefined);
-  }, [setFocusedVariation]);
+    if (selectedWidgetKind === WidgetsKinds.ALERTS) {
+      setFocusedVariation(undefined);
+    }
+
+    if (selectedWidgetKind === WidgetsKinds.DONATION_BAR) {
+      setSelectedWidgetKind(null);
+    }
+  }, [setFocusedVariation, setSelectedWidgetKind, selectedWidgetKind]);
 
   const toggleWidgetVisibility = useCallback(
     (widgetId: string) => {
@@ -186,13 +174,12 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
         setSelectedWidget: setSelectedWidgetKind,
         widgetData,
         setWidgetData,
-        hasAtLeastOneWidget: !!overlay.alerts,
+        hasAtLeastOneWidget: !!overlay.alerts || !!overlay.donationBar,
         overlay,
         getOverlayData,
         groups,
         setGroups,
         focusOnVariation,
-        updateVariation,
         toggleWidgetVisibility,
         hiddenWidgets,
         widgetToDisplayData,
@@ -202,9 +189,13 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
       {children}
       <AlertVariationEditionModal
         onClose={handleClose}
-        updateVariation={updateVariation}
         variationData={focusedVariation}
       ></AlertVariationEditionModal>
+      <DonationBarEditionModal
+        onClose={handleClose}
+        donationBarData={overlay.donationBar}
+        isOpen={selectedWidgetKind === WidgetsKinds.DONATION_BAR}
+      ></DonationBarEditionModal>
     </Context.Provider>
   );
 };

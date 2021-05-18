@@ -1,9 +1,9 @@
 import React from "react";
 
-import { WidgetsKinds } from "../../../services/overlays";
 import { AlertVariation } from "../../../types/alerts";
 import { EventData } from "../../../types/ifttt";
-import Alert from "./Alert";
+import { WidgetsKinds } from "../../../types/overlays";
+import Alert from "../widgets/alerts/PlayableAlert";
 import { Container } from "./style";
 
 const transactionData: EventData = {
