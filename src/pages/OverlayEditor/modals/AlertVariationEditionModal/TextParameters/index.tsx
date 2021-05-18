@@ -88,7 +88,8 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
             inputLabel="Font Color"
             inputName={AlertVariationLenses.text_color}
             value={formData?.[AlertVariationLenses.text_color]}
-            width="8rem"
+            isColorPicker
+            width="11rem"
           ></Input>
         </SectionRow>
         <SectionRow>
@@ -147,7 +148,8 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
               inputLabel="Stroke Color"
               inputName={AlertVariationLenses.text_stroke_color}
               value={formData?.[AlertVariationLenses.text_stroke_color]}
-              width="8rem"
+              isColorPicker
+              width="11rem"
             ></Input>
           </SectionRow>
         </SubSection>

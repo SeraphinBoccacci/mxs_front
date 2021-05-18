@@ -40,7 +40,8 @@ const BorderParameters = ({
             inputName={DonationBarLenses.border_color}
             onChange={handleOnChange}
             value={formData?.border_color}
-            width="10rem"
+            width="11rem"
+            isColorPicker
           ></Input>
           <Input
             inputLabel="Border Radius"

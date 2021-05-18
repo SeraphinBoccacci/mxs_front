@@ -58,7 +58,8 @@ const ReactionParameters = ({
             }
             value={formData?.donationReaction_fillSentAmountPart_color}
             onChange={handleOnChange}
-            width="14rem"
+            width="11rem"
+            isColorPicker
           ></Input>
           <Select
             inputName={

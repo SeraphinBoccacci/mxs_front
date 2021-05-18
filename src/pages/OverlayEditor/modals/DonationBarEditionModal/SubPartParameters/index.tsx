@@ -32,7 +32,8 @@ const DonationBarSubPart = ({
             inputName={colorLense}
             onChange={handleOnChange}
             value={formData?.[colorLense]}
-            width="8rem"
+            isColorPicker
+            width="11rem"
           ></Input>
         </SectionRow>
       </SectionContent>

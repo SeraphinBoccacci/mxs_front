@@ -1,6 +1,6 @@
 module.exports = {
   local: {
-    "default-src": ["*", "'unsafe-inline'"],
+    "default-src": ["*", "data:", "'unsafe-inline'"],
   },
   production: {
     "default-src": ["'self'", "*", "data:", "https:"],
