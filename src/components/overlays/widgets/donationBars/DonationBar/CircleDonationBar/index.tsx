@@ -98,8 +98,10 @@ const CircleDonationBar = ({
       contentWidth={donationBar.displaySettings.width}
       duration={donationBar.donationReaction.duration}
       animation={donationBar.donationReaction.animateBarDisplay?.kind}
+      offsetLeft={donationBar.offsetLeft}
+      offsetTop={donationBar.offsetTop}
     >
-      {shouldReact && (
+      {shouldReact && donationBar?.donationReaction?.soundPath && (
         <audio
           autoPlay
           src={`${config.url}/audios/${`${
@@ -108,12 +110,18 @@ const CircleDonationBar = ({
         ></audio>
       )}
       {!!sentAmountPartText && (
-        <SubPartContainer ref={amountSent}>
+        <SubPartContainer
+          ref={amountSent}
+          textColor={donationBar.sentAmountPart?.textColor}
+        >
           {sentAmountPartText}
         </SubPartContainer>
       )}
       {!!amountLeftToSendPartText && (
-        <SubPartContainer ref={amountLeftToSend}>
+        <SubPartContainer
+          ref={amountLeftToSend}
+          textColor={donationBar.amountToSendPart?.textColor}
+        >
           {amountLeftToSendPartText}
         </SubPartContainer>
       )}
@@ -148,12 +156,14 @@ const CircleDonationBar = ({
           r="50"
         />
       </Svg>
-      <Cursor
-        shouldReact={shouldReact}
-        animation={donationBar.donationReaction.animateLogo?.kind}
-        progression={progression}
-        src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
-      ></Cursor>
+      {donationBar?.centerCursorPath && (
+        <Cursor
+          shouldReact={shouldReact}
+          animation={donationBar.donationReaction.animateLogo?.kind}
+          progression={progression}
+          src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
+        ></Cursor>
+      )}
       <DonationDescription
         position={donationBar.donationBarDescription?.position}
       >

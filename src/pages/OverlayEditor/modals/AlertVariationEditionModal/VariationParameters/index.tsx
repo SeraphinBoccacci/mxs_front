@@ -69,7 +69,8 @@ const VariationParameters = ({
             inputName={AlertVariationLenses.backgroundColor}
             onChange={handleOnChange}
             value={formData?.backgroundColor || "#ffffff"}
-            width="8rem"
+            isColorPicker
+            width="11rem"
           ></Input>
           <Input
             inputLabel="Width"

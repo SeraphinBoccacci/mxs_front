@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { colors } from "../../../../constants";
 import { FlexRow } from "../../../../styles/global";
@@ -33,6 +33,7 @@ export const Content = styled(FlexRow)<ContentProps>`
 interface SubPartProps {
   progression: number;
   duration?: number;
+  textColor?: string;
 }
 
 const SubPart = styled.div<SubPartProps>`
@@ -40,6 +41,7 @@ const SubPart = styled.div<SubPartProps>`
   font-size: 1.1rem;
 
   text-align: center;
+  color: ${({ textColor }) => textColor};
 
   display: flex;
   flex-direction: column;
@@ -89,3 +91,45 @@ export const AmountToSendPart = styled(SubPart)<AmountToSendPartProps>`
 
   background: ${({ color = colors.primary }) => color};
 `;
+
+interface CursorContainerProps {
+  progression: number;
+  display?: DonationBarDisplays;
+  containerHeight?: number;
+  containerWidth?: number;
+}
+
+const computeCursorMinorOffset = (size: number) => {
+  return `-${size * 0.1}px`;
+};
+
+const computeCursorMajorOffset = (size: number) => {
+  return `${size * 0.6}px`;
+};
+
+const computeCursorSize = (size: number) => {
+  return `${size * 1.2}px`;
+};
+
+export const resolveCursorPosition = (display: DonationBarDisplays) => {
+  if (display === DonationBarDisplays.Vertical)
+    return css<CursorContainerProps>`
+      bottom: ${({ progression, containerWidth = 50 }) =>
+        `calc(${progression}% - ${computeCursorMajorOffset(containerWidth)})`};
+      left: ${({ containerWidth = 50 }) =>
+        computeCursorMinorOffset(containerWidth)};
+
+      height: ${({ containerWidth = 50 }) => computeCursorSize(containerWidth)};
+      width: ${({ containerWidth = 50 }) => computeCursorSize(containerWidth)};
+    `;
+
+  return css<CursorContainerProps>`
+    left: ${({ progression, containerHeight = 50 }) =>
+      `calc(${progression}% - ${computeCursorMajorOffset(containerHeight)})`};
+    bottom: ${({ containerHeight = 50 }) =>
+      computeCursorMinorOffset(containerHeight)};
+
+    height: ${({ containerHeight = 50 }) => computeCursorSize(containerHeight)};
+    width: ${({ containerHeight = 50 }) => computeCursorSize(containerHeight)};
+  `;
+};

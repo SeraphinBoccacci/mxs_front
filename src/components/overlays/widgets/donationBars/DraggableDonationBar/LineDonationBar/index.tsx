@@ -40,17 +40,21 @@ const LineDonationBar = ({
       offsetLeft={donationBar.offsetLeft}
       offsetTop={donationBar.offsetTop}
     >
-      {donationBar.centerCursorPath ? (
+      {donationBar.centerCursorPath && (
         <StyledImageContainer
           display={donationBar.displaySettings.kind}
           progression={progression}
+          containerWidth={donationBar.displaySettings.width}
+          containerHeight={
+            (donationBar.displaySettings as LineDisplaySettings).height
+          }
         >
           <StyledImageScreen></StyledImageScreen>
           <Cursor
             src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
           ></Cursor>
         </StyledImageContainer>
-      ) : null}
+      )}
       <Content
         display={donationBar.displaySettings.kind}
         borderWidth={donationBar.border?.width}
@@ -61,6 +65,7 @@ const LineDonationBar = ({
           display={donationBar.displaySettings.kind}
           duration={donationBar.donationReaction.duration}
           color={donationBar.sentAmountPart?.color}
+          textColor={donationBar.sentAmountPart?.textColor}
           progression={progression}
         >
           <div>{sentAmountPartText}</div>
@@ -69,6 +74,7 @@ const LineDonationBar = ({
           display={donationBar.displaySettings.kind}
           duration={donationBar.donationReaction.duration}
           color={donationBar.amountToSendPart?.color}
+          textColor={donationBar.amountToSendPart?.textColor}
           progression={progression}
         >
           <div>{amountLeftToSendPartText}</div>

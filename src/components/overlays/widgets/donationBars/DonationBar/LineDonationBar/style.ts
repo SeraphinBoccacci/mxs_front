@@ -6,6 +6,7 @@ import {
   LogoAnimations,
 } from "../../../../../../types/donationBar";
 import { logoAnimationsMapper } from "../../styles.donationBar";
+import { resolveCursorPosition } from "../../styles.lineDonationBar";
 
 interface DonationBarContainerProps {
   width?: number;
@@ -45,23 +46,15 @@ interface CursorContainerProps {
   duration?: number;
   animation?: LogoAnimations;
   shouldReact: boolean;
+  containerHeight?: number;
+  containerWidth?: number;
 }
 
 export const Cursor = styled.img<CursorContainerProps>`
   position: absolute;
 
-  bottom: ${({ progression, display }) =>
-    display === DonationBarDisplays.Vertical
-      ? `calc(${progression}% - 2rem)`
-      : "-0.5rem"};
-  left: ${({ progression, display }) =>
-    display === DonationBarDisplays.Vertical
-      ? "-0.5rem"
-      : `calc(${progression}% - 2rem)`};
-
-  height: 4rem;
-  width: 4rem;
-
+  ${({ display = DonationBarDisplays.Horizontal }) =>
+    resolveCursorPosition(display)}
   z-index: 100;
 
   border-radius: 10000px;
