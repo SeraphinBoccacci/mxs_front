@@ -9,7 +9,6 @@ import { updateDonationBar } from "../../../../services/overlays/donationBar";
 import {
   DonationBar,
   DonationBarFormData,
-  DonationBarLenses,
 } from "../../../../types/donationBar";
 import { TextStyles } from "../../../../types/style";
 import { useEditorContext } from "../../Context";
@@ -23,10 +22,8 @@ import {
 } from "../styles";
 import BorderParameters from "./BorderParameters";
 import CursorParameters from "./CursorParameters";
-import DescriptionParameters from "./DescriptionParameters";
 import GlobalParameters from "./GlobalParameters";
 import ReactionParameters from "./ReactionParameters";
-import SubPartParameters from "./SubPartParameters";
 import TextParameters from "./TextParameters";
 
 interface DonationBarEditionModalProps {
@@ -135,39 +132,20 @@ const DonationBarEditionModal = ({
           formData={formData}
         ></GlobalParameters>
 
-        <SubPartParameters
-          title="Amount sent part"
+        <BorderParameters
           handleOnChange={handleOnChange}
           formData={formData}
-          colorLense={DonationBarLenses.sentAmountPart_color}
-        ></SubPartParameters>
-
-        <SubPartParameters
-          title="Amount left to send part"
-          handleOnChange={handleOnChange}
-          formData={formData}
-          colorLense={DonationBarLenses.amountToSendPart_color}
-        ></SubPartParameters>
+        ></BorderParameters>
 
         <CursorParameters
           handleOnChange={handleOnChange}
           formData={formData}
         ></CursorParameters>
 
-        <BorderParameters
-          handleOnChange={handleOnChange}
-          formData={formData}
-        ></BorderParameters>
-
         <ReactionParameters
           handleOnChange={handleOnChange}
           formData={formData}
         ></ReactionParameters>
-
-        <DescriptionParameters
-          handleOnChange={handleOnChange}
-          formData={formData}
-        ></DescriptionParameters>
 
         <TextParameters
           handleOnChange={handleOnChange}

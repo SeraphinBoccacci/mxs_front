@@ -33,6 +33,7 @@ export const Content = styled(FlexRow)<ContentProps>`
 interface SubPartProps {
   progression: number;
   duration?: number;
+  textColor?: string;
 }
 
 const SubPart = styled.div<SubPartProps>`
@@ -40,6 +41,7 @@ const SubPart = styled.div<SubPartProps>`
   font-size: 1.1rem;
 
   text-align: center;
+  color: ${({ textColor }) => textColor};
 
   display: flex;
   flex-direction: column;

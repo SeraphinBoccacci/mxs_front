@@ -39,14 +39,18 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
       : ""};
 `;
 
-export const SubPartContainer = styled.div`
+interface SubPartContainerProps {
+  textColor?: string;
+}
+
+export const SubPartContainer = styled.div<SubPartContainerProps>`
   position: absolute;
   width: max-content;
   height: max-content;
 
   font-family: "Noto Sans JP", sans-serif;
   font-size: 1.3rem;
-
+  color: ${({ textColor }) => textColor};
   transition: 0.3s;
 `;
 

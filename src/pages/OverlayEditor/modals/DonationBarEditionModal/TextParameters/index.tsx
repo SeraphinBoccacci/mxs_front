@@ -30,6 +30,16 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
       <SectionTitle>Donation Bar Text Style</SectionTitle>
       <SectionContent>
         <SectionRow>
+          <Input
+            onChange={handleOnChange}
+            inputLabel="Text Content"
+            inputName={DonationBarLenses.donationBarDescription_content}
+            value={formData?.[DonationBarLenses.donationBarDescription_content]}
+            isTextContent
+            width="30rem"
+          ></Input>
+        </SectionRow>
+        <SectionRow>
           <Select
             onChange={handleOnChange}
             options={textPositionsOptions}

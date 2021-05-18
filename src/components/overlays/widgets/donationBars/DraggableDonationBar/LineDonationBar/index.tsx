@@ -65,6 +65,7 @@ const LineDonationBar = ({
           display={donationBar.displaySettings.kind}
           duration={donationBar.donationReaction.duration}
           color={donationBar.sentAmountPart?.color}
+          textColor={donationBar.sentAmountPart?.textColor}
           progression={progression}
         >
           <div>{sentAmountPartText}</div>
@@ -73,6 +74,7 @@ const LineDonationBar = ({
           display={donationBar.displaySettings.kind}
           duration={donationBar.donationReaction.duration}
           color={donationBar.amountToSendPart?.color}
+          textColor={donationBar.amountToSendPart?.textColor}
           progression={progression}
         >
           <div>{amountLeftToSendPartText}</div>
