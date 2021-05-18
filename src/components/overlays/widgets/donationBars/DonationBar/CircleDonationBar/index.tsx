@@ -98,6 +98,8 @@ const CircleDonationBar = ({
       contentWidth={donationBar.displaySettings.width}
       duration={donationBar.donationReaction.duration}
       animation={donationBar.donationReaction.animateBarDisplay?.kind}
+      offsetLeft={donationBar.offsetLeft}
+      offsetTop={donationBar.offsetTop}
     >
       {shouldReact && donationBar?.donationReaction?.soundPath && (
         <audio
