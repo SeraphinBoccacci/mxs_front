@@ -24,7 +24,6 @@ import {
 import BorderParameters from "./BorderParameters";
 import CursorParameters from "./CursorParameters";
 import DescriptionParameters from "./DescriptionParameters";
-import DisplayParameters from "./DisplayParameters";
 import GlobalParameters from "./GlobalParameters";
 import ReactionParameters from "./ReactionParameters";
 import SubPartParameters from "./SubPartParameters";
@@ -135,11 +134,6 @@ const DonationBarEditionModal = ({
           handleOnChange={handleOnChange}
           formData={formData}
         ></GlobalParameters>
-
-        <DisplayParameters
-          handleOnChange={handleOnChange}
-          formData={formData}
-        ></DisplayParameters>
 
         <SubPartParameters
           title="Amount sent part"
