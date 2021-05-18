@@ -47,7 +47,7 @@ const LineDonationBar = ({
       shouldReact={shouldReact}
       animation={donationBar.donationReaction.animateBarDisplay?.kind}
     >
-      {shouldReact && (
+      {shouldReact && donationBar?.donationReaction?.soundPath && (
         <audio
           autoPlay
           src={`${config.url}/audios/${`${
@@ -55,7 +55,7 @@ const LineDonationBar = ({
           }?ts=${Date.now()}`}`}
         ></audio>
       )}
-      {donationBar.centerCursorPath ? (
+      {donationBar.centerCursorPath && (
         <Cursor
           display={donationBar.displaySettings.kind}
           duration={donationBar.donationReaction.duration}
@@ -64,7 +64,7 @@ const LineDonationBar = ({
           shouldReact={shouldReact}
           src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
         ></Cursor>
-      ) : null}
+      )}
       <Content
         display={donationBar.displaySettings.kind}
         borderWidth={donationBar.border?.width}

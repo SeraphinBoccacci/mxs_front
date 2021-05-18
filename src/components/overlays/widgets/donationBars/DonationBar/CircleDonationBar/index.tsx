@@ -99,7 +99,7 @@ const CircleDonationBar = ({
       duration={donationBar.donationReaction.duration}
       animation={donationBar.donationReaction.animateBarDisplay?.kind}
     >
-      {shouldReact && (
+      {shouldReact && donationBar?.donationReaction?.soundPath && (
         <audio
           autoPlay
           src={`${config.url}/audios/${`${
@@ -148,12 +148,14 @@ const CircleDonationBar = ({
           r="50"
         />
       </Svg>
-      <Cursor
-        shouldReact={shouldReact}
-        animation={donationBar.donationReaction.animateLogo?.kind}
-        progression={progression}
-        src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
-      ></Cursor>
+      {donationBar?.centerCursorPath && (
+        <Cursor
+          shouldReact={shouldReact}
+          animation={donationBar.donationReaction.animateLogo?.kind}
+          progression={progression}
+          src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
+        ></Cursor>
+      )}
       <DonationDescription
         position={donationBar.donationBarDescription?.position}
       >

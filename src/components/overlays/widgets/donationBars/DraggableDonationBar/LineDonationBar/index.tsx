@@ -40,7 +40,7 @@ const LineDonationBar = ({
       offsetLeft={donationBar.offsetLeft}
       offsetTop={donationBar.offsetTop}
     >
-      {donationBar.centerCursorPath ? (
+      {donationBar.centerCursorPath && (
         <StyledImageContainer
           display={donationBar.displaySettings.kind}
           progression={progression}
@@ -50,7 +50,7 @@ const LineDonationBar = ({
             src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
           ></Cursor>
         </StyledImageContainer>
-      ) : null}
+      )}
       <Content
         display={donationBar.displaySettings.kind}
         borderWidth={donationBar.border?.width}
