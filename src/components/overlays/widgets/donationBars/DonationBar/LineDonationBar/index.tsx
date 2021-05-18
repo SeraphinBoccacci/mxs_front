@@ -63,6 +63,10 @@ const LineDonationBar = ({
           animation={donationBar.donationReaction.animateLogo?.kind}
           shouldReact={shouldReact}
           src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
+          containerWidth={donationBar.displaySettings.width}
+          containerHeight={
+            (donationBar.displaySettings as LineDisplaySettings).height
+          }
         ></Cursor>
       )}
       <Content

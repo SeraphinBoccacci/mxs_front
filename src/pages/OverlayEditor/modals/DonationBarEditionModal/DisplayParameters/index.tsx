@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import Input from "../../../../../components/Input";
 import Select from "../../../../../components/Select";
@@ -24,6 +24,47 @@ const DisplayParameters = ({
   handleOnChange,
   formData,
 }: DisplayParametersProps) => {
+  const changeSize = useCallback(
+    (name: string, value: number = 0) => {
+      handleOnChange({
+        target: {
+          name,
+          value,
+        },
+      });
+    },
+    [handleOnChange]
+  );
+
+  const handleDisplayChange = useCallback(
+    (event) => {
+      const isHeightGreaterThanWidth =
+        (formData?.displaySettings_height || 0) >
+        (formData?.displaySettings_width || 0);
+
+      const shouldInvertWidthAndHeight =
+        (event.target.value === DonationBarDisplays.Horizontal &&
+          isHeightGreaterThanWidth) ||
+        (event.target.value === DonationBarDisplays.Vertical &&
+          !isHeightGreaterThanWidth);
+
+      if (shouldInvertWidthAndHeight) {
+        changeSize(
+          DonationBarLenses.displaySettings_width,
+          formData?.displaySettings_height
+        );
+
+        changeSize(
+          DonationBarLenses.displaySettings_height,
+          formData?.displaySettings_width
+        );
+      }
+
+      handleOnChange(event);
+    },
+    [handleOnChange, formData, changeSize]
+  );
+
   return (
     <Section>
       <SectionTitle>Display</SectionTitle>
@@ -33,7 +74,7 @@ const DisplayParameters = ({
           <Select
             inputName={DonationBarLenses.displaySettings_kind}
             inputLabel="Kind"
-            onChange={handleOnChange}
+            onChange={handleDisplayChange}
             options={donationBarDisplayOptions}
             value={formData.displaySettings_kind}
           ></Select>

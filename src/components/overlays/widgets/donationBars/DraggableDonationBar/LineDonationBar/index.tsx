@@ -44,6 +44,10 @@ const LineDonationBar = ({
         <StyledImageContainer
           display={donationBar.displaySettings.kind}
           progression={progression}
+          containerWidth={donationBar.displaySettings.width}
+          containerHeight={
+            (donationBar.displaySettings as LineDisplaySettings).height
+          }
         >
           <StyledImageScreen></StyledImageScreen>
           <Cursor
