@@ -30,6 +30,16 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
       <SectionTitle>Donation Bar Text Style</SectionTitle>
       <SectionContent>
         <SectionRow>
+          <Input
+            onChange={handleOnChange}
+            inputLabel="Text Content"
+            inputName={DonationBarLenses.donationBarDescription_content}
+            value={formData?.[DonationBarLenses.donationBarDescription_content]}
+            isTextContent
+            width="30rem"
+          ></Input>
+        </SectionRow>
+        <SectionRow>
           <Select
             onChange={handleOnChange}
             options={textPositionsOptions}
@@ -74,7 +84,8 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
             inputLabel="Font Color"
             inputName={DonationBarLenses.donationBarDescription_color}
             value={formData?.[DonationBarLenses.donationBarDescription_color]}
-            width="8rem"
+            isColorPicker
+            width="11rem"
           ></Input>
         </SectionRow>
         <SectionRow>
@@ -142,7 +153,7 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
               }
               type="number"
               endAdornment="px"
-              width="8rem"
+              width="9rem"
             ></Input>
             <Input
               onChange={handleOnChange}
@@ -153,7 +164,8 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
                   DonationBarLenses.donationBarDescription_stroke_color
                 ]
               }
-              width="8rem"
+              isColorPicker
+              width="11rem"
             ></Input>
           </SectionRow>
         </SubSection>

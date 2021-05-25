@@ -11,6 +11,7 @@ import {
   SectionRow,
   SectionTitle,
 } from "../../styles";
+import { RowTitle } from "./style";
 
 interface BorderParametersProps {
   handleOnChange: (event: any) => void;
@@ -40,7 +41,8 @@ const BorderParameters = ({
             inputName={DonationBarLenses.border_color}
             onChange={handleOnChange}
             value={formData?.border_color}
-            width="10rem"
+            width="11rem"
+            isColorPicker
           ></Input>
           <Input
             inputLabel="Border Radius"
@@ -50,6 +52,44 @@ const BorderParameters = ({
             type="number"
             endAdornment="px"
             width="10rem"
+          ></Input>
+        </SectionRow>
+        <SectionRow>
+          <RowTitle>Sent Amount Part</RowTitle>
+          <Input
+            inputLabel="Background Color"
+            inputName={DonationBarLenses.sentAmountPart_color}
+            onChange={handleOnChange}
+            value={formData?.sentAmountPart_color}
+            isColorPicker
+            width="11rem"
+          ></Input>
+          <Input
+            inputLabel="Text Color"
+            inputName={DonationBarLenses.sentAmountPart_textColor}
+            onChange={handleOnChange}
+            value={formData?.sentAmountPart_textColor}
+            isColorPicker
+            width="11rem"
+          ></Input>
+        </SectionRow>
+        <SectionRow>
+          <RowTitle>Amount Left To Send Part</RowTitle>
+          <Input
+            inputLabel="Background Color"
+            inputName={DonationBarLenses.amountToSendPart_color}
+            onChange={handleOnChange}
+            value={formData?.amountToSendPart_color}
+            isColorPicker
+            width="11rem"
+          ></Input>
+          <Input
+            inputLabel="Text Color"
+            inputName={DonationBarLenses.amountToSendPart_textColor}
+            onChange={handleOnChange}
+            value={formData?.amountToSendPart_textColor}
+            isColorPicker
+            width="11rem"
           ></Input>
         </SectionRow>
       </SectionContent>

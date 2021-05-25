@@ -38,6 +38,7 @@ export interface LineDisplaySettings {
 
 interface AmountPart {
   color?: string;
+  textColor?: string;
 }
 
 export enum InBarAmountDisplay {
@@ -134,6 +135,8 @@ export enum DonationBarLenses {
   "border_radius" = "border_radius",
   "sentAmountPart_color" = "sentAmountPart_color",
   "amountToSendPart_color" = "amountToSendPart_color",
+  "sentAmountPart_textColor" = "sentAmountPart_textColor",
+  "amountToSendPart_textColor" = "amountToSendPart_textColor",
   "donationReaction_soundPath" = "donationReaction_soundPath",
   "donationReaction_duration" = "donationReaction_duration",
   "donationReaction_fillSentAmountPart_color" = "donationReaction_fillSentAmountPart_color",
@@ -142,33 +145,35 @@ export enum DonationBarLenses {
 }
 
 export interface DonationBarData {
-  offsetTop?: number; //done line circle
-  offsetLeft?: number; //done line circle
+  offsetTop?: number;
+  offsetLeft?: number;
   indicationDisplay?: number;
-  displaySettings_kind?: DonationBarDisplays; //done line circle
-  displaySettings_width?: number; //done line circle
-  displaySettings_strokeWidth?: number; // done circle
-  displaySettings_height?: number; //done line circle
-  centerCursorPath?: string; //done line circle
+  displaySettings_kind?: DonationBarDisplays;
+  displaySettings_width?: number;
+  displaySettings_strokeWidth?: number;
+  displaySettings_height?: number;
+  centerCursorPath?: string;
   donationGoalAmount_value?: number;
-  donationBarDescription_position?: TextPositions; //done line circle
-  donationBarDescription_content?: string; //done line circle
-  donationBarDescription_width?: number; //done line circle
-  donationBarDescription_height?: number; //done line circle
-  donationBarDescription_size?: string; //done line circle
-  donationBarDescription_color?: string; //done line circle
-  donationBarDescription_lineHeight?: string; //done line circle
-  donationBarDescription_letterSpacing?: string; //done line circle
-  donationBarDescription_wordSpacing?: string; //done line circle
-  donationBarDescription_textAlign?: string; //done line circle
-  donationBarDescription_textStyle?: TextStyles[]; //done line circle
-  donationBarDescription_stroke_width?: number; //done line circle
-  donationBarDescription_stroke_color?: string; //done line circle
-  border_color?: string; //done line
-  border_width?: number; //done line
-  border_radius?: number; //done line
-  sentAmountPart_color?: string; //done line circle
-  amountToSendPart_color?: string; //done line circle
+  donationBarDescription_position?: TextPositions;
+  donationBarDescription_content?: string;
+  donationBarDescription_width?: number;
+  donationBarDescription_height?: number;
+  donationBarDescription_size?: string;
+  donationBarDescription_color?: string;
+  donationBarDescription_lineHeight?: string;
+  donationBarDescription_letterSpacing?: string;
+  donationBarDescription_wordSpacing?: string;
+  donationBarDescription_textAlign?: string;
+  donationBarDescription_textStyle?: TextStyles[];
+  donationBarDescription_stroke_width?: number;
+  donationBarDescription_stroke_color?: string;
+  border_color?: string;
+  border_width?: number;
+  border_radius?: number;
+  sentAmountPart_color?: string;
+  amountToSendPart_color?: string;
+  sentAmountPart_textColor?: string;
+  amountToSendPart_textColor?: string;
   donationReaction_soundPath?: string;
   donationReaction_duration?: number;
   donationReaction_fillSentAmountPart_color?: string;

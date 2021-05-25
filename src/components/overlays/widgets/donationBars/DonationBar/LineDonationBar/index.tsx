@@ -47,7 +47,7 @@ const LineDonationBar = ({
       shouldReact={shouldReact}
       animation={donationBar.donationReaction.animateBarDisplay?.kind}
     >
-      {shouldReact && (
+      {shouldReact && donationBar?.donationReaction?.soundPath && (
         <audio
           autoPlay
           src={`${config.url}/audios/${`${
@@ -55,7 +55,7 @@ const LineDonationBar = ({
           }?ts=${Date.now()}`}`}
         ></audio>
       )}
-      {donationBar.centerCursorPath ? (
+      {donationBar.centerCursorPath && (
         <Cursor
           display={donationBar.displaySettings.kind}
           duration={donationBar.donationReaction.duration}
@@ -63,8 +63,12 @@ const LineDonationBar = ({
           animation={donationBar.donationReaction.animateLogo?.kind}
           shouldReact={shouldReact}
           src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
+          containerWidth={donationBar.displaySettings.width}
+          containerHeight={
+            (donationBar.displaySettings as LineDisplaySettings).height
+          }
         ></Cursor>
-      ) : null}
+      )}
       <Content
         display={donationBar.displaySettings.kind}
         borderWidth={donationBar.border?.width}
@@ -75,6 +79,7 @@ const LineDonationBar = ({
           display={donationBar.displaySettings.kind}
           duration={donationBar.donationReaction.duration}
           color={donationBar.sentAmountPart?.color}
+          textColor={donationBar.sentAmountPart?.textColor}
           progression={progression}
           shouldOverrideColor={shouldReact}
           overrideColor={
@@ -87,6 +92,7 @@ const LineDonationBar = ({
           display={donationBar.displaySettings.kind}
           duration={donationBar.donationReaction.duration}
           color={donationBar.amountToSendPart?.color}
+          textColor={donationBar.amountToSendPart?.textColor}
           progression={progression}
         >
           <div>{amountLeftToSendPartText}</div>

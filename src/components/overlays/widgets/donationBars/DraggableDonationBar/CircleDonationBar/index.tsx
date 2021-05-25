@@ -90,12 +90,18 @@ const CircleDonationBar = ({
   return (
     <DonationBarContainer contentWidth={donationBar.displaySettings.width}>
       {!!sentAmountPartText && (
-        <SubPartContainer ref={amountSent}>
+        <SubPartContainer
+          ref={amountSent}
+          textColor={donationBar.sentAmountPart?.textColor}
+        >
           {sentAmountPartText}
         </SubPartContainer>
       )}
       {!!amountLeftToSendPartText && (
-        <SubPartContainer ref={amountLeftToSend}>
+        <SubPartContainer
+          ref={amountLeftToSend}
+          textColor={donationBar.amountToSendPart?.textColor}
+        >
           {amountLeftToSendPartText}
         </SubPartContainer>
       )}

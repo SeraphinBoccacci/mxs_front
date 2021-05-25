@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { DonationBarDisplays } from "../../../../../../types/donationBar";
+import { resolveCursorPosition } from "../../styles.lineDonationBar";
 
 interface DonationBarContainerProps {
   width?: number;
@@ -23,21 +24,15 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
 interface CursorContainerProps {
   progression: number;
   display?: DonationBarDisplays;
+  containerHeight?: number;
+  containerWidth?: number;
 }
 
 export const StyledImageContainer = styled.div<CursorContainerProps>`
   position: absolute;
-  bottom: ${({ progression, display }) =>
-    display === DonationBarDisplays.Vertical
-      ? `calc(${progression}% - 2rem)`
-      : "-0.5rem"};
-  left: ${({ progression, display }) =>
-    display === DonationBarDisplays.Vertical
-      ? "-0.5rem"
-      : `calc(${progression}% - 2rem)`};
 
-  height: 4rem;
-  width: 4rem;
+  ${({ display = DonationBarDisplays.Horizontal }) =>
+    resolveCursorPosition(display)}
 
   z-index: 1000;
 `;
@@ -57,8 +52,8 @@ export const Cursor = styled.img`
   bottom: 0;
   left: 0;
 
-  height: 4rem;
-  width: 4rem;
+  height: 100%;
+  width: 100%;
 
   z-index: 100;
 

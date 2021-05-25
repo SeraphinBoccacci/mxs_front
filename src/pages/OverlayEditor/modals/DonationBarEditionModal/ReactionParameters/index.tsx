@@ -40,16 +40,7 @@ const ReactionParameters = ({
             isAudio
           ></Upload>
         </SectionRow>
-        <SectionRow>
-          <Input
-            inputLabel="Duration"
-            inputName={DonationBarLenses.donationReaction_duration}
-            value={formData?.donationReaction_duration}
-            onChange={handleOnChange}
-            width="7rem"
-            endAdornment="s"
-          ></Input>
-        </SectionRow>
+
         <SectionRow>
           <Input
             inputLabel="Sent amount part Color"
@@ -58,7 +49,8 @@ const ReactionParameters = ({
             }
             value={formData?.donationReaction_fillSentAmountPart_color}
             onChange={handleOnChange}
-            width="14rem"
+            width="11rem"
+            isColorPicker
           ></Input>
           <Select
             inputName={
@@ -78,6 +70,17 @@ const ReactionParameters = ({
             value={formData.donationReaction_animateLogo_kind}
             size="large"
           ></Select>
+        </SectionRow>
+
+        <SectionRow>
+          <Input
+            inputLabel="Duration"
+            inputName={DonationBarLenses.donationReaction_duration}
+            value={formData?.donationReaction_duration}
+            onChange={handleOnChange}
+            width="7rem"
+            endAdornment="s"
+          ></Input>
         </SectionRow>
       </SectionContent>
     </Section>
