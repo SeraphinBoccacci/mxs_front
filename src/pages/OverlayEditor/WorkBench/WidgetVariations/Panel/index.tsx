@@ -7,17 +7,14 @@ import { useWidgetVariationsContext } from "../WidgetVariationsContext";
 import { Background, Buttons, Container } from "./style";
 
 const Panel = () => {
-  const { setSelectedWidget, setWidgetData } = useEditorContext();
+  const { setSelectedWidget } = useEditorContext();
 
-  const {
-    createVariation,
-    createVariationsGroup,
-  } = useWidgetVariationsContext();
+  const { createVariation, createVariationsGroup } =
+    useWidgetVariationsContext();
 
   const handleCancel = useCallback(() => {
     setSelectedWidget(null);
-    setWidgetData(null);
-  }, [setSelectedWidget, setWidgetData]);
+  }, [setSelectedWidget]);
 
   return (
     <>

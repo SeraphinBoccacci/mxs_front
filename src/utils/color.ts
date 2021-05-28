@@ -26,23 +26,6 @@ export const alphaToHex = (alpha: number = 0) => {
   return ((alpha * 255) | (1 << 8)).toString(16).slice(1);
 };
 
-const componentToHex = (c: number) => {
-  let hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
-};
-
-export const rgbToHex = (color: any) => {
-  console.log("test", alphaToHex(color.a), color.a);
-
-  return (
-    "#" +
-    componentToHex(color.r) +
-    componentToHex(color.g) +
-    componentToHex(color.b) +
-    alphaToHex(color.a)
-  );
-};
-
 export const hexToRgb = (hex: string) => {
   const matcher =
     hex.length === 7

@@ -18,7 +18,8 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
   width: ${({ width = 500 }) => `${width}px`};
   height: ${({ height = 50 }) => `${height}px`};
 
-  border-radius: 5px;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
 `;
 
 interface CursorContainerProps {
@@ -26,6 +27,7 @@ interface CursorContainerProps {
   display?: DonationBarDisplays;
   containerHeight?: number;
   containerWidth?: number;
+  scale?: number;
 }
 
 export const StyledImageContainer = styled.div<CursorContainerProps>`
@@ -33,6 +35,8 @@ export const StyledImageContainer = styled.div<CursorContainerProps>`
 
   ${({ display = DonationBarDisplays.Horizontal }) =>
     resolveCursorPosition(display)}
+
+  transform: ${({ scale = 1 }) => `scale(${scale})`};
 
   z-index: 1000;
 `;

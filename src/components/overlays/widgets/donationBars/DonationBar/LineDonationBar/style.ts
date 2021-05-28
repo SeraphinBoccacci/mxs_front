@@ -38,6 +38,9 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
           transform: translate(-50%, -50%) perspective(500px) translateZ(50px);
         `
       : ""};
+
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
 `;
 
 interface CursorContainerProps {
@@ -48,6 +51,7 @@ interface CursorContainerProps {
   shouldReact: boolean;
   containerHeight?: number;
   containerWidth?: number;
+  scale?: number;
 }
 
 export const Cursor = styled.img<CursorContainerProps>`
@@ -62,4 +66,6 @@ export const Cursor = styled.img<CursorContainerProps>`
   transition: ${({ duration = 1 }) => `${duration}s`};
   ${({ shouldReact, animation }) =>
     shouldReact && logoAnimationsMapper(animation)}
+
+  transform: ${({ scale = 1 }) => `scale(${scale})`};
 `;

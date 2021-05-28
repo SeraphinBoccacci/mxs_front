@@ -1,5 +1,6 @@
 import React from "react";
 
+import SliderInput from "../../../../../components/SliderInput";
 import Upload from "../../../../../components/Upload";
 import {
   DonationBarFormData,
@@ -32,6 +33,21 @@ const CursorParameters = ({
             value={formData?.[DonationBarLenses.centerCursorPath]}
             inputName={DonationBarLenses.centerCursorPath}
           ></Upload>
+        </SectionRow>
+        <SectionRow>
+          <SliderInput
+            onChange={handleOnChange}
+            inputLabel="Image Scale"
+            value={formData?.[DonationBarLenses.centerCursorScale]}
+            inputName={DonationBarLenses.centerCursorScale}
+            sliderProps={{
+              valueLabelDisplay: "auto",
+              step: 0.1,
+              min: 0.5,
+              max: 3,
+            }}
+            width="15rem"
+          ></SliderInput>
         </SectionRow>
       </SectionContent>
     </Section>
