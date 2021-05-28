@@ -171,7 +171,7 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
       );
     }
 
-    if (selectedWidgetKind === WidgetsKinds.DONATION_BAR && widgetDatacd) {
+    if (selectedWidgetKind === WidgetsKinds.DONATION_BAR && widgetData) {
       return (
         <DonationBarEditionModal
           onClose={handleClose}
