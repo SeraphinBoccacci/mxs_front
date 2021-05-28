@@ -27,9 +27,8 @@ import ReactionParameters from "./ReactionParameters";
 import TextParameters from "./TextParameters";
 
 interface DonationBarEditionModalProps {
-  donationBarData?: DonationBar;
+  data?: DonationBar;
   onClose: () => void;
-  isOpen: boolean;
 }
 
 const formatFormData = (formData: { [x: string]: string | TextStyles[] }) => {
@@ -65,9 +64,7 @@ const formatVariation = (variation: DonationBar | null) => {
 };
 
 const DonationBarEditionModal = ({
-  isOpen,
-  donationBarData,
-
+  data,
   onClose,
 }: DonationBarEditionModalProps) => {
   const [formData, setFormData] = useForm<DonationBarFormData>({});
@@ -76,18 +73,18 @@ const DonationBarEditionModal = ({
   const { handleError } = useErrorHandlingContext();
 
   useEffect(() => {
-    setFormData({ value: formatVariation(donationBarData || null) });
-  }, [setFormData, donationBarData]);
+    setFormData({ value: formatVariation(data || null) });
+  }, [setFormData, data]);
 
   const handleClick = useCallback(async () => {
     const newSnapshot = formatFormData(omit(formData, "_id"));
 
-    if (donationBarData?._id && updateDonationBar) {
+    if (data?._id && updateDonationBar) {
       try {
         if (overlay?._id && herotag) {
           await updateDonationBar(herotag, overlay?._id, {
             ...newSnapshot,
-            _id: donationBarData._id,
+            _id: data._id,
           });
 
           await getOverlayData();
@@ -100,7 +97,7 @@ const DonationBarEditionModal = ({
     }
   }, [
     onClose,
-    donationBarData,
+    data,
     formData,
     getOverlayData,
     handleError,
@@ -116,10 +113,7 @@ const DonationBarEditionModal = ({
   );
 
   return (
-    <Modal
-      open={!!donationBarData && !!updateDonationBar && isOpen}
-      onClose={onClose}
-    >
+    <Modal open onClose={onClose}>
       <ModalContent>
         <ModalHeader>
           <Button variant="contained" color="primary" onClick={handleClick}>

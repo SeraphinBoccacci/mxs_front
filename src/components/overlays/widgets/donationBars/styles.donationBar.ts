@@ -4,10 +4,13 @@ import { LogoAnimations, TextPositions } from "../../../../types/donationBar";
 import { TextStyles } from "../../../../types/style";
 
 const bounce = keyframes`
-    0%, 50%, 100% {transform: perspective(500px) translateZ(0);}
-    20%, 80% {transform: perspective(500px) translateZ(-20px);} 
+    0% {transform: perspective(500px) translateZ(0);}
+    20% {transform: perspective(500px) translateZ(-20px);} 
+    50% {transform: perspective(500px) translateZ(0);}
     40% { transform: perspective(500px) translateZ(100px);} 
     60% {transform: perspective(500px) translateZ(50px);} 
+    80% {transform: perspective(500px) translateZ(-20px);} 
+    100% {transform: perspective(500px) translateZ(0);}
    `;
 
 const rotate = keyframes`
@@ -52,30 +55,34 @@ export const logoAnimationsMapper = (animation?: LogoAnimations) => {
 const descriptionPositionMapper = (position?: TextPositions) => {
   const mapper = {
     [TextPositions.TopLeft]: css`
-      top: -5rem;
+      top: -2rem;
       left: 0;
+      transform: translateY(-100%);
     `,
     [TextPositions.TopCenter]: css`
-      top: -5rem;
-      left: 50;
-      transform: translateX(-50%);
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
     `,
     [TextPositions.TopRight]: css`
-      top: -5rem;
+      top: -2rem;
       right: 0;
+      transform: translateY(-100%);
     `,
     [TextPositions.BottomRight]: css`
-      bottom: -5rem;
+      bottom: -2rem;
       right: 0;
+      transform: translateY(100%);
     `,
     [TextPositions.BottomCenter]: css`
-      bottom: -5rem;
+      bottom: -2rem;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(100%);
     `,
     [TextPositions.BottomLeft]: css`
-      bottom: -5rem;
+      bottom: -2rem;
       left: 0;
+      transform: translateY(100%);
     `,
   };
 

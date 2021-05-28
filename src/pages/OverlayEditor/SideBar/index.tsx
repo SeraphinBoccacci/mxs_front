@@ -2,6 +2,8 @@ import { Button } from "@material-ui/core";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import React, { useCallback } from "react";
 
+import { useAuth } from "../../../components/AuthContext";
+import { getDonationBar } from "../../../services/overlays/donationBar";
 import { WidgetsKinds } from "../../../types/overlays";
 import { useEditorContext } from "../Context";
 import {
@@ -14,13 +16,14 @@ import {
 } from "./style";
 
 const SideBar = () => {
+  const { user } = useAuth();
   const {
     setIsAddWidgetOpenned,
     overlay,
     hasAtLeastOneWidget,
     setSelectedWidget,
-    setWidgetData,
     selectedWidget,
+    setWidgetData,
   } = useEditorContext();
 
   const handleOnClick = useCallback(() => {
@@ -28,35 +31,29 @@ const SideBar = () => {
   }, [setIsAddWidgetOpenned]);
 
   const toggleWidget = useCallback(
-    (widgetKind: WidgetsKinds) => {
+    async (widgetKind: WidgetsKinds) => {
       if (selectedWidget === widgetKind) {
         setSelectedWidget(null);
-        setWidgetData(null);
 
         return;
       }
 
       if (overlay?.alerts && widgetKind === WidgetsKinds.ALERTS) {
         setSelectedWidget(widgetKind);
-        setWidgetData(overlay?.alerts);
       } else if (
-        overlay?.donationBar &&
+        user?.herotag &&
+        overlay?._id &&
         widgetKind === WidgetsKinds.DONATION_BAR
       ) {
+        const donationBar = await getDonationBar(user?.herotag, overlay._id);
+
         setSelectedWidget(widgetKind);
-        setWidgetData(overlay?.alerts);
+        setWidgetData(donationBar);
       } else {
         setSelectedWidget(null);
-        setWidgetData(null);
       }
     },
-    [
-      setSelectedWidget,
-      setWidgetData,
-      overlay?.alerts,
-      selectedWidget,
-      overlay?.donationBar,
-    ]
+    [setSelectedWidget, overlay, selectedWidget, setWidgetData, user?.herotag]
   );
 
   return (

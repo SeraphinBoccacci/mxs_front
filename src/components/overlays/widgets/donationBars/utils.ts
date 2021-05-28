@@ -18,18 +18,18 @@ export const computeAmounts = (
 
     if (progression === 100)
       return [
+        `${((progression / 100) * donationBar.donationGoalAmount.value).toFixed(
+          2
+        )} EGLD`,
         null,
-        `${(
-          (1 - progression / 100) *
-          donationBar.donationGoalAmount.value
-        ).toFixed(2)} EGLD`,
       ];
 
     return [
-      `${((progression / 100) * donationBar.donationGoalAmount.value).toFixed(
-        2
-      )} EGLD`,
       null,
+      `${(
+        (1 - progression / 100) *
+        donationBar.donationGoalAmount.value
+      ).toFixed(2)} EGLD`,
     ];
   }
 
@@ -40,10 +40,9 @@ export const computeAmounts = (
         `${(100 - progression).toFixed(1)} %`,
       ];
 
-    if (progression === 100)
-      return [null, `${(100 - progression).toFixed(1)} %`];
+    if (progression === 100) return [`${progression.toFixed(1)} %`, null];
 
-    return [`${progression.toFixed(1)} %`, null];
+    return [null, `${(100 - progression).toFixed(1)} %`];
   }
 
   return [null, null];

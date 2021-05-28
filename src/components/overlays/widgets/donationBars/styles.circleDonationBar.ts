@@ -52,6 +52,9 @@ export const SubPartContainer = styled.div<SubPartContainerProps>`
   font-size: 1.3rem;
   color: ${({ textColor }) => textColor};
   transition: 0.3s;
+
+  backdrop-filter: blur(20px);
+  border-radius: 10px;
 `;
 
 interface SvgProps {

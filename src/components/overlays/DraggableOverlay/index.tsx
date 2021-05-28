@@ -10,9 +10,9 @@ import { updateDonationBar } from "../../../services/overlays/donationBar";
 import { EventData } from "../../../types/ifttt";
 import { OverlayData, WidgetsKinds } from "../../../types/overlays";
 import { useErrorHandlingContext } from "../../ErrorHandlingContext";
-import Draggable from "../Draggable";
 import Alert from "../widgets/alerts/DraggableAlert";
 import DonationBar from "../widgets/donationBars/DraggableDonationBar";
+import Draggable from "./Draggable";
 import { Container } from "./style";
 
 const transactionData: EventData = {
