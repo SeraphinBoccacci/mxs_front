@@ -48,6 +48,7 @@ const LineDonationBar = ({
           containerHeight={
             (donationBar.displaySettings as LineDisplaySettings).height
           }
+          scale={donationBar.centerCursorScale}
         >
           <StyledImageScreen></StyledImageScreen>
           <Cursor

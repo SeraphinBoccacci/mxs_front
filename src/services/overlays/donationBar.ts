@@ -7,7 +7,7 @@ const endpoint = `${config.apiUrl}/donationBar`;
 export const getDonationBar = async (
   herotag: string,
   overlayId: string
-): Promise<void> => {
+): Promise<DonationBar> => {
   const data = await axiosGet(
     `${endpoint}/herotag/${herotag}/overlay/${overlayId}`,
     {

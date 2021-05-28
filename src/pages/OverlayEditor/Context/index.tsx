@@ -6,6 +6,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { useParams } from "react-router";
@@ -13,7 +14,8 @@ import { useParams } from "react-router";
 import { useAuth } from "../../../components/AuthContext";
 import LoadingScreen from "../../../components/LoadingScreen";
 import { getAlertVariation, getUserOverlay } from "../../../services/overlays";
-import { Alerts, AlertVariation } from "../../../types/alerts";
+import { AlertVariation } from "../../../types/alerts";
+import { DonationBar } from "../../../types/donationBar";
 import {
   OverlayData,
   VariationGroup,
@@ -32,8 +34,6 @@ interface ContextProps {
   setIsAddWidgetOpenned: Dispatch<SetStateAction<boolean>>;
   selectedWidget: WidgetsKinds | null;
   setSelectedWidget: Dispatch<SetStateAction<WidgetsKinds | null>>;
-  widgetData: Alerts | null;
-  setWidgetData: Dispatch<SetStateAction<Alerts | null>>;
   hasAtLeastOneWidget: boolean;
   overlay?: OverlayData;
   getOverlayData: () => Promise<void>;
@@ -44,6 +44,9 @@ interface ContextProps {
   hiddenWidgets: string[];
   widgetToDisplayData?: WidgetToDisplayData;
   displayWidget: (widgetKind: WidgetsKinds, widgetId: string) => void;
+  setWidgetData: Dispatch<
+    SetStateAction<AlertVariation | DonationBar | undefined>
+  >;
 }
 
 const Context = createContext<ContextProps>({
@@ -51,8 +54,6 @@ const Context = createContext<ContextProps>({
   setIsAddWidgetOpenned: () => {},
   selectedWidget: null,
   setSelectedWidget: () => {},
-  widgetData: null,
-  setWidgetData: () => {},
   hasAtLeastOneWidget: false,
   getOverlayData: async () => {},
   groups: [],
@@ -61,6 +62,7 @@ const Context = createContext<ContextProps>({
   toggleWidgetVisibility: () => {},
   hiddenWidgets: [],
   displayWidget: () => {},
+  setWidgetData: () => {},
 });
 
 interface EditorContextProviderProps {
@@ -70,18 +72,14 @@ interface EditorContextProviderProps {
 const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
   const [isAddWidgetOpenned, setIsAddWidgetOpenned] = useState(false);
   const [hiddenWidgets, setHiddenWidgets] = useState<string[]>([]);
-  const [widgetData, setWidgetData] = useState<Alerts | null>(null);
   const [overlay, setOverlay] = useState<OverlayData>();
   const [groups, setGroups] = useState<VariationGroup[]>([]);
-  const [focusedVariation, setFocusedVariation] = useState<AlertVariation>();
+  const [widgetData, setWidgetData] = useState<AlertVariation | DonationBar>();
 
-  const [
-    selectedWidgetKind,
-    setSelectedWidgetKind,
-  ] = useState<WidgetsKinds | null>(null);
-  const [widgetToDisplayData, setWidgetToDisplayData] = useState<
-    WidgetToDisplayData
-  >();
+  const [selectedWidgetKind, setSelectedWidgetKind] =
+    useState<WidgetsKinds | null>(null);
+  const [widgetToDisplayData, setWidgetToDisplayData] =
+    useState<WidgetToDisplayData>();
 
   const { overlayId } = useParams<{ overlayId: string }>();
   const { herotag } = useAuth();
@@ -104,20 +102,20 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
 
   const focusOnVariation = useCallback(
     (variation: AlertVariation) => {
-      setFocusedVariation(variation);
+      setWidgetData(variation);
     },
-    [setFocusedVariation]
+    [setWidgetData]
   );
 
   const handleClose = useCallback(() => {
     if (selectedWidgetKind === WidgetsKinds.ALERTS) {
-      setFocusedVariation(undefined);
+      setWidgetData(undefined);
     }
 
     if (selectedWidgetKind === WidgetsKinds.DONATION_BAR) {
       setSelectedWidgetKind(null);
     }
-  }, [setFocusedVariation, setSelectedWidgetKind, selectedWidgetKind]);
+  }, [setWidgetData, setSelectedWidgetKind, selectedWidgetKind]);
 
   const toggleWidgetVisibility = useCallback(
     (widgetId: string) => {
@@ -163,6 +161,28 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
     ]
   );
 
+  const modal = useMemo(() => {
+    if (selectedWidgetKind === WidgetsKinds.ALERTS && widgetData) {
+      return (
+        <AlertVariationEditionModal
+          onClose={handleClose}
+          data={widgetData as AlertVariation}
+        ></AlertVariationEditionModal>
+      );
+    }
+
+    if (selectedWidgetKind === WidgetsKinds.DONATION_BAR && widgetData) {
+      return (
+        <DonationBarEditionModal
+          onClose={handleClose}
+          data={widgetData as DonationBar}
+        ></DonationBarEditionModal>
+      );
+    }
+
+    return null;
+  }, [selectedWidgetKind, handleClose, widgetData]);
+
   if (!overlay) return <LoadingScreen></LoadingScreen>;
 
   return (
@@ -172,8 +192,6 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
         setIsAddWidgetOpenned,
         selectedWidget: selectedWidgetKind,
         setSelectedWidget: setSelectedWidgetKind,
-        widgetData,
-        setWidgetData,
         hasAtLeastOneWidget: !!overlay.alerts || !!overlay.donationBar,
         overlay,
         getOverlayData,
@@ -184,18 +202,11 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
         hiddenWidgets,
         widgetToDisplayData,
         displayWidget,
+        setWidgetData,
       }}
     >
       {children}
-      <AlertVariationEditionModal
-        onClose={handleClose}
-        variationData={focusedVariation}
-      ></AlertVariationEditionModal>
-      <DonationBarEditionModal
-        onClose={handleClose}
-        donationBarData={overlay.donationBar}
-        isOpen={selectedWidgetKind === WidgetsKinds.DONATION_BAR}
-      ></DonationBarEditionModal>
+      {modal}
     </Context.Provider>
   );
 };

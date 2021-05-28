@@ -19,7 +19,7 @@ import TextParameters from "./TextParameters";
 import VariationParameters from "./VariationParameters";
 
 interface AlertVariationEditionModalProps {
-  variationData?: AlertVariation;
+  data?: AlertVariation;
   onClose: () => void;
 }
 
@@ -56,7 +56,7 @@ const formatVariation = (variation: AlertVariation | null) => {
 };
 
 const AlertVariationEditionModal = ({
-  variationData,
+  data,
   onClose,
 }: AlertVariationEditionModalProps) => {
   const [formData, setFormData] = useForm<AlertVariationFormData>({});
@@ -65,8 +65,8 @@ const AlertVariationEditionModal = ({
   const { handleError } = useErrorHandlingContext();
 
   useEffect(() => {
-    setFormData({ value: formatVariation(variationData || null) });
-  }, [setFormData, variationData]);
+    setFormData({ value: formatVariation(data || null) });
+  }, [setFormData, data]);
 
   const updateVariation = useCallback(
     async (updatedVariation: AlertVariation) => {
@@ -86,15 +86,15 @@ const AlertVariationEditionModal = ({
   const handleClick = useCallback(async () => {
     const newSnapshot = formatFormData(omit(formData, "_id"));
 
-    if (variationData?._id && updateVariation) {
+    if (data?._id && updateVariation) {
       await updateVariation({
         ...newSnapshot,
-        _id: variationData._id,
+        _id: data._id,
       });
 
       onClose();
     }
-  }, [onClose, updateVariation, variationData, formData]);
+  }, [onClose, updateVariation, data, formData]);
 
   const handleOnChange = useCallback(
     (event) => {
@@ -104,7 +104,7 @@ const AlertVariationEditionModal = ({
   );
 
   return (
-    <Modal open={!!variationData && !!updateVariation} onClose={onClose}>
+    <Modal open onClose={onClose}>
       <ModalContent>
         <ModalHeader>
           <Button variant="contained" color="primary" onClick={handleClick}>

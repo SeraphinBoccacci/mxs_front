@@ -1,6 +1,6 @@
 import React, { createRef, ReactNode, useCallback, useState } from "react";
 
-import { WidgetsKinds } from "../../../types/overlays";
+import { WidgetsKinds } from "../../../../types/overlays";
 import { Background, Container, Content, DraggableContent } from "./style";
 
 interface DraggableProps {

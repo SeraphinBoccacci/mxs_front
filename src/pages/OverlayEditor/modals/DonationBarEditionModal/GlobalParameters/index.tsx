@@ -90,7 +90,7 @@ const GlobalParameters = ({
         </SectionRow>
         <SectionRow>
           <Input
-            inputLabel="Top"
+            inputLabel="From Top"
             inputName={DonationBarLenses.offsetTop}
             onChange={handleOnChange}
             value={formData?.offsetTop}
@@ -99,7 +99,7 @@ const GlobalParameters = ({
             width="8rem"
           ></Input>
           <Input
-            inputLabel="Left"
+            inputLabel="From Left"
             inputName={DonationBarLenses.offsetLeft}
             onChange={handleOnChange}
             value={formData?.offsetLeft}
