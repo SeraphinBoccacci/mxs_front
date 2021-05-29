@@ -15,7 +15,6 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
   width: ${({ contentWidth = 200 }) => `${contentWidth}px`};
   height: ${({ contentWidth = 200 }) => `${contentWidth}px`};
 
-  backdrop-filter: blur(10px);
   border-radius: 20px;
 `;
 

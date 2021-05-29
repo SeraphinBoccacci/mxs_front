@@ -53,6 +53,8 @@ export const SubPartContainer = styled.div<SubPartContainerProps>`
   color: ${({ textColor }) => textColor};
   transition: 0.3s;
 
+  padding: 0.1rem 0.3rem;
+
   backdrop-filter: blur(20px);
   border-radius: 10px;
 `;

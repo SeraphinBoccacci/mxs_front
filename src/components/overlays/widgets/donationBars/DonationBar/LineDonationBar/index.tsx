@@ -11,6 +11,7 @@ import {
   AmountSentPart,
   AmountToSendPart,
   Content,
+  CursorContainer,
 } from "../../styles.lineDonationBar";
 import { computeAmounts } from "../../utils";
 import { Cursor, DonationBarContainer } from "./style";
@@ -56,19 +57,23 @@ const LineDonationBar = ({
         ></audio>
       )}
       {donationBar.centerCursorPath && (
-        <Cursor
+        <CursorContainer
           display={donationBar.displaySettings.kind}
-          duration={donationBar.donationReaction.duration}
           progression={progression}
-          animation={donationBar.donationReaction.animateLogo?.kind}
-          shouldReact={shouldReact}
-          src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
           containerWidth={donationBar.displaySettings.width}
           containerHeight={
             (donationBar.displaySettings as LineDisplaySettings).height
           }
           scale={donationBar.centerCursorScale}
-        ></Cursor>
+          duration={donationBar.donationReaction.duration}
+        >
+          <Cursor
+            duration={donationBar.donationReaction.duration}
+            animation={donationBar.donationReaction.animateLogo?.kind}
+            shouldReact={shouldReact}
+            src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
+          ></Cursor>
+        </CursorContainer>
       )}
       <Content
         display={donationBar.displaySettings.kind}

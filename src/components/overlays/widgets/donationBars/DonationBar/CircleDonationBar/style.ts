@@ -33,6 +33,5 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
         `
       : ""};
 
-  backdrop-filter: blur(10px);
   border-radius: 20px;
 `;
