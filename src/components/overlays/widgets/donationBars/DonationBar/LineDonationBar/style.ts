@@ -2,11 +2,9 @@ import styled, { css } from "styled-components";
 
 import {
   BarDisplayAnimations,
-  DonationBarDisplays,
   LogoAnimations,
 } from "../../../../../../types/donationBar";
 import { logoAnimationsMapper } from "../../styles.donationBar";
-import { resolveCursorPosition } from "../../styles.lineDonationBar";
 
 interface DonationBarContainerProps {
   width?: number;
@@ -43,29 +41,21 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
   border-radius: 20px;
 `;
 
-interface CursorContainerProps {
-  progression: number;
-  display?: DonationBarDisplays;
+interface CursorProps {
   duration?: number;
   animation?: LogoAnimations;
   shouldReact: boolean;
-  containerHeight?: number;
-  containerWidth?: number;
-  scale?: number;
 }
 
-export const Cursor = styled.img<CursorContainerProps>`
+export const Cursor = styled.img<CursorProps>`
   position: absolute;
 
-  ${({ display = DonationBarDisplays.Horizontal }) =>
-    resolveCursorPosition(display)}
-  z-index: 100;
-
   border-radius: 10000px;
+
+  width: 100%;
+  height: 100%;
 
   transition: ${({ duration = 1 }) => `${duration}s`};
   ${({ shouldReact, animation }) =>
     shouldReact && logoAnimationsMapper(animation)}
-
-  transform: ${({ scale = 1 }) => `scale(${scale})`};
 `;

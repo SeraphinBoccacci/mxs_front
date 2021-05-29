@@ -4,14 +4,14 @@ import { LogoAnimations, TextPositions } from "../../../../types/donationBar";
 import { TextStyles } from "../../../../types/style";
 
 const bounce = keyframes`
-    0% {transform: perspective(500px) translateZ(0);}
-    20% {transform: perspective(500px) translateZ(-20px);} 
-    50% {transform: perspective(500px) translateZ(0);}
-    40% { transform: perspective(500px) translateZ(100px);} 
-    60% {transform: perspective(500px) translateZ(50px);} 
-    80% {transform: perspective(500px) translateZ(-20px);} 
-    100% {transform: perspective(500px) translateZ(0);}
-   `;
+  0% { transform: perspective(500px) translateZ(0) ; }
+  20% { transform: perspective(500px) translateZ(-20px);  }
+  50% { transform: perspective(500px) translateZ(0) ; }
+  40% {  transform: perspective(500px) translateZ(100px);  }
+  60% { transform: perspective(500px) translateZ(50px);  }
+  80% { transform: perspective(500px) translateZ(-20px);  }
+  100% { transform: perspective(500px) translateZ(0) ; }
+`;
 
 const rotate = keyframes`
   from {
