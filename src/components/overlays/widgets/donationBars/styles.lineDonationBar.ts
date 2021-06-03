@@ -97,6 +97,8 @@ interface CursorContainerProps {
   display?: DonationBarDisplays;
   containerHeight?: number;
   containerWidth?: number;
+  scale?: number;
+  duration?: number;
 }
 
 const computeCursorMinorOffset = (size: number) => {
@@ -133,3 +135,15 @@ export const resolveCursorPosition = (display: DonationBarDisplays) => {
     width: ${({ containerHeight = 50 }) => computeCursorSize(containerHeight)};
   `;
 };
+
+export const CursorContainer = styled.div<CursorContainerProps>`
+  position: absolute;
+
+  ${({ display = DonationBarDisplays.Horizontal }) =>
+    resolveCursorPosition(display)}
+
+  z-index: 100;
+
+  transition: ${({ duration = 1 }) => `${duration}s`};
+  transform: ${({ scale = 1 }) => `scale(${scale})`};
+`;

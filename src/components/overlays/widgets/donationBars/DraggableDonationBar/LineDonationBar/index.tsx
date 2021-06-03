@@ -11,14 +11,10 @@ import {
   AmountSentPart,
   AmountToSendPart,
   Content,
+  CursorContainer,
 } from "../../styles.lineDonationBar";
 import { computeAmounts } from "../../utils";
-import {
-  Cursor,
-  DonationBarContainer,
-  StyledImageContainer,
-  StyledImageScreen,
-} from "./style";
+import { Cursor, DonationBarContainer, StyledImageScreen } from "./style";
 
 interface LineDonationBarProps {
   progression: number;
@@ -41,7 +37,7 @@ const LineDonationBar = ({
       offsetTop={donationBar.offsetTop}
     >
       {donationBar.centerCursorPath && (
-        <StyledImageContainer
+        <CursorContainer
           display={donationBar.displaySettings.kind}
           progression={progression}
           containerWidth={donationBar.displaySettings.width}
@@ -49,12 +45,13 @@ const LineDonationBar = ({
             (donationBar.displaySettings as LineDisplaySettings).height
           }
           scale={donationBar.centerCursorScale}
+          duration={donationBar.donationReaction.duration}
         >
           <StyledImageScreen></StyledImageScreen>
           <Cursor
             src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
           ></Cursor>
-        </StyledImageContainer>
+        </CursorContainer>
       )}
       <Content
         display={donationBar.displaySettings.kind}

@@ -145,17 +145,7 @@ const Overlay = () => {
   }, [overlay, updateDonationBarSentAmount, displayVariation, herotag]);
 
   return (
-    <div
-      style={{
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        background:
-          "url('https://s1.qwant.com/thumbr/0x380/8/8/2399b4dc87b152097a8f1e0fe383776b3ec3178cdcc41622924b5f4f334270/20180411155344-a165c6fb.jpg?u=https%3A%2F%2Fdiapogram.com%2Fupload%2F2018%2F04%2F11%2F20180411155344-a165c6fb.jpg&q=0&b=1&p=0&a=0')",
-        backgroundSize: "cover",
-      }}
-    >
+    <div>
       {transactionData && (
         <div>
           {alertVariations.map((alertVariation) => (

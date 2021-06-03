@@ -1,8 +1,5 @@
 import styled from "styled-components";
 
-import { DonationBarDisplays } from "../../../../../../types/donationBar";
-import { resolveCursorPosition } from "../../styles.lineDonationBar";
-
 interface DonationBarContainerProps {
   width?: number;
   height?: number;
@@ -20,25 +17,6 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
 
   backdrop-filter: blur(10px);
   border-radius: 20px;
-`;
-
-interface CursorContainerProps {
-  progression: number;
-  display?: DonationBarDisplays;
-  containerHeight?: number;
-  containerWidth?: number;
-  scale?: number;
-}
-
-export const StyledImageContainer = styled.div<CursorContainerProps>`
-  position: absolute;
-
-  ${({ display = DonationBarDisplays.Horizontal }) =>
-    resolveCursorPosition(display)}
-
-  transform: ${({ scale = 1 }) => `scale(${scale})`};
-
-  z-index: 1000;
 `;
 
 export const StyledImageScreen = styled.div`
