@@ -114,6 +114,7 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
 
     if (selectedWidgetKind === WidgetsKinds.DONATION_BAR) {
       setSelectedWidgetKind(null);
+      setWidgetData(undefined);
     }
   }, [setWidgetData, setSelectedWidgetKind, selectedWidgetKind]);
 

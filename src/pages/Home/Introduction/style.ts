@@ -278,7 +278,6 @@ export const Reference = styled.a`
   padding: 0.5rem 1rem;
   height: max-content;
 
-  backdrop-filter: blur(20px);
   border-radius: 0.4rem;
 
   display: flex;

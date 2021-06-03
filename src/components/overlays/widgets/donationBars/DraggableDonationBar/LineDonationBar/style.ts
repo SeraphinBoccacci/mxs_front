@@ -14,9 +14,6 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
 
   width: ${({ width = 500 }) => `${width}px`};
   height: ${({ height = 50 }) => `${height}px`};
-
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
 `;
 
 export const StyledImageScreen = styled.div`

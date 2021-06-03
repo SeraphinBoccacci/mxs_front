@@ -113,6 +113,7 @@ const CircleDonationBar = ({
         <SubPartContainer
           ref={amountSent}
           textColor={donationBar.sentAmountPart?.textColor}
+          backgroundColor={donationBar.sentAmountPart?.color}
         >
           {sentAmountPartText}
         </SubPartContainer>
@@ -121,6 +122,7 @@ const CircleDonationBar = ({
         <SubPartContainer
           ref={amountLeftToSend}
           textColor={donationBar.amountToSendPart?.textColor}
+          backgroundColor={donationBar.amountToSendPart?.color}
         >
           {amountLeftToSendPartText}
         </SubPartContainer>
