@@ -11,8 +11,8 @@ export interface UserType {
   _id: string;
   password?: string;
   pendingPassword?: string;
-  herotag?: string;
-  erdAddress?: string;
+  herotag: string;
+  erdAddress: string;
   status: UserAccountStatus;
   verificationReference?: string;
   passwordEditionVerificationReference?: string;
