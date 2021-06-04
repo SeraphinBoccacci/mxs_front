@@ -5,6 +5,7 @@ import io from "socket.io-client";
 
 import config from "../../../config/config";
 import { getUserOverlay } from "../../../services/overlays";
+import { getDonationGoalSentAmount } from "../../../services/overlays/donationData";
 import { AlertVariation } from "../../../types/alerts";
 import { OverlayData } from "../../../types/overlays";
 import Alert from "../widgets/alerts/Alert";
@@ -143,6 +144,26 @@ const Overlay = () => {
       socket.disconnect();
     };
   }, [overlay, updateDonationBarSentAmount, displayVariation, herotag]);
+
+  useEffect(() => {
+    getDonationGoalSentAmount(herotag)
+      .then((result) => {
+        if (result.sentAmount) {
+          const amountToSend =
+            overlay?.donationBar?.donationGoalAmount.value || 1;
+
+          const progression =
+            Math.round((result.sentAmount / amountToSend) * 10000) / 100;
+
+          setDonationBarProgression(progression);
+        }
+      })
+      .catch();
+  }, [
+    herotag,
+    overlay?.donationBar?.donationGoalAmount.value,
+    updateDonationBarSentAmount,
+  ]);
 
   return (
     <div>

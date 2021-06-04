@@ -36,8 +36,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  backdrop-filter: blur(5px);
-
   border-top-right-radius: 20px;
 
   overflow: hidden;
