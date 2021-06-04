@@ -41,6 +41,7 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
 
 interface SubPartContainerProps {
   textColor?: string;
+  backgroundColor?: string;
 }
 
 export const SubPartContainer = styled.div<SubPartContainerProps>`
@@ -51,11 +52,11 @@ export const SubPartContainer = styled.div<SubPartContainerProps>`
   font-family: "Noto Sans JP", sans-serif;
   font-size: 1.3rem;
   color: ${({ textColor }) => textColor};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   transition: 0.3s;
 
   padding: 0.1rem 0.3rem;
 
-  backdrop-filter: blur(20px);
   border-radius: 10px;
 `;
 

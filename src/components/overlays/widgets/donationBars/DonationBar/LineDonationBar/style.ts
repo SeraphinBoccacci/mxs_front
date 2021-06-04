@@ -36,9 +36,6 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
           transform: translate(-50%, -50%) perspective(500px) translateZ(50px);
         `
       : ""};
-
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
 `;
 
 interface CursorProps {
