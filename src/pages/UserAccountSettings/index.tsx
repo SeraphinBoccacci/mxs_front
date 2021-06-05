@@ -10,6 +10,7 @@ import { toggleStreamingActivation } from "../../services/user";
 import { Paragraph } from "../../styles/global";
 import { ContentContainer } from "../../styles/global";
 import MinimumEgoldAmountForm from "./MinimumEgoldAmountForm";
+import Moderation from "./Moderation";
 import { AccountContainer } from "./style";
 
 const Account = () => {
@@ -66,6 +67,9 @@ const Account = () => {
           >
             Reset your donation goal sent amount
           </Button>
+        </ContentContainer>
+        <ContentContainer>
+          <Moderation></Moderation>
         </ContentContainer>
       </AccountContainer>
     </LabLayout>

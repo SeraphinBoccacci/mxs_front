@@ -23,9 +23,19 @@ export interface UserType {
     overlays?: OverlayData[];
     minimumRequiredAmount?: number;
   };
+  donationData?: {
+    donationGoal?: {
+      sentAmountAtDate: number;
+      lastResetDate?: Date;
+    };
+  };
+  moderation?: {
+    bannedWords?: string[];
+    bannedAddresses?: string[];
+    vipAddresses: string[];
+  };
   isStreaming?: boolean;
   streamingStartDate?: Date | null;
-
   referralLink?: string;
   herotagQrCodePath?: string;
 }

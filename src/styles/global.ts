@@ -126,6 +126,15 @@ export const ContentContainer = styled(Paper)`
   }
 `;
 
+export const Title = styled.h3`
+  color: ${colors.secondary};
+  font-family: ${fonts.Ubuntu};
+  font-size: 1.4rem;
+  line-height: 2rem;
+  text-align: center;
+  width: 100%;
+`;
+
 export const Paragraph = styled.p`
   color: ${colors.secondary};
   font-family: ${fonts.Ubuntu};
