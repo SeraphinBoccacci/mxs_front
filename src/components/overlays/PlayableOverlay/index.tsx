@@ -8,7 +8,8 @@ import { Container } from "./style";
 
 const transactionData: EventData = {
   herotag: "TEST_HEROTAG",
-  amount: "1",
+  amount: 1,
+  wordingAmount: "1 eGLD",
   data: "TEST_MESSAGE",
 };
 

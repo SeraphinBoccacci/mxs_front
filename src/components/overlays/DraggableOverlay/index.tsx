@@ -16,9 +16,10 @@ import Draggable from "./Draggable";
 import { Container } from "./style";
 
 const transactionData: EventData = {
-  amount: "1",
+  amount: 1,
   herotag: "TEST HEROTAG",
   data: "TEST MESSAGE",
+  wordingAmount: "1 eGLD",
 };
 
 const DraggableOverlay = () => {

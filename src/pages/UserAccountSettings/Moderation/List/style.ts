@@ -38,7 +38,12 @@ export const Word = styled.div<WordProps>`
   display: ${({ displayInColumn }) =>
     displayInColumn ? "block" : "inline-block"};
   width: max-content;
-  font-size: 1rem;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: 0.9rem;
   margin: 0.4rem 0.2rem;
 
   transition: 0.3s;

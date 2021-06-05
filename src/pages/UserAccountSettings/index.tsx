@@ -1,17 +1,15 @@
-import { Button } from "@material-ui/core";
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
 
 import ActivationSwitch from "../../components/ActivationSwitch";
 import { useAuth } from "../../components/AuthContext";
 import LabLayout from "../../components/LabLayout";
-import { resetDonationGoal } from "../../services/overlays/donationData";
 import { toggleStreamingActivation } from "../../services/user";
 import { Paragraph } from "../../styles/global";
 import { ContentContainer } from "../../styles/global";
-import MinimumEgoldAmountForm from "./MinimumEgoldAmountForm";
 import Moderation from "./Moderation";
 import { AccountContainer } from "./style";
+import TinyAmounts from "./TinyAmounts";
 
 const Account = () => {
   const { user } = useAuth();
@@ -33,12 +31,6 @@ const Account = () => {
     setIsSubmitting(false);
   }, [setIsSubmitting, user, isStreamActive, setIsStreamActive]);
 
-  const handleOnClick = useCallback(async () => {
-    if (user) {
-      await resetDonationGoal(user.herotag);
-    }
-  }, [user]);
-
   return (
     <LabLayout>
       <AccountContainer>
@@ -54,20 +46,10 @@ const Account = () => {
             onChange={handleSwitchChange}
           ></ActivationSwitch>
         </ContentContainer>
-        <MinimumEgoldAmountForm
+        <TinyAmounts
           setIsSubmitting={setIsSubmitting}
           isSubmitting={isSubmitting}
-        ></MinimumEgoldAmountForm>
-        <ContentContainer>
-          <Button
-            onClick={handleOnClick}
-            color="secondary"
-            variant="contained"
-            disabled={isSubmitting}
-          >
-            Reset your donation goal sent amount
-          </Button>
-        </ContentContainer>
+        ></TinyAmounts>
         <ContentContainer>
           <Moderation></Moderation>
         </ContentContainer>

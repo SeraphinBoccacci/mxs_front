@@ -141,7 +141,7 @@ const Alert = ({ alert, data }: AlertProps) => {
         >
           {alert.text.content
             .replaceAll("{{herotag}}", data.herotag)
-            .replaceAll("{{amount}}", String(data.amount))
+            .replaceAll("{{amount}}", String(data.wordingAmount))
             .replaceAll("{{message}}", data.message)
             .split("\n")
             .map((paragraph, index) => (

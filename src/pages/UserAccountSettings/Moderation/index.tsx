@@ -18,6 +18,7 @@ import {
   Accordions,
   AccordionSummary,
   Container,
+  StyledParagraph,
 } from "./style";
 
 const Moderation = () => {
@@ -34,6 +35,18 @@ const Moderation = () => {
   return (
     <Container>
       <Title>Moderation</Title>
+      <div>
+        <StyledParagraph>
+          Donations which include a banned word in the data field of the
+          transaction won’t show on screen.
+        </StyledParagraph>
+        <StyledParagraph>
+          Donations coming from a banned address won’t show on screen.
+        </StyledParagraph>
+        <StyledParagraph>
+          In both cases, you will still receive the amount of the transaction.
+        </StyledParagraph>
+      </div>
       <Accordions>
         <Accordion
           color="primary"
@@ -52,8 +65,6 @@ const Moderation = () => {
             ></List>
           </AccordionDetails>
         </Accordion>
-      </Accordions>
-      <Accordions>
         <Accordion
           color="primary"
           expanded={expandedPanel === 1}
@@ -71,8 +82,6 @@ const Moderation = () => {
             ></List>
           </AccordionDetails>
         </Accordion>
-      </Accordions>
-      <Accordions>
         <Accordion
           color="primary"
           expanded={expandedPanel === 2}

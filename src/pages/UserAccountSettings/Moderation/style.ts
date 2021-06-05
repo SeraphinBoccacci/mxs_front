@@ -6,7 +6,7 @@ import {
 import styled from "styled-components";
 
 import { colors, fonts } from "../../../constants";
-import { FlexColumn } from "../../../styles/global";
+import { FlexColumn, Paragraph } from "../../../styles/global";
 
 export const Container = styled.section`
   width: max-content;
@@ -50,5 +50,15 @@ export const AccordionDetails = styled(MaterialAccordionDetails)`
   @media (min-width: 450px) {
     font-size: 0.8rem;
     line-height: 1.1rem;
+  }
+`;
+
+export const StyledParagraph = styled(Paragraph)`
+  font-size: 0.8rem;
+
+  line-height: 1rem;
+
+  &:last-child {
+    margin-bottom: 4rem;
   }
 `;

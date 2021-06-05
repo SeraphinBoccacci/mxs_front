@@ -10,9 +10,7 @@ type InputProps = BaseProps & {
 const Input = ({ tooltipText, ...inputProps }: InputProps) => {
   return tooltipText ? (
     <Tooltip title={tooltipText}>
-      <div>
-        <Base {...inputProps}></Base>
-      </div>
+      <Base {...inputProps}></Base>
     </Tooltip>
   ) : (
     <Base {...inputProps}></Base>

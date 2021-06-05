@@ -138,7 +138,6 @@ const CircleDonationBar = ({
         <StyledImageContainer>
           <StyledImageScreen></StyledImageScreen>
           <Cursor
-            progression={progression}
             src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
           ></Cursor>
         </StyledImageContainer>
