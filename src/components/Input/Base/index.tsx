@@ -21,6 +21,7 @@ export type BaseProps = BaseInputType & {
   isDisabled?: boolean;
   centered?: boolean;
   width?: string;
+  withoutMargin?: boolean;
 };
 
 const isTextArea = (props: BaseInputType): props is OutlinedTextareaProps => {
@@ -34,7 +35,15 @@ const isColorPicker = (
 };
 
 const Base = (props: BaseProps) => {
-  const { width, value, centered, inputName, inputLabel, endAdornment } = props;
+  const {
+    width,
+    value,
+    centered,
+    inputName,
+    inputLabel,
+    endAdornment,
+    withoutMargin,
+  } = props;
 
   const component = useMemo(() => {
     if (isTextArea(props)) {
@@ -54,7 +63,12 @@ const Base = (props: BaseProps) => {
   }, [props, value]);
 
   return (
-    <InputContainer width={width} isEmpty={!value} centered={centered}>
+    <InputContainer
+      withoutMargin={withoutMargin}
+      width={width}
+      isEmpty={!value}
+      centered={centered}
+    >
       {component}
       <InputLabel htmlFor={inputName}>{inputLabel}</InputLabel>
       {!!endAdornment && (

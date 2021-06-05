@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import styled from "styled-components";
 
 import { fonts } from "../../../constants";
@@ -13,7 +14,7 @@ export const Header = styled.div`
   justify-content: space-between;
   align-content: center;
 
-  padding: 0 2rem;
+  padding: 0 1rem;
 
   & > button {
     height: 2rem;
@@ -35,4 +36,8 @@ export const Overlay = styled.div`
   width: 10rem;
   height: 10rem;
   background: red;
+`;
+
+export const StyledButton = styled(Button)`
+  margin: 0 1rem !important;
 `;

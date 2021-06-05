@@ -1,4 +1,3 @@
-import { Button } from "@material-ui/core";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import { useAuth } from "../../../components/AuthContext";
@@ -8,16 +7,22 @@ import { useForm } from "../../../hooks/useForm";
 import {
   getEgldPrice,
   updateMinimumRequiredAmount,
+  updateTinyAmountsWording,
 } from "../../../services/user";
-import { ContentContainer, FlexColumn } from "../../../styles/global";
+import {
+  ContentContainer,
+  FlexColumn,
+  Paragraph,
+} from "../../../styles/global";
 import { Comment, Form, FormCaption } from "../style";
+import { StyledButton } from "./style";
 
 interface MinimumEgoldAmountFormProps {
   setIsSubmitting: (isSubmitting: boolean) => void;
   isSubmitting: boolean;
 }
 
-const MinimumEgoldAmountForm = ({
+const TinyAmounts = ({
   setIsSubmitting,
   isSubmitting,
 }: MinimumEgoldAmountFormProps) => {
@@ -39,15 +44,18 @@ const MinimumEgoldAmountForm = ({
 
   const [formData, setFormData] = useForm<{
     minimumRequiredAmount?: number;
+    ceilAmount?: number;
+    wording?: string;
   }>({});
 
   useEffect(() => {
-    if (user?.integrations?.minimumRequiredAmount)
-      setFormData({
-        value: {
-          minimumRequiredAmount: user?.integrations?.minimumRequiredAmount,
-        },
-      });
+    setFormData({
+      value: {
+        minimumRequiredAmount: user?.integrations?.minimumRequiredAmount,
+        ceilAmount: user?.integrations?.tinyAmountWording?.ceilAmount,
+        wording: user?.integrations?.tinyAmountWording?.wording,
+      },
+    });
   }, [setFormData, user]);
 
   const handleOnChange = useCallback(
@@ -63,11 +71,25 @@ const MinimumEgoldAmountForm = ({
 
       try {
         setIsSubmitting(true);
-        if (formData.minimumRequiredAmount && user?.herotag)
-          await updateMinimumRequiredAmount(
-            user.herotag,
-            formData.minimumRequiredAmount
-          );
+
+        await Promise.all(
+          [
+            formData.minimumRequiredAmount &&
+              user?.herotag &&
+              updateMinimumRequiredAmount(
+                user.herotag,
+                formData.minimumRequiredAmount
+              ),
+            formData.ceilAmount &&
+              formData.wording &&
+              user?.herotag &&
+              updateTinyAmountsWording(
+                user.herotag,
+                formData.ceilAmount,
+                formData.wording
+              ),
+          ].filter(Boolean)
+        );
 
         setIsSubmitting(false);
         return;
@@ -75,7 +97,7 @@ const MinimumEgoldAmountForm = ({
         handleError(error.message);
       }
     },
-    [formData.minimumRequiredAmount, user, handleError, setIsSubmitting]
+    [formData, user, handleError, setIsSubmitting]
   );
 
   return (
@@ -104,17 +126,50 @@ const MinimumEgoldAmountForm = ({
           ></Input>
           <Comment>
             {formData.minimumRequiredAmount &&
-              `Won't react to transactions with amount below ~$
-            ${(currentPrice * formData.minimumRequiredAmount).toFixed(2)}`}
+              `Won't react to transactions with amount below ~$${(
+                currentPrice * formData.minimumRequiredAmount
+              ).toFixed(2)}`}
+          </Comment>
+          <Paragraph>
+            If the amount of ¤ is under{" "}
+            <Input
+              isDisabled={isSubmitting}
+              inputName="ceilAmount"
+              inputLabel="amount"
+              value={formData.ceilAmount}
+              onChange={handleOnChange}
+              type="number"
+              endAdornment="EGLD"
+              width="10rem"
+              withoutMargin
+            ></Input>{" "}
+            , display{" "}
+            <Input
+              isDisabled={isSubmitting}
+              inputName="wording"
+              inputLabel="wording"
+              value={formData.wording}
+              onChange={handleOnChange}
+              width="10rem"
+              withoutMargin
+            ></Input>{" "}
+            instead
+          </Paragraph>
+          <Comment>
+            {formData.ceilAmount &&
+              formData.wording &&
+              `If the amount of ¤ is under ~$${(
+                currentPrice * formData.ceilAmount
+              ).toFixed(2)}, display "${formData.wording}" instead`}
           </Comment>
         </FlexColumn>
 
-        <Button variant="outlined" color="secondary" type="submit">
+        <StyledButton variant="outlined" color="secondary" type="submit">
           Submit
-        </Button>
+        </StyledButton>
       </Form>
     </ContentContainer>
   );
 };
 
-export default MinimumEgoldAmountForm;
+export default TinyAmounts;

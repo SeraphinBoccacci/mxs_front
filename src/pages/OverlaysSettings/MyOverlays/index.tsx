@@ -1,15 +1,15 @@
-import { Button } from "@material-ui/core";
 import React, { useCallback } from "react";
 
 import { useAuth } from "../../../components/AuthContext";
 import { createOverlay } from "../../../services/overlays";
-import { ContentContainer } from "../../../styles/global";
+import { resetDonationGoal } from "../../../services/overlays/donationData";
+import { ContentContainer, FlexRow } from "../../../styles/global";
 import { useOverlayContext } from "../Context";
 import Overlay from "./Overlay";
-import { Header, OverlaysContainer, Title } from "./style";
+import { Header, OverlaysContainer, StyledButton, Title } from "./style";
 
 const MyOverlays = () => {
-  const { herotag } = useAuth();
+  const { herotag, user } = useAuth();
   const { overlays, getManyOverlays } = useOverlayContext();
 
   const handleCreateOverlay = useCallback(async () => {
@@ -20,17 +20,32 @@ const MyOverlays = () => {
     }
   }, [herotag, getManyOverlays]);
 
+  const handleOnClick = useCallback(async () => {
+    if (user) {
+      await resetDonationGoal(user.herotag);
+    }
+  }, [user]);
+
   return (
     <ContentContainer>
       <Header>
         <Title>My overlays</Title>
-        <Button
-          onClick={handleCreateOverlay}
-          color="secondary"
-          variant="contained"
-        >
-          Create overlay
-        </Button>
+        <FlexRow>
+          <StyledButton
+            onClick={handleOnClick}
+            color="secondary"
+            variant="outlined"
+          >
+            Reset your donation goal sent amount
+          </StyledButton>
+          <StyledButton
+            onClick={handleCreateOverlay}
+            color="secondary"
+            variant="contained"
+          >
+            Create overlay
+          </StyledButton>
+        </FlexRow>
       </Header>
       <OverlaysContainer>
         {overlays.map((overlay) => {

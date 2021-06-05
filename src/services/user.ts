@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { EventData } from "../types/ifttt";
+import { MockedEventData } from "../types/ifttt";
 import { axiosGet, axiosPost } from "../utils/axios";
 
 export const toggleStreamingActivation = async (
@@ -50,7 +50,7 @@ export const uploadFile = async (
   }
 };
 
-export const triggerEvent = (herotag: string, data: EventData) => {
+export const triggerEvent = (herotag: string, data: MockedEventData) => {
   return axiosPost(
     `${config.apiUrl}/user/trigger-event`,
     {
@@ -70,6 +70,22 @@ export const updateMinimumRequiredAmount = (
     {
       herotag,
       minimumRequiredAmount,
+    },
+    { withToken: true }
+  );
+};
+
+export const updateTinyAmountsWording = (
+  herotag: string,
+  ceilAmount: number,
+  wording: string
+) => {
+  return axiosPost(
+    `${config.apiUrl}/user/tiny-amounts`,
+    {
+      herotag,
+      ceilAmount,
+      wording,
     },
     { withToken: true }
   );

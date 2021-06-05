@@ -33,9 +33,10 @@ const CircleDonationBar = ({
   donationBar,
   progression,
 }: CircleDonationBarProps) => {
-  const amountSent = createRef<HTMLDivElement>();
-  const amountLeftToSend = createRef<HTMLDivElement>();
+  const amountSentPartRef = createRef<HTMLDivElement>();
+  const amountLeftToSendPartRef = createRef<HTMLDivElement>();
   const [shouldReact, setShouldReact] = useState(false);
+  const cappedProgression = progression > 100 ? 100 : progression;
 
   useEffect(() => {
     setShouldReact(true);
@@ -55,12 +56,12 @@ const CircleDonationBar = ({
       { isSentAmount }: { isSentAmount: boolean }
     ) => {
       if (ref.current) {
-        const sentPartRadians = (progression / 100) * Math.PI;
+        const sentPartRadians = (cappedProgression / 100) * Math.PI;
         const sin = Math.sin(sentPartRadians) * 0.95;
         const cos = Math.cos(sentPartRadians) * 0.95;
 
         if (isSentAmount) {
-          if (progression < 50) {
+          if (cappedProgression < 50) {
             ref.current.style.transform = "translate(0, 0)";
           } else {
             ref.current.style.transform = "translate(0, -100%)";
@@ -69,7 +70,7 @@ const CircleDonationBar = ({
           ref.current.style.top = `${radius - cos * radius}px`;
           ref.current.style.left = `${radius - sin * radius}px`;
         } else {
-          if (progression < 50) {
+          if (cappedProgression < 50) {
             ref.current.style.transform = "translate(-100%, -100%)";
           } else {
             ref.current.style.transform = "translate(-100%, 0)";
@@ -80,13 +81,13 @@ const CircleDonationBar = ({
         }
       }
     },
-    [radius, progression]
+    [radius, cappedProgression]
   );
 
   useEffect(() => {
-    updateAmountPosition(amountSent, { isSentAmount: true });
-    updateAmountPosition(amountLeftToSend, { isSentAmount: false });
-  }, [amountSent, amountLeftToSend, updateAmountPosition]);
+    updateAmountPosition(amountSentPartRef, { isSentAmount: true });
+    updateAmountPosition(amountLeftToSendPartRef, { isSentAmount: false });
+  }, [amountSentPartRef, amountLeftToSendPartRef, updateAmountPosition]);
 
   const [sentAmountPartText, amountLeftToSendPartText] = useMemo(() => {
     return computeAmounts(donationBar, progression);
@@ -111,7 +112,7 @@ const CircleDonationBar = ({
       )}
       {!!sentAmountPartText && (
         <SubPartContainer
-          ref={amountSent}
+          ref={amountSentPartRef}
           textColor={donationBar.sentAmountPart?.textColor}
           backgroundColor={donationBar.sentAmountPart?.color}
         >
@@ -120,7 +121,7 @@ const CircleDonationBar = ({
       )}
       {!!amountLeftToSendPartText && (
         <SubPartContainer
-          ref={amountLeftToSend}
+          ref={amountLeftToSendPartRef}
           textColor={donationBar.amountToSendPart?.textColor}
           backgroundColor={donationBar.amountToSendPart?.color}
         >
@@ -150,6 +151,7 @@ const CircleDonationBar = ({
           strokeWidth={
             (donationBar.displaySettings as CircleDisplaySettings).strokeWidth
           }
+          duration={donationBar.donationReaction.duration}
           color={donationBar.amountToSendPart?.color}
           progression={progression}
           fill="transparent"
@@ -162,7 +164,6 @@ const CircleDonationBar = ({
         <Cursor
           shouldReact={shouldReact}
           animation={donationBar.donationReaction.animateLogo?.kind}
-          progression={progression}
           src={`${config.url}/images/${`${donationBar.centerCursorPath}`}`}
         ></Cursor>
       )}

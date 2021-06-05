@@ -6,6 +6,7 @@ import { colors, fonts } from "../constants";
 export const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 export const FlexColumn = styled.div`
@@ -124,6 +125,15 @@ export const ContentContainer = styled(Paper)`
     margin: 3rem auto !important;
     padding: 1rem 4rem !important;
   }
+`;
+
+export const Title = styled.h3`
+  color: ${colors.secondary};
+  font-family: ${fonts.Ubuntu};
+  font-size: 1.4rem;
+  line-height: 2rem;
+  text-align: center;
+  width: 100%;
 `;
 
 export const Paragraph = styled.p`

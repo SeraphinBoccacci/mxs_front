@@ -83,8 +83,6 @@ const Circle = styled.circle<CircleProps>`
   stroke-dasharray: 314px;
   transform: rotate(-90deg);
   transform-origin: center center;
-
-  transition: 0.3s;
 `;
 
 interface SentAmountCircleProps {
@@ -96,20 +94,25 @@ interface SentAmountCircleProps {
 export const SentAmountCircle = styled(Circle)<SentAmountCircleProps>`
   stroke: ${({ color = colors.quad, shouldOverrideColor, overrideColor }) =>
     shouldOverrideColor && overrideColor ? overrideColor : color};
+
+  transition: 0.3s;
 `;
 
 interface AmountToSendCircleProps {
   color?: string;
+  duration?: number;
 }
 
 export const AmountToSendCircle = styled(Circle)<AmountToSendCircleProps>`
   stroke: ${({ color = colors.primary }) => color};
 
-  stroke-dashoffset: ${({ progression }) => `${(progression / 100) * 314}px`};
+  stroke-dashoffset: ${({ progression }) =>
+    `${(progression > 100 ? 1 : progression / 100) * 314}px`};
+
+  transition: ${({ duration = 0.3 }) => `${duration}s`};
 `;
 
 interface CursorContainerProps {
-  progression: number;
   shouldReact?: boolean;
   animation?: LogoAnimations;
 }

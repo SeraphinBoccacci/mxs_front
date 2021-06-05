@@ -12,9 +12,10 @@ import Alert from "../widgets/alerts/Alert";
 import DonationBar from "../widgets/donationBars/DonationBar";
 
 export interface TransactionData {
-  amount: number;
   herotag: string;
   message: string;
+  amount: number;
+  wordingAmount: string;
 }
 
 const findVariation = (amount: number, variations: AlertVariation[] = []) => {
@@ -88,10 +89,9 @@ const Overlay = () => {
       const amountToSend = overlay?.donationBar?.donationGoalAmount.value || 1;
 
       setDonationBarProgression((prevProgression) => {
-        const newProgression =
-          prevProgression + Math.round((amount / amountToSend) * 10000) / 100;
-
-        return newProgression > 100 ? 100 : newProgression;
+        return (
+          prevProgression + Math.round((amount / amountToSend) * 10000) / 100
+        );
       });
     },
     [setDonationBarProgression, overlay]
@@ -152,10 +152,9 @@ const Overlay = () => {
           const amountToSend =
             overlay?.donationBar?.donationGoalAmount.value || 1;
 
-          const progression =
-            Math.round((result.sentAmount / amountToSend) * 10000) / 100;
-
-          setDonationBarProgression(progression);
+          setDonationBarProgression(
+            Math.round((result.sentAmount / amountToSend) * 10000) / 100
+          );
         }
       })
       .catch();

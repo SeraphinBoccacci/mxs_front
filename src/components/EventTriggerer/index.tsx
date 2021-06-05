@@ -9,7 +9,7 @@ import React, {
 
 import { useForm } from "../../hooks/useForm";
 import { triggerEvent as postTriggerEvent } from "../../services/user";
-import { EventData } from "../../types/ifttt";
+import { MockedEventData } from "../../types/ifttt";
 import { useAuth } from "../AuthContext";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import Input from "../Input";
@@ -48,9 +48,9 @@ const EventTriggerer = (props: ButtonProps) => {
     async (event) => {
       event.preventDefault();
 
-      const data: EventData = {
+      const data: MockedEventData = {
         herotag: formData.herotag,
-        amount: formData.amount,
+        amount: Number(formData.amount),
         data: formData.message,
       };
 

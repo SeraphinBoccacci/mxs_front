@@ -6,15 +6,24 @@ interface InputContainerProps {
   isEmpty: boolean;
   centered?: boolean;
   width?: string;
+  withoutMargin?: boolean;
 }
+
+const resolveMargins = ({ withoutMargin, centered }: InputContainerProps) => {
+  if (withoutMargin) return "0";
+
+  if (centered) return "1rem auto";
+
+  return "1rem 0";
+};
 
 export const InputContainer = styled.div<InputContainerProps>`
   position: relative;
   width: ${({ width }) => width || "100%"};
   height: max-content;
-  margin: ${({ centered }) => (centered ? "1rem auto" : "1rem 0")};
+  margin: ${resolveMargins};
 
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
 
   border: ${({ isEmpty }) =>
