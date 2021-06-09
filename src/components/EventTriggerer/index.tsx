@@ -117,7 +117,8 @@ const EventTriggerer = (props: ButtonProps) => {
             </FormRow>
 
             <StyledAlert severity="warning">
-              Don&apos;t forget to refresh your OBS cache before
+              Don&apos;t forget to refresh your OBS browser source cache before
+              (double click your source and click refresh)
             </StyledAlert>
 
             <Button

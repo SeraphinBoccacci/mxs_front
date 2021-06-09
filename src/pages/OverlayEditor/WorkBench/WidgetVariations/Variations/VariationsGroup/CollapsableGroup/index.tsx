@@ -21,11 +21,10 @@ import {
   DraggableContainer,
   DroppableContainer,
   LeftNode,
+  ModalContent,
   RightNode,
-  StyledConfirmModal,
-  StyledEditModal,
   StyledForm,
-  StyledPaper,
+  StyledModal,
   StyledParagraph,
   VariationGroupHeader,
   VariationGroupTitle,
@@ -48,10 +47,8 @@ const CollapsableGroup = ({
 }: CollapsableGroupProps) => {
   const { groups, setGroups } = useEditorContext();
   const { handleError } = useErrorHandlingContext();
-  const {
-    deleteVariationsGroup,
-    updateVariationsGroup,
-  } = useWidgetVariationsContext();
+  const { deleteVariationsGroup, updateVariationsGroup } =
+    useWidgetVariationsContext();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isModalEditOpenned, setIsModalEditOpenned] = useState(false);
   const [isModalConfirmOpenned, setIsModalConfirmOpenned] = useState(false);
@@ -125,8 +122,8 @@ const CollapsableGroup = ({
 
   return (
     <>
-      <StyledConfirmModal onClose={closeEditModal} open={isModalEditOpenned}>
-        <StyledPaper>
+      <StyledModal onClose={closeEditModal} open={isModalEditOpenned}>
+        <ModalContent>
           <StyledForm>
             <Input
               inputLabel="Group Name"
@@ -154,13 +151,13 @@ const CollapsableGroup = ({
               </Button>
             </Buttons>
           </StyledForm>
-        </StyledPaper>
-      </StyledConfirmModal>
+        </ModalContent>
+      </StyledModal>
 
       {/*  */}
 
-      <StyledEditModal onClose={closeConfirmModal} open={isModalConfirmOpenned}>
-        <StyledPaper>
+      <StyledModal onClose={closeConfirmModal} open={isModalConfirmOpenned}>
+        <ModalContent>
           <StyledForm>
             <div>
               <StyledParagraph>
@@ -187,8 +184,8 @@ const CollapsableGroup = ({
               </Button>
             </Buttons>
           </StyledForm>
-        </StyledPaper>
-      </StyledEditModal>
+        </ModalContent>
+      </StyledModal>
 
       {/*  */}
 

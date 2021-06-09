@@ -18,9 +18,9 @@ import {
   Header,
   Image,
   ImageContainer,
+  ModalContent,
   StyledForm,
   StyledModal,
-  StyledPaper,
   StyledTitle,
 } from "./style";
 
@@ -75,7 +75,7 @@ const Overlay = ({ overlay }: OverlayProps) => {
   return (
     <>
       <StyledModal onClose={closeModal} open={isModalOpenned}>
-        <StyledPaper>
+        <ModalContent>
           <StyledForm>
             <Input
               inputLabel="Overlay Name"
@@ -99,7 +99,7 @@ const Overlay = ({ overlay }: OverlayProps) => {
               </Button>
             </Buttons>
           </StyledForm>
-        </StyledPaper>
+        </ModalContent>
       </StyledModal>
 
       {/*  */}
