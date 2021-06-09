@@ -93,7 +93,7 @@ export const PasswordEdit = ({
             onChange={handleOnChange}
             autoComplete="off"
             centered
-            width="10rem"
+            width="13rem"
           ></Input>
           <Input
             type="password"
@@ -104,7 +104,7 @@ export const PasswordEdit = ({
             onChange={handleOnChange}
             autoComplete="off"
             centered
-            width="10rem"
+            width="13rem"
           ></Input>
         </Inputs>
         <Button

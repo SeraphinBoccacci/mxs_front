@@ -5,6 +5,7 @@ import { colors } from "../../constants";
 
 type StyledMenuBurgerProps = HtmlHTMLAttributes<HTMLButtonElement> & {
   open: boolean;
+  color?: string;
 };
 
 export const StyledMenuBurger = styled.button<StyledMenuBurgerProps>`
@@ -30,7 +31,7 @@ export const StyledMenuBurger = styled.button<StyledMenuBurgerProps>`
   span {
     width: 2rem;
     height: 3px;
-    background: ${colors.secondary};
+    background: ${({ color }) => color || colors.secondary};
     border-radius: 9999px;
     position: relative;
     transform-origin: 1px;

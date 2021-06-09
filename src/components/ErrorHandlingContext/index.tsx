@@ -1,6 +1,6 @@
 import { Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { createContext, ReactNode, useState } from "react";
 
 export interface HandleError {
@@ -125,4 +125,5 @@ const ErrorHandlingContextProvider = ({
   );
 };
 
+export const useErrorHandlingContext = () => useContext(ErrorHandlingContext)
 export default ErrorHandlingContextProvider;

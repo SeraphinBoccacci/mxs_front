@@ -9,54 +9,17 @@ import {
 import React from "react";
 import { useHistory } from "react-router";
 
+import routes from "../../constants/routes";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useQueryString } from "../../hooks/useQueryString";
 import { getUserData } from "../../services/user";
+import { UserType } from "../../types/user";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
-import { Variation } from "../Lab/StreamElements/interface";
 
 export enum UserAccountStatus {
   PENDING_VERIFICATION = 0,
   VERIFIED,
   PENDING_EDIT_PASSWORD_VERIFICATION,
-}
-
-export interface IftttParticleData {
-  eventName: string;
-  triggerKey: string;
-  isActive: boolean;
-}
-
-export interface StreamElementData {
-  variations: Variation[];
-  rowsStructure: {
-    rows: string[];
-    rowsGroupName?: string | undefined;
-  }[];
-  isActive: boolean;
-}
-
-export interface UserType {
-  _id?: string;
-  password?: string;
-  pendingPassword?: string;
-  herotag?: string;
-  erdAddress?: string;
-  status: UserAccountStatus;
-  verificationReference?: string;
-  passwordEditionVerificationReference?: string;
-  verificationStartDate?: string;
-  passwordEditionVerificationStartDate?: string;
-  integrations?: {
-    ifttt?: IftttParticleData;
-    streamElements?: StreamElementData;
-    minimumRequiredAmount?: number;
-  };
-  isStreaming?: boolean;
-  streamingStartDate?: Date | null;
-
-  referralLink?: string;
-  herotagQrCodePath?: string;
 }
 
 export const AuthContext = createContext<{
@@ -67,10 +30,12 @@ export const AuthContext = createContext<{
   ) => void;
   setHerotag: (herotag: string) => void;
   user?: UserType;
+  getUser: () => void;
 }>({
   isAuthenticated: false,
   setTokenData: () => {},
   setHerotag: () => {},
+  getUser: () => {},
 });
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -94,6 +59,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const isAuthenticated = !!tokenData;
 
+  const getUser = useCallback(async () => {
+    try {
+      const data = await getUserData();
+      setUser(data);
+      setHerotag(data.herotag);
+    } catch (error) {
+      setTokenData(null);
+      history.push(routes.home);
+      handleError(error?.message);
+    }
+  }, [handleError, history, setHerotag, setTokenData]);
+
   useEffect(() => {
     if (!tokenData?.token || Date.now() > tokenData.expirationTimestamp) {
       setTokenData(null);
@@ -101,17 +78,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [setTokenData, tokenData, history]);
 
   useEffect(() => {
-    if (isAuthenticated)
-      getUserData()
-        .then((data) => {
-          setUser(data);
-          setHerotag(data.herotag);
-        })
-        .catch((error) => {
-          setTokenData(null);
-          history.push("/");
-          handleError(error?.message);
-        });
+    if (isAuthenticated) getUser();
     // eslint-disable-next-line
   }, [isAuthenticated]);
 
@@ -123,6 +90,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setHerotag,
         herotag,
         user,
+        getUser,
       }}
     >
       {children}

@@ -1,11 +1,6 @@
 import config from "../config/config";
+import { MockedEventData } from "../types/ifttt";
 import { axiosGet, axiosPost } from "../utils/axios";
-
-export interface EventData {
-  herotag: string;
-  amount: string;
-  data: string;
-}
 
 export const toggleStreamingActivation = async (
   herotag: string,
@@ -32,7 +27,30 @@ export const getUserData = async () => {
   return data;
 };
 
-export const triggerEvent = (herotag: string, data: EventData) => {
+export const uploadFile = async (
+  fileType: "images" | "audios",
+  file: File
+): Promise<string> => {
+  const formData = new FormData();
+
+  formData.append("media", file, file.name);
+
+  try {
+    const filePath = await axiosPost(
+      `${config.uploadsUrl}/${fileType}`,
+      formData,
+      { withToken: true }
+    );
+
+    if (!filePath) throw new Error("NO_FILE_PATH_RETURNED");
+
+    return filePath;
+  } catch (error) {
+    return "";
+  }
+};
+
+export const triggerEvent = (herotag: string, data: MockedEventData) => {
   return axiosPost(
     `${config.apiUrl}/user/trigger-event`,
     {
@@ -52,6 +70,22 @@ export const updateMinimumRequiredAmount = (
     {
       herotag,
       minimumRequiredAmount,
+    },
+    { withToken: true }
+  );
+};
+
+export const updateTinyAmountsWording = (
+  herotag: string,
+  ceilAmount: number,
+  wording: string
+) => {
+  return axiosPost(
+    `${config.apiUrl}/user/tiny-amounts`,
+    {
+      herotag,
+      ceilAmount,
+      wording,
     },
     { withToken: true }
   );

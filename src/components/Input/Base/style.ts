@@ -5,15 +5,25 @@ import { colors, fonts } from "../../../constants";
 interface InputContainerProps {
   isEmpty: boolean;
   centered?: boolean;
+  width?: string;
+  withoutMargin?: boolean;
 }
+
+const resolveMargins = ({ withoutMargin, centered }: InputContainerProps) => {
+  if (withoutMargin) return "0";
+
+  if (centered) return "1rem auto";
+
+  return "1rem 0";
+};
 
 export const InputContainer = styled.div<InputContainerProps>`
   position: relative;
-  width: max-content;
+  width: ${({ width }) => width || "100%"};
   height: max-content;
-  margin: ${({ centered }) => (centered ? "1rem auto" : "1rem")};
+  margin: ${resolveMargins};
 
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
 
   border: ${({ isEmpty }) =>
@@ -37,7 +47,8 @@ export const InputLabel = styled.label`
   left: 0;
 
   height: 100%;
-  width: 100%;
+  max-width: 100%;
+  flex: 1;
 
   line-height: 2.25rem;
   text-overflow: ellipsis;
@@ -58,8 +69,9 @@ interface AdornmentProps {
 }
 
 export const Adornment = styled.div<AdornmentProps>`
+  position: relative;
+  top: 0.1rem;
   width: max-content;
-  overflow: hidden;
   z-index: 50;
 
   line-height: 2.5rem;

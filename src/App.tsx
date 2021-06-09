@@ -12,15 +12,55 @@ import ErrorHandler from "./components/ErrorHandlingContext";
 import LoadingScreen from "./components/LoadingScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import Seo from "./components/Seo";
-import CreatorHomePage from "./pages/CreatorHomePage";
+import routes from "./constants/routes";
 import { theme } from "./styles/theme";
 
 const Home = lazy(() => {
   return import("./pages/Home");
 });
 
-const Lab = lazy(() => {
-  return import("./pages/Lab");
+const TippingPage = lazy(() => {
+  return import("./pages/TippingPage");
+});
+
+const Twitch = lazy(() => {
+  return import("./pages/Twitch");
+});
+
+const IftttSettings = lazy(() => {
+  return import("./pages/IftttSettings");
+});
+
+const OverlaysSettings = lazy(() => {
+  return import("./pages/OverlaysSettings");
+});
+
+const Tutorial = lazy(() => {
+  return import("./pages/Tutorial");
+});
+
+const Branding = lazy(() => {
+  return import("./pages/Branding");
+});
+
+const Security = lazy(() => {
+  return import("./pages/Security");
+});
+
+const UserAccountSettings = lazy(() => {
+  return import("./pages/UserAccountSettings");
+});
+
+const BrowserSource = lazy(() => {
+  return import("./pages/BrowserSource");
+});
+
+const WorkBenchBrowserSource = lazy(() => {
+  return import("./pages/WorkBenchBrowserSource");
+});
+
+const OverlayEditor = lazy(() => {
+  return import("./pages/OverlayEditor");
 });
 
 function App() {
@@ -32,17 +72,59 @@ function App() {
           <AuthProvider>
             <Suspense fallback={<LoadingScreen></LoadingScreen>}>
               <Switch>
-                <Route exact path="/">
+                <Route exact path={routes.home}>
                   <Home />
                 </Route>
-                <Route exact path="/creator/:herotag">
-                  <CreatorHomePage></CreatorHomePage>
+                <Route exact path={routes.tippingPage}>
+                  <TippingPage></TippingPage>
                 </Route>
-                <PrivateRoute exact path="/lab">
-                  <Lab />
+
+                {/* Lab Routes */}
+
+                <PrivateRoute exact path={routes.userAccountSettings}>
+                  <UserAccountSettings />
                 </PrivateRoute>
+
+                <PrivateRoute exact path={routes.userAccountSecurity}>
+                  <Security />
+                </PrivateRoute>
+
+                <PrivateRoute exact path={routes.userAccountBranding}>
+                  <Branding />
+                </PrivateRoute>
+
+                <PrivateRoute exact path={routes.ifttt}>
+                  <IftttSettings />
+                </PrivateRoute>
+
+                <PrivateRoute exact path={routes.overlays}>
+                  <OverlaysSettings />
+                </PrivateRoute>
+
+                <PrivateRoute exact path={routes.chatBotsTwitch}>
+                  <Twitch />
+                </PrivateRoute>
+
+                <PrivateRoute path={routes.tutorial}>
+                  <Tutorial></Tutorial>
+                </PrivateRoute>
+
+                <Route path={routes.browserSourcePage}>
+                  <BrowserSource></BrowserSource>
+                </Route>
+
+                <PrivateRoute path={routes.workBenchBrowserSourcePage}>
+                  <WorkBenchBrowserSource></WorkBenchBrowserSource>
+                </PrivateRoute>
+
+                <PrivateRoute path={routes.overlayEditorPage}>
+                  <OverlayEditor></OverlayEditor>
+                </PrivateRoute>
+
+                {/* Default Route */}
+
                 <Route>
-                  <Redirect to="/"></Redirect>
+                  <Redirect to={routes.home}></Redirect>
                 </Route>
               </Switch>
             </Suspense>

@@ -10,7 +10,7 @@ const extractToken = () => {
 
 export const axiosPost = async (
   endPoint: string,
-  body: object,
+  body: object | null,
   { withToken } = { withToken: false }
 ) => {
   try {
@@ -53,7 +53,7 @@ export const axiosGet = async (
 
 export const axiosPut = async (
   endPoint: string,
-  body: object,
+  body: object | null,
   { withToken } = { withToken: false }
 ) => {
   try {

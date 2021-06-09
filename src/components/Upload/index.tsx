@@ -4,12 +4,12 @@ import React, {
   memo,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
 import config from "../../config/config";
-import { uploadFile } from "../../services/streamElements";
-import { VariationLenses } from "../Lab/StreamElements/interface";
+import { uploadFile } from "../../services/user";
 import {
   Controllers,
   ImagePreview,
@@ -18,7 +18,7 @@ import {
 } from "./style";
 
 interface UploadProps {
-  inputName: VariationLenses | string;
+  inputName: string;
   inputLabel: string;
   isAudio?: boolean;
   value?: string;
@@ -83,15 +83,19 @@ const Upload = ({
     } as ChangeEvent<HTMLInputElement>);
   }, [setFile, onChange, inputName]);
 
+  const preview = useMemo(() => {
+    if (isAudio) return !!file ? <audio src={file} controls></audio> : null;
+
+    return (
+      <ImagePreviewContainer>
+        <ImagePreview src={file}></ImagePreview>
+      </ImagePreviewContainer>
+    );
+  }, [file, isAudio]);
+
   return (
     <UploadContainer key={`${inputName}_UploadContainer`}>
-      {isAudio ? (
-        <audio src={file} controls></audio>
-      ) : (
-        <ImagePreviewContainer>
-          <ImagePreview src={file}></ImagePreview>
-        </ImagePreviewContainer>
-      )}
+      {preview}
       <Controllers key={`${inputName}_Controllers`}>
         <input
           style={{ display: "none" }}
@@ -106,7 +110,7 @@ const Upload = ({
             {inputLabel}
           </Button>
         </label>
-        <Button onClick={handleClear}>Clear</Button>
+        {!!file && <Button onClick={handleClear}>Clear</Button>}
       </Controllers>
     </UploadContainer>
   );
