@@ -82,9 +82,12 @@ const MyOverlays = () => {
       <Modal open={isModalOpenned} onClose={closeModal}>
         <ModalContent>
           <StyledParagraph>
-            {`How are you sure you want to reset your donation goal sent amount ? (The later has reached ${
+            Are you sure you want to reset your donation goal sent amount?
+            <br></br>
+            <br></br>
+            {`It has reached ${
               user?.donationData?.donationGoal?.sentAmountAtDate || 0
-            } eGLD)`}
+            } eGLD.`}
           </StyledParagraph>
           <Buttons>
             <Button variant="outlined" color="secondary" onClick={closeModal}>

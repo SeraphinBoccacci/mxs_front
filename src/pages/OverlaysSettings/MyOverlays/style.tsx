@@ -45,14 +45,14 @@ export const StyledButton = styled(Button)`
 
 export const Modal = styled(MaterialModal)`
   width: 30rem;
-  height: 15rem;
+  height: 16rem;
 
   margin: auto;
 
   border: none !important;
   outline: none !important;
 
-  padding-top: 2rem !important;
+  padding: 1rem !important;
 `;
 
 export const ModalContent = styled(Paper)`
@@ -65,14 +65,12 @@ export const ModalContent = styled(Paper)`
 
   padding: 1rem;
 
-  overflow-y: scroll;
-
   border: none !important;
   outline: none !important;
 `;
 
 export const StyledParagraph = styled(Paragraph)`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1.1rem;
   text-align: center;
 `;
