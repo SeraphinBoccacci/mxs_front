@@ -9,14 +9,25 @@ import { colors, fonts } from "../../../constants";
 import { FlexColumn, Paragraph } from "../../../styles/global";
 
 export const Container = styled.section`
-  width: max-content;
   height: max-content;
   overflow-x: hidden;
 `;
 
 export const Accordions = styled(FlexColumn)`
-  width: 40rem;
+  width: 100%;
   margin: 0 auto;
+
+  @media (min-width: 500px) {
+    width: 25rem;
+  }
+
+  @media (min-width: 570px) {
+    width: 30rem;
+  }
+
+  @media (min-width: 750px) {
+    width: 40rem;
+  }
 `;
 
 export const Accordion = styled(MaterialAccordion)`

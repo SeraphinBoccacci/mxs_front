@@ -13,11 +13,18 @@ import { MockedEventData } from "../../types/ifttt";
 import { useAuth } from "../AuthContext";
 import { ErrorHandlingContext } from "../ErrorHandlingContext";
 import Input from "../Input";
-import { Form, FormRow, StyledButton, StyledModal, StyledPaper } from "./style";
+import {
+  Form,
+  FormRow,
+  StyledAlert,
+  StyledButton,
+  StyledModal,
+  StyledPaper,
+} from "./style";
 
 const EventTriggerer = (props: ButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { herotag } = useAuth();
+  const { herotag, getUser } = useAuth();
   const { handleError } = useContext(ErrorHandlingContext);
 
   const [formData, setFormData] = useForm({
@@ -62,9 +69,10 @@ const EventTriggerer = (props: ButtonProps) => {
         handleError(error.message);
       } finally {
         handleClose();
+        getUser();
       }
     },
-    [herotag, handleError, formData, handleClose]
+    [herotag, handleError, formData, handleClose, getUser]
   );
 
   const handleOnChange = useCallback(
@@ -107,6 +115,11 @@ const EventTriggerer = (props: ButtonProps) => {
                 value={formData.message}
               ></Input>
             </FormRow>
+
+            <StyledAlert severity="warning">
+              Don&apos;t forget to refresh your OBS cache before
+            </StyledAlert>
+
             <Button
               variant="outlined"
               color="secondary"

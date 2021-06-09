@@ -1,4 +1,5 @@
 import { Button, Modal, Paper } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import styled from "styled-components";
 
 export const StyledModal = styled(Modal)`
@@ -33,11 +34,15 @@ export const Form = styled.form`
 export const FormRow = styled.div`
   width: 100%;
 
-  margin: 2rem;
+  margin: 1rem 2rem;
 
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+`;
+
+export const StyledAlert = styled(Alert)`
+  margin: 1rem 2rem;
 `;

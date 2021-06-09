@@ -64,6 +64,22 @@ const addWidget = async (
   return res;
 };
 
+const updateOverlayName = async (
+  herotag: string,
+  overlayId: string,
+  overlayName: string
+) => {
+  const res = await axiosPost(
+    `${config.apiUrl}/overlays/overlay-name`,
+    { herotag, overlayId, overlayName },
+    {
+      withToken: true,
+    }
+  );
+
+  return res;
+};
+
 export {
   addWidget,
   createAlertVariation,
@@ -76,4 +92,5 @@ export {
   getUserAlertVariations,
   getUserOverlay,
   updateAlertVariation,
+  updateOverlayName,
 };

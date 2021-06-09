@@ -11,7 +11,7 @@ import {
   removeVipAddress,
 } from "../../../services/moderation";
 import { Title } from "../../../styles/global";
-import List from "./List";
+import AddressesList from "./AddressesList";
 import {
   Accordion,
   AccordionDetails,
@@ -20,6 +20,7 @@ import {
   Container,
   StyledParagraph,
 } from "./style";
+import WordsList from "./WordsList";
 
 const Moderation = () => {
   const [expandedPanel, setExpandedPanel] = useState<number>();
@@ -57,12 +58,11 @@ const Moderation = () => {
             Banned Words
           </AccordionSummary>
           <AccordionDetails>
-            {" "}
-            <List
+            <WordsList
               elements={user?.moderation?.bannedWords || []}
               addElement={addBannedWord}
               removeElement={removeBannedWord}
-            ></List>
+            ></WordsList>
           </AccordionDetails>
         </Accordion>
         <Accordion
@@ -71,15 +71,15 @@ const Moderation = () => {
           onChange={handleChange(1)}
         >
           <AccordionSummary expandIcon={<AddOutlinedIcon />}>
-            Banned Addresses
+            Banned Addresses / Herotag
           </AccordionSummary>
           <AccordionDetails>
-            <List
+            <AddressesList
               elements={user?.moderation?.bannedAddresses || []}
               addElement={addBannedAddress}
               removeElement={removeBannedAddress}
               displayInColumn
-            ></List>
+            ></AddressesList>
           </AccordionDetails>
         </Accordion>
         <Accordion
@@ -88,15 +88,15 @@ const Moderation = () => {
           onChange={handleChange(2)}
         >
           <AccordionSummary expandIcon={<AddOutlinedIcon />}>
-            VIP Addresses
+            VIP Addresses / Herotag
           </AccordionSummary>
           <AccordionDetails>
-            <List
+            <AddressesList
               elements={user?.moderation?.vipAddresses || []}
               addElement={addVipAddress}
               removeElement={removeVipAddress}
               displayInColumn
-            ></List>
+            ></AddressesList>
           </AccordionDetails>
         </Accordion>
       </Accordions>

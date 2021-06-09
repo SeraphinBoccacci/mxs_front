@@ -11,7 +11,7 @@ import {
   StyledButton,
   Word,
   WordsContainer,
-} from "./style";
+} from "../list.style";
 
 interface ListProps {
   elements: string[];
@@ -85,10 +85,11 @@ const List = ({
       <Form onSubmit={onSubmit}>
         <Input
           inputName="word-list"
-          inputLabel="Word"
+          inputLabel="Address / Herotag"
           onChange={onChange}
           value={wordToAdd}
-          width="14rem"
+          width="10rem"
+          tooltipText="Every maiar herotag format is handled by our service"
         ></Input>
         <StyledButton type="submit" variant="outlined" color="secondary">
           Add

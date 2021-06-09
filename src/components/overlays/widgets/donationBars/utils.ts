@@ -6,14 +6,17 @@ export const computeAmounts = (
 ): [string | null, string | null] => {
   const leftToSendProgression = 100 - progression;
   if (donationBar.indicationDisplay === InBarAmountDisplay.EGLD) {
-    const sent = `${(
-      (progression / 100) *
-      donationBar.donationGoalAmount.value
-    ).toFixed(2)} EGLD`;
-    const leftToSend = `${(
-      (leftToSendProgression / 100) *
-      donationBar.donationGoalAmount.value
-    ).toFixed(2)} EGLD`;
+    const sentAmount =
+      Math.ceil(donationBar.donationGoalAmount.value * progression) / 100;
+    const leftToSendAmount =
+      Math.ceil(donationBar.donationGoalAmount.value * leftToSendProgression) /
+      100;
+    const sent = `${sentAmount === 0.01 ? "<" : ""}${sentAmount.toFixed(
+      2
+    )} EGLD`;
+    const leftToSend = `${
+      leftToSendAmount === 0.01 ? "<" : ""
+    }${leftToSendAmount.toFixed(2)} EGLD`;
 
     if (progression === 0) return [null, leftToSend];
 

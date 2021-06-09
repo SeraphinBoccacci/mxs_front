@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import styled from "styled-components";
 
-import { colors } from "../../../../constants";
+import { colors } from "../../../constants";
 
 export const ListContainer = styled.div`
   display: flex;
@@ -22,6 +22,7 @@ export const Form = styled.form`
 
 export const StyledButton = styled(Button)`
   width: 6rem;
+  height: 2.7rem;
 `;
 
 export const WordsContainer = styled.div`
