@@ -26,6 +26,7 @@ const LineDonationBar = ({
   progression,
 }: LineDonationBarProps) => {
   const [shouldReact, setShouldReact] = useState(false);
+  const cappedProgression = progression > 100 ? 100 : progression;
 
   useEffect(() => {
     setShouldReact(true);
@@ -59,7 +60,7 @@ const LineDonationBar = ({
       {donationBar.centerCursorPath && (
         <CursorContainer
           display={donationBar.displaySettings.kind}
-          progression={progression}
+          progression={cappedProgression}
           containerWidth={donationBar.displaySettings.width}
           containerHeight={
             (donationBar.displaySettings as LineDisplaySettings).height
@@ -86,7 +87,7 @@ const LineDonationBar = ({
           duration={donationBar.donationReaction.duration}
           color={donationBar.sentAmountPart?.color}
           textColor={donationBar.sentAmountPart?.textColor}
-          progression={progression}
+          progression={cappedProgression}
           shouldOverrideColor={shouldReact}
           overrideColor={
             donationBar?.donationReaction?.fillSentAmountPart?.color
@@ -99,7 +100,7 @@ const LineDonationBar = ({
           duration={donationBar.donationReaction.duration}
           color={donationBar.amountToSendPart?.color}
           textColor={donationBar.amountToSendPart?.textColor}
-          progression={progression}
+          progression={cappedProgression}
         >
           <div>{amountLeftToSendPartText}</div>
         </AmountToSendPart>

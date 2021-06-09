@@ -18,6 +18,10 @@ export interface TransactionData {
   wordingAmount: string;
 }
 
+const computeProgression = (sentAmount: number, amountToSend: number) => {
+  return Math.round((sentAmount / amountToSend) * 10000) / 100;
+};
+
 const findVariation = (amount: number, variations: AlertVariation[] = []) => {
   const matchingVariations = variations
     // We keep only variations that match requiredAmount
@@ -89,9 +93,7 @@ const Overlay = () => {
       const amountToSend = overlay?.donationBar?.donationGoalAmount.value || 1;
 
       setDonationBarProgression((prevProgression) => {
-        return (
-          prevProgression + Math.round((amount / amountToSend) * 10000) / 100
-        );
+        return prevProgression + computeProgression(amount, amountToSend);
       });
     },
     [setDonationBarProgression, overlay]
@@ -153,7 +155,7 @@ const Overlay = () => {
             overlay?.donationBar?.donationGoalAmount.value || 1;
 
           setDonationBarProgression(
-            Math.round((result.sentAmount / amountToSend) * 10000) / 100
+            computeProgression(result.sentAmount, amountToSend)
           );
         }
       })

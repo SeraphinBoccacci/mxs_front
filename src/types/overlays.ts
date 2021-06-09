@@ -29,6 +29,8 @@ export interface VariationGroup {
 export interface OverlayData {
   _id: string;
   isActive: boolean;
+  name: string;
+  color: string;
   rowsStructure?: {
     rows: string[];
     rowsGroupName?: string | undefined;

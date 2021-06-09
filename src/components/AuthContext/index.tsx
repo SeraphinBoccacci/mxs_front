@@ -30,10 +30,12 @@ export const AuthContext = createContext<{
   ) => void;
   setHerotag: (herotag: string) => void;
   user?: UserType;
+  getUser: () => void;
 }>({
   isAuthenticated: false,
   setTokenData: () => {},
   setHerotag: () => {},
+  getUser: () => {},
 });
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -57,6 +59,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const isAuthenticated = !!tokenData;
 
+  const getUser = useCallback(async () => {
+    try {
+      const data = await getUserData();
+      setUser(data);
+      setHerotag(data.herotag);
+    } catch (error) {
+      setTokenData(null);
+      history.push(routes.home);
+      handleError(error?.message);
+    }
+  }, [handleError, history, setHerotag, setTokenData]);
+
   useEffect(() => {
     if (!tokenData?.token || Date.now() > tokenData.expirationTimestamp) {
       setTokenData(null);
@@ -64,17 +78,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [setTokenData, tokenData, history]);
 
   useEffect(() => {
-    if (isAuthenticated)
-      getUserData()
-        .then((data) => {
-          setUser(data);
-          setHerotag(data.herotag);
-        })
-        .catch((error) => {
-          setTokenData(null);
-          history.push(routes.home);
-          handleError(error?.message);
-        });
+    if (isAuthenticated) getUser();
     // eslint-disable-next-line
   }, [isAuthenticated]);
 
@@ -86,6 +90,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setHerotag,
         herotag,
         user,
+        getUser,
       }}
     >
       {children}
