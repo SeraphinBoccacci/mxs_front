@@ -70,6 +70,13 @@ export const StyledModal = styled(Modal)`
   margin: auto;
 `;
 
+export const ModalContent = styled(Paper)`
+  padding: 1rem;
+
+  border: none !important;
+  outline: none !important;
+`;
+
 export const StyledForm = styled.div`
   height: 100%;
 
@@ -77,13 +84,6 @@ export const StyledForm = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-`;
-
-export const StyledPaper = styled(Paper)`
-  width: 100% !important;
-  height: 100% !important;
-
-  padding: 1.4rem !important;
 `;
 
 export const StyledParagraph = styled.p`

@@ -103,12 +103,6 @@ export const DroppableContainer = styled.div<{ isDraggingOver?: boolean }>`
   padding: 0 0.2rem;
 `;
 
-export const StyledConfirmModal = styled(Modal)`
-  width: 20rem !important;
-  height: max-content !important;
-  margin: auto;
-`;
-
 export const StyledForm = styled.div`
   height: 100%;
 
@@ -118,17 +112,17 @@ export const StyledForm = styled.div`
   justify-content: space-around;
 `;
 
-export const StyledEditModal = styled(Modal)`
-  width: 30rem !important;
+export const StyledModal = styled(Modal)`
+  width: 20rem !important;
   height: max-content !important;
   margin: auto;
 `;
 
-export const StyledPaper = styled(Paper)`
-  width: 100% !important;
-  height: 100% !important;
+export const ModalContent = styled(Paper)`
+  padding: 1rem;
 
-  padding: 1.4rem !important;
+  border: none !important;
+  outline: none !important;
 `;
 
 export const StyledParagraph = styled.p`
