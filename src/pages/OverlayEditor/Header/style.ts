@@ -4,16 +4,13 @@ import styled from "styled-components";
 import { colors } from "../../../constants";
 
 export const Container = styled.header`
-  width: 100vw;
-  height: 4rem;
-
-  padding: 0 2rem;
-
-  background: ${colors.primary};
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100vw;
+  height: 4rem;
+  padding: 0 2rem;
+  background: ${colors.primary};
 
   & button {
     height: 2.4rem;
@@ -31,9 +28,6 @@ export const Buttons = styled.div`
 
   & > button:first-child > span > div > span:first-child {
     display: inline-block;
-  }
-
-  & > button:first-child > span > div > span:first-child {
     font-size: 0.7rem !important;
     line-height: 0.7rem;
   }

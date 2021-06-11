@@ -3,10 +3,9 @@ import styled from "styled-components";
 
 const Logo = () => {
   const LogoDiv = styled.div`
-    background-image: url("logo.png");
     width: 100%;
     height: 100%;
-
+    background-image: url("logo.png");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -15,13 +14,10 @@ const Logo = () => {
   const Container = styled.div`
     width: 10rem;
     height: 3rem;
-
     margin: auto 0;
     padding: 0 0.9rem;
-
-    background-color: #fff;
     border-radius: 0.4rem;
-
+    background-color: #fff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
       0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
       0 16px 16px rgba(0, 0, 0, 0.12);

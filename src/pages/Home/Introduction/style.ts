@@ -5,19 +5,16 @@ import { colors, fonts } from "../../../constants";
 
 export const Section = styled.section`
   position: relative;
-  min-height: 100vh;
-  height: max-content;
-  width: 100vw;
-  background-color: #060606;
-  padding: 6rem 0 2rem;
-
-  overflow-x: hidden;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: left;
-
+  justify-content: space-between;
+  overflow-x: hidden;
+  width: 100vw;
+  height: max-content;
+  min-height: 100vh;
+  padding: 6rem 0 2rem;
+  background-color: #060606;
   background-image: url("/planet_2_rotated.jpeg");
   background-position: bottom right;
   background-size: contain;
@@ -30,13 +27,12 @@ export const Section = styled.section`
 
 export const CatchPhraseAndImage = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-
+  justify-content: space-between;
   width: 100vw;
   height: max-content;
-  flex: 1;
 
   @media (min-width: 450px) {
     flex-direction: row;
@@ -45,9 +41,9 @@ export const CatchPhraseAndImage = styled.div`
   }
 
   @media (min-width: 820px) {
+    flex: 1;
     width: 50rem;
     margin-left: 7rem;
-    flex: 1;
   }
 `;
 
@@ -56,11 +52,9 @@ export const CatchPhraseContainer = styled.div`
   flex-direction: column;
   align-items: left;
   justify-content: space-between;
-
   width: 100vw;
   height: 18rem;
   padding: 1rem;
-
   background-color: transparent;
 
   @media (min-width: 450px) {
@@ -77,16 +71,16 @@ export const CatchPhraseContainer = styled.div`
 `;
 
 export const ShortCatchPhraseChip = styled(Chip)`
-  font-size: 0.7rem !important;
   width: max-content !important;
-  padding: 0 0.8rem !important;
   margin: 0 1rem !important;
+  padding: 0 0.8rem !important;
+  font-size: 0.7rem !important;
 
   @media (min-width: 450px) {
-    font-size: 0.75rem !important;
     width: max-content !important;
-    padding: 0 1rem !important;
     margin: 0 !important;
+    padding: 0 1rem !important;
+    font-size: 0.75rem !important;
   }
 `;
 
@@ -106,10 +100,10 @@ export const InnerContainer = styled.div`
 `;
 
 export const MainCatchPhrase = styled.h1`
-  font-family: ${fonts.Roboto};
-  font-size: 1.4rem;
-  color: ${colors.secondary};
   margin: 0;
+  color: ${colors.secondary};
+  font-size: 1.4rem;
+  font-family: ${fonts.Roboto};
 
   @media (min-width: 450px) {
     font-size: 2rem;
@@ -121,10 +115,10 @@ export const MainCatchPhrase = styled.h1`
 `;
 
 export const SubMainCatchPhrase = styled.h3`
-  font-family: ${fonts.Ubuntu};
-  font-size: 0.8rem;
-  color: ${colors.secondary};
   margin: 0;
+  color: ${colors.secondary};
+  font-size: 0.8rem;
+  font-family: ${fonts.Ubuntu};
 
   @media (min-width: 450px) {
     font-size: 1.2rem;
@@ -132,30 +126,26 @@ export const SubMainCatchPhrase = styled.h3`
 `;
 
 export const LittleDisclaimer = styled.h6`
-  margin: 0;
-
-  font-size: 0.4rem;
   width: 16rem;
-
-  font-family: ${fonts.Ubuntu};
+  margin: 0;
   color: ${colors.quad};
+  font-size: 0.4rem;
+  font-family: ${fonts.Ubuntu};
 
   @media (min-width: 450px) {
-    font-size: 0.8rem;
     width: max-content;
+    font-size: 0.8rem;
   }
 `;
 
 export const ReferencesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-
-  margin: 2rem 0;
-
-  height: max-content;
+  justify-content: space-between;
   width: 100%;
+  height: max-content;
+  margin: 2rem 0;
 
   @media (min-width: 450px) {
     margin: 2rem 0;
@@ -164,25 +154,19 @@ export const ReferencesContainer = styled.div`
 
 export const ReferencesTitle = styled.h2`
   position: relative;
-
   width: 10rem;
   height: 2rem;
-
   margin: 0 4rem;
-
-  font-family: ${fonts.Roboto};
   color: ${colors.quad};
-  text-align: center;
-
   font-size: 0.8rem;
+  font-family: ${fonts.Roboto};
   line-height: 2rem;
   letter-spacing: 1.2px;
-
+  text-align: center;
   font-variant-caps: all-small-caps;
 
   @media (min-width: 450px) {
     width: max-content;
-
     font-size: 1.2rem;
     line-height: 2rem;
   }
@@ -192,34 +176,28 @@ export const ReferencesTitle = styled.h2`
     position: absolute;
     top: 50%;
     left: -6rem;
-
     width: 6rem;
     height: 1px;
-
     border-radius: 999px;
     background-color: ${colors.quad};
 
     @media (min-width: 500px) {
       left: -12rem;
-
       width: 10rem;
     }
 
     @media (min-width: 800px) {
       left: -15rem;
-
       width: 13rem;
     }
 
     @media (min-width: 1000px) {
       left: -20rem;
-
       width: 18rem;
     }
 
     @media (min-width: 1180px) {
       left: -25rem;
-
       width: 22rem;
     }
   }
@@ -229,34 +207,28 @@ export const ReferencesTitle = styled.h2`
     position: absolute;
     top: 50%;
     right: -6rem;
-
     width: 6rem;
     height: 1px;
-
     border-radius: 999px;
     background-color: ${colors.quad};
 
     @media (min-width: 500px) {
       right: -12rem;
-
       width: 10rem;
     }
 
     @media (min-width: 800px) {
       right: -15rem;
-
       width: 13rem;
     }
 
     @media (min-width: 1000px) {
       right: -20rem;
-
       width: 18rem;
     }
 
     @media (min-width: 1180px) {
       right: -25rem;
-
       width: 22rem;
     }
   }
@@ -265,24 +237,21 @@ export const ReferencesTitle = styled.h2`
 export const ReferencesContent = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-
+  align-items: center;
+  justify-content: center;
   margin: 1rem 0;
   padding: 0 0.4rem;
 `;
 
 export const Reference = styled.a`
-  margin: 0.5rem;
-  padding: 0.5rem 1rem;
-  height: max-content;
-
-  border-radius: 0.4rem;
-
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: max-content;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
 
   @media (min-width: 700px) {
     margin: 1rem 2rem;
@@ -301,27 +270,22 @@ export const Reference = styled.a`
 
 export const ReferencesText = styled.div`
   position: relative;
-
+  height: 30px;
+  color: ${colors.secondary};
   font-size: 0.7rem;
   font-family: ${fonts.Roboto};
-  color: ${colors.secondary};
-
-  height: 30px;
   line-height: 30px;
-
   cursor: pointer;
 
   @media (min-width: 700px) {
-    font-size: 1.2rem;
-
     height: 40px;
+    font-size: 1.2rem;
     line-height: 40px;
   }
 
   @media (min-width: 1000px) {
-    font-size: 1.6rem;
-
     height: 50px;
+    font-size: 1.6rem;
     line-height: 50px;
   }
 `;
@@ -329,11 +293,8 @@ export const ReferencesText = styled.div`
 export const ReferenceImage = styled.img`
   width: 30px;
   height: 30px;
-
   margin: auto 0.4rem;
-
   filter: grayscale(100%);
-
   transition: 0.9s;
 
   @media (min-width: 700px) {

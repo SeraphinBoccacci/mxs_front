@@ -3,9 +3,8 @@ import styled from "styled-components";
 export const CallsToActionsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-
+  justify-content: space-between;
   margin-right: 20%;
   margin-left: 5%;
 

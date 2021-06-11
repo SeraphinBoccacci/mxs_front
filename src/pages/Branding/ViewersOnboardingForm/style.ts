@@ -5,9 +5,9 @@ import { colors, fonts } from "../../../constants";
 import { FlexColumn } from "../../../styles/global";
 
 export const FormContent = styled(FlexColumn)`
-  height: 30rem;
-  width: 100%;
   justify-content: space-evenly;
+  width: 100%;
+  height: 30rem;
 `;
 
 export const Button = styled(MaterialButton)`
@@ -16,37 +16,12 @@ export const Button = styled(MaterialButton)`
 
 export const HowTo = styled.div`
   position: relative;
-  font-family: ${fonts.Roboto};
   width: max-content;
-  color: ${colors.quad};
   margin: 0 auto;
-
-  cursor: pointer;
-
+  color: ${colors.quad};
   outline: none !important;
-
-  & > img {
-    position: fixed;
-    width: 0;
-    z-index: 100;
-
-    left: 50%;
-    top: 50%;
-
-    border-radius: 0.5rem;
-
-    transform: translateX(-50%) translateY(-50%);
-    opacity: 0;
-
-    transition: 0.4s;
-
-    cursor: none;
-  }
-
-  &:focus > img {
-    opacity: 1;
-    width: 80vw;
-  }
+  font-family: ${fonts.Roboto};
+  cursor: pointer;
 
   @media (min-width: 400px) {
     & > img {
@@ -54,8 +29,26 @@ export const HowTo = styled.div`
     }
 
     &:focus > img {
-      opacity: 1;
       width: 17rem;
+      opacity: 1;
     }
+  }
+
+  & > img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    width: 0;
+    border-radius: 0.5rem;
+    cursor: none;
+    transform: translateX(-50%) translateY(-50%);
+    opacity: 0;
+    transition: 0.4s;
+  }
+
+  &:focus > img {
+    width: 80vw;
+    opacity: 1;
   }
 `;

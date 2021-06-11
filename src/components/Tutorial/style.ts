@@ -12,7 +12,6 @@ export const TutorialContainer = styled(Paper)`
   position: relative;
   width: 80vw;
   height: max-content;
-
   margin: 2rem auto;
 
   @media (min-width: 550px) {
@@ -29,13 +28,11 @@ export const TutorialContainer = styled(Paper)`
 `;
 
 export const StepperContainer = styled.div`
-  width: calc(100% - 4rem);
-  overflow: scroll;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
-
+  overflow: scroll;
+  width: calc(100% - 4rem);
   margin: 0 2rem;
 `;
 
@@ -51,17 +48,15 @@ export const Step = styled(MaterialStep)`
 export const TutorialStep = styled.div`
   width: 100%;
   height: max-content;
-
   padding: 0.5rem 0;
 `;
 
 export const StepContent = styled(FlexColumn)`
-  background-color: ${colors.black};
+  width: 95%;
+  margin: 2rem auto;
   padding: 0.3rem;
   border-radius: 12px;
-  width: 95%;
-
-  margin: 2rem auto;
+  background-color: ${colors.black};
 
   @media (min-width: 500px) {
     width: 80%;
@@ -71,17 +66,16 @@ export const StepContent = styled(FlexColumn)`
 
 export const Image = styled.img`
   width: 100%;
-  border-radius: 7px;
-
   margin: 0 auto;
+  border-radius: 7px;
 `;
 
 export const Buttons = styled.div`
-  width: 100%;
-  height: max-content;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
+  height: max-content;
   margin: 1.3rem auto !important;
 
   > * {

@@ -15,11 +15,10 @@ export const Button = styled(MaterialButton)`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
-
-  height: max-content;
+  justify-content: space-evenly;
   width: 80vw;
+  height: max-content;
 
   @media (min-width: 500px) {
     width: 25rem;
@@ -33,66 +32,56 @@ export const Form = styled.form`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-
+  justify-content: space-between;
   width: 100%;
 `;
 
 export const FormCaption = styled.p`
-  font-family: ${fonts.Roboto};
+  margin: 1rem auto 3rem;
   font-size: 0.85rem;
+  font-family: ${fonts.Roboto};
   text-align: justify;
   text-align-last: left;
-
-  margin: 1rem auto 3rem;
 `;
 
 export const Comment = styled.p`
   width: 100%;
   height: 2rem;
-  line-height: 1rem;
-  font-family: ${fonts.Ubuntu};
-  font-size: 0.75rem;
-  text-align: center;
-
   margin: 0 auto 1rem;
+  font-size: 0.75rem;
+  font-family: ${fonts.Ubuntu};
+  line-height: 1rem;
+  text-align: center;
 `;
 
 export const OnboardingTitle = styled.h4`
-  text-align: center;
   font-size: 1.4rem;
-
   font-family: ${fonts.Roboto};
+  text-align: center;
 `;
 
 export const CarousselContent = styled.a`
-  display: block;
   position: relative;
+  display: block;
   overflow: hidden;
   border-radius: 0.6rem;
 
   &::before {
+    content: "Download";
     position: absolute;
     top: 0;
     left: 0;
-
-    content: "Download";
-    font-family: ${fonts.Ubuntu};
-    font-size: 1.4rem;
-    color: ${colors.secondary}00;
-
-    text-align: center;
-    line-height: 10rem;
-
     width: 100%;
     height: 100%;
-
-    background: ${colors.soft_black}00;
-
-    transition: 0.4s;
-
+    color: ${colors.secondary}00;
+    font-size: 1.4rem;
+    font-family: ${fonts.Ubuntu};
+    line-height: 10rem;
+    text-align: center;
     cursor: pointer;
+    background: ${colors.soft_black}00;
+    transition: 0.4s;
   }
 
   &:hover::before {

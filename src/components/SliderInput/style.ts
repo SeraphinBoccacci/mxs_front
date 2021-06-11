@@ -7,19 +7,16 @@ interface SliderInputContainerProps {
 }
 
 export const SliderInputContainer = styled.div<SliderInputContainerProps>`
-  height: max-content;
-  width: ${({ width }) => width};
-
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
-
-  background: ${colors.secondary};
-  padding: 1rem 2rem;
+  justify-content: space-evenly;
+  width: ${({ width }) => width};
+  height: max-content;
   margin: 2.5rem 0 0.5rem;
-
+  padding: 1rem 2rem;
   border-radius: 0.4rem;
+  background: ${colors.secondary};
 `;
 
 export const Label = styled.div`

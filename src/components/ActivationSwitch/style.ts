@@ -4,19 +4,16 @@ import styled from "styled-components";
 import { colors } from "../../constants/index";
 
 export const Container = styled.div`
-  height: 3rem;
-  line-height: 3rem;
-  width: 17rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
-
+  width: 17rem;
+  height: 3rem;
   margin: 3rem auto;
-
   border-radius: 6px;
-
-  color: ${colors.primary};
   background-color: ${colors.secondary};
+  color: ${colors.primary};
+  line-height: 3rem;
 `;
 
 export const ActivateSwitch = styled(Switch)`

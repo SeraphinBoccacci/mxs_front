@@ -9,30 +9,27 @@ import { colors, fonts } from "../../../constants";
 import { FlexColumn } from "../../../styles/global";
 
 export const FaqContainer = styled.section`
-  width: 100vw;
-  min-height: 100vh;
-  height: max-content;
   overflow-x: hidden;
-
+  width: 100vw;
+  height: max-content;
+  min-height: 100vh;
   padding: 5rem 0;
-
   background-color: ${colors.primary};
 `;
 
 export const FaqHeader = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
+  justify-content: center;
   margin-bottom: 4rem;
 `;
 
 export const FaqTitle = styled.h2`
+  margin: 0;
+  color: ${colors.secondary};
   font-size: 1.3rem;
   font-family: ${fonts.Roboto};
-  color: ${colors.secondary};
-  margin: 0;
 
   @media (min-width: 450px) {
     font-size: 2rem;
@@ -57,11 +54,10 @@ export const Accordions = styled(FlexColumn)`
 `;
 
 export const Accordion = styled(MaterialAccordion)`
-  background-color: ${colors.primary} !important;
+  margin: 0.8rem 0;
   border: solid 1px ${colors.quad}66;
   border-radius: 20px !important;
-
-  margin: 0.8rem 0;
+  background-color: ${colors.primary} !important;
 
   &::before {
     background-color: transparent !important;
@@ -69,8 +65,8 @@ export const Accordion = styled(MaterialAccordion)`
 `;
 
 export const AccordionSummary = styled(MaterialAccordionSummary)`
-  font-family: ${fonts.Ubuntu};
   font-size: 1rem;
+  font-family: ${fonts.Ubuntu};
   line-height: 1.3rem;
 
   @media (min-width: 500px) {
@@ -80,8 +76,8 @@ export const AccordionSummary = styled(MaterialAccordionSummary)`
 `;
 
 export const AccordionDetails = styled(MaterialAccordionDetails)`
-  font-family: ${fonts.Roboto};
   font-size: 0.9rem;
+  font-family: ${fonts.Roboto};
   line-height: 1.4rem;
   text-align: justify;
 

@@ -11,11 +11,10 @@ export const IftttParticleContainer = styled.div`
 export const IftttParticleForm = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
-
-  height: max-content;
+  justify-content: space-evenly;
   width: 80vw;
+  height: max-content;
 
   @media (min-width: 500px) {
     width: 25rem;
@@ -35,10 +34,10 @@ export const IftttParticleForm = styled.form`
 `;
 
 export const Paragraph = styled.p`
-  color: ${colors.secondary};
-  font-family: ${fonts.Ubuntu};
-  font-size: 0.85rem;
   width: 80vw;
+  color: ${colors.secondary};
+  font-size: 0.85rem;
+  font-family: ${fonts.Ubuntu};
   text-align: center;
 
   @media (min-width: 500px) {
@@ -57,8 +56,8 @@ export const Paragraph = styled.p`
   }
 
   @media (min-width: 1250px) {
-    line-height: 2rem;
     width: 35rem;
+    line-height: 2rem;
   }
 `;
 
@@ -66,7 +65,6 @@ export const TutorialButtonContainer = styled.div`
   position: relative;
   width: 50rem;
   height: max-content;
-
   margin: 0 auto;
 `;
 
@@ -75,29 +73,21 @@ export const FormInputs = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
   margin: 1rem 0 2.5rem;
 `;
 
 export const FormInput = styled.input`
   display: inline-block;
-  height: 2rem;
-  line-height: 2rem;
   width: max-content;
-
+  height: 2rem;
   margin: 1rem 2rem 1rem 0;
-  font-family: ${fonts.Ubuntu};
-  font-size: 0.9rem;
-
-  transition: 0.4s;
-  text-align: center;
-
-  border-radius: 5px;
   border: none;
-
-  &::placeholder {
-    font-size: 0.8rem;
-  }
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-family: ${fonts.Ubuntu};
+  line-height: 2rem;
+  text-align: center;
+  transition: 0.4s;
 
   @media (min-width: 800px) {
     &::placeholder {
@@ -109,6 +99,10 @@ export const FormInput = styled.input`
     &::placeholder {
       font-size: 1rem;
     }
+  }
+
+  &::placeholder {
+    font-size: 0.8rem;
   }
 
   &:focus::placeholder {

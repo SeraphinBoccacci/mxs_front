@@ -9,8 +9,8 @@ import { colors, fonts } from "../../../constants";
 import { FlexColumn, Paragraph } from "../../../styles/global";
 
 export const Container = styled.section`
-  height: max-content;
   overflow-x: hidden;
+  height: max-content;
 `;
 
 export const Accordions = styled(FlexColumn)`
@@ -31,10 +31,9 @@ export const Accordions = styled(FlexColumn)`
 `;
 
 export const Accordion = styled(MaterialAccordion)`
+  margin: 0.8rem 0;
   border: solid 2px ${colors.quad}66;
   border-radius: 20px !important;
-
-  margin: 0.8rem 0;
 
   &::before {
     background-color: transparent !important;
@@ -42,8 +41,8 @@ export const Accordion = styled(MaterialAccordion)`
 `;
 
 export const AccordionSummary = styled(MaterialAccordionSummary)`
-  font-family: ${fonts.Ubuntu};
   font-size: 1rem;
+  font-family: ${fonts.Ubuntu};
   line-height: 1.3rem;
 
   @media (min-width: 500px) {
@@ -53,8 +52,8 @@ export const AccordionSummary = styled(MaterialAccordionSummary)`
 `;
 
 export const AccordionDetails = styled(MaterialAccordionDetails)`
-  font-family: ${fonts.Roboto};
   font-size: 0.9rem;
+  font-family: ${fonts.Roboto};
   line-height: 1.4rem;
   text-align: justify;
 
@@ -66,7 +65,6 @@ export const AccordionDetails = styled(MaterialAccordionDetails)`
 
 export const StyledParagraph = styled(Paragraph)`
   font-size: 0.8rem;
-
   line-height: 1rem;
 
   &:last-child {

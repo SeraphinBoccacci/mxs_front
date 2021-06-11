@@ -4,44 +4,35 @@ import { colors, fonts } from "../../../constants";
 
 export const StyledNav = styled.nav<{ isOpen: boolean }>`
   position: fixed;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-
-  z-index: 10000;
   top: 0;
   left: 0;
-
-  height: ${({ isOpen }) => (isOpen ? "100vh" : "0")};
-  width: 100vw;
-
-  padding: 2rem;
-
-  transition: 0.3s;
-
-  background-color: ${colors.primary};
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   overflow: hidden;
+  width: 100vw;
+  height: ${({ isOpen }) => (isOpen ? "100vh" : "0")};
+  padding: 2rem;
+  background-color: ${colors.primary};
+  transition: 0.3s;
 `;
 
 export const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-
-  background-color: ${colors.gray};
-
   border-radius: 7px;
+  background-color: ${colors.gray};
 `;
 
 export const Content = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
-
   overflow-x: hidden;
   overflow-y: scroll;
+  width: 100%;
+  height: 100%;
 `;
 
 export const MenuButton = styled.div<{ isMenuOpen: boolean }>`
@@ -51,20 +42,16 @@ export const MenuButton = styled.div<{ isMenuOpen: boolean }>`
   z-index: 1000;
   width: 40px;
   height: 40px;
-
-  transition: 0.3s;
-
   padding: 0;
-  background-color: transparent;
   border: none;
+  background-color: transparent;
+  transition: 0.3s;
 `;
 
 export const StreamParticlesLogo = styled.div`
   width: 12rem;
   height: 4rem;
-
   margin: 0 auto 2rem;
-
   background-image: url("/logo.png");
   background-position: center center;
   background-size: contain;
@@ -82,18 +69,15 @@ export const StreamParticlesLogo = styled.div`
 `;
 
 export const StyledList = styled.ul`
-  width: 100%;
-
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-evenly;
-  list-style: none;
   overflow: visible;
-
+  width: 100%;
   margin-top: 6rem;
-
   padding-left: 2.5rem;
+  list-style: none;
 
   @media (min-width: 500px) {
     padding-left: 5rem;
@@ -108,13 +92,10 @@ export const StyledListItem = styled.li`
   position: relative;
   width: max-content;
   height: 2rem;
-
   margin: 1rem;
-
-  font-family: ${fonts.Ubuntu};
   color: ${colors.secondary};
   font-size: 1.3rem;
-
+  font-family: ${fonts.Ubuntu};
   transition: 0.3s;
 
   &.hoverable:hover {
@@ -130,29 +111,24 @@ export const StyledListItem = styled.li`
 export const StyledListItemTitle = styled.div`
   position: relative;
   z-index: 1000;
-
   cursor: pointer;
 
   &.highlighted::before {
-    position: absolute;
     content: "";
+    position: absolute;
     bottom: 0;
-
     width: 100%;
     height: 0.1rem;
     border-radius: 2rem;
-
     background: ${colors.quad};
   }
 `;
 
 export const BottomNode = styled.div`
-  width: 10rem;
-  height: 2rem;
-
-  margin: 6rem auto 3rem;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 10rem;
+  height: 2rem;
+  margin: 6rem auto 3rem;
 `;

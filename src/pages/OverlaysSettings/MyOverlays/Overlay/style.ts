@@ -5,9 +5,9 @@ import { colors } from "../../../../constants";
 import { FlexRow, Title } from "../../../../styles/global";
 
 export const Container = styled.div`
-  margin: 3rem 1rem;
   width: 15rem;
   height: max-content;
+  margin: 3rem 1rem;
   background: ${colors.soft_black};
 `;
 
@@ -16,8 +16,8 @@ interface ImageContainerProps {
 }
 
 export const Header = styled(FlexRow)`
-  padding: 0 1rem;
   justify-content: space-between;
+  padding: 0 1rem;
 
   & button {
     width: 1.5rem !important;
@@ -27,27 +27,23 @@ export const Header = styled(FlexRow)`
 `;
 
 export const StyledTitle = styled(Title)`
+  overflow: hidden;
   width: 10rem;
-
   margin: 0.4rem 0;
   font-size: 1rem;
-
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 export const ImageContainer = styled.div<ImageContainerProps>`
-  width: 15rem;
-  min-height: 8rem;
-  height: max-content;
-
-  background-color: ${({ color }) => color || colors.secondary};
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  width: 15rem;
+  height: max-content;
+  min-height: 8rem;
+  background-color: ${({ color }) => color || colors.secondary};
 `;
 
 export const Image = styled.img`
@@ -56,12 +52,11 @@ export const Image = styled.img`
 `;
 
 export const Buttons = styled.div`
-  width: 100%;
-  margin: 0.5rem 0;
-
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 100%;
+  margin: 0.5rem 0;
 `;
 
 export const StyledModal = styled(Modal)`
@@ -72,18 +67,16 @@ export const StyledModal = styled(Modal)`
 
 export const ModalContent = styled(Paper)`
   padding: 1rem;
-
   border: none !important;
   outline: none !important;
 `;
 
 export const StyledForm = styled.div`
-  height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  height: 100%;
 `;
 
 export const StyledParagraph = styled.p`
