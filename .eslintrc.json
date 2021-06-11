@@ -19,8 +19,7 @@
     "plugins": [
         "react",
         "@typescript-eslint", 
-        "simple-import-sort",
-        "stylelint"
+        "simple-import-sort"
     ],
     "rules": {
         "no-unused-vars": "off",

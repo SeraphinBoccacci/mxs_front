@@ -1,8 +1,6 @@
 import { Button as MaterialButton } from "@material-ui/core";
 import styled from "styled-components";
 
-import { colors, fonts } from "../../constants";
-
 export const AccountContainer = styled.div`
   display: flex;
   flex-direction: column;
