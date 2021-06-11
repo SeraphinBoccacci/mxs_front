@@ -8,12 +8,10 @@ export const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  background: ${colors.primary};
   width: 100%;
   height: 5rem;
-
   padding: 0 1rem;
+  background: ${colors.primary};
 
   @media (min-width: 700px) {
     padding: 0 2rem;

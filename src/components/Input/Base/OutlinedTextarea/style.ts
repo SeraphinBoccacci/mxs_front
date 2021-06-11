@@ -8,25 +8,20 @@ interface OutlinedTextAreaProps {
 
 export const OutlinedTextArea = styled.textarea<OutlinedTextAreaProps>`
   position: relative;
-  display: block;
-  z-index: 50;
   top: 0;
   left: 0;
+  z-index: 50;
+  display: block;
   width: 100%;
-
   height: auto;
-
-  outline: none;
-  resize: none;
-
-  border: none;
-  background: none;
-
-  line-height: 1.5rem;
-  font-family: ${fonts.Roboto};
-  font-size: 0.95rem;
-
   padding: 1rem 0;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  font-family: ${fonts.Roboto};
+  line-height: 1.5rem;
+  resize: none;
+  background: none;
 
   &:not(:placeholder-shown),
   &:focus {
@@ -35,11 +30,10 @@ export const OutlinedTextArea = styled.textarea<OutlinedTextAreaProps>`
 
   &:not(:placeholder-shown) + label,
   &:focus + label {
+    top: -0.45rem;
+    color: ${colors.quad};
     font-size: 0.75rem;
     line-height: 0.75rem;
-    top: -0.45rem;
-
-    color: ${colors.quad};
   }
 
   &:not(:placeholder-shown) ~ div,

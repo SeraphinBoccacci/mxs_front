@@ -5,33 +5,28 @@ import { colors, fonts } from "../../constants";
 
 export const ModalContainer = styled(Modal)`
   width: 90vw;
-  height: 120vw;
-
   max-width: 500px;
+  height: 120vw;
   max-height: 600px;
-
   margin: auto;
 `;
 
 export const ModalContent = styled(Paper)`
-  width: 100%;
-  height: 100%;
-
-  outline: none !important;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  outline: none !important;
 `;
 
 export const FormTitle = styled.h3`
-  margin: 1.5rem auto;
-  letter-spacing: 2px;
   width: max-content;
-
+  margin: 1.5rem auto;
+  color: ${colors.quad};
   font-size: 1.4rem;
   font-family: ${fonts.Roboto};
-  color: ${colors.quad};
+  letter-spacing: 2px;
 
   @media (min-width: 800px) {
     font-size: 2rem;
@@ -45,12 +40,12 @@ export const ConnectionForm = styled.form`
 `;
 
 export const Inputs = styled.div`
-  height: max-content;
-  width: 70%;
-  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 70%;
+  height: max-content;
+  margin: 1rem auto;
 
   @media (min-width: 700px) {
     margin: 3rem auto;
@@ -68,12 +63,12 @@ export const ChangeModePhrase = styled.div`
   margin-bottom: 1.7rem;
   padding: 0.5rem 2.2rem;
   border-radius: 999px;
-  font-size: 0.8rem;
-  line-height: 1rem;
-  background: ${colors.primary};
-  font-family: ${fonts.Ubuntu};
   color: ${colors.secondary};
   box-shadow: 0 8px 6px -6px ${colors.black};
+  font-size: 0.8rem;
+  font-family: ${fonts.Ubuntu};
+  line-height: 1rem;
+  background: ${colors.primary};
 `;
 
 export const ChangeModeSpan = styled.span`
@@ -86,14 +81,14 @@ export const RecoveryActionsCTAs = styled.div``;
 
 export const RecoveryActionCTA = styled.div`
   position: relative;
-  text-align: center;
-  font-size: 0.8rem;
-  font-family: ${fonts.Roboto};
-  color: ${colors.quad};
-  transition: 0.8s;
   width: max-content;
   margin: auto;
   padding: 0.2rem 0.6rem;
+  color: ${colors.quad};
+  font-size: 0.8rem;
+  font-family: ${fonts.Roboto};
+  text-align: center;
+  transition: 0.8s;
   &:hover {
     color: ${colors.primary};
   }
@@ -103,12 +98,12 @@ export const RecoveryActionCTA = styled.div`
     cursor: pointer;
   }
   & > div {
-    position: absolute;
     content: "";
+    position: absolute;
     bottom: 0;
     left: 0;
-    height: 0%;
     width: 100%;
+    height: 0%;
     border-radius: 99px;
     background-color: ${colors.quad};
     transition: 0.2s;

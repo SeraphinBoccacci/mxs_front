@@ -71,12 +71,11 @@ export const ThirdDot = styled.span`
 `;
 
 export const TransactionReferenceP = styled.p`
-  text-align: center;
   margin: 0 2rem;
-  font-family: ${fonts.Ubuntu};
   color: ${colors.secondary};
-
   font-size: 0.8rem;
+  font-family: ${fonts.Ubuntu};
+  text-align: center;
 
   @media (min-width: 800px) {
     font-size: 1rem;
@@ -93,30 +92,26 @@ export const Alert = styled(MaterialAlert)`
 
 export const Button = styled(MaterialButton)`
   width: max-content !important;
-
   margin: 0 auto !important;
-  padding: 0.4rem 2rem !important;
   margin-bottom: 1.8rem !important;
+  padding: 0.4rem 2rem !important;
 `;
 
 export const Column = styled.div`
-  width: 100%;
-  height: 100%;
-
-  padding: 2rem 1.4rem;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 1.4rem;
 `;
 
 export const ReferenceAndAlert = styled.div`
-  width: 100%;
-  height: 10rem;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 10rem;
 `;

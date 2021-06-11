@@ -9,25 +9,20 @@ import { FlexColumn } from "../../styles/global";
 
 export const VideoPlayerContainer = styled.div`
   position: relative;
-
-  width: 100%;
-  height: 40rem;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
+  justify-content: center;
+  width: 100%;
+  height: 40rem;
   margin: 2rem auto 6rem;
 `;
 
 export const VideoTitle = styled.h2`
-  font-family: ${fonts.Roboto};
-  font-size: 1.3rem;
-
   margin: 0 auto 3rem;
-
   color: ${colors.secondary};
+  font-size: 1.3rem;
+  font-family: ${fonts.Roboto};
 
   @media (min-width: 450px) {
     font-size: 2rem;
@@ -35,13 +30,11 @@ export const VideoTitle = styled.h2`
 `;
 
 export const StepperContainer = styled.div`
-  width: calc(100% - 4rem);
-  overflow: scroll;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
-
+  overflow: scroll;
+  width: calc(100% - 4rem);
   margin: 0 2rem;
 `;
 
@@ -57,17 +50,15 @@ export const Step = styled(MaterialStep)`
 export const TutorialStep = styled.div`
   width: 100%;
   height: max-content;
-
   padding: 0.5rem 0;
 `;
 
 export const StepContent = styled(FlexColumn)`
-  background-color: ${colors.black};
+  width: 95%;
+  margin: 2rem auto;
   padding: 0.3rem;
   border-radius: 12px;
-  width: 95%;
-
-  margin: 2rem auto;
+  background-color: ${colors.black};
 
   @media (min-width: 500px) {
     width: 80%;
@@ -77,7 +68,6 @@ export const StepContent = styled(FlexColumn)`
 
 export const Image = styled.img`
   width: 100%;
-  border-radius: 7px;
-
   margin: 0 auto;
+  border-radius: 7px;
 `;

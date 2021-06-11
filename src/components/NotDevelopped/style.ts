@@ -6,7 +6,6 @@ export const Container = styled.div`
   width: 400px;
   height: 400px;
   margin: 2rem auto;
-
   color: ${colors.secondary};
   text-align: center;
 `;

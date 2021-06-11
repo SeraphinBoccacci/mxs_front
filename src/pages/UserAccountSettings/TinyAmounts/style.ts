@@ -4,16 +4,15 @@ import styled from "styled-components";
 import { FlexColumn } from "../../../styles/global";
 
 export const StyledButton = styled(Button)`
-  margin: 2rem auto 0 !important;
   width: 10rem;
+  margin: 2rem auto 0 !important;
 `;
 
 export const Inputs = styled(FlexColumn)`
-  justify-content: space-evenly;
   align-items: center;
-
-  height: max-content;
+  justify-content: space-evenly;
   width: 80vw;
+  height: max-content;
 
   @media (min-width: 500px) {
     width: 25rem;
