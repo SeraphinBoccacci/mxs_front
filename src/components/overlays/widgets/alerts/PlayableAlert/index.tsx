@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import config from "../../../../../config/config";
 import { AlertVariation } from "../../../../../types/alerts";
 import { EventData } from "../../../../../types/ifttt";
+import { replaceManyAll } from "../../../../../utils/string";
 import {
   AnimatedImage,
   AnimatedTextContainer,
@@ -139,10 +140,11 @@ const Alert = ({ alert, data }: AlertProps) => {
           exitAnimationType={alert?.text?.animation?.exit?.type}
           exitAnimationDuration={alert?.text?.animation?.exit?.duration}
         >
-          {alert.text.content
-            .replaceAll("{{herotag}}", data.herotag)
-            .replaceAll("{{amount}}", String(data.amount))
-            .replaceAll("{{message}}", data.data)
+          {replaceManyAll(alert.text.content, [
+            ["{{herotag}}", data?.herotag || ""],
+            ["{{amount}}", String(data?.amount || "")],
+            ["{{message}}", data?.data || ""],
+          ])
             .split("\n")
             .map((paragraph, index) => (
               <StyledParagraph

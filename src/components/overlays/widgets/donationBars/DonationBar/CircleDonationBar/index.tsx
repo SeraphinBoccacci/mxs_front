@@ -13,6 +13,7 @@ import {
   CircleDisplaySettings,
   DonationBar,
 } from "../../../../../../types/donationBar";
+import { replaceAll } from "../../../../../../utils/string";
 import {
   AmountToSendCircle,
   Cursor,
@@ -45,10 +46,9 @@ const CircleDonationBar = ({
     }, (donationBar.donationReaction.duration || 0.3) * 1000);
   }, [progression, donationBar]);
 
-  const radius = useMemo(
-    () => (donationBar?.displaySettings?.width || 2) / 2,
-    [donationBar?.displaySettings?.width]
-  );
+  const radius = useMemo(() => (donationBar?.displaySettings?.width || 2) / 2, [
+    donationBar?.displaySettings?.width,
+  ]);
 
   const updateAmountPosition = useCallback(
     (
@@ -170,8 +170,11 @@ const CircleDonationBar = ({
       <DonationDescription
         position={donationBar.donationBarDescription?.position}
       >
-        {donationBar?.donationBarDescription?.content
-          ?.replaceAll("{{goal}}", String(donationBar.donationGoalAmount.value))
+        {replaceAll(
+          donationBar?.donationBarDescription?.content || "",
+          "{{goal}}",
+          String(donationBar.donationGoalAmount.value)
+        )
           .split("\n")
           .map((paragraph, index) => (
             <StyledParagraph

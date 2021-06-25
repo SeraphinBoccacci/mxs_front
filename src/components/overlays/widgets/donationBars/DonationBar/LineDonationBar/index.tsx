@@ -6,6 +6,7 @@ import {
   DonationBar,
   LineDisplaySettings,
 } from "../../../../../../types/donationBar";
+import { replaceAll } from "../../../../../../utils/string";
 import { DonationDescription, StyledParagraph } from "../../styles.donationBar";
 import {
   AmountSentPart,
@@ -108,8 +109,11 @@ const LineDonationBar = ({
       <DonationDescription
         position={donationBar.donationBarDescription?.position}
       >
-        {donationBar?.donationBarDescription?.content
-          ?.replaceAll("{{goal}}", String(donationBar.donationGoalAmount.value))
+        {replaceAll(
+          donationBar?.donationBarDescription?.content || "",
+          "{{goal}}",
+          String(donationBar.donationGoalAmount.value)
+        )
           .split("\n")
           .map((paragraph, index) => (
             <StyledParagraph
