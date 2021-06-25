@@ -11,6 +11,7 @@ import {
   DonationBarFormData,
 } from "../../../../types/donationBar";
 import { TextStyles } from "../../../../types/style";
+import { replaceAll } from "../../../../utils/string";
 import { useEditorContext } from "../../Context";
 import {
   Modal,
@@ -33,7 +34,7 @@ interface DonationBarEditionModalProps {
 
 const formatFormData = (formData: { [x: string]: string | TextStyles[] }) => {
   return Object.entries(formData).reduce((variationData, [key, value]) => {
-    const path = key.replaceAll("Ref", "").split("_");
+    const path = replaceAll(key, "Ref", "").split("_");
 
     const newVariation = set(variationData, path, value || "");
 
