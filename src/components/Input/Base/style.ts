@@ -19,19 +19,15 @@ const resolveMargins = ({ withoutMargin, centered }: InputContainerProps) => {
 
 export const InputContainer = styled.div<InputContainerProps>`
   position: relative;
+  display: inline-flex;
+  flex-direction: row;
   width: ${({ width }) => width || "100%"};
   height: max-content;
   margin: ${resolveMargins};
-
-  display: inline-flex;
-  flex-direction: row;
-
+  padding: 0 1.4rem;
   border: ${({ isEmpty }) =>
     isEmpty ? `${colors.gray} solid 1.8px` : `${colors.gray}66 solid 1.8px`};
-
   border-radius: 4px;
-  padding: 0 1.4rem;
-
   transition: 0.3s;
 
   &:focus-within {
@@ -40,28 +36,22 @@ export const InputContainer = styled.div<InputContainerProps>`
 `;
 
 export const InputLabel = styled.label`
-  display: block;
   position: absolute;
-  z-index: 40;
   top: 0;
   left: 0;
-
-  height: 100%;
-  max-width: 100%;
+  z-index: 40;
+  display: block;
   flex: 1;
-
+  overflow: hidden;
+  max-width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+  color: ${colors.gray};
   line-height: 2.25rem;
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
-
-  padding: 0 1rem;
-
-  transition: 0.2s;
-
-  color: ${colors.gray};
-
   cursor: text;
+  transition: 0.2s;
 `;
 
 interface AdornmentProps {
@@ -71,19 +61,15 @@ interface AdornmentProps {
 export const Adornment = styled.div<AdornmentProps>`
   position: relative;
   top: 0.1rem;
-  width: max-content;
   z-index: 50;
-
+  width: max-content;
+  font-size: 0.95rem;
+  font-family: ${fonts.Roboto};
   line-height: 2.5rem;
   text-align: right;
-
-  font-family: ${fonts.Roboto};
-  font-size: 0.95rem;
-
-  transition: 0.3s;
-  transform: scaleX(0);
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-duration: 0.3s;
+  transform: scaleX(0);
   transform-origin: right;
-
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
 `;

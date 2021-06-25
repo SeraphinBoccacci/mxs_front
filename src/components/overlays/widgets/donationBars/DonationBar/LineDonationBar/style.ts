@@ -20,14 +20,10 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
   position: fixed;
   top: ${({ offsetTop = 100 }) => `${offsetTop}px`};
   left: ${({ offsetLeft = 100 }) => `${offsetLeft}px`};
-
   width: ${({ width = 500 }) => `${width}px`};
   height: ${({ height = 50 }) => `${height}px`};
-
   border-radius: 5px;
-
   transition: ${({ duration = 1 }) => `${duration / 5}s`};
-
   ${({ shouldReact, animation }) =>
     shouldReact && animation === BarDisplayAnimations.center
       ? css`
@@ -46,12 +42,9 @@ interface CursorProps {
 
 export const Cursor = styled.img<CursorProps>`
   position: absolute;
-
-  border-radius: 10000px;
-
   width: 100%;
   height: 100%;
-
+  border-radius: 10000px;
   transition: ${({ duration = 1 }) => `${duration}s`};
   ${({ shouldReact, animation }) =>
     shouldReact && logoAnimationsMapper(animation)}

@@ -15,15 +15,12 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
   position: fixed;
   top: ${({ offsetTop = 100 }) => `${offsetTop}px`};
   left: ${({ offsetLeft = 100 }) => `${offsetLeft}px`};
-
-  padding: 0;
-  margin: 0;
-
   width: ${({ contentWidth = 200 }) => `${contentWidth}px`};
   height: ${({ contentWidth = 200 }) => `${contentWidth}px`};
-
+  margin: 0;
+  padding: 0;
+  border-radius: 20px;
   transition: ${({ duration = 1 }) => `${duration / 5}s`};
-
   ${({ shouldReact, animation }) =>
     shouldReact && animation === BarDisplayAnimations.center
       ? css`
@@ -32,6 +29,4 @@ export const DonationBarContainer = styled.div<DonationBarContainerProps>`
           transform: translate(-50%, -50%) perspective(500px) translateZ(50px);
         `
       : ""};
-
-  border-radius: 20px;
 `;

@@ -5,26 +5,23 @@ import { FlexRow } from "../../styles/global";
 
 export const Container = styled.div`
   position: relative;
-  min-height: 100vh;
-  height: max-content;
-  width: 100vw;
-  background-color: ${colors.primary};
-  padding: 6rem 0 2rem;
-
-  overflow-x: hidden;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
+  width: 100vw;
+  height: max-content;
+  min-height: 100vh;
+  padding: 6rem 0 2rem;
+  background-color: ${colors.primary};
 `;
 
 export const Content = styled.div`
   position: relative;
-  height: max-content;
-  width: 90%;
-
-  margin: auto 0;
   top: -2rem;
+  width: 90%;
+  height: max-content;
+  margin: auto 0;
 
   @media (min-width: 25rem) {
     width: 22rem;
@@ -41,10 +38,9 @@ export const Content = styled.div`
 
 export const Box = styled(FlexRow)`
   position: relative;
-  height: 8rem;
-
   align-items: center;
   justify-content: center;
+  height: 8rem;
 
   @media (min-width: 30rem) {
     height: 10rem;
@@ -53,12 +49,10 @@ export const Box = styled(FlexRow)`
 
 export const HerotagBox = styled(Box)`
   & > div {
-    width: 100%;
-    height: 100%;
-
     align-items: center;
     justify-content: center;
-
+    width: 100%;
+    height: 100%;
     transition: 0.4s;
   }
 
@@ -67,25 +61,21 @@ export const HerotagBox = styled(Box)`
   }
 
   & > img {
-    opacity: 0;
-
-    transition: 0.3s;
-
     cursor: none;
-
     transform: translateY(20px);
+    opacity: 0;
+    transition: 0.3s;
   }
 
   &:hover > img {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
 `;
 
 export const MaiarImage = styled.img`
   width: 6rem;
   border-radius: 8px;
-
   cursor: pointer;
 
   @media (min-width: 30rem) {
@@ -95,14 +85,12 @@ export const MaiarImage = styled.img`
 `;
 
 export const StepTitle = styled.h4`
-  font-family: ${fonts.Roboto};
+  margin: 0;
   color: ${colors.secondary};
   font-size: 1rem;
+  font-family: ${fonts.Roboto};
   line-height: 2rem;
-  margin: 0;
-
   text-align: center;
-
   transition: 0.4s;
 
   @media (min-width: 30rem) {
@@ -114,9 +102,9 @@ export const StepTitle = styled.h4`
 export const StepNumber = styled.div`
   position: absolute;
   left: 0;
-  font-family: ${fonts.Ubuntu};
   color: ${colors.secondary};
   font-size: 1.7rem;
+  font-family: ${fonts.Ubuntu};
 
   @media (min-width: 30rem) {
     font-size: 2.3rem;
@@ -124,16 +112,14 @@ export const StepNumber = styled.div`
 `;
 
 export const Herotag = styled.div`
-  font-family: ${fonts.Code};
-  font-weight: 500;
-  color: ${colors.primary};
-  font-size: 1.5rem;
-  line-height: 2rem;
   padding: 0.4rem 0.8rem;
-
   border-radius: 0.5rem;
-
   background-color: ${colors.secondary};
+  color: ${colors.primary};
+  font-weight: 500;
+  font-size: 1.5rem;
+  font-family: ${fonts.Code};
+  line-height: 2rem;
 
   @media (min-width: 30rem) {
     padding: 0.5rem 1rem;

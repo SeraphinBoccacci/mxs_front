@@ -5,8 +5,8 @@ import { fonts } from "../../../../constants";
 
 export const HeaderTableCell = styled(MaterialTableCell)`
   padding: 10px 4px !important;
-  font-family: ${fonts.Roboto} !important;
   font-size: 0.9rem !important;
+  font-family: ${fonts.Roboto} !important;
 
   &:last-child {
     padding: 6px 20px 6px 4px !important;

@@ -15,19 +15,16 @@ export const Content = styled(FlexRow)<ContentProps>`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-
-  overflow: hidden;
-
-  border-style: solid;
-  border-width: ${({ borderWidth = 0 }) => `${borderWidth}px`};
-  border-color: ${({ borderColor = "none" }) => borderColor};
-  border-radius: ${({ borderRadius = 5 }) => `${borderRadius}px`};
-
   display: flex;
   flex-direction: ${({ display }) =>
     display === DonationBarDisplays.Vertical ? "column-reverse" : "row"};
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-width: ${({ borderWidth = 0 }) => `${borderWidth}px`};
+  border-style: solid;
+  border-color: ${({ borderColor = "none" }) => borderColor};
+  border-radius: ${({ borderRadius = 5 }) => `${borderRadius}px`};
 `;
 
 interface SubPartProps {
@@ -37,19 +34,15 @@ interface SubPartProps {
 }
 
 const SubPart = styled.div<SubPartProps>`
-  font-family: "Noto Sans JP", sans-serif;
-  font-size: 1.1rem;
-
-  text-align: center;
-  color: ${({ textColor }) => textColor};
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  transition: ${({ duration = 1 }) => `${duration}s`};
-
   overflow: hidden;
+  color: ${({ textColor }) => textColor};
+  font-size: 1.1rem;
+  font-family: "Noto Sans JP", sans-serif;
+  text-align: center;
+  transition: ${({ duration = 1 }) => `${duration}s`};
 
   & div {
     width: max-content;
@@ -69,7 +62,6 @@ export const AmountSentPart = styled(SubPart)<AmountSentPartProps>`
     display === DonationBarDisplays.Vertical ? "100%" : `${progression}%`};
   height: ${({ display, progression }) =>
     display === DonationBarDisplays.Vertical ? `${progression}%` : "100%"};
-
   background: ${({ color = colors.quad, shouldOverrideColor, overrideColor }) =>
     shouldOverrideColor && overrideColor ? overrideColor : color};
 `;
@@ -88,7 +80,6 @@ export const AmountToSendPart = styled(SubPart)<AmountToSendPartProps>`
     display === DonationBarDisplays.Vertical
       ? `${100 - progression}%`
       : "100%"};
-
   background: ${({ color = colors.primary }) => color};
 `;
 
@@ -120,30 +111,25 @@ export const resolveCursorPosition = (display: DonationBarDisplays) => {
         `calc(${progression}% - ${computeCursorMajorOffset(containerWidth)})`};
       left: ${({ containerWidth = 50 }) =>
         computeCursorMinorOffset(containerWidth)};
-
-      height: ${({ containerWidth = 50 }) => computeCursorSize(containerWidth)};
       width: ${({ containerWidth = 50 }) => computeCursorSize(containerWidth)};
+      height: ${({ containerWidth = 50 }) => computeCursorSize(containerWidth)};
     `;
 
   return css<CursorContainerProps>`
-    left: ${({ progression, containerHeight = 50 }) =>
-      `calc(${progression}% - ${computeCursorMajorOffset(containerHeight)})`};
     bottom: ${({ containerHeight = 50 }) =>
       computeCursorMinorOffset(containerHeight)};
-
-    height: ${({ containerHeight = 50 }) => computeCursorSize(containerHeight)};
+    left: ${({ progression, containerHeight = 50 }) =>
+      `calc(${progression}% - ${computeCursorMajorOffset(containerHeight)})`};
     width: ${({ containerHeight = 50 }) => computeCursorSize(containerHeight)};
+    height: ${({ containerHeight = 50 }) => computeCursorSize(containerHeight)};
   `;
 };
 
 export const CursorContainer = styled.div<CursorContainerProps>`
   position: absolute;
-
+  z-index: 100;
+  transform: ${({ scale = 1 }) => `scale(${scale})`};
   ${({ display = DonationBarDisplays.Horizontal }) =>
     resolveCursorPosition(display)}
-
-  z-index: 100;
-
   transition: ${({ duration = 1 }) => `${duration}s`};
-  transform: ${({ scale = 1 }) => `scale(${scale})`};
 `;

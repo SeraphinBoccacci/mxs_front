@@ -5,8 +5,7 @@ import { fonts } from "../../../../../../constants/index";
 interface TableBodyProps {}
 
 export const TableBody = styled.div<TableBodyProps>`
-  font-family: ${fonts.Ubuntu};
   font-size: 0.8rem;
-
+  font-family: ${fonts.Ubuntu};
   text-align: center;
 `;

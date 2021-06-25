@@ -3,24 +3,19 @@ import styled from "styled-components";
 import { fonts } from "../../../../constants";
 
 export const Container = styled.div`
-  z-index: 50;
-  display: block;
-  top: 0rem;
+  top: 0;
   left: 0;
-
+  z-index: 50;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   width: 10rem;
   height: 2.5rem;
   padding: 0;
-  outline: none;
-
   border: none;
-  background: none;
-
-  font-family: ${fonts.Roboto};
+  outline: none;
   font-size: 0.95rem;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  font-family: ${fonts.Roboto};
+  background: none;
 `;

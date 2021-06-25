@@ -11,9 +11,7 @@ export const StreamElementsParticleContainer = styled.div`
 export const CodeSnippets = styled(Paper)`
   display: flex;
   flex-direction: column;
-
   width: 50rem;
-
   margin: 3rem auto;
   padding: 1rem;
 `;
@@ -21,7 +19,6 @@ export const CodeSnippets = styled(Paper)`
 export const CodeSnippetsButtons = styled.div`
   display: flex;
   flex-direction: row;
-
   justify-content: space-evenly;
 `;
 

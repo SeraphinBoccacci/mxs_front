@@ -5,12 +5,9 @@ import styled from "styled-components";
 export const CodeSnippetsContainer = styled(Paper)`
   display: flex;
   flex-direction: column;
-
+  overflow-y: scroll;
   width: 50rem;
   height: max-content;
-
-  overflow-y: scroll;
-
   margin: 3rem auto;
   padding: 1rem;
 `;
@@ -18,7 +15,6 @@ export const CodeSnippetsContainer = styled(Paper)`
 export const CodeSnippetsButtons = styled.div`
   display: flex;
   flex-direction: row;
-
   justify-content: space-evenly;
 `;
 

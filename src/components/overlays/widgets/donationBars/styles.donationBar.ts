@@ -25,7 +25,7 @@ const rotate = keyframes`
 const shake = keyframes`
     0% { transform: translate(1px, 1px) rotate(0deg); }
     10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    20% { transform: translate(-3px, 0) rotate(1deg); }
     30% { transform: translate(3px, 2px) rotate(0deg); }
     40% { transform: translate(1px, -1px) rotate(1deg); }
     50% { transform: translate(-1px, 2px) rotate(-1deg); }
@@ -70,8 +70,8 @@ const descriptionPositionMapper = (position?: TextPositions) => {
       transform: translateY(-100%);
     `,
     [TextPositions.BottomRight]: css`
-      bottom: -2rem;
       right: 0;
+      bottom: -2rem;
       transform: translateY(100%);
     `,
     [TextPositions.BottomCenter]: css`
@@ -95,12 +95,9 @@ interface DonationDescriptionProps {
 
 export const DonationDescription = styled.div<DonationDescriptionProps>`
   position: absolute;
-
   width: max-content;
   height: max-content;
-
   font-family: "Noto Sans JP", sans-serif;
-
   ${({ position }) => descriptionPositionMapper(position)};
 `;
 
@@ -120,30 +117,25 @@ export const StyledParagraph = styled.p<StyledParagraphProps>`
   width: 100%;
   height: max-content;
   margin: 0;
-
-  -webkit-text-stroke: ${({ strokeWidth, strokeColor }) =>
-    strokeColor && strokeWidth && `${strokeWidth}px ${strokeColor}`};
   color: ${({ color }) => color || "#000000"};
-
-  font-size: ${({ size }) => (size ? `${size}px` : "normal")};
-  line-height: ${({ lineHeight }) =>
-    lineHeight ? `${lineHeight}px` : "normal"};
-
-  letter-spacing: ${({ letterSpacing }) =>
-    letterSpacing ? `${letterSpacing}px` : "normal"};
-  word-spacing: ${({ wordSpacing }) =>
-    wordSpacing ? `${wordSpacing}px` : "normal"};
-
-  text-align: ${({ textAlign }) => textAlign || "normal"};
-
   font-weight: ${({ textStyle }) =>
     textStyle?.some((style) => style === TextStyles.bold) ? "800" : "normal"};
-  text-decoration: ${({ textStyle }) =>
-    textStyle?.some((style) => style === TextStyles.underline)
-      ? "underline"
-      : "normal"};
   font-style: ${({ textStyle }) =>
     textStyle?.some((style) => style === TextStyles.italic)
       ? "italic"
       : "normal"};
+  font-size: ${({ size }) => (size ? `${size}px` : "normal")};
+  line-height: ${({ lineHeight }) =>
+    lineHeight ? `${lineHeight}px` : "normal"};
+  letter-spacing: ${({ letterSpacing }) =>
+    letterSpacing ? `${letterSpacing}px` : "normal"};
+  text-align: ${({ textAlign }) => textAlign || "normal"};
+  text-decoration: ${({ textStyle }) =>
+    textStyle?.some((style) => style === TextStyles.underline)
+      ? "underline"
+      : "normal"};
+  word-spacing: ${({ wordSpacing }) =>
+    wordSpacing ? `${wordSpacing}px` : "normal"};
+  -webkit-text-stroke: ${({ strokeWidth, strokeColor }) =>
+    strokeColor && strokeWidth && `${strokeWidth}px ${strokeColor}`};
 `;

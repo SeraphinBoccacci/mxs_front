@@ -9,14 +9,13 @@ export const Container = styled.div`
 
 export const PlayableOverlayContainer = styled.div`
   position: absolute;
-  height: 1080px;
-  width: 1920px;
-
   top: calc(50% - 540px);
   left: calc(50% - 960px);
-
   overflow: hidden;
-
+  width: 1920px;
+  height: 1080px;
+  border: none;
+  border-radius: 4px;
   background-image: linear-gradient(
       to bottom,
       transparent 20%,
@@ -24,13 +23,9 @@ export const PlayableOverlayContainer = styled.div`
     ),
     linear-gradient(to right, ${colors.secondary} 20%, ${colors.gray} 20%);
   background-size: 10px 10px, 10px 10px;
-  border: none;
-  border-radius: 4px;
-
   box-shadow: 0 0.5px 0.5px rgba(0, 0, 0, 0.12),
     0 0.5px 0.5px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.12),
     0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12);
-
   transform: perspective(500px) translateZ(-2000px);
 
   @media (min-width: 900px) {
@@ -56,14 +51,13 @@ export const PlayableOverlayContainer = styled.div`
 
 export const Iframe = styled.iframe`
   position: absolute;
-  height: 1080px;
-  width: 1920px;
-
-  z-index: 100;
-
   top: calc(50% - 540px);
   left: calc(50% - 960px);
-
+  z-index: 100;
+  width: 1920px;
+  height: 1080px;
+  border: none;
+  border-radius: 4px;
   background-image: linear-gradient(
       to bottom,
       transparent 20%,
@@ -71,13 +65,9 @@ export const Iframe = styled.iframe`
     ),
     linear-gradient(to right, ${colors.secondary} 20%, ${colors.gray} 20%);
   background-size: 10px 10px, 10px 10px;
-  border: none;
-  border-radius: 4px;
-
   box-shadow: 0 0.5px 0.5px rgba(0, 0, 0, 0.12),
     0 0.5px 0.5px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.12),
     0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12);
-
   transform: perspective(500px) translateZ(-2000px);
 
   @media (min-width: 900px) {

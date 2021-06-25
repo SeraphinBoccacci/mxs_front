@@ -134,32 +134,32 @@ const displayMapper = (position?: TextPositions) => {
     [TextPositions.over]: css`
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     `,
     [TextPositions.bottom]: css`
       display: flex;
       flex-direction: column-reverse;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     `,
     [TextPositions.top]: css`
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     `,
     [TextPositions.left]: css`
       display: flex;
       flex-direction: row;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     `,
     [TextPositions.right]: css`
       display: flex;
       flex-direction: row-reverse;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     `,
   };
 
@@ -176,16 +176,13 @@ interface StyledContainerProps {
 
 export const StyledContainer = styled.div<StyledContainerProps>`
   position: absolute;
-  width: ${({ width }) => (width ? `${width}px` : "max-content")};
-  height: ${({ height }) => (height ? `${height}px` : "max-content")};
-
   top: ${({ offsetTop }) => `${offsetTop}px`};
   left: ${({ offsetLeft }) => `${offsetLeft}px`};
-
-  padding: 0;
   overflow: hidden;
+  width: ${({ width }) => (width ? `${width}px` : "max-content")};
+  height: ${({ height }) => (height ? `${height}px` : "max-content")};
+  padding: 0;
   font-family: "Noto Sans JP", sans-serif;
-
   ${({ textPosition }) => displayMapper(textPosition)};
 `;
 
@@ -210,13 +207,11 @@ export const StyledImage = styled.img<StyledImageProps>`
 
 export const AnimatedImage = styled(StyledImage)`
   visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
-
   ${({ enterAnimationType, enterAnimationDuration, enterAnimationDelay }) =>
     css`
       animation: ${enterAnimationMapper(enterAnimationType)}
         ${enterAnimationDuration || 0}s 1 ${enterAnimationDelay || 0}s;
     `};
-
   ${({ shouldImageExit, exitAnimationType, exitAnimationDuration }) =>
     shouldImageExit
       ? css`
@@ -240,21 +235,19 @@ interface StyledTextContainerProps {
 
 export const StyledTextContainer = styled.div<StyledTextContainerProps>`
   position: relative;
+  overflow: hidden;
   width: ${({ width }) => (width ? `${width}px` : "max-content")};
   height: ${({ height }) => (height ? `${height}px` : "max-content")};
-  overflow: hidden;
   margin: 1.3rem;
 `;
 
 export const AnimatedTextContainer = styled(StyledTextContainer)`
   visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
-
   ${({ enterAnimationType, enterAnimationDuration, enterAnimationDelay }) =>
     css`
       animation: ${enterAnimationMapper(enterAnimationType)}
         ${enterAnimationDuration || 0}s 1 ${enterAnimationDelay || 0}s;
     `};
-
   ${({ shouldTextExit, exitAnimationType, exitAnimationDuration }) =>
     shouldTextExit
       ? css`
@@ -279,30 +272,25 @@ interface StyledParagraphProps {
 export const StyledParagraph = styled.p<StyledParagraphProps>`
   width: 100%;
   height: max-content;
-
-  -webkit-text-stroke: ${({ strokeWidth, strokeColor }) =>
-    strokeColor && strokeWidth && `${strokeWidth}px ${strokeColor}`};
   color: ${({ color }) => color || "#000000"};
-
-  font-size: ${({ size }) => (size ? `${size}px` : "normal")};
-  line-height: ${({ lineHeight }) =>
-    lineHeight ? `${lineHeight}px` : "normal"};
-
-  letter-spacing: ${({ letterSpacing }) =>
-    letterSpacing ? `${letterSpacing}px` : "normal"};
-  word-spacing: ${({ wordSpacing }) =>
-    wordSpacing ? `${wordSpacing}px` : "normal"};
-
-  text-align: ${({ textAlign }) => textAlign || "normal"};
-
   font-weight: ${({ textStyle }) =>
     textStyle?.some((style) => style === TextStyles.bold) ? "800" : "normal"};
-  text-decoration: ${({ textStyle }) =>
-    textStyle?.some((style) => style === TextStyles.underline)
-      ? "underline"
-      : "normal"};
   font-style: ${({ textStyle }) =>
     textStyle?.some((style) => style === TextStyles.italic)
       ? "italic"
       : "normal"};
+  font-size: ${({ size }) => (size ? `${size}px` : "normal")};
+  line-height: ${({ lineHeight }) =>
+    lineHeight ? `${lineHeight}px` : "normal"};
+  letter-spacing: ${({ letterSpacing }) =>
+    letterSpacing ? `${letterSpacing}px` : "normal"};
+  text-align: ${({ textAlign }) => textAlign || "normal"};
+  text-decoration: ${({ textStyle }) =>
+    textStyle?.some((style) => style === TextStyles.underline)
+      ? "underline"
+      : "normal"};
+  word-spacing: ${({ wordSpacing }) =>
+    wordSpacing ? `${wordSpacing}px` : "normal"};
+  -webkit-text-stroke: ${({ strokeWidth, strokeColor }) =>
+    strokeColor && strokeWidth && `${strokeWidth}px ${strokeColor}`};
 `;

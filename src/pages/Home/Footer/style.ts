@@ -4,18 +4,15 @@ import styled from "styled-components";
 import { colors, fonts } from "../../../constants";
 
 export const FooterContainer = styled.footer`
-  background-color: ${colors.quad};
-
-  width: 100vw;
-  min-height: 50vh;
-  height: max-content;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: left;
-
+  justify-content: space-evenly;
+  width: 100vw;
+  height: max-content;
+  min-height: 50vh;
   padding: 3rem 4rem 1rem;
+  background-color: ${colors.quad};
 
   @media (min-width: 800px) {
     padding: 2rem 5rem;
@@ -31,16 +28,13 @@ export const FooterContainer = styled.footer`
 `;
 
 export const Columns = styled.div`
-  height: max-content;
-
-  width: 100%;
-
-  margin: auto;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: left;
+  justify-content: space-around;
+  width: 100%;
+  height: max-content;
+  margin: auto;
 
   @media (min-width: 800px) {
     flex-direction: row;
@@ -63,9 +57,7 @@ export const DoubleColumn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
   width: 100%;
-
   padding: 4rem 0;
 
   @media (min-width: 800px) {
@@ -76,9 +68,7 @@ export const DoubleColumn = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-
   width: 10rem;
-
   margin-bottom: 3rem;
 
   @media (min-width: 800px) {
@@ -103,12 +93,10 @@ export const ColumnParagraph = styled.p`
 
 export const ColumnTitle = styled.h5`
   margin: 1rem 0 0.8rem;
-
+  color: ${colors.black};
+  font-variant: small-caps;
   font-size: 1.5rem;
   font-family: ${fonts.Roboto};
-  font-variant: small-caps;
-
-  color: ${colors.black};
 
   @media (min-width: 800px) {
     margin: 2rem 0 1rem;
@@ -117,23 +105,16 @@ export const ColumnTitle = styled.h5`
 
 export const ColumnItem = styled.div`
   position: relative;
-
-  height: 2rem;
-
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  width: max-content;
+  height: 2rem;
   margin: 0;
   margin-left: 0.2rem;
-
-  font-size: 1rem;
-
-  width: max-content;
-
-  font-family: ${fonts.Ubuntu};
   color: ${colors.black};
-
+  font-size: 1rem;
+  font-family: ${fonts.Ubuntu};
   cursor: pointer;
 
   & > span {
@@ -141,20 +122,19 @@ export const ColumnItem = styled.div`
   }
 
   &::before {
-    position: absolute;
     content: "";
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 0;
     height: 2px;
     background-color: ${colors.primary};
-
     transition: 0.6s cubic-bezier(0.39, 0.575, 0.565, 1);
   }
 
   &:hover::before {
-    position: absolute;
     content: "";
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -165,22 +145,18 @@ export const ColumnItem = styled.div`
 
 export const ElgdSymbol = styled.span`
   content: "¤";
-
-  font-family: ${fonts.Ubuntu};
   font-size: 2rem;
+  font-family: ${fonts.Ubuntu};
 `;
 
 export const StyledModal = styled(Modal)`
+  overflow: scroll;
   width: 20rem;
   height: 30rem;
   margin: auto !important;
-
-  outline: none !important;
   border: none !important;
-
   border-radius: 6px !important;
-
-  overflow: scroll;
+  outline: none !important;
 
   @media (min-width: 35rem) {
     width: 30rem;
@@ -196,18 +172,16 @@ export const StyledModal = styled(Modal)`
 `;
 
 export const FooterModalContent = styled(Paper)`
-  padding: 1rem 0rem !important;
-
-  outline: none !important;
+  padding: 1rem 0 !important;
   border: none !important;
+  outline: none !important;
 `;
 
 export const FooterModalTitle = styled.h3`
-  text-align: center;
-  font-family: ${fonts.Roboto};
-  font-size: 1.4rem;
-
   margin: 1rem 1rem 2rem;
+  font-size: 1.4rem;
+  font-family: ${fonts.Roboto};
+  text-align: center;
 
   @media (min-width: 35rem) {
     font-size: 1.7rem;
@@ -219,13 +193,12 @@ export const FooterModalTitle = styled.h3`
 `;
 
 export const FooterModalParagraph = styled.p`
+  margin: 1.3rem 1.6rem;
+  font-size: 0.8rem;
+  font-family: ${fonts.Ubuntu};
+  line-height: 1rem;
   text-align: justify;
   text-align-last: center;
-  font-family: ${fonts.Ubuntu};
-  font-size: 0.8rem;
-  line-height: 1rem;
-
-  margin: 1.3rem 1.6rem;
 
   @media (min-width: 35rem) {
     font-size: 0.85rem;
@@ -244,11 +217,10 @@ export const StyledUlParagraph = styled(FooterModalParagraph)`
 `;
 
 export const StyledUl = styled.ol`
-  font-family: ${fonts.Ubuntu};
-  font-size: 0.8rem;
-  line-height: 1rem;
-
   margin-left: 1rem;
+  font-size: 0.8rem;
+  font-family: ${fonts.Ubuntu};
+  line-height: 1rem;
 
   @media (min-width: 35rem) {
     font-size: 0.85rem;
@@ -267,6 +239,6 @@ export const StyledLi = styled.li`
 
 export const StyledComment = styled.span`
   display: inline-block;
-  font-size: 0.65rem;
   width: 90%;
+  font-size: 0.65rem;
 `;

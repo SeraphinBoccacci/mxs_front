@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import config from "../../../../../config/config";
 import { AlertVariation } from "../../../../../types/alerts";
+import { replaceManyAll } from "../../../../../utils/string";
 import { TransactionData } from "../../../Overlay";
 import {
   AnimatedImage,
@@ -139,10 +140,11 @@ const Alert = ({ alert, data }: AlertProps) => {
           exitAnimationType={alert?.text?.animation?.exit?.type}
           exitAnimationDuration={alert?.text?.animation?.exit?.duration}
         >
-          {alert.text.content
-            .replaceAll("{{herotag}}", data.herotag)
-            .replaceAll("{{amount}}", String(data.wordingAmount))
-            .replaceAll("{{message}}", data.message)
+          {replaceManyAll(alert.text.content, [
+            ["{{herotag}}", data?.herotag || ""],
+            ["{{amount}}", data?.wordingAmount || ""],
+            ["{{message}}", data?.message || ""],
+          ])
             .split("\n")
             .map((paragraph, index) => (
               <StyledParagraph

@@ -5,13 +5,11 @@ import { colors, fonts } from "../../../constants";
 import { FlexColumn } from "../../../styles/global";
 
 export const FeaturesContainer = styled.section`
-  width: 100vw;
   overflow-x: hidden;
-  min-height: 100vh;
+  width: 100vw;
   height: max-content;
-
+  min-height: 100vh;
   padding: 3rem 0;
-
   background-color: ${colors.secondary};
 
   @media (min-width: 450px) {
@@ -20,9 +18,8 @@ export const FeaturesContainer = styled.section`
 `;
 
 export const FeaturesHeader = styled(FlexColumn)`
-  justify-content: center;
   align-items: center;
-
+  justify-content: center;
   margin-bottom: 4rem;
 `;
 
@@ -32,45 +29,39 @@ export const FeaturesTitle = styled.h2`
 `;
 
 export const FeaturesSubTitle = styled.h4`
+  margin-top: -1.1rem;
   font-size: 0.9rem;
   font-family: ${fonts.Ubuntu};
-  margin-top: -1.1rem;
 `;
 
 export const FeaturesContent = styled.div<{ isRowReverse: boolean }>`
   display: flex;
-  overflow: hidden;
-
-  justify-content: center;
-  align-items: center;
-
   flex-direction: column;
-
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   margin: 0 auto;
 
   @media (min-width: 800px) {
-    width: max-content;
     flex-direction: ${({ isRowReverse }) =>
       isRowReverse ? "row-reverse" : "row"};
+    width: max-content;
   }
 `;
 
 export const ContentContainer = styled.div`
   position: relative;
-  width: max-content;
-
   display: flex;
-
+  width: max-content;
   margin: 3rem auto;
 `;
 
 export const FeaturesSubContent = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100vw;
   height: max-content;
-
-  justify-content: space-between;
 
   @media (min-width: 700px) {
     width: 25rem;
@@ -85,45 +76,39 @@ export const FeaturesSubContent = styled.div`
 export const FeaturePaper = styled(Paper)`
   position: relative;
   left: 0;
-  height: 40vw !important;
-
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  padding: 0.7rem;
+  height: 40vw !important;
   margin: 0.7rem;
-
+  padding: 0.7rem;
   transition: 0.4s !important;
+
+  @media (min-width: 700px) {
+    height: 9rem !important;
+    margin: 0.85rem;
+    padding: 0.85rem;
+  }
+
+  @media (min-width: 1100px) {
+    height: 12rem !important;
+    margin: 1rem;
+    padding: 1rem;
+  }
 
   &:hover {
     border-radius: 20px;
   }
-
-  @media (min-width: 700px) {
-    padding: 0.85rem;
-    margin: 0.85rem;
-
-    height: 9rem !important;
-  }
-
-  @media (min-width: 1100px) {
-    padding: 1rem;
-    margin: 1rem;
-
-    height: 12rem !important;
-  }
 `;
 
 export const Feature = styled.div`
-  height: 100%;
-  width: 100%;
-  flex: 1;
-  margin-left: 1rem;
-
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-left: 1rem;
 
   @media (min-width: 1100px) {
     margin-left: 1.5rem;
@@ -131,9 +116,9 @@ export const Feature = styled.div`
 `;
 
 export const FeatureTitle = styled.h3`
-  font-family: ${fonts.Ubuntu};
   margin: 0.3rem 0;
   font-size: 1rem;
+  font-family: ${fonts.Ubuntu};
 
   @media (min-width: 700px) {
     font-size: 1.1rem;
@@ -145,13 +130,12 @@ export const FeatureTitle = styled.h3`
 `;
 
 export const FeatureParagraph = styled.p`
-  font-family: ${fonts.Roboto};
+  width: 100%;
   color: #c5c5c5;
   font-size: 0.8rem;
+  font-family: ${fonts.Roboto};
   line-height: 1.2rem;
   text-align: left;
-
-  width: 100%;
 
   @media (min-width: 700px) {
     font-size: 0.85rem;
@@ -166,15 +150,13 @@ export const FeatureParagraph = styled.p`
 `;
 
 export const FeatureScreen = styled.div<{ background: string }>`
-  background-image: ${({ background }) => background};
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
-
   width: 80vw;
   height: 80vw;
-
   margin: 2rem 0;
+  background-image: ${({ background }) => background};
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
 
   @media (min-width: 500px) {
     width: 18rem;
