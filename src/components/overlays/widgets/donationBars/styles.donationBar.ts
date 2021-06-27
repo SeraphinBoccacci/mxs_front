@@ -81,6 +81,7 @@ interface StyledParagraphProps {
 export const StyledParagraph = styled.p<StyledParagraphProps>`
   width: 100%;
   height: max-content;
+  min-height: ${({ size = 20, lineHeight }) => `${lineHeight || size}px`};
   margin: 0;
   color: ${({ color }) => color || "#000000"};
   font-weight: ${({ textStyle }) =>

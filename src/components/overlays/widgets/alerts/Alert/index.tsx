@@ -9,6 +9,7 @@ import {
   AnimatedImage,
   StyledContainer,
   StyledParagraph,
+  StyledParagraphContainer,
 } from "../styles.alerts";
 
 interface AlertProps {
@@ -126,42 +127,50 @@ const Alert = ({ alert, data }: AlertProps) => {
       offsetLeft={alert.offsetLeft}
     >
       {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
-      {alert.text?.content &&
-        replaceManyAll(alert.text.content, [
-          ["{{herotag}}", data?.herotag || ""],
-          ["{{amount}}", data?.wordingAmount || ""],
-          ["{{message}}", data?.message || ""],
-        ])
-          .split("\n")
-          .map((paragraph, index) => (
-            <StyledParagraph
-              key={`paragraph_${index}`}
-              strokeColor={alert?.text?.stroke?.color}
-              strokeWidth={alert?.text?.stroke?.width}
-              shouldTextExit={shouldTextExit}
-              width={alert?.text?.width}
-              height={alert?.text?.height}
-              offsetLeft={alert?.text?.offsetLeft}
-              offsetTop={alert?.text?.offsetTop}
-              isVisible={isTextDisplayed}
-              enterAnimationType={alert?.text?.animation?.enter?.type}
-              enterAnimationDuration={alert?.text?.animation?.enter?.duration}
-              enterAnimationDelay={alert?.text?.animation?.enter?.delay}
-              exitAnimationType={alert?.text?.animation?.exit?.type}
-              exitAnimationDuration={alert?.text?.animation?.exit?.duration}
-              {...pick(alert.text, [
-                "size",
-                "color",
-                "lineHeight",
-                "letterSpacing",
-                "wordSpacing",
-                "textAlign",
-                "textStyle",
-              ])}
-            >
-              {paragraph}
-            </StyledParagraph>
-          ))}
+      {alert.text?.content && (
+        <StyledParagraphContainer
+          width={alert?.text?.width}
+          height={alert?.text?.height}
+          offsetLeft={alert?.text?.offsetLeft}
+          offsetTop={alert?.text?.offsetTop}
+          enterAnimationType={alert?.text?.animation?.enter?.type}
+          enterAnimationDuration={alert?.text?.animation?.enter?.duration}
+          enterAnimationDelay={alert?.text?.animation?.enter?.delay}
+          exitAnimationType={alert?.text?.animation?.exit?.type}
+          exitAnimationDuration={alert?.text?.animation?.exit?.duration}
+          shouldTextExit={shouldTextExit}
+          isVisible={isTextDisplayed}
+        >
+          {replaceManyAll(alert.text.content, [
+            ["{{herotag}}", data?.herotag || ""],
+            ["{{amount}}", data?.wordingAmount || ""],
+            ["{{message}}", data?.message || ""],
+          ])
+            .split("\n")
+            .map((paragraph, index) => (
+              <StyledParagraph
+                key={`paragraph_${index}`}
+                strokeColor={alert?.text?.stroke?.color}
+                strokeWidth={alert?.text?.stroke?.width}
+                width={alert?.text?.width}
+                height={alert?.text?.height}
+                offsetLeft={alert?.text?.offsetLeft}
+                offsetTop={alert?.text?.offsetTop}
+                {...pick(alert.text, [
+                  "size",
+                  "color",
+                  "lineHeight",
+                  "letterSpacing",
+                  "wordSpacing",
+                  "textAlign",
+                  "textStyle",
+                ])}
+              >
+                {paragraph}
+              </StyledParagraph>
+            ))}
+        </StyledParagraphContainer>
+      )}
       {alert.image?.imagePath && (
         <AnimatedImage
           shouldImageExit={shouldImageExit}
