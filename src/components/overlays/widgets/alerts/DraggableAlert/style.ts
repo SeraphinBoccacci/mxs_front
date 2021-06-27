@@ -24,3 +24,18 @@ export const StyledImageScreen = styled.div`
   margin: 0;
   padding: 0;
 `;
+
+interface StyledPContainerProps {
+  offsetLeft?: number;
+  offsetTop?: number;
+  width?: number;
+  height?: number;
+}
+
+export const StyledParagraphContainer = styled.div<StyledPContainerProps>`
+  z-index: 1000;
+  width: ${({ width }) => (width ? `${width}px` : "100%")};
+  height: ${({ height }) => (height ? `${height}px` : "max-content")};
+  margin-top: ${({ offsetTop }) => `${offsetTop}px`};
+  margin-left: ${({ offsetLeft }) => `${offsetLeft}px`};
+`;

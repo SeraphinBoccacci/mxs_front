@@ -5,12 +5,13 @@ import config from "../../../../../config/config";
 import { AlertVariation } from "../../../../../types/alerts";
 import { EventData } from "../../../../../types/ifttt";
 import { replaceManyAll } from "../../../../../utils/string";
+import { StyledImage, StyledParagraph } from "../styles.alerts";
 import {
-  StyledImage,
-  StyledParagraph,
+  Container,
+  StyledImageContainer,
+  StyledImageScreen,
   StyledParagraphContainer,
-} from "../styles.alerts";
-import { Container, StyledImageContainer, StyledImageScreen } from "./style";
+} from "./style";
 
 interface AlertProps {
   alert: AlertVariation;
@@ -32,12 +33,6 @@ const Alert = ({ alert, data }: AlertProps) => {
           height={alert?.text?.height}
           offsetLeft={alert?.text?.offsetLeft}
           offsetTop={alert?.text?.offsetTop}
-          isVisible
-          enterAnimationType={alert?.text?.animation?.enter?.type}
-          enterAnimationDuration={alert?.text?.animation?.enter?.duration}
-          enterAnimationDelay={alert?.text?.animation?.enter?.delay}
-          exitAnimationType={alert?.text?.animation?.exit?.type}
-          exitAnimationDuration={alert?.text?.animation?.exit?.duration}
         >
           {replaceManyAll(alert.text.content, [
             ["{{herotag}}", data?.herotag || ""],

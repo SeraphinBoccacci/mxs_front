@@ -58,11 +58,10 @@ interface DonationDescriptionProps {
 }
 
 export const DonationDescription = styled.div<DonationDescriptionProps>`
-  position: absolute;
-  top: ${({ offsetTop }) => `${offsetTop}px`};
-  left: ${({ offsetLeft }) => `${offsetLeft}px`};
   width: max-content;
   height: max-content;
+  margin-top: ${({ offsetTop }) => `${offsetTop}px`};
+  margin-left: ${({ offsetLeft }) => `${offsetLeft}px`};
   font-family: "Noto Sans JP", sans-serif;
 `;
 
