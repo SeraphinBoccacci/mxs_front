@@ -196,12 +196,10 @@ interface StyledPContainerProps {
 }
 
 export const StyledParagraphContainer = styled.div<StyledPContainerProps>`
-  position: absolute;
-  top: ${({ offsetTop }) => `${offsetTop}px`};
-  left: ${({ offsetLeft }) => `${offsetLeft}px`};
-  z-index: 1000;
   width: ${({ width }) => (width ? `${width}px` : "100%")};
   height: ${({ height }) => (height ? `${height}px` : "max-content")};
+  margin-top: ${({ offsetTop }) => `${offsetTop}px`};
+  margin-left: ${({ offsetLeft }) => `${offsetLeft}px`};
   visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
   ${({ enterAnimationType, enterAnimationDuration, enterAnimationDelay }) =>
     css`
@@ -251,6 +249,7 @@ export const StyledParagraph = styled.p<StyledParagraphProps>`
       : "normal"};
   word-spacing: ${({ wordSpacing }) =>
     wordSpacing ? `${wordSpacing}px` : "normal"};
+  word-wrap: break-word;
   -webkit-text-stroke: ${({ strokeWidth, strokeColor }) =>
     strokeColor && strokeWidth && `${strokeWidth}px ${strokeColor}`};
 `;
