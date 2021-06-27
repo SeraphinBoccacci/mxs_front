@@ -47,17 +47,9 @@ export enum InBarAmountDisplay {
   "none" = "none",
 }
 
-export enum TextPositions {
-  TopLeft = "TopLeft",
-  TopCenter = "TopCenter",
-  TopRight = "TopRight",
-  BottomLeft = "BottomLeft",
-  BottomCenter = "BottomCenter",
-  BottomRight = "BottomRight",
-}
-
 interface DonationBarText extends Text {
-  position?: TextPositions;
+  offsetTop?: number;
+  offsetLeft?: number;
 }
 
 export enum LogoAnimations {
@@ -119,10 +111,11 @@ export enum DonationBarLenses {
   "centerCursorPath" = "centerCursorPath",
   "centerCursorScale" = "centerCursorScale",
   "donationGoalAmount_value" = "donationGoalAmount_value",
-  "donationBarDescription_position" = "donationBarDescription_position",
   "donationBarDescription_content" = "donationBarDescription_content",
   "donationBarDescription_width" = "donationBarDescription_width",
   "donationBarDescription_height" = "donationBarDescription_height",
+  "donationBarDescription_offsetTop" = "donationBarDescription_offsetTop",
+  "donationBarDescription_offsetLeft" = "donationBarDescription_offsetLeft",
   "donationBarDescription_size" = "donationBarDescription_size",
   "donationBarDescription_color" = "donationBarDescription_color",
   "donationBarDescription_lineHeight" = "donationBarDescription_lineHeight",
@@ -157,10 +150,11 @@ export interface DonationBarData {
   centerCursorPath?: string;
   centerCursorScale?: number;
   donationGoalAmount_value?: number;
-  donationBarDescription_position?: TextPositions;
   donationBarDescription_content?: string;
   donationBarDescription_width?: number;
   donationBarDescription_height?: number;
+  donationBarDescription_offsetTop?: number;
+  donationBarDescription_offsetLeft?: number;
   donationBarDescription_size?: string;
   donationBarDescription_color?: string;
   donationBarDescription_lineHeight?: string;

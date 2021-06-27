@@ -1,7 +1,6 @@
 import React from "react";
 
 import Input from "../../../../../components/Input";
-import Select from "../../../../../components/Select";
 import {
   DonationBarFormData,
   DonationBarLenses,
@@ -15,7 +14,6 @@ import {
   SubSection,
   SubSectionTitle,
 } from "../../styles";
-import { textPositionsOptions } from "../constants";
 import { TextAlignRadioGroup } from "./TextAlignRadioGroup";
 import { TextStylesCheckboxes } from "./TextStylesCheckboxes";
 
@@ -32,6 +30,30 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
         <SectionRow>
           <Input
             onChange={handleOnChange}
+            inputLabel="Top"
+            inputName={DonationBarLenses.donationBarDescription_offsetTop}
+            value={
+              formData?.[DonationBarLenses.donationBarDescription_offsetTop]
+            }
+            width="8rem"
+            type="number"
+            endAdornment="px"
+          ></Input>
+          <Input
+            onChange={handleOnChange}
+            inputLabel="Left"
+            inputName={DonationBarLenses.donationBarDescription_offsetLeft}
+            value={
+              formData?.[DonationBarLenses.donationBarDescription_offsetLeft]
+            }
+            width="8rem"
+            type="number"
+            endAdornment="px"
+          ></Input>
+        </SectionRow>
+        <SectionRow>
+          <Input
+            onChange={handleOnChange}
             inputLabel="Text Content"
             inputName={DonationBarLenses.donationBarDescription_content}
             value={formData?.[DonationBarLenses.donationBarDescription_content]}
@@ -39,18 +61,7 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
             width="30rem"
           ></Input>
         </SectionRow>
-        <SectionRow>
-          <Select
-            onChange={handleOnChange}
-            options={textPositionsOptions}
-            inputName={DonationBarLenses.donationBarDescription_position}
-            inputLabel="Text Position"
-            size="large"
-            value={
-              formData?.[DonationBarLenses.donationBarDescription_position]
-            }
-          ></Select>
-        </SectionRow>
+
         <SectionRow>
           <Input
             onChange={handleOnChange}
