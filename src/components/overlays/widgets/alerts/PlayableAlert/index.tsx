@@ -7,7 +7,6 @@ import { EventData } from "../../../../../types/ifttt";
 import { replaceManyAll } from "../../../../../utils/string";
 import {
   AnimatedImage,
-  AnimatedTextContainer,
   StyledContainer,
   StyledParagraph,
 } from "../styles.alerts";
@@ -121,51 +120,48 @@ const Alert = ({ alert, data }: AlertProps) => {
 
   return (
     <StyledContainer
-      textPosition={alert.text?.position}
       width={alert.width}
       height={alert.heigth}
       offsetTop={alert.offsetTop}
       offsetLeft={alert.offsetLeft}
     >
       {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
-      {alert.text?.content && (
-        <AnimatedTextContainer
-          shouldTextExit={shouldTextExit}
-          width={alert?.text?.width}
-          height={alert?.text?.height}
-          isVisible={isTextDisplayed}
-          enterAnimationType={alert?.text?.animation?.enter?.type}
-          enterAnimationDuration={alert?.text?.animation?.enter?.duration}
-          enterAnimationDelay={alert?.text?.animation?.enter?.delay}
-          exitAnimationType={alert?.text?.animation?.exit?.type}
-          exitAnimationDuration={alert?.text?.animation?.exit?.duration}
-        >
-          {replaceManyAll(alert.text.content, [
-            ["{{herotag}}", data?.herotag || ""],
-            ["{{amount}}", String(data?.amount || "")],
-            ["{{message}}", data?.data || ""],
-          ])
-            .split("\n")
-            .map((paragraph, index) => (
-              <StyledParagraph
-                key={`paragraph_${index}`}
-                strokeColor={alert?.text?.stroke?.color}
-                strokeWidth={alert?.text?.stroke?.width}
-                {...pick(alert.text, [
-                  "size",
-                  "color",
-                  "lineHeight",
-                  "letterSpacing",
-                  "wordSpacing",
-                  "textAlign",
-                  "textStyle",
-                ])}
-              >
-                {paragraph}
-              </StyledParagraph>
-            ))}
-        </AnimatedTextContainer>
-      )}
+      {alert.text?.content &&
+        replaceManyAll(alert.text.content, [
+          ["{{herotag}}", data?.herotag || ""],
+          ["{{amount}}", String(data?.amount || "")],
+          ["{{message}}", data?.data || ""],
+        ])
+          .split("\n")
+          .map((paragraph, index) => (
+            <StyledParagraph
+              key={`paragraph_${index}`}
+              strokeColor={alert?.text?.stroke?.color}
+              strokeWidth={alert?.text?.stroke?.width}
+              shouldTextExit={shouldTextExit}
+              width={alert?.text?.width}
+              height={alert?.text?.height}
+              offsetTop={alert?.text?.offsetTop}
+              offsetLeft={alert?.text?.offsetLeft}
+              isVisible={isTextDisplayed}
+              enterAnimationType={alert?.text?.animation?.enter?.type}
+              enterAnimationDuration={alert?.text?.animation?.enter?.duration}
+              enterAnimationDelay={alert?.text?.animation?.enter?.delay}
+              exitAnimationType={alert?.text?.animation?.exit?.type}
+              exitAnimationDuration={alert?.text?.animation?.exit?.duration}
+              {...pick(alert.text, [
+                "size",
+                "color",
+                "lineHeight",
+                "letterSpacing",
+                "wordSpacing",
+                "textAlign",
+                "textStyle",
+              ])}
+            >
+              {paragraph}
+            </StyledParagraph>
+          ))}
       {alert.image?.imagePath && (
         <AnimatedImage
           shouldImageExit={shouldImageExit}

@@ -17,8 +17,8 @@ import Draggable from "./Draggable";
 
 const transactionData: EventData = {
   amount: 1,
-  herotag: "TEST HEROTAG",
-  data: "TEST MESSAGE",
+  herotag: "TEST_HEROTAG",
+  data: "TEST_MESSAGE",
   wordingAmount: "1 eGLD",
 };
 

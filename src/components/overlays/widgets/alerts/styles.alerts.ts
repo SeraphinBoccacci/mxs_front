@@ -1,6 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
 
-import { TextPositions } from "../../../../types/alerts";
 import {
   EnterAnimationTypes,
   ExitAnimationTypes,
@@ -129,45 +128,7 @@ const exitAnimationMapper = (animation?: ExitAnimationTypes) => {
   return mapper[animation || ExitAnimationTypes.slideLeft];
 };
 
-const displayMapper = (position?: TextPositions) => {
-  const mapper = {
-    [TextPositions.over]: css`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    `,
-    [TextPositions.bottom]: css`
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: center;
-      justify-content: center;
-    `,
-    [TextPositions.top]: css`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    `,
-    [TextPositions.left]: css`
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-    `,
-    [TextPositions.right]: css`
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: center;
-      justify-content: center;
-    `,
-  };
-
-  return mapper[position || TextPositions.bottom];
-};
-
 interface StyledContainerProps {
-  textPosition?: TextPositions;
   width?: number;
   height?: number;
   offsetTop?: number;
@@ -178,12 +139,11 @@ export const StyledContainer = styled.div<StyledContainerProps>`
   position: absolute;
   top: ${({ offsetTop }) => `${offsetTop}px`};
   left: ${({ offsetLeft }) => `${offsetLeft}px`};
-  overflow: hidden;
+  overflow: visible;
   width: ${({ width }) => (width ? `${width}px` : "max-content")};
   height: ${({ height }) => (height ? `${height}px` : "max-content")};
   padding: 0;
   font-family: "Noto Sans JP", sans-serif;
-  ${({ textPosition }) => displayMapper(textPosition)};
 `;
 
 interface StyledImageProps {
@@ -221,7 +181,18 @@ export const AnimatedImage = styled(StyledImage)`
       : ""};
 `;
 
-interface StyledTextContainerProps {
+interface StyledParagraphProps {
+  strokeColor?: string;
+  strokeWidth?: number;
+  size?: string;
+  color?: string;
+  lineHeight?: string;
+  letterSpacing?: string;
+  wordSpacing?: string;
+  textAlign?: string;
+  textStyle?: TextStyles[];
+  offsetLeft?: number;
+  offsetTop?: number;
   width?: number;
   height?: number;
   isVisible?: boolean;
@@ -233,45 +204,14 @@ interface StyledTextContainerProps {
   exitAnimationDuration?: number;
 }
 
-export const StyledTextContainer = styled.div<StyledTextContainerProps>`
-  position: relative;
-  overflow: hidden;
-  width: ${({ width }) => (width ? `${width}px` : "max-content")};
-  height: ${({ height }) => (height ? `${height}px` : "max-content")};
-  margin: 1.3rem;
-`;
-
-export const AnimatedTextContainer = styled(StyledTextContainer)`
-  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
-  ${({ enterAnimationType, enterAnimationDuration, enterAnimationDelay }) =>
-    css`
-      animation: ${enterAnimationMapper(enterAnimationType)}
-        ${enterAnimationDuration || 0}s 1 ${enterAnimationDelay || 0}s;
-    `};
-  ${({ shouldTextExit, exitAnimationType, exitAnimationDuration }) =>
-    shouldTextExit
-      ? css`
-          animation: ${exitAnimationMapper(exitAnimationType)}
-            ${exitAnimationDuration || 0}s 1;
-        `
-      : ""};
-`;
-
-interface StyledParagraphProps {
-  strokeColor?: string;
-  strokeWidth?: number;
-  size?: string;
-  color?: string;
-  lineHeight?: string;
-  letterSpacing?: string;
-  wordSpacing?: string;
-  textAlign?: string;
-  textStyle?: TextStyles[];
-}
-
 export const StyledParagraph = styled.p<StyledParagraphProps>`
-  width: 100%;
-  height: max-content;
+  position: absolute;
+  top: ${({ offsetTop }) => `${offsetTop}px`};
+  left: ${({ offsetLeft }) => `${offsetLeft}px`};
+  z-index: 1000;
+  width: ${({ width }) => (width ? `${width}px` : "100%")};
+  height: ${({ height }) => (height ? `${height}px` : "max-content")};
+  margin: 0;
   color: ${({ color }) => color || "#000000"};
   font-weight: ${({ textStyle }) =>
     textStyle?.some((style) => style === TextStyles.bold) ? "800" : "normal"};
@@ -291,6 +231,19 @@ export const StyledParagraph = styled.p<StyledParagraphProps>`
       : "normal"};
   word-spacing: ${({ wordSpacing }) =>
     wordSpacing ? `${wordSpacing}px` : "normal"};
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
   -webkit-text-stroke: ${({ strokeWidth, strokeColor }) =>
     strokeColor && strokeWidth && `${strokeWidth}px ${strokeColor}`};
+  ${({ enterAnimationType, enterAnimationDuration, enterAnimationDelay }) =>
+    css`
+      animation: ${enterAnimationMapper(enterAnimationType)}
+        ${enterAnimationDuration || 0}s 1 ${enterAnimationDelay || 0}s;
+    `};
+  ${({ shouldTextExit, exitAnimationType, exitAnimationDuration }) =>
+    shouldTextExit
+      ? css`
+          animation: ${exitAnimationMapper(exitAnimationType)}
+            ${exitAnimationDuration || 0}s 1;
+        `
+      : ""};
 `;

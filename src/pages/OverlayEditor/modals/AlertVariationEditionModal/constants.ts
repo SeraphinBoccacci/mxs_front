@@ -1,17 +1,7 @@
-import { TextPositions } from "../../../../types/alerts";
 import {
   EnterAnimationTypes,
   ExitAnimationTypes,
 } from "../../../../types/style";
-
-export const textPositionsOptions = [
-  { label: "None", value: "" },
-  { label: "On top", value: TextPositions.top },
-  { label: "On bottom", value: TextPositions.bottom },
-  { label: "At right", value: TextPositions.right },
-  { label: "At left", value: TextPositions.left },
-  { label: "Over", value: TextPositions.over },
-];
 
 export const enterAnimationTypesOptions = [
   { label: "None", value: "" },
