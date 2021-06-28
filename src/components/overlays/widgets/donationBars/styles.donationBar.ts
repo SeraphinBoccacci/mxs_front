@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 
-import { LogoAnimations, TextPositions } from "../../../../types/donationBar";
+import { LogoAnimations } from "../../../../types/donationBar";
 import { TextStyles } from "../../../../types/style";
 
 const bounce = keyframes`
@@ -52,53 +52,17 @@ export const logoAnimationsMapper = (animation?: LogoAnimations) => {
   return mapper[animation || LogoAnimations.bounce];
 };
 
-const descriptionPositionMapper = (position?: TextPositions) => {
-  const mapper = {
-    [TextPositions.TopLeft]: css`
-      top: -2rem;
-      left: 0;
-      transform: translateY(-100%);
-    `,
-    [TextPositions.TopCenter]: css`
-      top: -2rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(-100%);
-    `,
-    [TextPositions.TopRight]: css`
-      top: -2rem;
-      right: 0;
-      transform: translateY(-100%);
-    `,
-    [TextPositions.BottomRight]: css`
-      right: 0;
-      bottom: -2rem;
-      transform: translateY(100%);
-    `,
-    [TextPositions.BottomCenter]: css`
-      bottom: -2rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(100%);
-    `,
-    [TextPositions.BottomLeft]: css`
-      bottom: -2rem;
-      left: 0;
-      transform: translateY(100%);
-    `,
-  };
-
-  return mapper[position || TextPositions.TopLeft];
-};
-
 interface DonationDescriptionProps {
-  position?: TextPositions;
+  offsetTop?: number;
+  offsetLeft?: number;
 }
 
 export const DonationDescription = styled.div<DonationDescriptionProps>`
-  position: absolute;
   width: max-content;
   height: max-content;
+  margin-top: ${({ offsetTop }) => `${offsetTop}px`};
+  margin-left: ${({ offsetLeft }) => `${offsetLeft}px`};
   font-family: "Noto Sans JP", sans-serif;
-  ${({ position }) => descriptionPositionMapper(position)};
 `;
 
 interface StyledParagraphProps {
@@ -116,6 +80,7 @@ interface StyledParagraphProps {
 export const StyledParagraph = styled.p<StyledParagraphProps>`
   width: 100%;
   height: max-content;
+  min-height: ${({ size = 20, lineHeight }) => `${lineHeight || size}px`};
   margin: 0;
   color: ${({ color }) => color || "#000000"};
   font-weight: ${({ textStyle }) =>

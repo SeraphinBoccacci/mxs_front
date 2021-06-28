@@ -10,15 +10,15 @@ import { updateDonationBar } from "../../../services/overlays/donationBar";
 import { EventData } from "../../../types/ifttt";
 import { OverlayData, WidgetsKinds } from "../../../types/overlays";
 import { useErrorHandlingContext } from "../../ErrorHandlingContext";
+import { Container } from "../styles";
 import Alert from "../widgets/alerts/DraggableAlert";
 import DonationBar from "../widgets/donationBars/DraggableDonationBar";
 import Draggable from "./Draggable";
-import { Container } from "./style";
 
 const transactionData: EventData = {
   amount: 1,
-  herotag: "TEST HEROTAG",
-  data: "TEST MESSAGE",
+  herotag: "TEST_HEROTAG",
+  data: "TEST_MESSAGE",
   wordingAmount: "1 eGLD",
 };
 
@@ -26,11 +26,10 @@ const DraggableOverlay = () => {
   const [hiddenWidgetsString] = useQueryString("hiddenWidgets");
   const [overlay, setOverlay] = useState<OverlayData>();
   const [draggedWidget, setDraggedWidget] = useState<string>();
-  const { overlayId, herotag } =
-    useParams<{
-      overlayId: string;
-      herotag: string;
-    }>();
+  const { overlayId, herotag } = useParams<{
+    overlayId: string;
+    herotag: string;
+  }>();
   const { handleError } = useErrorHandlingContext();
 
   const hiddenWidgets = useMemo(() => {

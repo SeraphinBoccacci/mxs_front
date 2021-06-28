@@ -7,9 +7,9 @@ import { replaceManyAll } from "../../../../../utils/string";
 import { TransactionData } from "../../../Overlay";
 import {
   AnimatedImage,
-  AnimatedTextContainer,
   StyledContainer,
   StyledParagraph,
+  StyledParagraphContainer,
 } from "../styles.alerts";
 
 interface AlertProps {
@@ -121,7 +121,6 @@ const Alert = ({ alert, data }: AlertProps) => {
 
   return (
     <StyledContainer
-      textPosition={alert.text?.position}
       width={alert.width}
       height={alert.heigth}
       offsetTop={alert.offsetTop}
@@ -129,16 +128,18 @@ const Alert = ({ alert, data }: AlertProps) => {
     >
       {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
       {alert.text?.content && (
-        <AnimatedTextContainer
-          shouldTextExit={shouldTextExit}
+        <StyledParagraphContainer
           width={alert?.text?.width}
           height={alert?.text?.height}
-          isVisible={isTextDisplayed}
+          offsetLeft={alert?.text?.offsetLeft}
+          offsetTop={alert?.text?.offsetTop}
           enterAnimationType={alert?.text?.animation?.enter?.type}
           enterAnimationDuration={alert?.text?.animation?.enter?.duration}
           enterAnimationDelay={alert?.text?.animation?.enter?.delay}
           exitAnimationType={alert?.text?.animation?.exit?.type}
           exitAnimationDuration={alert?.text?.animation?.exit?.duration}
+          shouldTextExit={shouldTextExit}
+          isVisible={isTextDisplayed}
         >
           {replaceManyAll(alert.text.content, [
             ["{{herotag}}", data?.herotag || ""],
@@ -151,6 +152,10 @@ const Alert = ({ alert, data }: AlertProps) => {
                 key={`paragraph_${index}`}
                 strokeColor={alert?.text?.stroke?.color}
                 strokeWidth={alert?.text?.stroke?.width}
+                width={alert?.text?.width}
+                height={alert?.text?.height}
+                offsetLeft={alert?.text?.offsetLeft}
+                offsetTop={alert?.text?.offsetTop}
                 {...pick(alert.text, [
                   "size",
                   "color",
@@ -164,7 +169,7 @@ const Alert = ({ alert, data }: AlertProps) => {
                 {paragraph}
               </StyledParagraph>
             ))}
-        </AnimatedTextContainer>
+        </StyledParagraphContainer>
       )}
       {alert.image?.imagePath && (
         <AnimatedImage

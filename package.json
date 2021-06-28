@@ -81,7 +81,8 @@
     "test": "react-scripts test",
     "lint": "eslint src --ext .ts",
     "lint:style": "npx stylelint 'src/**/*.ts' 'src/**/*.tsx'",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [

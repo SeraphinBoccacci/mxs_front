@@ -1,6 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
 
-import { TextPositions } from "../../../../types/alerts";
 import {
   EnterAnimationTypes,
   ExitAnimationTypes,
@@ -129,45 +128,7 @@ const exitAnimationMapper = (animation?: ExitAnimationTypes) => {
   return mapper[animation || ExitAnimationTypes.slideLeft];
 };
 
-const displayMapper = (position?: TextPositions) => {
-  const mapper = {
-    [TextPositions.over]: css`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    `,
-    [TextPositions.bottom]: css`
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: center;
-      justify-content: center;
-    `,
-    [TextPositions.top]: css`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    `,
-    [TextPositions.left]: css`
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-    `,
-    [TextPositions.right]: css`
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: center;
-      justify-content: center;
-    `,
-  };
-
-  return mapper[position || TextPositions.bottom];
-};
-
 interface StyledContainerProps {
-  textPosition?: TextPositions;
   width?: number;
   height?: number;
   offsetTop?: number;
@@ -178,12 +139,11 @@ export const StyledContainer = styled.div<StyledContainerProps>`
   position: absolute;
   top: ${({ offsetTop }) => `${offsetTop}px`};
   left: ${({ offsetLeft }) => `${offsetLeft}px`};
-  overflow: hidden;
+  overflow: visible;
   width: ${({ width }) => (width ? `${width}px` : "max-content")};
   height: ${({ height }) => (height ? `${height}px` : "max-content")};
   padding: 0;
   font-family: "Noto Sans JP", sans-serif;
-  ${({ textPosition }) => displayMapper(textPosition)};
 `;
 
 interface StyledImageProps {
@@ -221,7 +181,9 @@ export const AnimatedImage = styled(StyledImage)`
       : ""};
 `;
 
-interface StyledTextContainerProps {
+interface StyledPContainerProps {
+  offsetLeft?: number;
+  offsetTop?: number;
   width?: number;
   height?: number;
   isVisible?: boolean;
@@ -233,15 +195,11 @@ interface StyledTextContainerProps {
   exitAnimationDuration?: number;
 }
 
-export const StyledTextContainer = styled.div<StyledTextContainerProps>`
-  position: relative;
-  overflow: hidden;
-  width: ${({ width }) => (width ? `${width}px` : "max-content")};
+export const StyledParagraphContainer = styled.div<StyledPContainerProps>`
+  width: ${({ width }) => (width ? `${width}px` : "100%")};
   height: ${({ height }) => (height ? `${height}px` : "max-content")};
-  margin: 1.3rem;
-`;
-
-export const AnimatedTextContainer = styled(StyledTextContainer)`
+  margin-top: ${({ offsetTop }) => `${offsetTop}px`};
+  margin-left: ${({ offsetLeft }) => `${offsetLeft}px`};
   visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
   ${({ enterAnimationType, enterAnimationDuration, enterAnimationDelay }) =>
     css`
@@ -270,8 +228,8 @@ interface StyledParagraphProps {
 }
 
 export const StyledParagraph = styled.p<StyledParagraphProps>`
-  width: 100%;
-  height: max-content;
+  min-height: ${({ size = 20, lineHeight }) => `${lineHeight || size}px`};
+  margin: 0;
   color: ${({ color }) => color || "#000000"};
   font-weight: ${({ textStyle }) =>
     textStyle?.some((style) => style === TextStyles.bold) ? "800" : "normal"};
@@ -291,6 +249,7 @@ export const StyledParagraph = styled.p<StyledParagraphProps>`
       : "normal"};
   word-spacing: ${({ wordSpacing }) =>
     wordSpacing ? `${wordSpacing}px` : "normal"};
+  word-wrap: break-word;
   -webkit-text-stroke: ${({ strokeWidth, strokeColor }) =>
     strokeColor && strokeWidth && `${strokeWidth}px ${strokeColor}`};
 `;

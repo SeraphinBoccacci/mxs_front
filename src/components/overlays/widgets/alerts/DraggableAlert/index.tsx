@@ -5,12 +5,13 @@ import config from "../../../../../config/config";
 import { AlertVariation } from "../../../../../types/alerts";
 import { EventData } from "../../../../../types/ifttt";
 import { replaceManyAll } from "../../../../../utils/string";
+import { StyledImage, StyledParagraph } from "../styles.alerts";
 import {
-  StyledImage,
-  StyledParagraph,
-  StyledTextContainer,
-} from "../styles.alerts";
-import { Container, StyledImageContainer, StyledImageScreen } from "./style";
+  Container,
+  StyledImageContainer,
+  StyledImageScreen,
+  StyledParagraphContainer,
+} from "./style";
 
 interface AlertProps {
   alert: AlertVariation;
@@ -25,15 +26,13 @@ const Alert = ({ alert, data }: AlertProps) => {
   }, [alert.image]);
 
   return (
-    <Container
-      textPosition={alert.text?.position}
-      width={alert.width}
-      height={alert.heigth}
-    >
+    <Container width={alert.width} height={alert.heigth}>
       {alert.text?.content && (
-        <StyledTextContainer
+        <StyledParagraphContainer
           width={alert?.text?.width}
           height={alert?.text?.height}
+          offsetLeft={alert?.text?.offsetLeft}
+          offsetTop={alert?.text?.offsetTop}
         >
           {replaceManyAll(alert.text.content, [
             ["{{herotag}}", data?.herotag || ""],
@@ -59,8 +58,9 @@ const Alert = ({ alert, data }: AlertProps) => {
                 {paragraph}
               </StyledParagraph>
             ))}
-        </StyledTextContainer>
+        </StyledParagraphContainer>
       )}
+
       {alert.image?.imagePath && (
         <StyledImageContainer>
           <StyledImageScreen></StyledImageScreen>

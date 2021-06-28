@@ -1,7 +1,6 @@
 import React from "react";
 
 import Input from "../../../../../components/Input";
-import Select from "../../../../../components/Select";
 import {
   AlertVariationFormData,
   AlertVariationLenses,
@@ -17,7 +16,6 @@ import {
   SubSectionTitle,
 } from "../../styles";
 import { AnimationSettings } from "../AnimationSettings";
-import { textPositionsOptions } from "../constants";
 import { TextAlignRadioGroup } from "./TextAlignRadioGroup";
 import { TextStylesCheckboxes } from "./TextStylesCheckboxes";
 
@@ -32,14 +30,24 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
       <SectionTitle>Text</SectionTitle>
       <SectionContent>
         <SectionRow>
-          <Select
+          <Input
             onChange={handleOnChange}
-            options={textPositionsOptions}
-            inputName={AlertVariationLenses.text_position}
-            inputLabel="Text Position"
-            size="large"
-            value={formData?.[AlertVariationLenses.text_position]}
-          ></Select>
+            inputLabel="Top"
+            inputName={AlertVariationLenses.text_offsetTop}
+            value={formData?.[AlertVariationLenses.text_offsetTop]}
+            width="8rem"
+            type="number"
+            endAdornment="px"
+          ></Input>
+          <Input
+            onChange={handleOnChange}
+            inputLabel="Left"
+            inputName={AlertVariationLenses.text_offsetLeft}
+            value={formData?.[AlertVariationLenses.text_offsetLeft]}
+            width="8rem"
+            type="number"
+            endAdornment="px"
+          ></Input>
         </SectionRow>
         <SectionRow>
           <Input

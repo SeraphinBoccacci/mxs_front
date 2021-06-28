@@ -3,7 +3,6 @@ import {
   DonationBarDisplays,
   InBarAmountDisplay,
   LogoAnimations,
-  TextPositions,
 } from "../../../../types/donationBar";
 
 export const donationBarDisplayOptions = [
@@ -16,16 +15,6 @@ export const indicationDisplay = [
   { label: "None", value: InBarAmountDisplay.none },
   { label: "eGLD", value: InBarAmountDisplay.EGLD },
   { label: "Percentage", value: InBarAmountDisplay.percent },
-];
-
-export const textPositionsOptions = [
-  { label: "None", value: "" },
-  { label: "Top Left", value: TextPositions.TopLeft },
-  { label: "Top Center", value: TextPositions.TopCenter },
-  { label: "Top Right", value: TextPositions.TopRight },
-  { label: "Bottom Left", value: TextPositions.BottomLeft },
-  { label: "Bottom Center", value: TextPositions.BottomCenter },
-  { label: "Bottom Right", value: TextPositions.BottomRight },
 ];
 
 export const logoAnimationsOptions = [

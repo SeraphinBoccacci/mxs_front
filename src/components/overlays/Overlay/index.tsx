@@ -8,6 +8,7 @@ import { getUserOverlay } from "../../../services/overlays";
 import { getDonationGoalSentAmount } from "../../../services/overlays/donationData";
 import { AlertVariation } from "../../../types/alerts";
 import { OverlayData } from "../../../types/overlays";
+import { Container } from "../styles";
 import Alert from "../widgets/alerts/Alert";
 import DonationBar from "../widgets/donationBars/DonationBar";
 
@@ -66,11 +67,10 @@ const findVariation = (amount: number, variations: AlertVariation[] = []) => {
 };
 
 const Overlay = () => {
-  const { overlayId, herotag } =
-    useParams<{
-      overlayId: string;
-      herotag: string;
-    }>();
+  const { overlayId, herotag } = useParams<{
+    overlayId: string;
+    herotag: string;
+  }>();
   const [overlay, setOverlay] = useState<OverlayData>();
   const [transactionData, setTransactionData] = useState<TransactionData>();
   const [donationBarProgression, setDonationBarProgression] = useState(0);
@@ -167,7 +167,7 @@ const Overlay = () => {
   ]);
 
   return (
-    <div>
+    <Container>
       {transactionData && (
         <div>
           {alertVariations.map((alertVariation) => (
@@ -185,7 +185,7 @@ const Overlay = () => {
           progression={donationBarProgression}
         ></DonationBar>
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -107,7 +107,8 @@ const LineDonationBar = ({
         </AmountToSendPart>
       </Content>
       <DonationDescription
-        position={donationBar.donationBarDescription?.position}
+        offsetLeft={donationBar.donationBarDescription?.offsetLeft}
+        offsetTop={donationBar.donationBarDescription?.offsetTop}
       >
         {replaceAll(
           donationBar?.donationBarDescription?.content || "",

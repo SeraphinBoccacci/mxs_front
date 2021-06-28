@@ -3,8 +3,8 @@ import React from "react";
 import { AlertVariation } from "../../../types/alerts";
 import { EventData } from "../../../types/ifttt";
 import { WidgetsKinds } from "../../../types/overlays";
+import { Container } from "../styles";
 import Alert from "../widgets/alerts/PlayableAlert";
-import { Container } from "./style";
 
 const transactionData: EventData = {
   herotag: "TEST_HEROTAG",
