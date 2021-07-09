@@ -143,7 +143,6 @@ export const StyledContainer = styled.div<StyledContainerProps>`
   width: ${({ width }) => (width ? `${width}px` : "max-content")};
   height: ${({ height }) => (height ? `${height}px` : "max-content")};
   padding: 0;
-  font-family: "Noto Sans JP", sans-serif;
 `;
 
 interface StyledImageProps {
@@ -227,6 +226,7 @@ interface StyledParagraphProps {
   wordSpacing?: string;
   textAlign?: string;
   textStyle?: TextStyles[];
+  fontFamily?: string;
 }
 
 export const StyledParagraph = styled.p<StyledParagraphProps>`
@@ -240,6 +240,7 @@ export const StyledParagraph = styled.p<StyledParagraphProps>`
       ? "italic"
       : "normal"};
   font-size: ${({ size }) => (size ? `${size}px` : "normal")};
+  font-family: ${({ fontFamily = "Noto Sans JP" }) => fontFamily};
   line-height: ${({ lineHeight }) =>
     lineHeight ? `${lineHeight}px` : "normal"};
   letter-spacing: ${({ letterSpacing }) =>
