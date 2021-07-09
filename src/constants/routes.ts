@@ -21,10 +21,11 @@ const iftttTutorial = `${lab}/tutorial/ifttt`;
 const chatBotsTwitchTutorial = `${lab}/tutorial/chat-bots-twitch`;
 
 const tippingPage = "/creator/:herotag";
-const browserSourcePage = "/browser-source/herotag/:herotag/overlay/:overlayId";
+const browserSourcePage =
+  "/browser-source/herotag/:herotag/overlay/:overlayLink";
 const workBenchBrowserSourcePage =
-  "/work-bench-browser-source/herotag/:herotag/overlay/:overlayId";
-const overlayEditorPage = "/editor/overlay/:overlayId";
+  "/work-bench-browser-source/herotag/:herotag/overlay/:overlayLink";
+const overlayEditorPage = "/editor/overlay/:overlayLink";
 
 const routes = {
   home: "/",

@@ -166,6 +166,7 @@ const CircleDonationBar = ({
                 "wordSpacing",
                 "textAlign",
                 "textStyle",
+                "fontFamily",
               ])}
             >
               {paragraph}

@@ -53,6 +53,7 @@ const Alert = ({ alert, data }: AlertProps) => {
                   "wordSpacing",
                   "textAlign",
                   "textStyle",
+                  "fontFamily",
                 ])}
               >
                 {paragraph}

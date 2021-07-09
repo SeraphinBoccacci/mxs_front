@@ -129,6 +129,7 @@ const LineDonationBar = ({
                 "wordSpacing",
                 "textAlign",
                 "textStyle",
+                "fontFamily",
               ])}
             >
               {paragraph}
