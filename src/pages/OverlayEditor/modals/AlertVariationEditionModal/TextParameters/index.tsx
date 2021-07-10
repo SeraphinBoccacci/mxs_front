@@ -1,7 +1,7 @@
 import React from "react";
 
+import Autocomplete from "../../../../../components/FontAutocomplete";
 import Input from "../../../../../components/Input";
-import SelectAutocomplete from "../../../../../components/SelectAutocomplete";
 import { AVAILABLE_GOOGLE_FONTS_OPTIONS } from "../../../../../constants/availableGoogleFonts";
 import {
   AlertVariationFormData,
@@ -103,14 +103,14 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
             isColorPicker
             width="11rem"
           ></Input>
-          <SelectAutocomplete
+          <Autocomplete
             options={AVAILABLE_GOOGLE_FONTS_OPTIONS}
             inputName={AlertVariationLenses.text_fontFamily}
             inputLabel="Font Family"
             value={formData?.[AlertVariationLenses.text_fontFamily]}
             onChange={handleOnChange}
             width="15rem"
-          ></SelectAutocomplete>
+          ></Autocomplete>
         </SectionRow>
         <SectionRow>
           <Input
