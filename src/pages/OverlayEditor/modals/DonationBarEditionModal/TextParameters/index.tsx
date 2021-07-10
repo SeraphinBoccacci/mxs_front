@@ -1,7 +1,7 @@
 import React from "react";
 
+import Autocomplete from "../../../../../components/FontAutocomplete";
 import Input from "../../../../../components/Input";
-import SelectAutocomplete from "../../../../../components/SelectAutocomplete";
 import { AVAILABLE_GOOGLE_FONTS_OPTIONS } from "../../../../../constants/availableGoogleFonts";
 import {
   DonationBarFormData,
@@ -102,7 +102,7 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
             isColorPicker
             width="11rem"
           ></Input>
-          <SelectAutocomplete
+          <Autocomplete
             options={AVAILABLE_GOOGLE_FONTS_OPTIONS}
             inputName={DonationBarLenses.donationBarDescription_fontFamily}
             inputLabel="Font Family"
@@ -111,7 +111,7 @@ const TextParameters = ({ handleOnChange, formData }: TextParametersProps) => {
             }
             onChange={handleOnChange}
             width="15rem"
-          ></SelectAutocomplete>
+          ></Autocomplete>
         </SectionRow>
         <SectionRow>
           <Input
