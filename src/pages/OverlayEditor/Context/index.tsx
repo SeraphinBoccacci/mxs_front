@@ -76,25 +76,28 @@ const EditorContextProvider = ({ children }: EditorContextProviderProps) => {
   const [groups, setGroups] = useState<VariationGroup[]>([]);
   const [widgetData, setWidgetData] = useState<AlertVariation | DonationBar>();
 
-  const [selectedWidgetKind, setSelectedWidgetKind] =
-    useState<WidgetsKinds | null>(null);
-  const [widgetToDisplayData, setWidgetToDisplayData] =
-    useState<WidgetToDisplayData>();
+  const [
+    selectedWidgetKind,
+    setSelectedWidgetKind,
+  ] = useState<WidgetsKinds | null>(null);
+  const [widgetToDisplayData, setWidgetToDisplayData] = useState<
+    WidgetToDisplayData
+  >();
 
-  const { overlayId } = useParams<{ overlayId: string }>();
+  const { overlayLink } = useParams<{ overlayLink: string }>();
   const { herotag } = useAuth();
 
   const getOverlayData = useCallback(async () => {
     if (!herotag) return;
 
-    const overlay = await getUserOverlay(herotag, overlayId);
+    const overlay = await getUserOverlay(herotag, overlayLink);
 
     if (overlay) {
       setOverlay(overlay);
 
       setGroups(overlay?.alerts?.groups || []);
     }
-  }, [herotag, overlayId, setOverlay]);
+  }, [herotag, overlayLink, setOverlay]);
 
   useEffect(() => {
     getOverlayData();

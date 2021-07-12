@@ -63,7 +63,6 @@ export const DonationDescription = styled.div<DonationDescriptionProps>`
   left: ${({ offsetLeft }) => `${offsetLeft}px`};
   width: max-content;
   height: max-content;
-  font-family: "Noto Sans JP", sans-serif;
 `;
 
 interface StyledParagraphProps {
@@ -76,6 +75,7 @@ interface StyledParagraphProps {
   wordSpacing?: string;
   textAlign?: string;
   textStyle?: TextStyles[];
+  fontFamily?: string;
 }
 
 export const StyledParagraph = styled.p<StyledParagraphProps>`
@@ -91,6 +91,7 @@ export const StyledParagraph = styled.p<StyledParagraphProps>`
       ? "italic"
       : "normal"};
   font-size: ${({ size }) => (size ? `${size}px` : "normal")};
+  font-family: ${({ fontFamily = "Noto Sans JP" }) => fontFamily};
   line-height: ${({ lineHeight }) =>
     lineHeight ? `${lineHeight}px` : "normal"};
   letter-spacing: ${({ letterSpacing }) =>

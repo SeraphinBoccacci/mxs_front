@@ -40,7 +40,7 @@ const SoundParameters = ({ handleOnChange, formData }: TextParametersProps) => {
             value={formData?.[AlertVariationLenses.sound_soundDelay]}
             type="number"
             endAdornment="seconds"
-            tooltipText="Time between alert end and alert start"
+            tooltipText="Your sound will trigger X seconds after the animation"
             width="8rem"
           ></Input>
           <Input
@@ -50,7 +50,7 @@ const SoundParameters = ({ handleOnChange, formData }: TextParametersProps) => {
             value={formData?.[AlertVariationLenses.sound_soundOffset]}
             type="number"
             endAdornment="seconds"
-            tooltipText="Time between alert end and alert end"
+            tooltipText="The end of your sound will be cropped of X seconds"
             width="8rem"
           ></Input>
         </SectionRow>

@@ -80,6 +80,14 @@ const updateOverlayName = async (
   return res;
 };
 
+const getOverlayFonts = async (herotag: string, overlayLink: string) => {
+  const res = await axiosGet(
+    `${config.apiUrl}/overlays/fonts/herotag/${herotag}/overlay/${overlayLink}`
+  );
+
+  return res;
+};
+
 export {
   addWidget,
   createAlertVariation,
@@ -89,6 +97,7 @@ export {
   deleteOverlay,
   getAlertVariation,
   getManyUserOverlays,
+  getOverlayFonts,
   getUserAlertVariations,
   getUserOverlay,
   updateAlertVariation,

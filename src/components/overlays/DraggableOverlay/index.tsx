@@ -26,8 +26,8 @@ const DraggableOverlay = () => {
   const [hiddenWidgetsString] = useQueryString("hiddenWidgets");
   const [overlay, setOverlay] = useState<OverlayData>();
   const [draggedWidget, setDraggedWidget] = useState<string>();
-  const { overlayId, herotag } = useParams<{
-    overlayId: string;
+  const { overlayLink, herotag } = useParams<{
+    overlayLink: string;
     herotag: string;
   }>();
   const { handleError } = useErrorHandlingContext();
@@ -44,15 +44,15 @@ const DraggableOverlay = () => {
 
   const getOverlay = useCallback(async () => {
     if (herotag) {
-      const overlay = await getUserOverlay(herotag, overlayId);
+      const overlay = await getUserOverlay(herotag, overlayLink);
 
       if (overlay) setOverlay(overlay);
     }
-  }, [overlayId, herotag]);
+  }, [overlayLink, herotag]);
 
   useEffect(() => {
     getOverlay();
-  }, [overlayId, herotag, getOverlay]);
+  }, [overlayLink, herotag, getOverlay]);
 
   const handleOnDragEnd = useCallback(
     async (widgetId, widgetKind, { offsetTop, offsetLeft }) => {

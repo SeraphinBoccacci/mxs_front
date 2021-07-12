@@ -20,8 +20,34 @@ interface AlertProps {
 const Alert = ({ alert, data }: AlertProps) => {
   const [shouldImageExit, setShouldImageExit] = useState(false);
   const [isImageDisplayed, setIsImageDisplayed] = useState(false);
+  const [isSoundPlayed, setIsSoundPlayed] = useState(false);
   const [shouldTextExit, setShouldTextExit] = useState(false);
   const [isTextDisplayed, setIsTextDisplayed] = useState(false);
+
+  useEffect(() => {
+    let enterTimeout: NodeJS.Timeout;
+
+    if (alert.sound?.soundDelay) {
+      const enterDuration = alert.sound?.soundDelay * 1000;
+
+      enterTimeout = setTimeout(() => {
+        setIsSoundPlayed(true);
+      }, enterDuration);
+    } else setIsSoundPlayed(true);
+
+    const timeBeforeStop =
+      ((alert.duration || 0) - (alert.sound?.soundOffset || 0)) * 1000;
+
+    const exitTimeout = setTimeout(() => {
+      setIsSoundPlayed(false);
+    }, timeBeforeStop);
+
+    //clean up
+    return () => {
+      if (enterTimeout) clearTimeout(enterTimeout);
+      clearTimeout(exitTimeout);
+    };
+  }, [alert.duration, alert.sound?.soundDelay, alert.sound?.soundOffset]);
 
   useEffect(() => {
     let enterTimeout: NodeJS.Timeout;
@@ -53,9 +79,8 @@ const Alert = ({ alert, data }: AlertProps) => {
 
     //clean up
     return () => {
-      clearTimeout(exitTimeout);
-
       if (enterTimeout) clearTimeout(enterTimeout);
+      clearTimeout(exitTimeout);
     };
   }, [
     setShouldImageExit,
@@ -97,9 +122,8 @@ const Alert = ({ alert, data }: AlertProps) => {
 
     //clean up
     return () => {
-      clearTimeout(exitTimeout);
-
       if (enterTimeout) clearTimeout(enterTimeout);
+      clearTimeout(exitTimeout);
     };
   }, [
     setShouldTextExit,
@@ -126,7 +150,9 @@ const Alert = ({ alert, data }: AlertProps) => {
       offsetTop={alert.offsetTop}
       offsetLeft={alert.offsetLeft}
     >
-      {alert.sound?.soundPath && <audio src={audioSrc} autoPlay></audio>}
+      {alert.sound?.soundPath && isSoundPlayed && (
+        <audio src={audioSrc} autoPlay></audio>
+      )}
       {alert.text?.content && (
         <StyledParagraphContainer
           width={alert?.text?.width}
@@ -160,6 +186,7 @@ const Alert = ({ alert, data }: AlertProps) => {
                   "wordSpacing",
                   "textAlign",
                   "textStyle",
+                  "fontFamily",
                 ])}
               >
                 {paragraph}
